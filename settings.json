@@ -14,7 +14,7 @@
         1020,
         815
     ],
-    "lef_menu_size" : {
+    "left_menu_size" : {
         "minimum" : 50,
         "maximum" : 240
     },

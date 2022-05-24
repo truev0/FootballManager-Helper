@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="central_widget">
+   <layout class="QVBoxLayout" name="central_widget_layout">
+    <item>
+     <widget class="PyWindow" name="window">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="left_menu_frame">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>19</y>
+         <width>181</width>
+         <height>551</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="left_menu_layout">
+        <item>
+         <widget class="PyLeftMenu" name="left_menu" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QFrame" name="left_column_frame">
+       <property name="geometry">
+        <rect>
+         <x>219</x>
+         <y>29</y>
+         <width>20</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QVBoxLayout" name="left_column_layout">
+        <item>
+         <widget class="PyLeftColumn" name="left_column" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QFrame" name="right_app_frame">
+       <property name="geometry">
+        <rect>
+         <x>479</x>
+         <y>29</y>
+         <width>281</width>
+         <height>541</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QVBoxLayout" name="right_app_layout">
+        <item>
+         <widget class="QFrame" name="title_bar_frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="title_bar_layout">
+           <item>
+            <widget class="PyTitleBar" name="title_bar" native="true"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="content_area_frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QHBoxLayout" name="content_area_layout">
+           <item>
+            <widget class="QFrame" name="right_column_frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="content_area_right_layout">
+              <item>
+               <widget class="QFrame" name="content_area_right_bg_frame">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="content_area_left_frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="credits_frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="credits_layout">
+           <item>
+            <widget class="PyCredits" name="credits" native="true"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PyWindow</class>
+   <extends>QFrame</extends>
+   <header>gui\widgets\py_window\py_window.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PyLeftMenu</class>
+   <extends>QWidget</extends>
+   <header>pyleftmenu.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PyLeftColumn</class>
+   <extends>QWidget</extends>
+   <header>pyleftcolumn.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PyTitleBar</class>
+   <extends>QWidget</extends>
+   <header>pytitlebar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PyCredits</class>
+   <extends>QWidget</extends>
+   <header>pycredits.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

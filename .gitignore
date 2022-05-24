@@ -4,3 +4,4 @@ venv/
 __pycache__/
 .idea/
 .pyc
+gui/uis/windows/main_window/copia.py
