@@ -26,14 +26,12 @@ from gui.uis.pages.ui_main_pages import Ui_MainPages
 # ///////////////////////////////////////////////////////////////
 from gui.uis.columns.ui_right_column import Ui_RightColumn
 
-# MAIN FUNCTIONS
+# PY WINDOW
 # ///////////////////////////////////////////////////////////////
-from .functions_main_window import *
-
 class Ui_MainWindow(object):
     def setupUi(self, parent):
         if not parent.objectName():
-            parent.setObjectName(u"MainWindow")
+            parent.setObjectName("MainWindow")
 
         # LOAD SETTINGS
         # ///////////////////////////////////////////////////////////////
@@ -58,9 +56,9 @@ class Ui_MainWindow(object):
             font: {self.settings["font"]["text_size"]}pt "{self.settings["font"]["family"]}";
             color: {self.themes["app_color"]["text_foreground"]};
         ''')
-        self.central_widget.setObjectName(u"central_widget")
+        # self.central_widget.setObjectName(u"central_widget") TODO delete
         self.central_widget_layout = QVBoxLayout(self.central_widget)
-        self.central_widget_layout.setObjectName(u"central_widget_layout")
+        # self.central_widget_layout.setObjectName(u"central_widget_layout") TODO delete
 
         if self.settings["custom_title_bar"]:
             self.central_widget_layout.setContentsMargins(10, 10, 10, 10)
@@ -76,11 +74,14 @@ class Ui_MainWindow(object):
             border_color=self.themes["app_color"]["bg_two"],
             text_color=self.themes["app_color"]["text_foreground"]
         )
-        self.window.setObjectName(u"window")
+        # self.window.setObjectName(u"window") TODO delete
 
         # If disable custom title bar
         if not self.settings["custom_title_bar"]:
             self.window.set_stylesheet(border_radius=0, border_size=0)
+
+        # ADD PY WINDOW TO CENTRAL WIDGET
+        self.central_widget_layout.addWidget(self.window)
 
         # ADD FRAME LEFT MENU
         # Add here custom left bar
@@ -88,14 +89,14 @@ class Ui_MainWindow(object):
         left_menu_margin = self.settings["left_menu_content_margins"]
         left_menu_minimum = self.settings["left_menu_size"]["minimum"]
         self.left_menu_frame = QFrame()
-        self.left_menu_frame.setObjectName(u"left_menu_frame")
+        # self.left_menu_frame.setObjectName(u"left_menu_frame") TODO delete
         self.left_menu_frame.setMaximumSize(left_menu_minimum + (left_menu_margin * 2), 17280)
         self.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
 
         # LEFT MENU LAYOUT
         # ///////////////////////////////////////////////////////////////
         self.left_menu_layout = QHBoxLayout(self.left_menu_frame)
-        self.left_menu_layout.setObjectName(u"left_menu_layout")
+        # self.left_menu_layout.setObjectName(u"left_menu_layout") TODO delete
         self.left_menu_layout.setContentsMargins(
             left_menu_margin,
             left_menu_margin,
@@ -121,15 +122,15 @@ class Ui_MainWindow(object):
             text_foreground=self.themes["app_color"]["text_foreground"],
             text_active=self.themes["app_color"]["text_active"]
         )
-        self.left_menu.setObjectName(u"left_menu")
+        # self.left_menu.setObjectName(u"left_menu") TODO delete
 
         self.left_menu_layout.addWidget(self.left_menu)
 
-        # ADD LEFT MENU
+        # ADD LEFT COLUMN
         # Add here the left column with Stacked Widgets
         # ///////////////////////////////////////////////////////////////
         self.left_column_frame = QFrame()
-        self.left_column_frame.setObjectName(u"left_column_frame")
+        # self.left_column_frame.setObjectName(u"left_column_frame") TODO delete
         self.left_column_frame.setMaximumWidth(self.settings["left_column_size"]["minimum"])
         self.left_column_frame.setMinimumWidth(self.settings["left_column_size"]["minimum"])
         self.left_column_frame.setStyleSheet(f"background: {self.themes['app_color']['bg_two']}")
@@ -137,7 +138,7 @@ class Ui_MainWindow(object):
         # ADD LAYOUT TO LEFT COLUMN
         # ///////////////////////////////////////////////////////////////
         self.left_column_layout = QVBoxLayout(self.left_column_frame)
-        self.left_column_layout.setObjectName(u"left_column_layout")
+        # self.left_column_layout.setObjectName(u"left_column_layout") TODO delete
         self.left_column_layout.setContentsMargins(0, 0, 0, 0)
 
         # ADD CUSTOM LEFT MENU WIDGET
@@ -160,7 +161,7 @@ class Ui_MainWindow(object):
             icon_color_pressed=self.themes["app_color"]["icon_pressed"],
             icon_close_path=Functions.set_svg_icon("icon_close.svg")
         )
-        self.left_column.setObjectName(u"left_column")
+        # self.left_column.setObjectName(u"left_column") TODO delete
 
         self.left_column_layout.addWidget(self.left_column)
 
@@ -168,21 +169,23 @@ class Ui_MainWindow(object):
         # Add here the right widgets
         # ///////////////////////////////////////////////////////////////
         self.right_app_frame = QFrame()
-        self.right_app_frame.setObjectName(u"right_app_frame")
+        # self.right_app_frame.setObjectName(u"right_app_frame") TODO delete
 
         # ADD RIGHT APP LAYOUT
         # ///////////////////////////////////////////////////////////////
         self.right_app_layout = QVBoxLayout(self.right_app_frame)
-        self.right_app_layout.setObjectName(u"right_app_layout")
+        # self.right_app_layout.setObjectName(u"right_app_layout") TODO delete
         self.right_app_layout.setContentsMargins(3, 3, 3, 3)
         self.right_app_layout.setSpacing(6)
 
         # ADD TITLE BAR FRAME
         # ///////////////////////////////////////////////////////////////
         self.title_bar_frame = QFrame()
-        self.title_bar_frame.setObjectName(u"title_bar_frame")
+        self.title_bar_frame.setMinimumHeight(40)
+        self.title_bar_frame.setMaximumHeight(40)
+        # self.title_bar_frame.setObjectName(u"title_bar_frame") TODO delete
         self.title_bar_layout = QVBoxLayout(self.title_bar_frame)
-        self.title_bar_layout.setObjectName(u"title_bar_layout")
+        # self.title_bar_layout.setObjectName(u"title_bar_layout") TODO delete
         self.title_bar_layout.setContentsMargins(0, 0, 0, 0)
 
         # ADD CUSTOM TITLE BAR
@@ -209,33 +212,33 @@ class Ui_MainWindow(object):
             title_size=self.settings["font"]["title_size"],
             is_custom_title_bar=self.settings["custom_title_bar"]
         )
-        self.title_bar.setObjectName(u"title_bar")
+        # self.title_bar.setObjectName(u"title_bar") TODO delete
 
         self.title_bar_layout.addWidget(self.title_bar)
-
-        self.right_app_layout.addWidget(self.title_bar_frame)  # TODO change position2
 
         # ADD CONTENT AREA
         # ///////////////////////////////////////////////////////////////
         self.content_area_frame = QFrame()
-        self.content_area_frame.setObjectName(u"content_area_frame")
+        # self.content_area_frame.setObjectName(u"content_area_frame") TODO delete
 
         # CONTENT AREA LAYOUT
         # ///////////////////////////////////////////////////////////////
         self.content_area_layout = QHBoxLayout(self.content_area_frame)
-        self.content_area_layout.setObjectName(u"content_area_layout")
+        # self.content_area_layout.setObjectName(u"content_area_layout") TODO delete
         self.content_area_layout.setContentsMargins(0, 0, 0, 0)
         self.content_area_layout.setSpacing(0)
 
         # RIGHT BAR
         # ///////////////////////////////////////////////////////////////
-        self.right_column_frame = QFrame(self.content_area_frame)
-        self.right_column_frame.setObjectName(u"right_column_frame")
+        self.right_column_frame = QFrame()
+        # self.right_column_frame.setObjectName(u"right_column_frame") TODO delete
+        self.right_column_frame.setMinimumWidth(self.settings["right_column_size"]["minimum"])
+        self.right_column_frame.setMaximumWidth(self.settings["right_column_size"]["minimum"])
 
         # IMPORT RIGHT COLUMN
         # ///////////////////////////////////////////////////////////////
         self.content_area_right_layout = QVBoxLayout(self.right_column_frame)
-        self.content_area_right_layout.setObjectName(u"content_area_right_layout")
+        # self.content_area_right_layout.setObjectName(u"content_area_right_layout") TODO delete
         self.content_area_right_layout.setContentsMargins(5, 5, 5, 5)
         self.content_area_right_layout.setSpacing(0)
 
@@ -257,33 +260,31 @@ class Ui_MainWindow(object):
         self.right_column = Ui_RightColumn()
         self.right_column.setupUi(self.content_area_right_bg_frame)
 
-        self.content_area_layout.addWidget(self.right_column_frame)
-
         # LEFT CONTENT
         # ///////////////////////////////////////////////////////////////
         self.content_area_left_frame = QFrame()
-        self.content_area_left_frame.setObjectName(u"content_area_left_frame")
+        # self.content_area_left_frame.setObjectName(u"content_area_left_frame") TODO delete
 
         # IMPORT MAIN PAGES
         # ///////////////////////////////////////////////////////////////
         self.load_pages = Ui_MainPages()
         self.load_pages.setupUi(self.content_area_left_frame)
 
+        # ADD TO LAYOUT
         self.content_area_layout.addWidget(self.content_area_left_frame)
-
-        self.right_app_layout.addWidget(self.content_area_frame)
+        self.content_area_layout.addWidget(self.right_column_frame)
 
         # CREDITS / BOTTOM APP FRAME
         # ///////////////////////////////////////////////////////////////
         self.credits_frame = QFrame()
-        self.credits_frame.setObjectName(u"credits_frame")
+        # self.credits_frame.setObjectName(u"credits_frame") TODO delete
         self.credits_frame.setMinimumHeight(26)
         self.credits_frame.setMaximumHeight(26)
 
         # CREATE LAYOUT CREDITS
         # ///////////////////////////////////////////////////////////////
         self.credits_layout = QVBoxLayout(self.credits_frame)
-        self.credits_layout.setObjectName(u"credits_layout")
+        # self.credits_layout.setObjectName(u"credits_layout") TODO delete
         self.credits_layout.setContentsMargins(0, 0, 0, 0)
 
         # ADD CUSTOM CREDIT WDIGET
@@ -296,15 +297,25 @@ class Ui_MainWindow(object):
             text_size=self.settings["font"]["text_size"],
             text_description_color=self.themes["app_color"]["text_description"]
         )
-        self.credits.setObjectName(u"credits")
+        # self.credits.setObjectName(u"credits") TODO delete
 
         # ADD TO CREDITS LAYOUT
         self.credits_layout.addWidget(self.credits)
 
+        # ADD WIDGETS TO RIGHT LAYOUT
+        # ///////////////////////////////////////////////////////////////
+        self.right_app_layout.addWidget(self.title_bar_frame)
+        self.right_app_layout.addWidget(self.content_area_frame)
         self.right_app_layout.addWidget(self.credits_frame)
 
-        self.central_widget_layout.addWidget(self.window)  # TODO change position
+        # ADD WIDGETS TO "PyWindow"
+        # ///////////////////////////////////////////////////////////////
+        self.window.layout.addWidget(self.left_menu_frame)
+        self.window.layout.addWidget(self.left_column_frame)
+        self.window.layout.addWidget(self.right_app_frame)
 
+        # ADD CENTRAL WIDGET AND SET CONTENT MARGINS
+        # ///////////////////////////////////////////////////////////////
         parent.setCentralWidget(self.central_widget)
 
     # ADD LEFT BUTTON
@@ -439,36 +450,16 @@ class Ui_MainWindow(object):
     # SETUP MAIN WINDOW WITH CUSTOM PARAMETER
     # ///////////////////////////////////////////////////////////////
     def setup_gui(self):
-        # APP TITLE
-        # ///////////////////////////////////////////////////////////////
-        self.setWindowTitle(self.settings["app_name"])
-
-        # REMOVE TITLE BAR
-        # ///////////////////////////////////////////////////////////////
-        if self.settings["custom_title_bar"]:
-            self.setWindowFlag(Qt.FramelessWindowHint)
-            self.setAttribute(Qt.WA_TranslucentBackground)
-
-        # ADD GRIPS
-        # ///////////////////////////////////////////////////////////////
-        if self.settings["custom_title_bar"]:
-            self.left_grip = PyGrips(self, "left", self.hide_grips)
-            self.right_grip = PyGrips(self, "right", self.hide_grips)
-            self.top_grip = PyGrips(self, "top", self.hide_grips)
-            self.bottom_grip = PyGrips(self, "bottom", self.hide_grips)
-            self.top_left_grip = PyGrips(self, "top_left", self.hide_grips)
-            self.top_right_grip = PyGrips(self, "top_right", self.hide_grips)
-            self.bottom_left_grip = PyGrips(self, "bottom_left", self.hide_grips)
-            self.bottom_right_grip = PyGrips(self, "bottom_right", self.hide_grips)
-
         # LEFT MENUS / GET SIGNALS WHEN LEFT MENU BTN IS CLICKED / RELEASED
         # ///////////////////////////////////////////////////////////////
         # ADD BUTTONS
         self.left_menu.add_menus(Ui_MainWindow.add_left_buttons)
 
         # SET SIGNALS
-        self.left_menu.clicked.connect(self.btn_clicked)
-        self.left_menu.released.connect(self.btn_released)
+        # self.left_menu.clicked.connect(PyLeftMenu.btn_clicked(self))
+        # self.left_menu.released.connect(PyLeftMenu.btn_released(self))
+        # self.left_menu.clicked.connect(self.btn_clicked)
+        # self.left_menu.released.connect(self.btn_released)
 
         # TITLE BAR / EXTRA BUTTONS
         # ///////////////////////////////////////////////////////////////
@@ -476,8 +467,8 @@ class Ui_MainWindow(object):
         self.title_bar.add_menus(Ui_MainWindow.add_title_bar_buttons)
 
         # SET SIGNALS
-        self.title_bar.clicked.connect(self.btn_clicked)
-        self.title_bar.released.connect(self.btn_released)
+        # self.title_bar.clicked.connect(PyTitleBar.btn_clicked(self))
+        # self.title_bar.released.connect(PyTitleBar.btn_released(self))
 
         # ADD TITLE
         if self.settings["custom_title_bar"]:
@@ -487,19 +478,20 @@ class Ui_MainWindow(object):
 
         # LEFT COLUMN SET SIGNALS
         # ///////////////////////////////////////////////////////////////
-        self.left_column.clicked.connect(self.btn_clicked)
-        self.left_column.released.connect(self.btn_released)
+        # self.left_column.clicked.connect(PyLeftColumn.btn_clicked(self))
+        # self.left_column.released.connect(PyLeftColumn.btn_released(self))
+        # TODO delete signals
+
 
         # SET INITIAL PAGE / LEFT & RIGHT MENUS
         # ///////////////////////////////////////////////////////////////
-        MainFunctions.set_page(self, self.load_pages.page_1)
-        MainFunctions.set_left_column_menu(
-            self,
+        self.set_page(self.load_pages.page_1)
+        self.set_left_column_menu(
             menu=self.left_column.menus.menu_1,
             title="Settings Left Column",
             icon_path=Functions.set_svg_icon("icon_settings.svg")
         )
-        MainFunctions.set_right_column_menu(self, self.right_column.menu_1)
+        self.set_right_column_menu(self.right_column.menu_1)
 
         # ///////////////////////////////////////////////////////////////
         # CUSTOM WIDGETS
@@ -548,3 +540,106 @@ class Ui_MainWindow(object):
             self.top_right_grip.setGeometry(self.width() - 20, 5, 15, 15)
             self.bottom_left_grip.setGeometry(5, self.height() - 20, 15, 15)
             self.bottom_right_grip.setGeometry(self.width() - 20, self.height() - 20, 15, 15)
+
+    # SET MAIN WINDOW PAGES
+    # ///////////////////////////////////////////////////////////////
+    def set_page(self, page):
+        self.load_pages.pages.setCurrentWidget(page)
+
+    # SET LEFT COLUMN PAGES
+    # ///////////////////////////////////////////////////////////////
+    def set_left_column_menu(self, menu, title, icon_path):
+        self.left_column.menus.menus.setCurrentWidget(menu)
+        self.left_column.title_label.setText(title)
+        self.left_column.icon.set_icon(icon_path)
+
+    # RETURN IF LEFT COLUMN IS VISIBLE
+    # ///////////////////////////////////////////////////////////////
+    def left_column_is_visible(self):
+        width = self.left_column_frame.width()
+        if width == 0:
+            return False
+        else:
+            return True
+
+    # RETURN IF RIGHT COLUMN IS VISIBLE
+    # ///////////////////////////////////////////////////////////////
+    def right_column_is_visible(self):
+        width = self.right_column_frame.width()
+        if width == 0:
+            return False
+        else:
+            return True
+
+    # SET RIGHT COLUMN PAGES
+    # ///////////////////////////////////////////////////////////////
+    def set_right_column_menu(self, menu):
+        self.right_column.menus.setCurrentWidget(menu)
+
+    # GET TITLE BUTTON BY OBJECT NAME
+    # ///////////////////////////////////////////////////////////////
+    def get_title_bar_btn(self, object_name):
+        return self.title_bar_frame.findChild(QPushButton, object_name)
+
+    # GET TITLE BUTTON BY OBJECT NAME
+    # ///////////////////////////////////////////////////////////////
+    def get_left_menu_btn(self, object_name):
+        return self.left_menu.findChild(QPushButton, object_name)
+
+    # LEFT AND RIGHT COLUMNS / SHOW / HIDE
+    # ///////////////////////////////////////////////////////////////
+    def toggle_left_column(self):
+        # GET ACTUAL COLUMN SIZE
+        width = self.left_column_frame.width()
+        right_column_width = self.right_column_frame.width()
+
+        self.start_box_animation(width, right_column_width, "left")
+
+    def toggle_right_column(self):
+        # GET ACTUAL COLUMNS SIZE
+        left_column_width = self.left_column_frame.width()
+        width = self.right_column_frame.width()
+
+        self.start_box_animation(left_column_width, width, "right")
+
+    def start_box_animation(self, left_box_width, right_box_width, direction):
+        right_width = 0
+        left_width = 0
+        time_animation = self.settings["time_duration"]
+        minimum_left = self.settings["left_column_size"]["minimum"]
+        maximum_left = self.settings["left_column_size"]["maximum"]
+        minimum_right = self.settings["right_column_size"]["minimum"]
+        maximum_right = self.settings["right_column_size"]["maximum"]
+
+        # Check left Values
+        if left_box_width == minimum_left and direction == "left":
+            left_width = maximum_left
+        else:
+            left_width = minimum_left
+
+        # Check right values
+        if right_box_width == minimum_right and direction == "right":
+            right_width = maximum_right
+        else:
+            right_width = minimum_right
+
+        # ANIMATION LEFT BOX
+        self.left_box = QPropertyAnimation(self.left_column_frame, b"minimumWidth")
+        self.left_box.setDuration(time_animation)
+        self.left_box.setStartValue(left_box_width)
+        self.left_box.setEndValue(left_width)
+        self.left_box.setEasingCurve(QEasingCurve.InOutQuart)
+
+        # ANIMATION RIGHT BOX
+        self.right_box = QPropertyAnimation(self.right_column_frame, b"minimumWidth")
+        self.right_box.setDuration(time_animation)
+        self.right_box.setStartValue(right_box_width)
+        self.right_box.setEndValue(right_width)
+        self.right_box.setEasingCurve(QEasingCurve.InOutQuart)
+
+        # GROUP ANIMATION
+        self.group = QParallelAnimationGroup()
+        self.group.stop()
+        self.group.addAnimation(self.left_box)
+        self.group.addAnimation(self.right_box)
+        self.group.start()
