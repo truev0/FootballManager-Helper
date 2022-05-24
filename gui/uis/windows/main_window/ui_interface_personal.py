@@ -26,6 +26,9 @@ from gui.uis.pages.ui_main_pages import Ui_MainPages
 # ///////////////////////////////////////////////////////////////
 from gui.uis.columns.ui_right_column import Ui_RightColumn
 
+# MAIN FUNCTIONS
+# ///////////////////////////////////////////////////////////////
+from .functions_main_window import *
 
 class Ui_MainWindow(object):
     def setupUi(self, parent):
@@ -304,3 +307,244 @@ class Ui_MainWindow(object):
 
         parent.setCentralWidget(self.central_widget)
 
+    # ADD LEFT BUTTON
+    # ///////////////////////////////////////////////////////////////
+    add_left_buttons = [
+        {
+            "btn_icon": "icon_home.svg",
+            "btn_id": "btn_home",
+            "btn_text": "Home",
+            "btn_tooltip": "Home page",
+            "show_top": True,
+            "is_active": True
+        },
+        {
+            "btn_icon": "icon_squad.svg",
+            "btn_id": "btn_squad",
+            "btn_text": "Squad",
+            "btn_tooltip": "Show your squad",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_tactic.svg",
+            "btn_id": "btn_tactic",
+            "btn_text": "Tactic",
+            "btn_tooltip": "Show your tactic",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_development.svg",
+            "btn_id": "btn_development",
+            "btn_text": "Development",
+            "btn_tooltip": "Show flaws of your players",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_stats.svg",
+            "btn_id": "btn_stats",
+            "btn_text": "Statistics",
+            "btn_tooltip": "Show statistics",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_metrics.svg",
+            "btn_id": "btn_metrics",
+            "btn_text": "Metrics",
+            "btn_tooltip": "Show players metrics",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_compare.svg",
+            "btn_id": "btn_compare",
+            "btn_text": "Compare",
+            "btn_tooltip": "Comparation between players",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_scouting.svg",
+            "btn_id": "btn_scouting",
+            "btn_text": "Scouting",
+            "btn_tooltip": "Show scouted players",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_employees.svg",
+            "btn_id": "btn_employees",
+            "btn_text": "Employees",
+            "btn_tooltip": "Show your staff",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_settings.svg",
+            "btn_id": "btn_settings",
+            "btn_text": "Settings",
+            "btn_tooltip": "Open settings",
+            "show_top": False,
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_info.svg",
+            "btn_id": "btn_info",
+            "btn_text": "Information",
+            "btn_tooltip": "Open information",
+            "show_top": False,
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_help.svg",
+            "btn_id": "btn_help",
+            "btn_text": "Help",
+            "btn_tooltip": "Open help",
+            "show_top": False,
+            "is_active": False
+        }
+    ]
+
+    # ADD TITLE BAR BUTTONS
+    # ///////////////////////////////////////////////////////////////
+    add_title_bar_buttons = [
+        {
+            "btn_icon": "icon_refresh.svg",
+            "btn_id": "btn_refresh",
+            "btn_tooltip": "Refresh",
+            "is_active": False
+        },
+        {
+            "btn_icon": "icon_settings.svg",
+            "btn_id": "btn_top_settings",
+            "btn_tooltip": "Top settings",
+            "is_active": False
+        }
+    ]
+
+    # SETUP CUSTOM BUTTONS
+    # Get sender() function when button is clicked
+    # ///////////////////////////////////////////////////////////////
+    def setup_btns(self):
+        if self.title_bar.sender() != None:
+            return self.title_bar.sender()
+        elif self.left_menu.sender() != None:
+            return self.left_menu.sender()
+        elif self.left_column.sender() != None:
+            return self.left_column.sender()
+
+    # SETUP MAIN WINDOW WITH CUSTOM PARAMETER
+    # ///////////////////////////////////////////////////////////////
+    def setup_gui(self):
+        # APP TITLE
+        # ///////////////////////////////////////////////////////////////
+        self.setWindowTitle(self.settings["app_name"])
+
+        # REMOVE TITLE BAR
+        # ///////////////////////////////////////////////////////////////
+        if self.settings["custom_title_bar"]:
+            self.setWindowFlag(Qt.FramelessWindowHint)
+            self.setAttribute(Qt.WA_TranslucentBackground)
+
+        # ADD GRIPS
+        # ///////////////////////////////////////////////////////////////
+        if self.settings["custom_title_bar"]:
+            self.left_grip = PyGrips(self, "left", self.hide_grips)
+            self.right_grip = PyGrips(self, "right", self.hide_grips)
+            self.top_grip = PyGrips(self, "top", self.hide_grips)
+            self.bottom_grip = PyGrips(self, "bottom", self.hide_grips)
+            self.top_left_grip = PyGrips(self, "top_left", self.hide_grips)
+            self.top_right_grip = PyGrips(self, "top_right", self.hide_grips)
+            self.bottom_left_grip = PyGrips(self, "bottom_left", self.hide_grips)
+            self.bottom_right_grip = PyGrips(self, "bottom_right", self.hide_grips)
+
+        # LEFT MENUS / GET SIGNALS WHEN LEFT MENU BTN IS CLICKED / RELEASED
+        # ///////////////////////////////////////////////////////////////
+        # ADD BUTTONS
+        self.left_menu.add_menus(Ui_MainWindow.add_left_buttons)
+
+        # SET SIGNALS
+        self.left_menu.clicked.connect(self.btn_clicked)
+        self.left_menu.released.connect(self.btn_released)
+
+        # TITLE BAR / EXTRA BUTTONS
+        # ///////////////////////////////////////////////////////////////
+        # ADD BUTTONS
+        self.title_bar.add_menus(Ui_MainWindow.add_title_bar_buttons)
+
+        # SET SIGNALS
+        self.title_bar.clicked.connect(self.btn_clicked)
+        self.title_bar.released.connect(self.btn_released)
+
+        # ADD TITLE
+        if self.settings["custom_title_bar"]:
+            self.title_bar.set_title(self.settings["app_name"])
+        else:
+            self.title_bar.set_title("Welcome to FM Helper")
+
+        # LEFT COLUMN SET SIGNALS
+        # ///////////////////////////////////////////////////////////////
+        self.left_column.clicked.connect(self.btn_clicked)
+        self.left_column.released.connect(self.btn_released)
+
+        # SET INITIAL PAGE / LEFT & RIGHT MENUS
+        # ///////////////////////////////////////////////////////////////
+        MainFunctions.set_page(self, self.load_pages.page_1)
+        MainFunctions.set_left_column_menu(
+            self,
+            menu=self.left_column.menus.menu_1,
+            title="Settings Left Column",
+            icon_path=Functions.set_svg_icon("icon_settings.svg")
+        )
+        MainFunctions.set_right_column_menu(self, self.right_column.menu_1)
+
+        # ///////////////////////////////////////////////////////////////
+        # CUSTOM WIDGETS
+        # OBJECTS FOR LOAD PAGES, LEFT AND RIGHT COLUMNS
+        # You can access objects inside Qt Designer projects using
+        # the objects below:
+        #
+        # <OBJECTS>
+        # LEFT COLUMN: self.ui.left_column.menus
+        # RIGHT COLUMN: self.ui.right_column
+        # LOAD PAGES: self.ui.load_pages
+        # </OBJECTS>
+        # ///////////////////////////////////////////////////////////////
+
+        # LANGUAGE
+        # ///////////////////////////////////////////////////////////////
+        self.language = self.settings["language"]
+
+        # LEFT COLUMN CONFIGURATION
+        # ///////////////////////////////////////////////////////////////
+        # TODO edit this column
+
+        # PAGES CONFIGURATION
+        # ///////////////////////////////////////////////////////////////
+        # PAGE 1
+        # TODO edit layouts
+
+        # PAGE 2
+        # TODO edit layouts and add widgets
+
+        # RIGHT COLUMN CONFIGURATION
+        # ///////////////////////////////////////////////////////////////
+        # TODO edit this column
+
+        # ///////////////////////////////////////////////////////////////
+        # END CUSTOM WIDGETS
+
+    # RESIZE GRIPS AND CHANGE POSITION
+    # ///////////////////////////////////////////////////////////////
+    def resize_grips(self):
+        if self.settings["custom_title_bar"]:
+            self.left_grip.setGeometry(5, 10, 10, self.height())
+            self.right_grip.setGeometry(self.width() - 15, 10, 10, self.height())
+            self.top_grip.setGeometry(5, 5, self.width() - 10, 10)
+            self.bottom_grip.setGeometry(5, self.height() - 15, self.width() - 10, 10)
+            self.top_right_grip.setGeometry(self.width() - 20, 5, 15, 15)
+            self.bottom_left_grip.setGeometry(5, self.height() - 20, 15, 15)
+            self.bottom_right_grip.setGeometry(self.width() - 20, self.height() - 20, 15, 15)
