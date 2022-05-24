@@ -19,10 +19,10 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
     # APPLICATION
     # ///////////////////////////////////////////
-    application = QApplication(sys.argv)
-    application.setWindowIcon()
+    app = QApplication(sys.argv)
+    # app.setWindowIcon()
     window = MainWindow()
 
     # EXEC APP
     # ///////////////////////////////////////////
-    sys.exit(application.exec())
+    sys.exit(app.exec())
