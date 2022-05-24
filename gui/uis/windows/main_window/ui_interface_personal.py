@@ -455,32 +455,16 @@ class Ui_MainWindow(object):
         # ADD BUTTONS
         self.left_menu.add_menus(Ui_MainWindow.add_left_buttons)
 
-        # SET SIGNALS
-        # self.left_menu.clicked.connect(PyLeftMenu.btn_clicked(self))
-        # self.left_menu.released.connect(PyLeftMenu.btn_released(self))
-        # self.left_menu.clicked.connect(self.btn_clicked)
-        # self.left_menu.released.connect(self.btn_released)
-
         # TITLE BAR / EXTRA BUTTONS
         # ///////////////////////////////////////////////////////////////
         # ADD BUTTONS
         self.title_bar.add_menus(Ui_MainWindow.add_title_bar_buttons)
-
-        # SET SIGNALS
-        # self.title_bar.clicked.connect(PyTitleBar.btn_clicked(self))
-        # self.title_bar.released.connect(PyTitleBar.btn_released(self))
 
         # ADD TITLE
         if self.settings["custom_title_bar"]:
             self.title_bar.set_title(self.settings["app_name"])
         else:
             self.title_bar.set_title("Welcome to FM Helper")
-
-        # LEFT COLUMN SET SIGNALS
-        # ///////////////////////////////////////////////////////////////
-        # self.left_column.clicked.connect(PyLeftColumn.btn_clicked(self))
-        # self.left_column.released.connect(PyLeftColumn.btn_released(self))
-        # TODO delete signals
 
 
         # SET INITIAL PAGE / LEFT & RIGHT MENUS
@@ -528,18 +512,6 @@ class Ui_MainWindow(object):
 
         # ///////////////////////////////////////////////////////////////
         # END CUSTOM WIDGETS
-
-    # RESIZE GRIPS AND CHANGE POSITION
-    # ///////////////////////////////////////////////////////////////
-    def resize_grips(self):
-        if self.settings["custom_title_bar"]:
-            self.left_grip.setGeometry(5, 10, 10, self.height())
-            self.right_grip.setGeometry(self.width() - 15, 10, 10, self.height())
-            self.top_grip.setGeometry(5, 5, self.width() - 10, 10)
-            self.bottom_grip.setGeometry(5, self.height() - 15, self.width() - 10, 10)
-            self.top_right_grip.setGeometry(self.width() - 20, 5, 15, 15)
-            self.bottom_left_grip.setGeometry(5, self.height() - 20, 15, 15)
-            self.bottom_right_grip.setGeometry(self.width() - 20, self.height() - 20, 15, 15)
 
     # SET MAIN WINDOW PAGES
     # ///////////////////////////////////////////////////////////////
@@ -605,7 +577,7 @@ class Ui_MainWindow(object):
     def start_box_animation(self, left_box_width, right_box_width, direction):
         right_width = 0
         left_width = 0
-        time_animation = self.settings["time_duration"]
+        time_animation = self.settings["time_animation"]
         minimum_left = self.settings["left_column_size"]["minimum"]
         maximum_left = self.settings["left_column_size"]["maximum"]
         minimum_right = self.settings["right_column_size"]["minimum"]
