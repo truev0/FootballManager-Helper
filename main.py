@@ -148,49 +148,57 @@ class MainWindow(QMainWindow):
             # Select menu
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load page x
+            # Load page 3
+            self.ui.set_page(self.ui.load_pages.page_3)
 
         # Development Btn
         if btn.objectName() == "btn_development":
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load page x
+            # Load page 4
+            # self.ui.set_page(self.ui.load_pages.page_4)
 
         # Stats Btn
         if btn.objectName() == "btn_stats":
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load page x
+            # Load page 5
+            # self.ui.set_page(self.ui.load_pages.page_5)
 
         # Metrics Btn
         if btn.objectName() == "btn_metrics":
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load page x
+            # Load page 6
+            # self.ui.set_page(self.ui.load_pages.page_6)
 
         # Compare Btn
         if btn.objectName() == "btn_compare":
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load page x
+            # Load page 7
+            # self.ui.set_page(self.ui.load_pages.page_7)
 
         # Scouting Btn
         if btn.objectName() == "btn_scouting":
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load page x
+            # Load page 8
+            # self.ui.set_page(self.ui.load_pages.page_8)
 
         # Employees Btn
         if btn.objectName() == "btn_employees":
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load page x
+            # Load page 9
+            # self.ui.set_page(self.ui.load_pages.page_9)
 
         # Help Btn
         if btn.objectName() == "btn_help":
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load page x
+            # Load page 10
+            # self.ui.set_page(self.ui.load_pages.page_10)
 
         # Information Btn
         if btn.objectName() == "btn_info":
@@ -256,6 +264,9 @@ class MainWindow(QMainWindow):
             # Get left menu btn
             top_settings = self.ui.get_left_menu_btn("btn_settings")
             top_settings.set_active_tab(False)
+
+        if btn.objectName() == "btn_refresh":
+            print(self.width(), self.height())
 
         # DEBUG
 

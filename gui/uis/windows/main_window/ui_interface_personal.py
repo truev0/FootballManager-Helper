@@ -528,7 +528,7 @@ class Ui_MainWindow(object):
         # TODO edit layouts
 
         # PAGE 2 - Squad view
-        # TODO edit layouts and add widgets
+        # Add table model
         self.table_squad = PyTableWidget(
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
@@ -542,9 +542,179 @@ class Ui_MainWindow(object):
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
             context_color=self.themes["app_color"]["context_color"]
         )
-
         # ADD WIDGETS TO PAGE 2
         self.load_pages.row_1_layout.addWidget(self.table_squad)
+
+        # PAGE 3 - Tactic view
+        # Add pitch image
+        self.pitch_image = QLabel(self.load_pages.vertical_pitch_frame)
+        self.pitch_image.setObjectName(u"pitch_image")
+        self.pitch_image.setGeometry(QRect(0, 0, 550, 820))
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pitch_image.sizePolicy().hasHeightForWidth())
+        self.pitch_image.setSizePolicy(sizePolicy)
+        self.pitch_image.setMinimumSize(QSize(550, 820))
+        self.pitch_image.setPixmap(QPixmap("gui/images/png_images/vertical_pitch.png"))
+        self.pitch_image.setScaledContents(True)
+        self.pitch_image.setAlignment(Qt.AlignCenter)
+        self.pitch_image.raise_()
+
+        # Add pitch players
+        # BTN POS 1
+        self.btn_pos_1 = PyPlayerButton(
+            icon_path=Functions.set_svg_icon("icon_player_identifier.svg"),
+            parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
+            tooltip_text="Goalkeeper",
+            width=48,
+            height=48,
+            radius=20,
+            x=250,
+            y=710,
+            btn_id="btn_pos_1",
+            dark_one=self.themes["app_color"]["dark_one"],
+            icon_color=self.themes["app_color"]["icon_color"],
+            icon_color_hover=self.themes["app_color"]["icon_hover"],
+            icon_color_pressed=self.themes["app_color"]["icon_active"],
+            icon_color_active=self.themes["app_color"]["icon_active"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["pink"]
+        )
+        # self.btn_pos_1.setMaximumHeight(48)
+        # self.btn_pos_1.setMaximumWidth(48)
+        self.btn_pos_1.setGeometry(QRect(250, 710, 48, 48))
+
+        # # BTN POS 2
+        # self.btn_pos_2 = PyPlayerButton(
+        #     radius=8,
+        #     color=self.themes["app_color"]["white"],
+        #
+        #     bg_color_hover=self.themes["app_color"]["icon_hover"],
+        #     bg_color_pressed=self.themes["app_color"]["icon_pressed"],
+        #     parent=self.load_pages.vertical_pitch_frame
+        # )
+        # self.btn_pos_2.setObjectName(u"btn_pos_1")
+        # self.btn_pos_2.setGeometry(QRect(170, 650, 48, 48))
+        # # BTN POS 3
+        # self.btn_pos_3 = PyPlayerButton(
+        #     radius=8,
+        #     color=self.themes["app_color"]["white"],
+        #
+        #     bg_color_hover=self.themes["app_color"]["icon_hover"],
+        #     bg_color_pressed=self.themes["app_color"]["icon_pressed"],
+        #     parent=self.load_pages.vertical_pitch_frame
+        # )
+        # self.btn_pos_3.setObjectName(u"btn_pos_1")
+        # self.btn_pos_3.setGeometry(QRect(320, 650, 48, 48))
+        # # BTN POS 4
+        # self.btn_pos_4 = PyPlayerButton(
+        #     radius=8,
+        #     color=self.themes["app_color"]["white"],
+        #
+        #     bg_color_hover=self.themes["app_color"]["icon_hover"],
+        #     bg_color_pressed=self.themes["app_color"]["icon_pressed"],
+        #     parent=self.load_pages.vertical_pitch_frame
+        # )
+        # self.btn_pos_4.setObjectName(u"btn_pos_1")
+        # self.btn_pos_4.setGeometry(QRect(430, 610, 48, 48))
+        # # BTN POS 5
+        # self.btn_pos_5 = PyPlayerButton(
+        #     radius=8,
+        #     color=self.themes["app_color"]["white"],
+        #
+        #     bg_color_hover=self.themes["app_color"]["icon_hover"],
+        #     bg_color_pressed=self.themes["app_color"]["icon_pressed"],
+        #     parent=self.load_pages.vertical_pitch_frame
+        # )
+        # self.btn_pos_5.setObjectName(u"btn_pos_1")
+        # self.btn_pos_5.setGeometry(QRect(50, 610, 48, 48))
+        # # BTN POS 6
+        # self.btn_pos_6 = PyPlayerButton(
+        #     radius=8,
+        #     color=self.themes["app_color"]["white"],
+        #
+        #     bg_color_hover=self.themes["app_color"]["icon_hover"],
+        #     bg_color_pressed=self.themes["app_color"]["icon_pressed"],
+        #     parent=self.load_pages.vertical_pitch_frame
+        # )
+        # self.btn_pos_6.setObjectName(u"btn_pos_1")
+        # self.btn_pos_6.setGeometry(QRect(240, 490, 48, 48))
+        # # BTN POS 7
+        # self.btn_pos_7 = PyPlayerButton(
+        #     radius=8,
+        #     color=self.themes["app_color"]["white"],
+        #
+        #     bg_color_hover=self.themes["app_color"]["icon_hover"],
+        #     bg_color_pressed=self.themes["app_color"]["icon_pressed"],
+        #     parent=self.load_pages.vertical_pitch_frame
+        # )
+        # self.btn_pos_7.setObjectName(u"btn_pos_1")
+        # self.btn_pos_7.setGeometry(QRect(150, 380, 48, 48))
+        # # BTN POS 8
+        # self.btn_pos_8 = PyPlayerButton(
+        #     radius=8,
+        #     color=self.themes["app_color"]["white"],
+        #
+        #     bg_color_hover=self.themes["app_color"]["icon_hover"],
+        #     bg_color_pressed=self.themes["app_color"]["icon_pressed"],
+        #     parent=self.load_pages.vertical_pitch_frame
+        # )
+        # self.btn_pos_8.setObjectName(u"btn_pos_1")
+        # self.btn_pos_8.setGeometry(QRect(330, 380, 48, 48))
+        # # BTN POS 9
+        # self.btn_pos_9 = PyPlayerButton(
+        #     radius=8,
+        #     color=self.themes["app_color"]["white"],
+        #
+        #     bg_color_hover=self.themes["app_color"]["icon_hover"],
+        #     bg_color_pressed=self.themes["app_color"]["icon_pressed"],
+        #     parent=self.load_pages.vertical_pitch_frame
+        # )
+        # self.btn_pos_9.setObjectName(u"btn_pos_1")
+        # self.btn_pos_9.setGeometry(QRect(60, 210, 48, 48))
+        # # BTN POS 10
+        # self.btn_pos_10 = PyPlayerButton(
+        #     radius=8,
+        #     color=self.themes["app_color"]["white"],
+        #
+        #     bg_color_hover=self.themes["app_color"]["icon_hover"],
+        #     bg_color_pressed=self.themes["app_color"]["icon_pressed"],
+        #     parent=self.load_pages.vertical_pitch_frame
+        # )
+        # self.btn_pos_10.setObjectName(u"btn_pos_1")
+        # self.btn_pos_10.setGeometry(QRect(410, 210, 48, 48))
+        # # BTN POS 11
+        # self.btn_pos_11 = PyPlayerButton(
+        #     radius=8,
+        #     color=self.themes["app_color"]["white"],
+        #
+        #     bg_color_hover=self.themes["app_color"]["icon_hover"],
+        #     bg_color_pressed=self.themes["app_color"]["icon_pressed"],
+        #     parent=self.load_pages.vertical_pitch_frame
+        # )
+        # self.btn_pos_11.setObjectName(u"btn_pos_1")
+        # self.btn_pos_11.setGeometry(QRect(250, 110, 48, 48))
+
+
+        # Add table list
+        self.table_tactic = PyTableWidget(
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["context_color"],
+            bg_color=self.themes["app_color"]["bg_two"],
+            header_horizontal_color=self.themes["app_color"]["dark_two"],
+            header_vertical_color=self.themes["app_color"]["bg_three"],
+            bottom_line_color=self.themes["app_color"]["bg_three"],
+            grid_line_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+            context_color=self.themes["app_color"]["context_color"]
+        )
+        # ADD WIDGETS TO PAGE 3
+        self.load_pages.list_table_layout.addWidget(self.table_tactic)
 
         # RIGHT COLUMN CONFIGURATION
         # ///////////////////////////////////////////////////////////////

@@ -7,12 +7,12 @@
     "custom_title_bar": true,
     "language": "en",
     "startup_size": [
-        1400,
-        720
+        1300,
+        971
     ],
     "minimum_size": [
         1020,
-        815
+        971
     ],
     "left_menu_size" : {
         "minimum" : 50,

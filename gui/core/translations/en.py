@@ -1,3 +1,8 @@
+# self.pitch_label = QLabel()
+# pixmap = QPixmap('gui/images/png_images/vertical_pitch.png')
+# self.pitch_label.setPixmap(pixmap)
+# self.pitch_label.setScaledContents(True)
+#         self.vertical_pitch_layout.addWidget(self.pitch_label)
 english = {
     "menu": {
         "o0": "Home",

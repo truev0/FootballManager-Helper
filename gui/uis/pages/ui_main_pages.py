@@ -1,29 +1,30 @@
-# ///////////////////////////////////////////////////////////////
-#
-# BY: VICTOR CAICEDO
-# PROJECT MADE WITH: Qt Designer and PySide6
-# V: 1.0.0
-#
-# This project can be used freely for all uses, as long as they maintain the
-# respective credits only in the Python scripts, any information in the visual
-# interface (GUI) can be modified without any implication.
-#
-# There are limitations on Qt licenses if you want to use your products
-# commercially, I recommend reading them on the official website:
-# https://doc.qt.io/qtforpython/licenses.html
-#
-# ///////////////////////////////////////////////////////////////
+# -*- coding: utf-8 -*-
 
-# IMPORT QT CORE
-# ///////////////////////////////////////////////////////////////
-from pyside_core import *
+################################################################################
+## Form generated from reading UI file 'main_pagesyeoGXi.ui'
+##
+## Created by: Qt User Interface Compiler version 6.3.0
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
+
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
+    QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
+    QVBoxLayout, QWidget)
 
 
 class Ui_MainPages(object):
     def setupUi(self, MainPages):
         if not MainPages.objectName():
             MainPages.setObjectName(u"MainPages")
-        MainPages.resize(860, 600)
+        MainPages.resize(1051, 858)
         self.main_pages_layout = QVBoxLayout(MainPages)
         self.main_pages_layout.setSpacing(0)
         self.main_pages_layout.setObjectName(u"main_pages_layout")
@@ -91,48 +92,10 @@ class Ui_MainPages(object):
         self.verticalLayout.setSpacing(15)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(5, 5, 5, 5)
-        self.title_label = QLabel(self.contents)
-        self.title_label.setObjectName(u"title_label")
-        self.title_label.setMaximumSize(QSize(16777215, 40))
-        font = QFont()
-        font.setPointSize(16)
-        self.title_label.setFont(font)
-        self.title_label.setStyleSheet(u"font-size: 16pt")
-        self.title_label.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout.addWidget(self.title_label)
-
-        self.description_label = QLabel(self.contents)
-        self.description_label.setObjectName(u"description_label")
-        self.description_label.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
-        self.description_label.setWordWrap(True)
-
-        self.verticalLayout.addWidget(self.description_label)
-
         self.row_1_layout = QHBoxLayout()
         self.row_1_layout.setObjectName(u"row_1_layout")
 
         self.verticalLayout.addLayout(self.row_1_layout)
-
-        self.row_2_layout = QHBoxLayout()
-        self.row_2_layout.setObjectName(u"row_2_layout")
-
-        self.verticalLayout.addLayout(self.row_2_layout)
-
-        self.row_3_layout = QHBoxLayout()
-        self.row_3_layout.setObjectName(u"row_3_layout")
-
-        self.verticalLayout.addLayout(self.row_3_layout)
-
-        self.row_4_layout = QVBoxLayout()
-        self.row_4_layout.setObjectName(u"row_4_layout")
-
-        self.verticalLayout.addLayout(self.row_4_layout)
-
-        self.row_5_layout = QVBoxLayout()
-        self.row_5_layout.setObjectName(u"row_5_layout")
-
-        self.verticalLayout.addLayout(self.row_5_layout)
 
         self.scroll_area.setWidget(self.contents)
 
@@ -141,17 +104,51 @@ class Ui_MainPages(object):
         self.pages.addWidget(self.page_2)
         self.page_3 = QWidget()
         self.page_3.setObjectName(u"page_3")
-        self.page_3.setStyleSheet(u"QFrame {\n"
-"	font-size: 16pt;\n"
-"}")
         self.page_3_layout = QVBoxLayout(self.page_3)
+        self.page_3_layout.setSpacing(5)
         self.page_3_layout.setObjectName(u"page_3_layout")
-        self.empty_page_label = QLabel(self.page_3)
-        self.empty_page_label.setObjectName(u"empty_page_label")
-        self.empty_page_label.setFont(font)
-        self.empty_page_label.setAlignment(Qt.AlignCenter)
+        self.page_3_layout.setContentsMargins(5, 5, 5, 5)
+        self.scroll_area_tactic = QScrollArea(self.page_3)
+        self.scroll_area_tactic.setObjectName(u"scroll_area_tactic")
+        self.scroll_area_tactic.setStyleSheet(u"background: transparent;")
+        self.scroll_area_tactic.setFrameShape(QFrame.NoFrame)
+        self.scroll_area_tactic.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll_area_tactic.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll_area_tactic.setWidgetResizable(True)
+        self.scroll_area_tactic.setAlignment(Qt.AlignCenter)
+        self.content_tactic = QWidget()
+        self.content_tactic.setObjectName(u"content_tactic")
+        self.content_tactic.setGeometry(QRect(0, 0, 1031, 838))
+        self.content_tactic.setStyleSheet(u"background: transparent;")
+        self.horizontalLayout = QHBoxLayout(self.content_tactic)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.vertical_pitch_frame = QFrame(self.content_tactic)
+        self.vertical_pitch_frame.setObjectName(u"vertical_pitch_frame")
+        self.vertical_pitch_frame.setMinimumSize(QSize(550, 790))
+        self.vertical_pitch_frame.setFrameShape(QFrame.NoFrame)
+        self.vertical_pitch_frame.setFrameShadow(QFrame.Raised)
 
-        self.page_3_layout.addWidget(self.empty_page_label)
+        self.horizontalLayout.addWidget(self.vertical_pitch_frame)
+
+        self.horizontalSpacer = QSpacerItem(198, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.list_table_frame = QFrame(self.content_tactic)
+        self.list_table_frame.setObjectName(u"list_table_frame")
+        self.list_table_frame.setMinimumSize(QSize(250, 600))
+        self.list_table_frame.setFrameShape(QFrame.NoFrame)
+        self.list_table_frame.setFrameShadow(QFrame.Raised)
+        self.list_table_layout = QHBoxLayout(self.list_table_frame)
+        self.list_table_layout.setSpacing(0)
+        self.list_table_layout.setObjectName(u"list_table_layout")
+        self.list_table_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.horizontalLayout.addWidget(self.list_table_frame)
+
+        self.scroll_area_tactic.setWidget(self.content_tactic)
+
+        self.page_3_layout.addWidget(self.scroll_area_tactic)
 
         self.pages.addWidget(self.page_3)
 
@@ -160,7 +157,7 @@ class Ui_MainPages(object):
 
         self.retranslateUi(MainPages)
 
-        self.pages.setCurrentIndex(0)
+        self.pages.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainPages)
@@ -169,7 +166,5 @@ class Ui_MainPages(object):
     def retranslateUi(self, MainPages):
         MainPages.setWindowTitle(QCoreApplication.translate("MainPages", u"Form", None))
         self.label.setText(QCoreApplication.translate("MainPages", u"Welcome To FM Excel Helper", None))
-        self.title_label.setText(QCoreApplication.translate("MainPages", u"Custom Widgets Page", None))
-        self.empty_page_label.setText(QCoreApplication.translate("MainPages", u"Empty Page", None))
     # retranslateUi
 
