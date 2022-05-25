@@ -2,6 +2,7 @@
 # ///////////////////////////////////////////
 import sys
 import os
+import json
 
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////
@@ -15,9 +16,22 @@ from gui.core.json_settings import Settings
 # ///////////////////////////////////////////
 from gui.core.functions import Functions
 
+# IMPORT FM INSIDE
+# ///////////////////////////////////////////
+import gui.core.fm_insider.FMinside as FMi
+
+# IMPORT CUSTOM CLASSES
+# ///////////////////////////////////////////
+from gui.core.custom_classes.CustomNestedNamespace.py_CustomNestedNamespace import NestedNamespace
+
+# IMPORT TRANSLATIONS
+# ///////////////////////////////////////////
+from gui.core.translations import en, es
+
 # IMPORT WIDGETS
 # ///////////////////////////////////////////
 from gui.widgets import *
+from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 
 # IMPORT INTERFACE
 # ///////////////////////////////////////////
@@ -29,6 +43,8 @@ os.environ["QT_FONT_DPI"] = "96"
 
 # MAIN WINDOW
 # ///////////////////////////////////////////
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -41,13 +57,26 @@ class MainWindow(QMainWindow):
 
         # CLASS VARIABLES
         # ///////////////////////////////////////////
+        self.dragPos = None
         self.df_squad = None
+        self.bottom_right_grip = None
+        self.bottom_left_grip = None
+        self.top_right_grip = None
+        self.top_left_grip = None
+        self.bottom_grip = None
+        self.top_grip = None
+        self.right_grip = None
+        self.left_grip = None
+        self.ui_text = {}
+        self.ui_text.update({'en': NestedNamespace(en.english)})
+        self.ui_text.update({'es': NestedNamespace(es.espanol)})
+
 
         # LOAD SETTINGS
         # ///////////////////////////////////////////
         settings = Settings()
         self.settings = settings.items
-        self.language = self.settings["language"]
+        self.language = 'en'
 
         # SETUP MAIN WINDOW
         # ///////////////////////////////////////////
@@ -275,13 +304,15 @@ class MainWindow(QMainWindow):
     def mousePressEvent(self, event):
         # SET DRAG POS WINDOW
         p = event.globalPosition()
-        globalPos = p.toPoint()
-        self.dragPos = globalPos
+        global_pos = p.toPoint()
+        self.dragPos = global_pos
 
     # CONNECT EVENT CLICKS
     # ///////////////////////////////////////////
     def connect_events(self):
-        self.ui.load_squad_btn.clicked.connect(self.load_file)
+        self.ui.load_squad_btn.clicked.connect(lambda: self.load_file())
+        self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
+        self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
 
     # LOAD FILE
     # ///////////////////////////////////////////
@@ -290,12 +321,11 @@ class MainWindow(QMainWindow):
         dlg_file = QFileDialog.getOpenFileName(
             self,
             caption="Select a file",
-            filter=("HTML Files (*.html)")
+            filter="HTML Files (*.html)"
         )
 
         # READ FILE
         if dlg_file:
-            print("Hola")
             self.df_squad = FMi.setting_up_pandas(dlg_file[0], 'squad_btn')
             self.df_squad = FMi.convert_values(self.df_squad, self.language)
             self.df_squad = FMi.create_metrics_for_gk(self.df_squad, self.language)
@@ -303,6 +333,62 @@ class MainWindow(QMainWindow):
             self.df_squad = FMi.create_scores_for_position(self.df_squad, self.language)
             self.df_squad = FMi.round_data(self.df_squad)
             self.df_squad = FMi.ranking_values(self.df_squad)
+            print("Archivo Leido")
+
+    # TRANSLATE UI
+    # ///////////////////////////////////////////
+    def translate_lang(self, lang):
+        print("Translation")
+        self.language = lang
+
+        # Translating side menu buttons
+        self.ui.left_menu.findChild(QPushButton, 'btn_home').setText(self.ui_text[lang].menu.o0)
+        self.ui.left_menu.findChild(QPushButton, 'btn_squad').setText(self.ui_text[lang].menu.o1)
+        self.ui.left_menu.findChild(QPushButton, 'btn_tactic').setText(self.ui_text[lang].menu.o2)
+        self.ui.left_menu.findChild(QPushButton, 'btn_development').setText(self.ui_text[lang].menu.o3)
+        self.ui.left_menu.findChild(QPushButton, 'btn_stats').setText(self.ui_text[lang].menu.o5)
+        self.ui.left_menu.findChild(QPushButton, 'btn_metrics').setText(self.ui_text[lang].menu.o6)
+        self.ui.left_menu.findChild(QPushButton, 'btn_compare').setText(self.ui_text[lang].menu.o7)
+        self.ui.left_menu.findChild(QPushButton, 'btn_scouting').setText(self.ui_text[lang].menu.o8)
+        self.ui.left_menu.findChild(QPushButton, 'btn_employees').setText(self.ui_text[lang].menu.o9)
+        self.ui.left_menu.findChild(QPushButton, 'btn_settings').setText(self.ui_text[lang].menu.o10)
+        self.ui.left_menu.findChild(QPushButton, 'btn_info').setText(self.ui_text[lang].menu.o11)
+        self.ui.left_menu.findChild(QPushButton, 'btn_help').setText(self.ui_text[lang].menu.o12)
+        self.ui.left_menu.toggle_button.setText(self.ui_text[lang].menu.o4)
+
+        # Translating side menu tooltips
+        self.ui.left_menu.findChild(QPushButton, 'btn_home').change_tooltip(self.ui_text[lang].menu.t0)
+        self.ui.left_menu.findChild(QPushButton, 'btn_squad').change_tooltip(self.ui_text[lang].menu.t1)
+        self.ui.left_menu.findChild(QPushButton, 'btn_tactic').change_tooltip(self.ui_text[lang].menu.t2)
+        self.ui.left_menu.findChild(QPushButton, 'btn_development').change_tooltip(self.ui_text[lang].menu.t3)
+        self.ui.left_menu.findChild(QPushButton, 'btn_stats').change_tooltip(self.ui_text[lang].menu.t5)
+        self.ui.left_menu.findChild(QPushButton, 'btn_metrics').change_tooltip(self.ui_text[lang].menu.t6)
+        self.ui.left_menu.findChild(QPushButton, 'btn_compare').change_tooltip(self.ui_text[lang].menu.t7)
+        self.ui.left_menu.findChild(QPushButton, 'btn_scouting').change_tooltip(self.ui_text[lang].menu.t8)
+        self.ui.left_menu.findChild(QPushButton, 'btn_employees').change_tooltip(self.ui_text[lang].menu.t9)
+        self.ui.left_menu.findChild(QPushButton, 'btn_settings').change_tooltip(self.ui_text[lang].menu.t10)
+        self.ui.left_menu.findChild(QPushButton, 'btn_info').change_tooltip(self.ui_text[lang].menu.t11)
+        self.ui.left_menu.findChild(QPushButton, 'btn_help').change_tooltip(self.ui_text[lang].menu.t12)
+        self.ui.left_menu.toggle_button.change_tooltip(self.ui_text[lang].menu.t4)
+
+        # Translating tooltip title buttons
+        self.ui.title_bar.findChild(QPushButton,
+                                    'btn_refresh').change_tooltip(self.ui_text[lang].title_buttons_tooltips.b1)
+        self.ui.title_bar.findChild(QPushButton,
+                                    'btn_top_settings').change_tooltip(self.ui_text[lang].title_buttons_tooltips.b2)
+        self.ui.title_bar.minimize_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b3)
+        self.ui.title_bar.maximize_restore_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b4)
+        self.ui.title_bar.close_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b5)
+
+
+        # Translating left inside menu
+        self.ui.load_squad_btn.setText(self.ui_text[lang].left_content.b1)
+        self.ui.load_scouting_btn.setText(self.ui_text[lang].left_content.b2)
+
+        # Translatin right inside menu
+        self.ui.right_btn_1.setText(self.ui_text[lang].right_content.b1)
+        self.ui.right_btn_2.setText(self.ui_text[lang].right_content.b2)
+
 
 
 # SETTINGS WHEN TO START

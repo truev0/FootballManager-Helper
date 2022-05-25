@@ -1,5 +1,4 @@
 
-
 # IMPORT QT CORE
 # ///////////////////////////////////////////////////////////////
 from pyside_core import *
@@ -214,7 +213,7 @@ class PyLeftMenu(QWidget):
     def setup_ui(self):
         # ADD MENU LAYOUT
         self.left_menu_layout = QVBoxLayout(self)
-        self.left_menu_layout.setContentsMargins(0,0,0,0)
+        self.left_menu_layout.setContentsMargins(0 ,0 ,0 ,0)
 
         # ADD BG
         self.bg = QFrame()
@@ -227,16 +226,16 @@ class PyLeftMenu(QWidget):
 
         # ADD LAYOUTS
         self._layout = QVBoxLayout(self.bg)
-        self._layout.setContentsMargins(0,0,0,0)
+        self._layout.setContentsMargins(0 ,0 ,0 ,0)
 
         # TOP LAYOUT
         self.top_layout = QVBoxLayout(self.top_frame)
-        self.top_layout.setContentsMargins(0,0,0,0)
+        self.top_layout.setContentsMargins(0 ,0 ,0 ,0)
         self.top_layout.setSpacing(1)
 
         # BOTTOM LAYOUT
         self.bottom_layout = QVBoxLayout(self.bottom_frame)
-        self.bottom_layout.setContentsMargins(0,0,0,8)
+        self.bottom_layout.setContentsMargins(0 ,0 ,0 ,8)
         self.bottom_layout.setSpacing(1)
 
         # ADD TOP AND BOTTOM FRAME
@@ -245,8 +244,3 @@ class PyLeftMenu(QWidget):
 
         # ADD BG TO LAYOUT
         self.left_menu_layout.addWidget(self.bg)
-
-        
-
-        
-

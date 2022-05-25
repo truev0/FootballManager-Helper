@@ -48,6 +48,8 @@ class PyTitleButton(QPushButton):
         self._top_margin = self.height() + 6
         self._is_active = is_active
         # Set Parameters
+        self._dark_one = dark_one
+        self._text_foreground = text_foreground
         self._set_bg_color = bg_color
         self._set_icon_path = icon_path
         self._set_icon_color = icon_color
@@ -64,6 +66,19 @@ class PyTitleButton(QPushButton):
             dark_one,
             context_color,
             text_foreground
+        )
+        self._tooltip.hide()
+
+    # SETTER FOR TRANSLATE
+    # ///////////////////////////////////////////////////////////////
+    def change_tooltip(self, new_tooltip):
+        self._tooltip_text = new_tooltip
+        self._tooltip = _ToolTip(
+            self._app_parent,
+            self._tooltip_text,
+            self._dark_one,
+            self._context_color,
+            self._text_foreground
         )
         self._tooltip.hide()
 

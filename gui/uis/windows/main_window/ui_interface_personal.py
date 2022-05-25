@@ -496,7 +496,6 @@ class Ui_MainWindow(object):
 
         # LEFT COLUMN CONFIGURATION
         # ///////////////////////////////////////////////////////////////
-        # TODO edit this column
         # Load Squad Btn
         self.load_squad_btn = PyPushButton(
             text="Load squad file",
@@ -504,23 +503,121 @@ class Ui_MainWindow(object):
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
-        )
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
 
+        )
         self.load_squad_btn.setMaximumHeight(40)
         self.left_column.menus.btn_1_layout.addWidget(self.load_squad_btn)
 
+        # Load Scouting Btn
+        self.load_scouting_btn = PyPushButton(
+            text="Load scouting file",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.load_scouting_btn.setMaximumHeight(40)
+        self.load_scouting_btn.setEnabled(False)  # TODO enable button
+        self.left_column.menus.btn_2_layout.addWidget(self.load_scouting_btn)
+
         # PAGES CONFIGURATION
         # ///////////////////////////////////////////////////////////////
-        # PAGE 1
+        # PAGE 1 - Introduction to App
         # TODO edit layouts
 
-        # PAGE 2
+        # PAGE 2 - Squad view
         # TODO edit layouts and add widgets
+        self.table_squad = PyTableWidget(
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["context_color"],
+            bg_color=self.themes["app_color"]["bg_two"],
+            header_horizontal_color=self.themes["app_color"]["dark_two"],
+            header_vertical_color=self.themes["app_color"]["bg_three"],
+            bottom_line_color=self.themes["app_color"]["bg_three"],
+            grid_line_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+            context_color=self.themes["app_color"]["context_color"]
+        )
+
+        # ADD WIDGETS TO PAGE 2
+        self.load_pages.row_1_layout.addWidget(self.table_squad)
 
         # RIGHT COLUMN CONFIGURATION
         # ///////////////////////////////////////////////////////////////
-        # TODO edit this column
+
+        # Button to change to menu 2
+        self.right_btn_1 = PyPushButton(
+            text="Show Menu 2",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.icon_right = QIcon(Functions.set_svg_icon("icon_arrow_right.svg"))
+        self.right_btn_1.setIcon(self.icon_right)
+        self.right_btn_1.setMaximumHeight(40)
+        self.right_btn_1.clicked.connect(lambda: self.set_right_column_menu(
+            self.right_column.menu_2
+        ))
+        self.right_column.btn_1_menu_1_layout.addWidget(self.right_btn_1)
+
+        # Button to change to menu 1
+        self.right_btn_2 = PyPushButton(
+            text="Show Menu 1",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.icon_left = QIcon(Functions.set_svg_icon("icon_arrow_left.svg"))
+        self.right_btn_2.setIcon(self.icon_left)
+        self.right_btn_2.setMaximumHeight(40)
+        self.right_btn_2.clicked.connect(lambda: self.set_right_column_menu(
+            self.right_column.menu_1
+        ))
+        self.right_column.btn_1_menu_2_layout.addWidget(self.right_btn_2)
+
+        # ENGLISH BUTTON
+        # Button to change UI to english
+        # ///////////////////////////////////////////////////////////////
+        self.english_language_btn = PyPushButton(
+            text="English",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.icon_english = QIcon(Functions.set_svg_image("us.svg"))
+        self.english_language_btn.setIcon(self.icon_english)
+        self.english_language_btn.setMaximumHeight(40)
+        # TODO connect function
+
+        self.right_column.btn_en_layout.addWidget(self.english_language_btn)
+
+        # SPANISH BUTTON
+        # Button to change UI to spanish
+        # ///////////////////////////////////////////////////////////////
+        self.spanish_language_btn = PyPushButton(
+            text="Español",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.icon_spanish = QIcon(Functions.set_svg_image("es.svg"))
+        self.spanish_language_btn.setIcon(self.icon_spanish)
+        self.spanish_language_btn.setMaximumHeight(40)
+        # TODO connect function
+
+        self.right_column.btn_es_layout.addWidget(self.spanish_language_btn)
 
         # ///////////////////////////////////////////////////////////////
         # END CUSTOM WIDGETS

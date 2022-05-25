@@ -1,9 +1,10 @@
 espanol = {
     "menu": {
+        "o0": "Inicio",
         "o1": "Plantilla",
         "o2": "Tactica",
         "o3": "Desarrollo",
-        "o4": "Idoneidad",
+        "o4": "Ocultar menu",
         "o5": "Estadisticas",
         "o6": "Metricas",
         "o7": "Comparativa",
@@ -11,7 +12,20 @@ espanol = {
         "o9": "Empleados",
         "o10": "Ajustes",
         "o11": "Info",
-        "o12": "Ayuda"
+        "o12": "Ayuda",
+        "t0": "Pagina inicio",
+        "t1": "Ver plantilla",
+        "t2": "Ver tactica",
+        "t3": "Ver desarrollo",
+        "t4": "Mostrar menu",
+        "t5": "Ver estadisticas",
+        "t6": "Ver metricas",
+        "t7": "Ver comparativa",
+        "t8": "Ir a scouting",
+        "t9": "Ver empleados",
+        "t10": "Ir a ajustes",
+        "t11": "Ir a info",
+        "t12": "Ir a ayuda"
     },
     "pages": {
         "p1": {
@@ -72,6 +86,21 @@ espanol = {
         "p13": {
 
         }
+    },
+    "left_content": {
+        "b1": "Cargar archivo plantilla",
+        "b2": "Cargar archivo scouting"
+    },
+    "right_content": {
+        "b1": "Deslizar menu 2",
+        "b2": "Deslizar menu 1"
+    },
+    "title_buttons_tooltips": {
+        "b1": "Refrescar",
+        "b2": "Ajustes Superiores",
+        "b3": "Minimizar",
+        "b4": "Maximizar",
+        "b5": "Cerrar"
     }
 }
 

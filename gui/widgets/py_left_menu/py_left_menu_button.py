@@ -81,6 +81,19 @@ class PyLeftMenuButton(QPushButton):
         )
         self.tooltip.hide()
 
+    # SETTER FOR TRANSLATE
+    # ///////////////////////////////////////////////////////////////
+    def change_tooltip(self, new_tooltip):
+        self._tooltip_text = new_tooltip
+        self.tooltip = _ToolTip(
+            self._parent,
+            self._tooltip_text,
+            self._dark_one,
+            self._context_color,
+            self._set_text_foreground
+        )
+        self.tooltip.hide()
+
     # PAINT EVENT
     # ///////////////////////////////////////////////////////////////
     def paintEvent(self, event):

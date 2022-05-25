@@ -1,9 +1,10 @@
 english = {
     "menu": {
+        "o0": "Home",
         "o1": "Squad",
         "o2": "Tactic",
         "o3": "Development",
-        "o4": "Suitability",
+        "o4": "Hide menu",
         "o5": "Statistics",
         "o6": "Metrics",
         "o7": "Compare",
@@ -11,7 +12,20 @@ english = {
         "o9": "Employees",
         "o10": "Settings",
         "o11": "Info",
-        "o12": "Help"
+        "o12": "Help",
+        "t0": "Home Page",
+        "t1": "Show your squad",
+        "t2": "Show your tactic",
+        "t3": "Show flaws of your players",
+        "t4": "Show menu",
+        "t5": "Show statistics",
+        "t6": "Show metrics",
+        "t7": "Comparation between players",
+        "t8": "Show scouted players",
+        "t9": "Show your employees",
+        "t10": "Open Settings",
+        "t11": "Open Info",
+        "t12": "Open Help"
     },
     "pages": {
         "p1": {
@@ -72,6 +86,21 @@ english = {
         "p13": {
 
         }
+    },
+    "left_content": {
+        "b1": "Load squad file",
+        "b2": "Load scouting file"
+    },
+    "right_content": {
+        "b1": "Slide menu 2",
+        "b2": "Slide menu 1"
+    },
+    "title_buttons_tooltips": {
+        "b1": "Refresh",
+        "b2": "Top Settings",
+        "b3": "Minimize app",
+        "b4": "Maximize app",
+        "b5": "Close app"
     }
 }
 
