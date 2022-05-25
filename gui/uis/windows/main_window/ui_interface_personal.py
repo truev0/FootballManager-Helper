@@ -497,6 +497,18 @@ class Ui_MainWindow(object):
         # LEFT COLUMN CONFIGURATION
         # ///////////////////////////////////////////////////////////////
         # TODO edit this column
+        # Load Squad Btn
+        self.load_squad_btn = PyPushButton(
+            text="Load squad file",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+
+        self.load_squad_btn.setMaximumHeight(40)
+        self.left_column.menus.btn_1_layout.addWidget(self.load_squad_btn)
 
         # PAGES CONFIGURATION
         # ///////////////////////////////////////////////////////////////

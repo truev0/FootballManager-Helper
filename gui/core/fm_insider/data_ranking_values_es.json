@@ -1,0 +1,538 @@
+{
+  "positionEvaluation": [
+    {
+      "position": "POR-De",
+      "sumElements": ["Aér", "Blo", "Com", "Mdo", "Ref", "Saq", "Pue", "1v1", "Ant", "Cnc", "Col", "Dec", "Agi"],
+      "coef1": 13,
+      "coef2": 0.000001
+    },
+    {
+      "position": "PCI-De",
+      "sumElements": ["Aér", "Blo", "Com", "Mdo", "Ctr", "Pas", "Ref", "SAL", "Pue", "1v1", "Ant", "Cnc", "Col", "Dec",
+        "Vis", "Ser", "Ace", "Agi", "Saq"],
+      "coef1": 19,
+      "coef2": 0.00000002
+    },
+    {
+      "position": "PCI-Ap",
+      "sumElements": ["Aér", "Blo", "Com", "Mdo", "Ctr", "Pas", "Ref", "SAL", "Pue", "1v1", "Ant", "Cnc", "Col", "Dec",
+        "Vis", "Ser", "Ace", "Agi", "Saq"],
+      "coef1": 19,
+      "coef2": 0.000003
+    },
+    {
+      "position": "PCI-At",
+      "sumElements": ["Aér", "Blo", "Com", "Mdo", "Ctr", "Pas", "Ref", "SAL", "Pue", "1v1", "Ant", "Cnc", "Col", "Dec",
+        "Vis", "Ser", "Ace", "Agi", "Saq", "Exc"],
+      "coef1": 20,
+      "coef2": 0.00004
+    },
+    {
+      "position": "DCT-De",
+      "sumElements": ["Cab", "Ctr", "Ent", "Mar", "Pas", "Téc", "Agr", "Ant", "Col", "Cnc", "Dec", "Ser", "Val", "Vis",
+        "Sal", "Vel", "Fue"],
+      "coef1": 17,
+      "coef2": 0.00005
+    },
+    {
+      "position": "DCT-Cu",
+      "sumElements": ["Cab", "Ctr", "Ent", "Mar", "Pas", "Téc", "Ant", "Col", "Cnc", "Dec", "Ser", "Val", "Vis",
+        "Sal", "Vel", "Fue"],
+      "coef1": 16,
+      "coef2": 0.000006
+    },
+    {
+      "position": "DCT-Ta",
+      "sumElements": ["Cab", "Ctr", "Ent", "Mar", "Pas", "Téc", "Agr","Ant", "Col", "Cnc", "Dec", "Ser", "Val", "Vis",
+        "Sal", "Fue"],
+      "coef1": 16,
+      "coef2": 0.000007
+    },
+    {
+      "position": "DFC-De",
+      "sumElements": ["Cab", "Mar", "Ent", "Agr", "Ant", "Col", "Cnc", "Dec", "Ser", "Val", "Fue", "Sal", "Vel"],
+      "coef1": 13,
+      "coef2": 0.000008
+    },
+    {
+      "position": "DFC-Cu",
+      "sumElements": ["Cab", "Mar", "Ent", "Ant", "Col", "Cnc", "Dec", "Ser", "Val", "Fue", "Sal", "Vel"],
+      "coef1": 12,
+      "coef2": 0.0000008
+    },
+    {
+      "position": "DFC-Ta",
+      "sumElements": ["Cab", "Mar", "Ent", "Agr", "Ant", "Col", "Cnc", "Dec", "Ser", "Val", "Fue", "Sal"],
+      "coef1": 12,
+      "coef2": 0.000009
+    },
+    {
+      "position": "LIB-Ap",
+      "sumElements": ["Cab", "Ctr", "Mar", "Ent", "Pas", "Reg", "Téc", "Ant", "Col", "Cnc", "Dec", "JEq", "Ser", "Vis",
+        "Tal", "Val", "Agi", "Sal", "Fue", "Equ"],
+      "coef1": 20,
+      "coef2": 0.000000101
+    },
+    {
+      "position": "CLT-De",
+      "sumElements": ["Cab", "Cen", "Mar", "Ent", "Agr", "Reg", "Ant", "Col", "Cnc", "Dec", "Ser", "Val", "Sac", "Sal",
+        "Fue", "Res", "Vel"],
+      "coef1": 17,
+      "coef2": 0.0000011
+    },
+    {
+      "position": "CLT-Ap",
+      "sumElements": ["Cab", "Cen", "Mar", "Ent", "Agr", "Reg", "Ant", "Col", "Cnc", "Dec", "Ser", "Val", "Sac", "Sal",
+        "Fue", "Res", "Vel", "Dmq"],
+      "coef1": 17,
+      "coef2": 0.0000012
+    },
+    {
+      "position": "CLT-At",
+      "sumElements": ["Cab", "Cen", "Mar", "Ent", "Agr", "Reg", "Ant", "Col", "Cnc", "Dec", "Ser", "Val", "Sac", "Sal",
+        "Fue", "Res", "Vel", "Dmq"],
+      "coef1": 17,
+      "coef2": 0.00000013
+    },
+    {
+      "position": "DPr-De",
+      "sumElements": ["Cab", "Ent", "Mar", "Agr", "Cnc", "Col", "Ant", "Val", "Sal", "Fue", "Vel"],
+      "coef1": 11,
+      "coef2": 0.00000014
+    },
+    {
+      "position": "DPr-Cu",
+      "sumElements": ["Cab", "Ent", "Mar", "Ant", "Cnc", "Col", "Val", "Sal", "Vel", "Fue"],
+      "coef1": 10,
+      "coef2": 0.000015
+    },
+    {
+      "position": "DPr-Ta",
+      "sumElements": ["Cab", "Ent", "Mar", "Agr", "Ant", "Cnc", "Col", "Sal", "Fue"],
+      "coef1": 9,
+      "coef2": 0.000000016
+    },
+    {
+      "position": "CRC-Ap",
+      "sumElements": ["Cen", "Ctr", "Ent", "Pas", "Téc", "Reg", "Ant", "Dec", "Dmq", "JEq", "Ser", "Sac", "Tal", "Ace",
+        "Agi", "Equ", "Res", "Vel"],
+      "coef1": 18,
+      "coef2": 0.00000017
+    },
+    {
+      "position": "CRC-At",
+      "sumElements": ["Cen", "Ctr", "Ent", "Pas", "Téc", "Reg", "Ant", "Dec", "Dmq", "JEq", "Ser", "Sac", "Tal", "Ace",
+        "Agi", "Equ", "Res", "Vel"],
+      "coef1": 18,
+      "coef2": 0.0000018
+    },
+    {
+      "position": "CAR-De",
+      "sumElements": ["Cen","Ctr","Pas","Mar","Ent","Reg","Téc","Ant","Cnc","Col","Dec","Dmq","JEq","Sac","Ace","Agi",
+        "Res","Vel"],
+      "coef1": 18,
+      "coef2": 0.000019
+    },
+    {
+      "position": "CAR-Ap",
+      "sumElements": ["Cen","Ctr","Ent","Mar","Reg","Téc","Pas","Ant","Cnc","Dec","Col","Dmq","JEq","Sac","Ace","Agi",
+        "Res","Vel"],
+      "coef1": 18,
+      "coef2": 0.00000201
+    },
+    {
+      "position": "CAR-At",
+      "sumElements": ["Cen","Ctr","Ent","Pas","Mar","Reg","Téc","Ant","Cnc","Col","Dmq","Dec","JEq","Sac","Tal","Ace",
+        "Agi","Res","Vel"],
+      "coef1": 19,
+      "coef2": 0.00000021
+    },
+    {
+      "position": "CIN-De",
+      "sumElements": ["Ctr","Mar","Pas","Ent","Reg","Téc","Ant","Cnc","Col","Dec","Dmq","JEq","Sac","Ace","Agi","Res"],
+      "coef1": 16,
+      "coef2": 0.000000022
+    },
+    {
+      "position": "CIN-Ap",
+      "sumElements": ["Ctr","Ent","Mar","Pas","Reg","Téc","Ant","Cnc","Dec","Col","Dmq","JEq","Sac","Ser","Ace","Agi",
+        "Res"],
+      "coef1": 17,
+      "coef2": 0.00000023
+    },
+    {
+      "position": "CIN-At",
+      "sumElements": ["Ctr","Pas","Mar","Ent","Reg","Téc","Lej","Ant","Cnc","Col","Dec","Dmq","JEq","Sac","Ser","Tal",
+        "Ace","Agi","Res","Vel"],
+      "coef1": 20,
+      "coef2": 0.0000024
+    },
+    {
+      "position": "LP-De",
+      "sumElements": ["Cab","Mar","Ent","Agr","Ant","Cnc","Col","JEq","Val","Fue"],
+      "coef1": 10,
+      "coef2": 0.00000025
+    },
+    {
+      "position": "LAT-De",
+      "sumElements": ["Cen","Ent","Pas","Mar","Ant","Cnc","Dec","Col","JEq","Ser","Res","Vel"],
+      "coef1": 12,
+      "coef2": 0.0000026
+    },
+    {
+      "position": "LAT-Ap",
+      "sumElements": ["Cen","Ent","Pas","Mar","Reg","Téc","Ant","Cnc","Col","Dec","JEq","Ser","Sac","Res","Vel"],
+      "coef1": 15,
+      "coef2": 0.0000027
+    },
+    {
+      "position": "LAT-At",
+      "sumElements": ["Ace","Agi","Res","Vel","Ant","Cnc","Col","Dec","Dmq","JEq","Sac","Ser","Cen","Ctr","Ent","Mar",
+        "Reg","Pas","Téc"],
+      "coef1": 19,
+      "coef2": 0.0000028
+    },
+    {
+      "position": "PVD-De",
+      "sumElements": ["Ent","Mar","Ant","Cnc","Col","Dec","JEq","Ser","Fue"],
+      "coef1": 9,
+      "coef2": 0.000029
+    },
+    {
+      "position": "MCI-De",
+      "sumElements": ["Sal","Fue","Res","Agr","Ant","Col","Cnc","Dec","JEq","Sac","Ser","Val","Cab","Mar","Pas","Ent"],
+      "coef1": 16,
+      "coef2": 0.0000301
+    },
+    {
+      "position": "MC-De",
+      "sumElements": ["Mar","Pas","Ent","Agr","Ant","Col","Cnc","Dec","JEq","Sac","Ser","Fue","Res"],
+      "coef1": 13,
+      "coef2": 0.000031
+    },
+    {
+      "position": "MC-Ap",
+      "sumElements": ["Mar","Pas","Ent","Agr","Ant","Col","Cnc","Dec","JEq","Sac","Ser","Fue","Res","Ctr"],
+      "coef1": 14,
+      "coef2": 0.000032
+    },
+    {
+      "position": "REG-Ap",
+      "sumElements": ["Pas","Ctr","Reg","Téc","Lej","Ant","Dec","Dmq","JEq","Ser","Tal","Vis","Equ"],
+      "coef1": 13,
+      "coef2": 0.000033
+    },
+    {
+      "position": "VOL-Ap",
+      "sumElements": ["Ctr","Pas","Ent","Mar","Rem","Lej","Ant","Cnc","Col","Dec","Dmq","Sac","Ser","Ace","Equ","Fue",
+        "Res","Vel"],
+      "coef1": 20,
+      "coef2": 0.000034
+    },
+    {
+      "position": "VOL-At",
+      "sumElements": ["Ctr","Pas","Ent","Mar","Rem","Lej","Ant","Cnc","Col","Dec","Dmq","Sac","Ser","Ace","Equ","Fue",
+        "Res","Vel"],
+      "coef1": 20,
+      "coef2": 0.000035
+    },
+    {
+      "position": "PVO-De",
+      "sumElements": ["Ctr","Ent","Pas","Téc","Ant","Col","Dec","JEq","Sac","Vis","Ser","Equ"],
+      "coef1": 12,
+      "coef2": 0.000036
+    },
+    {
+      "position": "PVO-Ap",
+      "sumElements": ["Ctr","Pas","Téc","Ant","Dec","Dmq","JEq","Sac","Vis","Ser","Equ"],
+      "coef1": 11,
+      "coef2": 0.000037
+    },
+    {
+      "position": "CRP-De",
+      "sumElements": ["Col","Mar","Ent","Agr","Ant","Cnc","JEq","Sac","Val","Agi","Fue","Res","Vel"],
+      "coef1": 13,
+      "coef2": 0.000038
+    },
+    {
+      "position": "CRP-Ap",
+      "sumElements": ["Pas","Mar","Ent","Agr","Ant","Cnc","JEq","Sac","Val","Agi","Fue","Res","Vel"],
+      "coef1": 13,
+      "coef2": 0.000039
+    },
+    {
+      "position": "CM-De",
+      "sumElements": ["Ctr","Mar","Pas","Ent","Téc","Agr","Ant","Col","Cnc","Dec","JEq","Sac","Ser","Res"],
+      "coef1": 14,
+      "coef2": 0.0000401
+    },
+    {
+      "position": "CM-Ap",
+      "sumElements": ["Res","Ant","Cnc","Dec","Dmq","JEq","Vis","Sac","Ser","Téc","Pas","Ctr","Ent"],
+      "coef1": 13,
+      "coef2": 0.000041
+    },
+    {
+      "position": "CM-At",
+      "sumElements": ["Ctr","Ent","Pas","Téc","Lej","Ant","Dec","Dmq","JEq","Sac","Ser","Vis","Ace","Res"],
+      "coef1": 14,
+      "coef2": 0.000042
+    },
+    {
+      "position": "IM-Ap",
+      "sumElements": ["Ctr","Ent","Pas","Téc","Ant","Cnc","Col","Dec","Dmq","JEq","Sac","Ser","Vis","Res"],
+      "coef1": 14,
+      "coef2": 0.000043
+    },
+    {
+      "position": "CTT-Ap",
+      "sumElements": ["Ctr","Pas","Ent","Reg","Rem","Téc","Lej","Agr","Ant","Col","Dec","Dmq","JEq","Sac","Ser","Ace",
+        "Equ","Fue","Res","Vel"],
+      "coef1": 20,
+      "coef2": 0.000044
+    },
+    {
+      "position": "OIT-Ap",
+      "sumElements": ["Ctr","Pas","Reg","Lej","Téc","Ant","Cnc","Col","Dec","Dmq","JEq","Sac","Vis","Ser","Ace","Agi",
+        "Equ","Res","Vel"],
+      "coef1": 19,
+      "coef2": 0.000045
+    },
+    {
+      "position": "MEZ-Ap",
+      "sumElements": ["Ctr","Ent","Pas","Reg","Téc","Lej","Ant","Dec","Dmq","Sac","Ser","Vis","Ace","Equ","Res"],
+      "coef1": 15,
+      "coef2": 0.000046
+    },
+    {
+      "position": "MEZ-At",
+      "sumElements": ["Ctr","Pas","Rem","Reg","Téc","Lej","Ant","Dec","Dmq","Sac","Vis","Tal","Ser","Ace","Equ","Res"],
+      "coef1": 16,
+      "coef2": 0.000047
+    },
+    {
+      "position": "OAD-Ap",
+      "sumElements": ["Agi","Ant","Dec","Dmq","JEq","Vis","Tal","Ser","Ctr","Pas","Téc","Reg"],
+      "coef1": 12,
+      "coef2": 0.000048
+    },
+    {
+      "position": "OAD-At",
+      "sumElements": ["Ace","Agi","Ant","Dec","Dmq","JEq","Vis","Tal","Ser","Ctr","Pas","Téc","Reg"],
+      "coef1": 13,
+      "coef2": 0.000049
+    },
+    {
+      "position": "INT-De",
+      "sumElements": ["Ctr","Ent","Pas","Mar","Cen","Téc","Ant","Cnc","Col","Dec","JEq","Sac","Ser","Res"],
+      "coef1": 14,
+      "coef2": 0.00000501
+    },
+    {
+      "position": "INT-Ap",
+      "sumElements": ["Ctr","Ent","Pas","Dmq","Cen","Téc","Ant","Cnc","Col","Dec","JEq","Sac","Ser","Res","Vis"],
+      "coef1": 15,
+      "coef2": 0.0000051
+    },
+    {
+      "position": "INT-At",
+      "sumElements": ["Ctr","Ent","Pas","Dmq","Cen","Téc","Ant","Dec","JEq","Sac","Ser","Res","Vis"],
+      "coef1": 13,
+      "coef2": 0.0000052
+    },
+    {
+      "position": "IDF-De",
+      "sumElements": ["Cen","Ctr","Mar","Ent","Reg","Téc","Ant","Agr","Cnc","Col","Dec","Dmq","JEq","Sac","Ace","Res"],
+      "coef1": 16,
+      "coef2": 0.0000053
+    },
+    {
+      "position": "IDF-Ap",
+      "sumElements": ["Cen","Ctr","Mar","Ent","Reg","Téc","Ant","Agr","Cnc","Col","Dec","Dmq","JEq","Sac","Ace","Res",
+        "Pas","Ser"],
+      "coef1": 18,
+      "coef2": 0.0000054
+    },
+    {
+      "position": "OES-Ap",
+      "sumElements": ["Ctr","Pas","Téc","Reg","Dec","Dmq","JEq","Ser","Vis","Agi"],
+      "coef1": 10,
+      "coef2": 0.0000055
+    },
+    {
+      "position": "OES-At",
+      "sumElements": ["Ctr","Pas","Téc","Reg","Ant","Dec","Dmq","JEq","Ser","Tal","Vis","Ace","Agi"],
+      "coef1": 13,
+      "coef2": 0.00056
+    },
+    {
+      "position": "ENG-Ap",
+      "sumElements": ["Agi","Ant","Dec","Dmq","JEq","Vis","Tal","Ser","Ctr","Pas","Téc","Reg"],
+      "coef1": 12,
+      "coef2": 0.0000057
+    },
+    {
+      "position": "MP-Ap",
+      "sumElements": ["Ctr","Pas","Reg","Téc","Lej","Ant","Dec","Dmq","Ser","Vis","Tal","Agi"],
+      "coef1": 12,
+      "coef2": 0.0000058
+    },
+    {
+      "position": "MP-At",
+      "sumElements": ["Ctr","Pas","Reg","Téc","Lej","Ant","Dec","Dmq","Ser","Vis","Tal","Agi","Rem"],
+      "coef1": 13,
+      "coef2": 0.0000059
+    },
+    {
+      "position": "TRE-At",
+      "sumElements": ["Ctr","Pas","Reg","Rem","Téc","Ant","Dec","Dmq","Vis","Ser","Tal","Ace","Agi","Equ"],
+      "coef1": 14,
+      "coef2": 0.00000601
+    },
+    {
+      "position": "DLS-At",
+      "sumElements": ["Ctr","Pas","Reg","Rem","Téc","Ant","Cnc","Dec","Dmq","Sac","Ser","Ace","Agi","Equ","Res","Vel"],
+      "coef1": 16,
+      "coef2": 0.0000061
+    },
+    {
+      "position": "EXT-Ap",
+      "sumElements": ["Cen","Ctr","Pas","Reg","Téc","Dmq","Sac","Ace","Agi","Res","Vel"],
+      "coef1": 11,
+      "coef2": 0.0000062
+    },
+    {
+      "position": "EXT-At",
+      "sumElements": ["Cen","Ctr","Pas","Reg","Téc","Ant","Dmq","Tal","Ace","Agi","Vel"],
+      "coef1": 11,
+      "coef2": 0.0000063
+    },
+    {
+      "position": "DLI-Ap",
+      "sumElements": ["Ctr","Pas","Reg","Rem","Lej","Téc","Ant","Dmq","Ser","Tal","Vis","Ace","Agi","Equ","Vel"],
+      "coef1": 15,
+      "coef2": 0.0000064
+    },
+    {
+      "position": "DLI-At",
+      "sumElements": ["Ace","Agi","Equ","Vel","Ant","Dmq","Ser","Tal","Pas","Ctr","Rem","Reg","Téc","Lej"],
+      "coef1": 14,
+      "coef2": 0.0000065
+    },
+    {
+      "position": "II-Ap",
+      "sumElements": ["Cen","Ctr","Pas","Reg","Téc","Lej","Dec","Dmq","Sac","Ser","Vis","Ace","Agi","Res","Vel"],
+      "coef1": 15,
+      "coef2": 0.0000066
+    },
+    {
+      "position": "II-At",
+      "sumElements": ["Cen","Ctr","Pas","Reg","Téc","Lej","Ant","Dec","Dmq","Ser","Tal","Vis","Ace","Agi","Vel"],
+      "coef1": 15,
+      "coef2": 0.0000067
+    },
+    {
+      "position": "BDE-At",
+      "sumElements": ["Ctr","Téc","Rem","Ant","Cnc","Dec","Dmq","Sac","Ser","Ace","Equ","Res"],
+      "coef1": 12,
+      "coef2": 0.0000068
+    },
+    {
+      "position": "HOE-Ap",
+      "sumElements": ["Cen","Ctr","Cab","Ant","Dmq","JEq","Sac","Val","Sal","Fue","Equ","Res"],
+      "coef1": 12,
+      "coef2": 0.0000069
+    },
+    {
+      "position": "HOE-At",
+      "sumElements": ["Cen","Ctr","Cab","Ant","Dmq","JEq","Sac","Val","Sal","Fue","Equ","Res","Rem"],
+      "coef1": 13,
+      "coef2": 0.00000701
+    },
+    {
+      "position": "OBJ-Ap",
+      "sumElements": ["Cab","Ctr","Rem","Agr","Ant","Dec","Dmq","JEq","Ser","Val","Fue","Sal","Equ"],
+      "coef1": 13,
+      "coef2": 0.0000071
+    },
+    {
+      "position": "OBJ-At",
+      "sumElements": ["Cab","Ctr","Rem","Agr","Ant","Dec","Dmq","JEq","Ser","Val","Fue","Sal","Equ"],
+      "coef1": 13,
+      "coef2": 0.0000072
+    },
+    {
+      "position": "2°D-Ap",
+      "sumElements": ["Ctr","Pas","Rem","Téc","Ant","Dec","Dmq","JEq","Ser","Tal","Vis","Equ","Fue"],
+      "coef1": 13,
+      "coef2": 0.0000073
+    },
+    {
+      "position": "2°D-At",
+      "sumElements": ["Ctr","Pas","Rem","Téc","Ant","Dec","Dmq","JEq","Ser","Tal","Vis","Equ","Fue","Reg"],
+      "coef1": 14,
+      "coef2": 0.0000074
+    },
+    {
+      "position": "DP-De",
+      "sumElements": ["Ace","Agi","Equ","Fue","Res","Vel","Agr","Ant","Cnc","Dec","JEq","Ser","Sac","Val","Ctr"],
+      "coef1": 15,
+      "coef2": 0.0000075
+    },
+    {
+      "position": "DP-Ap",
+      "sumElements": ["Ace","Agi","Equ","Fue","Res","Vel","Agr","Ant","Cnc","Dec","Dmq","JEq","Ser","Sac","Val","Ctr",
+        "Pas"],
+      "coef1": 17,
+      "coef2": 0.0000076
+    },
+    {
+      "position": "DP-At",
+      "sumElements": ["Ace","Agi","Equ","Fue","Res","Vel","Agr","Ant","Cnc","Dec","Dmq","JEq","Ser","Sac","Val","Ctr",
+        "Rem"],
+      "coef1": 17,
+      "coef2": 0.0000077
+    },
+    {
+      "position": "DLC-Ap",
+      "sumElements": ["Cab","Ctr","Pas","Reg","Rem","Lej","Téc","Ant","Dec","Dmq","JEq","Sac","Ser","Vis","Ace","Agi",
+        "Sal","Equ","Fue","Vel","Res"],
+      "coef1": 21,
+      "coef2": 0.0000078
+    },
+    {
+      "position": "DLC-At",
+      "sumElements": ["Cab","Ctr","Pas","Reg","Rem","Lej","Téc","Ant","Dec","Dmq","JEq","Sac","Ser","Vis","Ace","Agi",
+        "Sal","Equ","Fue","Vel","Res"],
+      "coef1": 21,
+      "coef2": 0.0000079
+    },
+    {
+      "position": "ARI-At",
+      "sumElements": ["Cab","Ctr","Rem","Téc","Ant","Dec","Dmq","Ser","Ace"],
+      "coef1": 9,
+      "coef2": 0.00000801
+    },
+    {
+      "position": "DLA-At",
+      "sumElements": ["Ctr","Pas","Rem","Reg","Téc","Ant","Dec","Dmq","Sac","Ser","Ace","Agi","Equ","Res","Vel"],
+      "coef1": 15,
+      "coef2": 0.0000081
+    },
+    {
+      "position": "F9-Ap",
+      "sumElements": ["Ctr","Pas","Reg","Rem","Téc","Ant","Dec","Dmq","JEq","Tal","Ser","Vis","Ace","Agi","Equ"],
+      "coef1": 15,
+      "coef2": 0.0000082
+    },
+    {
+      "position": "Global",
+      "sumElements": ["Aér", "Mdo", "Com", "Exc", "Blo", "Pue", "1v1", "Ref", "SAL", "Puñ", "Saq", "Agr", "Ant", "Val"],
+      "gralSum": ["Ser", "Cnc", "Dec", "Det", "Tal", "Lid", "Dmq", "Col", "JEq", "Vis", "Sac", "Ace", "Agi", "Equ",
+        "Sal", "Fís", "Vel", "Res", "Fue"],
+      "elementsProm": ["Cór", "Cen", "Reg", "Rem", "Ctr", "Lib", "Cab", "Lej", "Sq L", "Mar", "Pas", "Pen", "Ent",
+        "Téc", "Agr", "Ant", "Val", "Ser", "Cnc", "Dec", "Det", "Tal", "Lid", "Dmq", "Col", "JEq", "Vis", "Sac", "Ace",
+        "Agi", "Equ", "Sal", "Fís", "Vel", "Res", "Fue"]
+    }
+  ]
+}

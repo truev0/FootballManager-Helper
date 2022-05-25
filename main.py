@@ -39,10 +39,15 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        # CLASS VARIABLES
+        # ///////////////////////////////////////////
+        self.df_squad = None
+
         # LOAD SETTINGS
         # ///////////////////////////////////////////
         settings = Settings()
         self.settings = settings.items
+        self.language = self.settings["language"]
 
         # SETUP MAIN WINDOW
         # ///////////////////////////////////////////
@@ -50,6 +55,7 @@ class MainWindow(QMainWindow):
         self.custom_settings()
         self.ui.setup_gui()
         self.set_signals()
+        self.connect_events()
 
         self.show()
 
@@ -271,6 +277,33 @@ class MainWindow(QMainWindow):
         p = event.globalPosition()
         globalPos = p.toPoint()
         self.dragPos = globalPos
+
+    # CONNECT EVENT CLICKS
+    # ///////////////////////////////////////////
+    def connect_events(self):
+        self.ui.load_squad_btn.clicked.connect(self.load_file)
+
+    # LOAD FILE
+    # ///////////////////////////////////////////
+    def load_file(self):
+        # FILE DIALOG
+        dlg_file = QFileDialog.getOpenFileName(
+            self,
+            caption="Select a file",
+            filter=("HTML Files (*.html)")
+        )
+
+        # READ FILE
+        if dlg_file:
+            print("Hola")
+            self.df_squad = FMi.setting_up_pandas(dlg_file[0], 'squad_btn')
+            self.df_squad = FMi.convert_values(self.df_squad, self.language)
+            self.df_squad = FMi.create_metrics_for_gk(self.df_squad, self.language)
+            self.df_squad = FMi.data_for_rankings(self.df_squad, self.language)
+            self.df_squad = FMi.create_scores_for_position(self.df_squad, self.language)
+            self.df_squad = FMi.round_data(self.df_squad)
+            self.df_squad = FMi.ranking_values(self.df_squad)
+
 
 # SETTINGS WHEN TO START
 # Set initial class and also additional parameter of the "QApplication" class

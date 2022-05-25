@@ -1,0 +1,256 @@
+espanol = {
+    "menu": {
+        "o1": "Plantilla",
+        "o2": "Tactica",
+        "o3": "Desarrollo",
+        "o4": "Idoneidad",
+        "o5": "Estadisticas",
+        "o6": "Metricas",
+        "o7": "Comparativa",
+        "o8": "Scouting",
+        "o9": "Empleados",
+        "o10": "Ajustes",
+        "o11": "Info",
+        "o12": "Ayuda"
+    },
+    "pages": {
+        "p1": {
+
+        },
+        "p2": {
+
+        },
+        "p3": {
+
+        },
+        "p4": {
+
+        },
+        "p5": {
+
+        },
+        "p6": {
+
+        },
+        "p7": {
+
+        },
+        "p8": {
+
+        },
+        "p9": {
+
+        },
+        "p10": {
+            "label_top": "AJUSTES",
+            "frame_1": {
+                "label_top": "CARGA ARCHIVO PLANTILLA",
+                "path": "Ruta de archivo",
+                "btn_1": "BUSCAR ARCHIVO",
+                "btn_2": "CARGAR ARCHIVO"
+            },
+            "frame_2": {
+                "label_top": "CARGA ARCHIVO SCOUTING",
+                "path": "Ruta de archivo",
+                "btn_1": "BUSCAR ARCHIVO",
+                "btn_2": "CARGAR ARCHIVO"
+            },
+            "frame_3": {
+                "label_top": "LENGUAJE",
+                "text_1": "INGLES",
+                "text_2": "ESPAÑOL",
+                "btn_text": "GUARDAR"
+            }
+
+        },
+        "p11": {
+
+        },
+        "p12": {
+
+        },
+        "p13": {
+
+        }
+    }
+}
+
+column_headers = {
+    "h": {
+        "h1": "Nombre",
+        "h2": "Edad",
+        "h3": "Personalidad",
+        "h4": "Posición",
+        "h5": "Altura",
+        "h6": "Pierna buena",
+        "h7": "PdN",
+        "h8": "Ciudad de nacimiento",
+        "h9": "Final",
+        "h10": "Valor de traspaso",
+        "h11": "Sueldo",
+        "h12": "Min",
+        "s1": "BDs",
+        "s2": "BRe",
+        "s3": "BAt",
+        "s4": "Enc",
+        "s5": "% Pase",
+        "s6": "Ps C/90",
+        "s7": "Ent Cl",
+        "s8": "Ent P",
+        "s9": "Rob/90",
+        "s10": "Rcg %",
+        "s11": "Cab G/90",
+        "s12": "FC",
+        "s13": "Pas Clv/90",
+        "s14": "Oc C/90",
+        "s15": "Gol/90",
+        "s16": "Asis/90",
+        "s17": "% disparos",
+        "s18": "Reg/90",
+        "s19": "Tir/90",
+        "s20": "Cen.C/I",
+        "s21": "Cen.Com",
+        "s22": "TirP/90",
+        "s23": "Dist/90",
+        "s24": "Gol",
+        "s25": "Asis",
+        "s26": "EnEq",
+        "s27": "EnEq/90",
+        "s28": "Ps I/90",
+        "s29": "Pen M",
+        "s30": "Media",
+        "a1": "Ace",
+        "a2": "Sac",
+        "a3": "Vis",
+        "a4": "Saq",
+        "a5": "Téc",
+        "a6": "JEq",
+        "a7": "Ent",
+        "a8": "Fue",
+        "a9": "Res",
+        "a10": "SAL",
+        "a11": "Ref",
+        "a12": "Puñ",
+        "a13": "Col",
+        "a14": "Pen",
+        "a15": "Pas",
+        "a16": "Vel",
+        "a17": "1v1",
+        "a18": "Dmq",
+        "a19": "Fís",
+        "a20": "Mar",
+        "a21": "Sq L",
+        "a22": "Lej",
+        "a23": "Lid",
+        "a24": "Pue",
+        "a25": "Sal",
+        "a26": "Cab",
+        "a27": "Blo",
+        "a28": "Lib",
+        "a29": "Tal",
+        "a30": "Ctr",
+        "a31": "Rem",
+        "a32": "Exc",
+        "a33": "Reg",
+        "a34": "Det",
+        "a35": "Dec",
+        "a36": "Cen",
+        "a37": "Cór",
+        "a38": "Cnc",
+        "a39": "Ser",
+        "a40": "Com",
+        "a41": "Mdo",
+        "a42": "Val",
+        "a43": "Equ",
+        "a44": "Ant",
+        "a45": "Agi",
+        "a46": "Agr",
+        "a47": "Aér"
+    }
+}
+
+positions = {
+    "p1": "POR-De",
+    "p2": "PCI-De",
+    "p3": "PCI-Ap",
+    "p4": "PCI-At",
+    "p5": "DCT-De",
+    "p6": "DCT-Cu",
+    "p7": "DCT-Ta",
+    "p8": "DFC-De",
+    "p9": "DFC-Cu",
+    "p10": "DFC-Ta",
+    "p11": "LIB-Ap",
+    "p12": "CLT-De",
+    "p13": "CLT-Ap",
+    "p14": "CLT-At",
+    "p15": "DPr-De",
+    "p16": "DPr-Cu",
+    "p17": "DPr-Ta",
+    "p18": "CRC-Ap",
+    "p19": "CRC-At",
+    "p20": "CAR-De",
+    "p21": "CAR-Ap",
+    "p22": "CAR-At",
+    "p23": "CIN-De",
+    "p24": "CIN-Ap",
+    "p25": "CIN-At",
+    "p26": "LP-De",
+    "p27": "LAT-De",
+    "p28": "LAT-Ap",
+    "p29": "LAT-At",
+    "p30": "PVD-De",
+    "p31": "MCI-De",
+    "p32": "MC-De",
+    "p33": "MC-Ap",
+    "p34": "REG-Ap",
+    "p35": "VOL-Ap",
+    "p36": "VOL-At",
+    "p37": "PVO-De",
+    "p38": "PVO-Ap",
+    "p39": "CRP-De",
+    "p40": "CRP-Ap",
+    "p41": "CM-De",
+    "p42": "CM-Ap",
+    "p43": "CM-At",
+    "p44": "IM-Ap",
+    "p45": "CTT-Ap",
+    "p46": "OIT-Ap",
+    "p47": "MEZ-Ap",
+    "p48": "MEZ-At",
+    "p49": "OAD-Ap",
+    "p50": "OAD-At",
+    "p51": "INT-De",
+    "p52": "INT-Ap",
+    "p53": "INT-At",
+    "p54": "IDF-De",
+    "p55": "IDF-Ap",
+    "p56": "OES-Ap",
+    "p57": "OES-At",
+    "p58": "ENG-Ap",
+    "p59": "MP-Ap",
+    "p60": "MP-At",
+    "p61": "TRE-At",
+    "p62": "DLS-At",
+    "p63": "EXT-Ap",
+    "p64": "EXT-At",
+    "p65": "DLI-Ap",
+    "p66": "DLI-At",
+    "p67": "II-Ap",
+    "p68": "II-At",
+    "p69": "BDE-At",
+    "p70": "HOE-Ap",
+    "p71": "HOE-At",
+    "p72": "OBJ-Ap",
+    "p73": "OBJ-At",
+    "p74": "2°D-Ap",
+    "p75": "2°D-At",
+    "p76": "DP-De",
+    "p77": "DP-Ap",
+    "p78": "DP-At",
+    "p79": "DLC-Ap",
+    "p80": "DLC-At",
+    "p81": "ARI-At",
+    "p82": "DLA-At",
+    "p83": "F9-Ap"
+}
