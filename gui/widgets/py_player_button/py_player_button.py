@@ -27,32 +27,21 @@ class PyPlayerButton(QPushButton):
             self,
             icon_path=None,
             parent=None,
-            app_parent=None,
             btn_id=None,
-            x=250,
-            y=250,
-            width=48,
-            height=48,
-            radius=8,
-            bg_color="#343b48",
-            bg_color_hover="#3c4454",
-            bg_color_pressed="#2c313c",
+            bg_color="#4f973c",
+            bg_color_hover="#dce1ec",
+            bg_color_pressed="#f5f6f9",
             icon_color="#c3ccdf",
-            icon_color_hover="#dce1ec",
-            icon_color_pressed="#edf0f5",
-            icon_color_active="#f5f6f9",
-            dark_one="#1b1e23",
-            text_foreground="#8a95aa",
-            context_color="#568af2",
-            top_margin=40,
-            lista=None,
-            tooltip_text="",
-            is_active=False
+            icon_color_hover="#343b48",
+            icon_color_pressed="272c36",
+            icon_color_active="#1b1e23",
     ):
         super().__init__()
 
         # SET PARAMETERS
-        self.setFixedSize(width, height)
+        self.setFixedSize(48, 48)
+        if parent != None:
+            self.setParent(parent)
         self.setCursor(Qt.PointingHandCursor)
         self.setObjectName(btn_id)
 
@@ -60,36 +49,25 @@ class PyPlayerButton(QPushButton):
         self._bg_color = bg_color
         self._bg_color_hover = bg_color_hover
         self._bg_color_pressed = bg_color_pressed
+
         self._icon_color = icon_color
         self._icon_color_hover = icon_color_hover
         self._icon_color_pressed = icon_color_pressed
         self._icon_color_active = icon_color_active
-        self._context_color = context_color
-        self._top_margin = top_margin
-        self._is_active = is_active
+        self._top_margin = 40
+        self._is_active = False
         # Set Parameters
         self._set_bg_color = bg_color
         self._set_icon_path = icon_path
         self._set_icon_color = icon_color
-        self._set_border_radius = radius
+        self._set_border_radius = 8
         # Parent
         self._parent = parent
-        self._app_parent = app_parent
 
         # Custom attributes
-        self._lista = lista
-        self._x = x
-        self._y = y
+        self._lista = None
 
         # TOOLTIP
-        self._tooltip_text = tooltip_text
-        self._tooltip = _ToolTip(
-            app_parent,
-            tooltip_text,
-            dark_one,
-            text_foreground
-        )
-        self._tooltip.hide()
 
     # SET ACTIVE MENU
     # ///////////////////////////////////////////////////////////////
@@ -108,7 +86,7 @@ class PyPlayerButton(QPushButton):
 
         if self._is_active:
             # BRUSH
-            brush = QBrush(QColor(self._context_color))
+            brush = QBrush(QColor(self._bg_color_pressed))
         else:
             # BRUSH
             brush = QBrush(QColor(self._set_bg_color))
@@ -155,16 +133,16 @@ class PyPlayerButton(QPushButton):
     # ///////////////////////////////////////////////////////////////
     def enterEvent(self, event):
         self.change_style(QEvent.Enter)
-        self.move_tooltip()
-        self._tooltip.show()
+        # self.move_tooltip()
+        # self._tooltip.show()
 
     # MOUSE LEAVE
     # Event fired when the mouse leaves the BTN
     # ///////////////////////////////////////////////////////////////
     def leaveEvent(self, event):
         self.change_style(QEvent.Leave)
-        self.move_tooltip()
-        self._tooltip.hide()
+        # self.move_tooltip()
+        # self._tooltip.hide()
 
     # MOUSE PRESS
     # Event triggered when the left button is pressed
@@ -211,63 +189,63 @@ class PyPlayerButton(QPushButton):
 
     # MOVE TOOLTIP
     # ///////////////////////////////////////////////////////////////
-    def move_tooltip(self):
-        # GET MAIN WINDOW PARENT
-        gp = self.mapToGlobal(QPoint(0, 0))
-
-        # SET WIDGET TO GET POSTION
-        # Return absolute position of widget inside app
-        pos = self._parent.mapFromGlobal(gp)
-
-        # FORMAT POSITION
-        # Adjust tooltip position with offset
-        pos_x = (pos.x() - (self._tooltip.width() // 2)) + (self.width() // 2)
-        pos_y = pos.y() - self._top_margin
-
-        # SET POSITION TO WIDGET
-        # Move tooltip position
-        self._tooltip.move(pos_x, pos_y)
+    # def move_tooltip(self):
+    #     # GET MAIN WINDOW PARENT
+    #     gp = self.mapToGlobal(QPoint(0, 0))
+    #
+    #     # SET WIDGET TO GET POSTION
+    #     # Return absolute position of widget inside app
+    #     pos = self._parent.mapFromGlobal(gp)
+    #
+    #     # FORMAT POSITION
+    #     # Adjust tooltip position with offset
+    #     pos_x = (pos.x() - (self._tooltip.width() // 2)) + (self.width() // 2)
+    #     pos_y = pos.y() - self._top_margin
+    #
+    #     # SET POSITION TO WIDGET
+    #     # Move tooltip position
+    #     self._tooltip.move(pos_x, pos_y)
 
 # TOOLTIP
 # ///////////////////////////////////////////////////////////////
-class _ToolTip(QLabel):
-    # TOOLTIP / LABEL StyleSheet
-    style_tooltip = """ 
-    QLabel {{		
-        background-color: {_dark_one};	
-        color: {_text_foreground};
-        padding-left: 10px;
-        padding-right: 10px;
-        border-radius: 17px;
-        border: 0px solid transparent;
-        font: 800 9pt "Segoe UI";
-    }}
-    """
-    def __init__(
-        self,
-        parent,
-        tooltip,
-        dark_one,
-        text_foreground
-    ):
-        QLabel.__init__(self)
-
-        # LABEL SETUP
-        style = self.style_tooltip.format(
-            _dark_one = dark_one,
-            _text_foreground = text_foreground
-        )
-        self.setObjectName(u"label_tooltip")
-        self.setStyleSheet(style)
-        self.setMinimumHeight(34)
-        self.setParent(parent)
-        self.setText(tooltip)
-        self.adjustSize()
-
-        # SET DROP SHADOW
-        self.shadow = QGraphicsDropShadowEffect(self)
-        self.shadow.setBlurRadius(30)
-        self.shadow.setXOffset(0)
-        self.shadow.setYOffset(0)
-        self.shadow.setColor(QColor(0, 0, 0, 80))
-        self.setGraphicsEffect(self.shadow)
+# class _ToolTip(QLabel):
+#     # TOOLTIP / LABEL StyleSheet
+#     style_tooltip = """
+#     QLabel {{
+#         background-color: {_dark_one};
+#         color: {_text_foreground};
+#         padding-left: 10px;
+#         padding-right: 10px;
+#         border-radius: 17px;
+#         border: 0px solid transparent;
+#         font: 800 9pt "Segoe UI";
+#     }}
+#     """
+#     def __init__(
+#         self,
+#         parent,
+#         tooltip,
+#         dark_one,
+#         text_foreground
+#     ):
+#         QLabel.__init__(self)
+#
+#         # LABEL SETUP
+#         style = self.style_tooltip.format(
+#             _dark_one = dark_one,
+#             _text_foreground = text_foreground
+#         )
+#         self.setObjectName(u"label_tooltip")
+#         self.setStyleSheet(style)
+#         self.setMinimumHeight(34)
+#         self.setParent(parent)
+#         self.setText(tooltip)
+#         self.adjustSize()
+#
+#         # SET DROP SHADOW
+#         self.shadow = QGraphicsDropShadowEffect(self)
+#         self.shadow.setBlurRadius(30)
+#         self.shadow.setXOffset(0)
+#         self.shadow.setYOffset(0)
+#         self.shadow.setColor(QColor(0, 0, 0, 80))
+#         self.setGraphicsEffect(self.shadow)

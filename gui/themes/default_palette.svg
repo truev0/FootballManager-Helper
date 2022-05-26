@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="default_palette.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.4324916"
+     inkscape:cx="417.10542"
+     inkscape:cy="639.09625"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="19.947762"
+       y="11.26679"
+       id="text63"><tspan
+         sodipodi:role="line"
+         id="tspan61"
+         style="stroke-width:0.264583"
+         x="19.947762"
+         y="11.26679" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.2849px;fill:#000000;stroke-width:0.523741"
+       x="64.633018"
+       y="13.390217"
+       id="text117"><tspan
+         sodipodi:role="line"
+         id="tspan115"
+         style="stroke-width:0.523741"
+         x="64.633018"
+         y="13.390217">DEFAULT THEME COLORS</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="14.96082"
+       y="24.011194"
+       id="text225"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="14.96082"
+         y="24.011194"
+         id="tspan227">Dark One #1b1e23</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="58.833885"
+       y="24.269785"
+       id="text225-0"><tspan
+         style="stroke-width:0.264583"
+         x="58.833885"
+         y="24.269785"
+         id="tspan227-6"
+         sodipodi:role="line">Dark Two #1e22293</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="156.35628"
+       y="24.269785"
+       id="text225-9"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="156.35628"
+         y="24.269785"
+         id="tspan227-64">Dark Four #272c36</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="106.85626"
+       y="24.454487"
+       id="text225-3"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="106.85626"
+         y="24.454487"
+         id="tspan227-0">Dark Three #21252d</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="157.09509"
+       y="63.057095"
+       id="text225-5"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="157.09509"
+         y="63.057095"
+         id="tspan227-09">Icon color #c3ccdf</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="15.798436"
+       y="146.17276"
+       id="text225-8"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="15.798436"
+         y="146.17276"
+         id="tspan227-2">Context hover #6c99f4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="106.85627"
+       y="64.350006"
+       id="text225-6"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="106.85627"
+         y="64.350006"
+         id="tspan227-4">BG three #3c4454</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="59.018589"
+       y="64.534706"
+       id="text225-7"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="59.018589"
+         y="64.534706"
+         id="tspan227-3">BG two #343b48</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="15.429036"
+       y="64.165306"
+       id="text225-2"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="15.429036"
+         y="64.165306"
+         id="tspan227-7">Bg One #2c313c</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="15.983141"
+       y="106.46194"
+       id="text225-59"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="15.983141"
+         y="106.46194"
+         id="tspan227-66">icon hover #dce1ec</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="57.540974"
+       y="105.72314"
+       id="text225-91"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="57.540974"
+         y="105.72314"
+         id="tspan227-62">Icon pressed #6c99f4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="157.27979"
+       y="104.61494"
+       id="text225-4"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="157.27979"
+         y="104.61494"
+         id="tspan227-72">context color #568af2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="107.04098"
+       y="105.16904"
+       id="text225-1"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="107.04098"
+         y="105.16904"
+         id="tspan227-5">Icon active #f5f6f9</tspan></text>
+    <circle
+       style="fill:#1b1e23;stroke-width:0.264583;fill-opacity:1"
+       id="path551"
+       cx="29.552238"
+       cy="42.666046"
+       r="13.298508" />
+    <circle
+       style="fill:#1e2229;stroke-width:0.264583;fill-opacity:0.24705882"
+       id="path551-7"
+       cx="73.8806"
+       cy="42.296642"
+       r="13.298508" />
+    <circle
+       style="fill:#21252d;stroke-width:0.264583;fill-opacity:1"
+       id="path551-74"
+       cx="122.64179"
+       cy="42.111938"
+       r="13.298508" />
+    <circle
+       style="fill:#272c36;stroke-width:0.264583;fill-opacity:1"
+       id="path551-9"
+       cx="173.43469"
+       cy="41.003731"
+       r="13.298508" />
+    <circle
+       style="fill:#2c313c;stroke-width:0.264583;fill-opacity:1"
+       id="path551-1"
+       cx="30.845148"
+       cy="84.039177"
+       r="13.298508" />
+    <circle
+       style="fill:#343b48;stroke-width:0.264583;fill-opacity:1"
+       id="path551-94"
+       cx="75.173508"
+       cy="82.746269"
+       r="13.298508" />
+    <circle
+       style="fill:#3c4454;stroke-width:0.264583;fill-opacity:1"
+       id="path551-3"
+       cx="122.45709"
+       cy="82.746269"
+       r="13.298508" />
+    <circle
+       style="fill:#c3ccdf;stroke-width:0.264583;fill-opacity:1"
+       id="path551-2"
+       cx="173.9888"
+       cy="82.376862"
+       r="13.298508" />
+    <circle
+       style="fill:#dce1ec;stroke-width:0.264583;fill-opacity:1"
+       id="path551-5"
+       cx="31.214552"
+       cy="124.48881"
+       r="13.298508" />
+    <circle
+       style="fill:#6c99f4;stroke-width:0.264583;fill-opacity:1"
+       id="path551-22"
+       cx="73.695892"
+       cy="123.5653"
+       r="13.298508" />
+    <circle
+       style="fill:#f5f6f9;stroke-width:0.264583;fill-opacity:1"
+       id="path551-76"
+       cx="123.3806"
+       cy="123.01119"
+       r="13.298508" />
+    <circle
+       style="fill:#568af2;stroke-width:0.264583;fill-opacity:1"
+       id="path551-39"
+       cx="173.43469"
+       cy="122.45709"
+       r="13.298508" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="58.54353"
+       y="146.09924"
+       id="text225-91-2"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="58.54353"
+         y="146.09924"
+         id="tspan227-62-2">context pressed #3f6fd1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="158.28185"
+       y="144.99104"
+       id="text225-4-5"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="158.28185"
+         y="144.99104"
+         id="tspan227-72-4">text foreground #8a95aa</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="108.04354"
+       y="145.54515"
+       id="text225-1-7"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="108.04354"
+         y="145.54515"
+         id="tspan4136">text title #dce1ec</tspan></text>
+    <circle
+       style="fill:#3f6fd1;fill-opacity:1;stroke-width:0.264583"
+       id="path551-22-8"
+       cx="74.698463"
+       cy="163.94141"
+       r="13.298508" />
+    <circle
+       style="fill:#dce1ec;fill-opacity:1;stroke-width:0.264583"
+       id="path551-76-9"
+       cx="124.38313"
+       cy="163.3873"
+       r="13.298508" />
+    <circle
+       style="fill:#8a95aa;fill-opacity:1;stroke-width:0.264583"
+       id="path551-39-1"
+       cx="174.43658"
+       cy="162.83321"
+       r="13.298508" />
+    <circle
+       style="fill:#6c99f4;stroke-width:0.264583;fill-opacity:1"
+       id="path551-93"
+       cx="30.84515"
+       cy="165.30783"
+       r="13.298508" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="16.178125"
+       y="189.38376"
+       id="text225-8-3"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="16.178125"
+         y="189.38376"
+         id="tspan227-2-8">text description #4f5b6e</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="58.923218"
+       y="189.31024"
+       id="text225-91-2-1"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="58.923218"
+         y="189.31024"
+         id="tspan227-62-2-3">text active #dce1ec</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="158.66107"
+       y="188.20204"
+       id="text225-4-5-4"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="158.66107"
+         y="188.20204"
+         id="tspan227-72-4-5">green #00ff7f</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.175px;fill:#000000;stroke-width:0.264583"
+       x="108.42329"
+       y="188.75615"
+       id="text225-1-7-1"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="108.42329"
+         y="188.75615"
+         id="tspan4136-4">white #f5f6f9</tspan></text>
+    <circle
+       style="fill:#dce1ec;fill-opacity:1;stroke-width:0.264583"
+       id="path551-22-8-8"
+       cx="75.078163"
+       cy="207.1524"
+       r="13.298508" />
+    <circle
+       style="fill:#f5f6f9;fill-opacity:1;stroke-width:0.264583;stroke:#000000;stroke-opacity:1"
+       id="path551-76-9-2"
+       cx="124.76283"
+       cy="206.5983"
+       r="13.298508" />
+    <circle
+       style="fill:#cbfec9;fill-opacity:0.24705882;stroke-width:0.264583"
+       id="path551-39-1-4"
+       cx="174.81558"
+       cy="206.0442"
+       r="13.298508" />
+    <circle
+       style="fill:#4f5b6e;fill-opacity:1;stroke-width:0.264583"
+       id="path551-93-2"
+       cx="31.224834"
+       cy="208.51883"
+       r="13.298508" />
+  </g>
+</svg>
