@@ -2,22 +2,6 @@
 # ///////////////////////////////////////////////////////////////
 from pyside_core import *
 
-# STYLE
-# ///////////////////////////////////////////////////////////////
-style = '''
-QPushButton {{
-    border: none;
-    border-radius: {_radius};
-    background-color: transparent;
-}}
-QPushButton:hover {{
-    background-color: {_bg_color_hover};
-}}
-QPushButton:pressed {{
-    background-color: {_bg_color_pressed};
-}}
-'''
-
 # PY PLAYER BUTTON
 # ///////////////////////////////////////////////////////////////
 
@@ -133,16 +117,12 @@ class PyPlayerButton(QPushButton):
     # ///////////////////////////////////////////////////////////////
     def enterEvent(self, event):
         self.change_style(QEvent.Enter)
-        # self.move_tooltip()
-        # self._tooltip.show()
 
     # MOUSE LEAVE
     # Event fired when the mouse leaves the BTN
     # ///////////////////////////////////////////////////////////////
     def leaveEvent(self, event):
         self.change_style(QEvent.Leave)
-        # self.move_tooltip()
-        # self._tooltip.hide()
 
     # MOUSE PRESS
     # Event triggered when the left button is pressed
@@ -186,66 +166,3 @@ class PyPlayerButton(QPushButton):
     def set_icon(self, icon_path):
         self._set_icon_path = icon_path
         self.repaint()
-
-    # MOVE TOOLTIP
-    # ///////////////////////////////////////////////////////////////
-    # def move_tooltip(self):
-    #     # GET MAIN WINDOW PARENT
-    #     gp = self.mapToGlobal(QPoint(0, 0))
-    #
-    #     # SET WIDGET TO GET POSTION
-    #     # Return absolute position of widget inside app
-    #     pos = self._parent.mapFromGlobal(gp)
-    #
-    #     # FORMAT POSITION
-    #     # Adjust tooltip position with offset
-    #     pos_x = (pos.x() - (self._tooltip.width() // 2)) + (self.width() // 2)
-    #     pos_y = pos.y() - self._top_margin
-    #
-    #     # SET POSITION TO WIDGET
-    #     # Move tooltip position
-    #     self._tooltip.move(pos_x, pos_y)
-
-# TOOLTIP
-# ///////////////////////////////////////////////////////////////
-# class _ToolTip(QLabel):
-#     # TOOLTIP / LABEL StyleSheet
-#     style_tooltip = """
-#     QLabel {{
-#         background-color: {_dark_one};
-#         color: {_text_foreground};
-#         padding-left: 10px;
-#         padding-right: 10px;
-#         border-radius: 17px;
-#         border: 0px solid transparent;
-#         font: 800 9pt "Segoe UI";
-#     }}
-#     """
-#     def __init__(
-#         self,
-#         parent,
-#         tooltip,
-#         dark_one,
-#         text_foreground
-#     ):
-#         QLabel.__init__(self)
-#
-#         # LABEL SETUP
-#         style = self.style_tooltip.format(
-#             _dark_one = dark_one,
-#             _text_foreground = text_foreground
-#         )
-#         self.setObjectName(u"label_tooltip")
-#         self.setStyleSheet(style)
-#         self.setMinimumHeight(34)
-#         self.setParent(parent)
-#         self.setText(tooltip)
-#         self.adjustSize()
-#
-#         # SET DROP SHADOW
-#         self.shadow = QGraphicsDropShadowEffect(self)
-#         self.shadow.setBlurRadius(30)
-#         self.shadow.setXOffset(0)
-#         self.shadow.setYOffset(0)
-#         self.shadow.setColor(QColor(0, 0, 0, 80))
-#         self.setGraphicsEffect(self.shadow)

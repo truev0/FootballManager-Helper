@@ -5,3 +5,4 @@ __pycache__/
 .idea/
 .pyc
 gui/uis/windows/main_window/copia.py
+test_files/

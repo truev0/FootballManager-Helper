@@ -23,6 +23,8 @@ import gui.core.fm_insider.FMinside as FMi
 # IMPORT CUSTOM CLASSES
 # ///////////////////////////////////////////
 from gui.core.custom_classes.CustomNestedNamespace.py_CustomNestedNamespace import NestedNamespace
+from gui.core.custom_classes.CustomPandasTableModel.py_CustomPandasTableModel import CustomizedPandasModel
+from gui.core.custom_classes.CustomPandasListModel.py_CustomPandasListModel import CustomListModel
 
 # IMPORT TRANSLATIONS
 # ///////////////////////////////////////////
@@ -267,6 +269,7 @@ class MainWindow(QMainWindow):
 
         if btn.objectName() == "btn_refresh":
             print(self.width(), self.height())
+            self.squad_helper()
 
         # DEBUG
 
@@ -345,6 +348,21 @@ class MainWindow(QMainWindow):
             self.df_squad = FMi.round_data(self.df_squad)
             self.df_squad = FMi.ranking_values(self.df_squad)
             print("Archivo Leido")
+
+        self.df_for_table = FMi.create_df_for_squad(self.df_squad, self.language)
+
+    # SQUAD HELPER FUNCTION
+    # ///////////////////////////////////////////
+    def squad_helper(self):
+        model = CustomizedPandasModel(self.df_for_table)
+        column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
+        self.ui.table_squad.setSelectionBehavior(QTableView.SelectItems)
+        self.ui.table_squad.setModel(model)
+        self.ui.table_squad.show()
+        headers = self.ui.table_squad.horizontalHeader()
+        for c in column_indexes:
+            headers.setSectionResizeMode(c, QHeaderView.ResizeToContents)
+
 
     # TRANSLATE UI
     # ///////////////////////////////////////////
