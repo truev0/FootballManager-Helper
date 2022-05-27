@@ -56,9 +56,7 @@ class Ui_MainWindow(object):
             font: {self.settings["font"]["text_size"]}pt "{self.settings["font"]["family"]}";
             color: {self.themes["app_color"]["text_foreground"]};
         ''')
-        # self.central_widget.setObjectName(u"central_widget") TODO delete
         self.central_widget_layout = QVBoxLayout(self.central_widget)
-        # self.central_widget_layout.setObjectName(u"central_widget_layout") TODO delete
 
         if self.settings["custom_title_bar"]:
             self.central_widget_layout.setContentsMargins(10, 10, 10, 10)
@@ -74,7 +72,6 @@ class Ui_MainWindow(object):
             border_color=self.themes["app_color"]["bg_two"],
             text_color=self.themes["app_color"]["text_foreground"]
         )
-        # self.window.setObjectName(u"window") TODO delete
 
         # If disable custom title bar
         if not self.settings["custom_title_bar"]:
@@ -89,14 +86,12 @@ class Ui_MainWindow(object):
         left_menu_margin = self.settings["left_menu_content_margins"]
         left_menu_minimum = self.settings["left_menu_size"]["minimum"]
         self.left_menu_frame = QFrame()
-        # self.left_menu_frame.setObjectName(u"left_menu_frame") TODO delete
         self.left_menu_frame.setMaximumSize(left_menu_minimum + (left_menu_margin * 2), 17280)
         self.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
 
         # LEFT MENU LAYOUT
         # ///////////////////////////////////////////////////////////////
         self.left_menu_layout = QHBoxLayout(self.left_menu_frame)
-        # self.left_menu_layout.setObjectName(u"left_menu_layout") TODO delete
         self.left_menu_layout.setContentsMargins(
             left_menu_margin,
             left_menu_margin,
@@ -122,7 +117,6 @@ class Ui_MainWindow(object):
             text_foreground=self.themes["app_color"]["text_foreground"],
             text_active=self.themes["app_color"]["text_active"]
         )
-        # self.left_menu.setObjectName(u"left_menu") TODO delete
 
         self.left_menu_layout.addWidget(self.left_menu)
 
@@ -130,7 +124,6 @@ class Ui_MainWindow(object):
         # Add here the left column with Stacked Widgets
         # ///////////////////////////////////////////////////////////////
         self.left_column_frame = QFrame()
-        # self.left_column_frame.setObjectName(u"left_column_frame") TODO delete
         self.left_column_frame.setMaximumWidth(self.settings["left_column_size"]["minimum"])
         self.left_column_frame.setMinimumWidth(self.settings["left_column_size"]["minimum"])
         self.left_column_frame.setStyleSheet(f"background: {self.themes['app_color']['bg_two']}")
@@ -138,7 +131,6 @@ class Ui_MainWindow(object):
         # ADD LAYOUT TO LEFT COLUMN
         # ///////////////////////////////////////////////////////////////
         self.left_column_layout = QVBoxLayout(self.left_column_frame)
-        # self.left_column_layout.setObjectName(u"left_column_layout") TODO delete
         self.left_column_layout.setContentsMargins(0, 0, 0, 0)
 
         # ADD CUSTOM LEFT MENU WIDGET
@@ -161,7 +153,6 @@ class Ui_MainWindow(object):
             icon_color_pressed=self.themes["app_color"]["icon_pressed"],
             icon_close_path=Functions.set_svg_icon("icon_close.svg")
         )
-        # self.left_column.setObjectName(u"left_column") TODO delete
 
         self.left_column_layout.addWidget(self.left_column)
 
@@ -169,12 +160,10 @@ class Ui_MainWindow(object):
         # Add here the right widgets
         # ///////////////////////////////////////////////////////////////
         self.right_app_frame = QFrame()
-        # self.right_app_frame.setObjectName(u"right_app_frame") TODO delete
 
         # ADD RIGHT APP LAYOUT
         # ///////////////////////////////////////////////////////////////
         self.right_app_layout = QVBoxLayout(self.right_app_frame)
-        # self.right_app_layout.setObjectName(u"right_app_layout") TODO delete
         self.right_app_layout.setContentsMargins(3, 3, 3, 3)
         self.right_app_layout.setSpacing(6)
 
@@ -183,9 +172,7 @@ class Ui_MainWindow(object):
         self.title_bar_frame = QFrame()
         self.title_bar_frame.setMinimumHeight(40)
         self.title_bar_frame.setMaximumHeight(40)
-        # self.title_bar_frame.setObjectName(u"title_bar_frame") TODO delete
         self.title_bar_layout = QVBoxLayout(self.title_bar_frame)
-        # self.title_bar_layout.setObjectName(u"title_bar_layout") TODO delete
         self.title_bar_layout.setContentsMargins(0, 0, 0, 0)
 
         # ADD CUSTOM TITLE BAR
@@ -212,33 +199,28 @@ class Ui_MainWindow(object):
             title_size=self.settings["font"]["title_size"],
             is_custom_title_bar=self.settings["custom_title_bar"]
         )
-        # self.title_bar.setObjectName(u"title_bar") TODO delete
 
         self.title_bar_layout.addWidget(self.title_bar)
 
         # ADD CONTENT AREA
         # ///////////////////////////////////////////////////////////////
         self.content_area_frame = QFrame()
-        # self.content_area_frame.setObjectName(u"content_area_frame") TODO delete
 
         # CONTENT AREA LAYOUT
         # ///////////////////////////////////////////////////////////////
         self.content_area_layout = QHBoxLayout(self.content_area_frame)
-        # self.content_area_layout.setObjectName(u"content_area_layout") TODO delete
         self.content_area_layout.setContentsMargins(0, 0, 0, 0)
         self.content_area_layout.setSpacing(0)
 
         # RIGHT BAR
         # ///////////////////////////////////////////////////////////////
         self.right_column_frame = QFrame()
-        # self.right_column_frame.setObjectName(u"right_column_frame") TODO delete
         self.right_column_frame.setMinimumWidth(self.settings["right_column_size"]["minimum"])
         self.right_column_frame.setMaximumWidth(self.settings["right_column_size"]["minimum"])
 
         # IMPORT RIGHT COLUMN
         # ///////////////////////////////////////////////////////////////
         self.content_area_right_layout = QVBoxLayout(self.right_column_frame)
-        # self.content_area_right_layout.setObjectName(u"content_area_right_layout") TODO delete
         self.content_area_right_layout.setContentsMargins(5, 5, 5, 5)
         self.content_area_right_layout.setSpacing(0)
 
@@ -263,7 +245,6 @@ class Ui_MainWindow(object):
         # LEFT CONTENT
         # ///////////////////////////////////////////////////////////////
         self.content_area_left_frame = QFrame()
-        # self.content_area_left_frame.setObjectName(u"content_area_left_frame") TODO delete
 
         # IMPORT MAIN PAGES
         # ///////////////////////////////////////////////////////////////
@@ -277,14 +258,12 @@ class Ui_MainWindow(object):
         # CREDITS / BOTTOM APP FRAME
         # ///////////////////////////////////////////////////////////////
         self.credits_frame = QFrame()
-        # self.credits_frame.setObjectName(u"credits_frame") TODO delete
         self.credits_frame.setMinimumHeight(26)
         self.credits_frame.setMaximumHeight(26)
 
         # CREATE LAYOUT CREDITS
         # ///////////////////////////////////////////////////////////////
         self.credits_layout = QVBoxLayout(self.credits_frame)
-        # self.credits_layout.setObjectName(u"credits_layout") TODO delete
         self.credits_layout.setContentsMargins(0, 0, 0, 0)
 
         # ADD CUSTOM CREDIT WDIGET
@@ -297,7 +276,6 @@ class Ui_MainWindow(object):
             text_size=self.settings["font"]["text_size"],
             text_description_color=self.themes["app_color"]["text_description"]
         )
-        # self.credits.setObjectName(u"credits") TODO delete
 
         # ADD TO CREDITS LAYOUT
         self.credits_layout.addWidget(self.credits)

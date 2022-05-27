@@ -28,6 +28,7 @@ class PyPlayerButton(QPushButton):
             self.setParent(parent)
         self.setCursor(Qt.PointingHandCursor)
         self.setObjectName(btn_id)
+        self.setAcceptDrops(True)
 
         # PROPERTIES
         self._bg_color = bg_color
@@ -49,9 +50,25 @@ class PyPlayerButton(QPushButton):
         self._parent = parent
 
         # Custom attributes
-        self._lista = None
+        self._lista = []
 
-        # TOOLTIP
+
+    # DRAG ENTER EVENT VERIFIER
+    # ///////////////////////////////////////////////////////////////
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasText():
+            print("has text")
+            event.accept()
+        else:
+            print("No text")
+            event.ignore()
+
+
+    # DROP EVENT
+    # ///////////////////////////////////////////////////////////////
+    def dropEvent(self, event):
+        self._lista.append(event.mimeData().text())
+        print(self._lista)
 
     # SET ACTIVE MENU
     # ///////////////////////////////////////////////////////////////
