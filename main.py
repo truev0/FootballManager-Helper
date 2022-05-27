@@ -3,6 +3,7 @@
 import sys
 import os
 import json
+import time
 
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////
@@ -23,8 +24,8 @@ import gui.core.fm_insider.FMinside as FMi
 # IMPORT CUSTOM CLASSES
 # ///////////////////////////////////////////
 from gui.core.custom_classes.CustomNestedNamespace.py_CustomNestedNamespace import NestedNamespace
-from gui.core.custom_classes.CustomPandasTableModel.py_CustomPandasTableModel import CustomizedPandasModel
-from gui.core.custom_classes.CustomPandasListModel.py_CustomPandasListModel import CustomListModel
+from gui.core.custom_classes.CustomNumpyTableModel.py_CustomNumpyTableModel import CustomizedNumpyModel
+from gui.core.custom_classes.CustomNumpyListModel.py_CustomNumpyListModel import CustomizedNumpyListModel
 
 # IMPORT TRANSLATIONS
 # ///////////////////////////////////////////
@@ -268,12 +269,12 @@ class MainWindow(QMainWindow):
             top_settings.set_active_tab(False)
 
         if btn.objectName() == "btn_refresh":
-            print(self.width(), self.height())
-            self.squad_helper()
+            # self.squad_helper()
+            pass
 
         # DEBUG
 
-        print(f"Button {btn.objectName()}, clicked!")
+        # print(f"Button {btn.objectName()}, clicked!")
 
     # LEFT MENU BTN IS RELEASED
     # Check function by object name / btn_id
@@ -283,7 +284,7 @@ class MainWindow(QMainWindow):
         btn = self.ui.setup_btns()
 
         # DEBUG
-        print(f"Button {btn.objectName()}, released!")
+        # print(f"Button {btn.objectName()}, released!")
 
     # SET ALL SIGNALS
     # ///////////////////////////////////////////
@@ -347,14 +348,16 @@ class MainWindow(QMainWindow):
             self.df_squad = FMi.create_scores_for_position(self.df_squad, self.language)
             self.df_squad = FMi.round_data(self.df_squad)
             self.df_squad = FMi.ranking_values(self.df_squad)
-            print("Archivo Leido")
 
         self.df_for_table = FMi.create_df_for_squad(self.df_squad, self.language)
+        self.df_tactic = self.df_for_table.iloc[:, :1]
+        self.tables_helper()
 
     # SQUAD HELPER FUNCTION
     # ///////////////////////////////////////////
-    def squad_helper(self):
-        model = CustomizedPandasModel(self.df_for_table)
+    def tables_helper(self):
+        inicio = time.time()
+        model = CustomizedNumpyModel(self.df_for_table)
         column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
         self.ui.table_squad.setSelectionBehavior(QTableView.SelectItems)
         self.ui.table_squad.setModel(model)
@@ -362,6 +365,14 @@ class MainWindow(QMainWindow):
         headers = self.ui.table_squad.horizontalHeader()
         for c in column_indexes:
             headers.setSectionResizeMode(c, QHeaderView.ResizeToContents)
+
+        model2 = CustomizedNumpyListModel(self.df_tactic)
+        self.ui.table_tactic.setModel(model2)
+        self.ui.table_tactic.show()
+        self.ui.table_tactic.horizontalHeader().setStretchLastSection(True)
+
+        fin = time.time()
+        print(f"Tiempo de ejecución: {fin - inicio}")
 
 
     # TRANSLATE UI

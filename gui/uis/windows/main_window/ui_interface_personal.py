@@ -532,7 +532,7 @@ class Ui_MainWindow(object):
         self.table_squad = PyTableWidget(
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
-            selection_color=self.themes["app_color"]["context_color"],
+            selection_color=self.themes["app_color"]["dark_two"],
             bg_color=self.themes["app_color"]["bg_two"],
             header_horizontal_color=self.themes["app_color"]["dark_two"],
             header_vertical_color=self.themes["app_color"]["bg_three"],
@@ -647,7 +647,7 @@ class Ui_MainWindow(object):
         self.table_tactic = PyTableWidget(
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
-            selection_color=self.themes["app_color"]["context_color"],
+            selection_color=self.themes["app_color"]["dark_two"],
             bg_color=self.themes["app_color"]["bg_two"],
             header_horizontal_color=self.themes["app_color"]["dark_two"],
             header_vertical_color=self.themes["app_color"]["bg_three"],

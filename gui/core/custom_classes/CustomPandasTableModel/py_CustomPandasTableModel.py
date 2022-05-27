@@ -28,10 +28,10 @@ class CustomizedPandasModel(QAbstractTableModel):
             return unicode(value)
 
     def rowCount(self, parent=None):
-        return self._data.shape[0]
+        return len(self._data.index)
 
     def columnCount(self, parent=None):
-        return self._data.shape[1]
+        return self._data.columns.size
 
     def headerData(self, section, orientation, role=Qt.DisplayRole):
         if role == Qt.DisplayRole:

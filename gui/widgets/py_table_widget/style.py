@@ -2,23 +2,23 @@
 # ///////////////////////////////////////////////////////////////
 style = '''
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
-QTableWidget */
+QTableView */
 
-QTableWidget {{	
+QTableView {{	
 	background-color: {_bg_color};
 	padding: 5px;
 	border-radius: {_radius}px;
 	gridline-color: {_grid_line_color};
     color: {_color};
 }}
-QTableWidget::item{{
+QTableView::item{{
 	border-color: none;
 	padding-left: 5px;
 	padding-right: 5px;
 	gridline-color: rgb(44, 49, 60);
     border-bottom: 1px solid {_bottom_line_color};
 }}
-QTableWidget::item:selected{{
+QTableView::item:selected{{
 	background-color: {_selection_color};
 }}
 QHeaderView::section{{
@@ -29,10 +29,10 @@ QHeaderView::section{{
     border-bottom: 1px solid rgb(44, 49, 60);
     border-right: 1px solid rgb(44, 49, 60);
 }}
-QTableWidget::horizontalHeader {{	
+QTableView::horizontalHeader {{	
 	background-color: rgb(33, 37, 43);
 }}
-QTableWidget QTableCornerButton::section {{
+QTableView QTableCornerButton::section {{
     border: none;
 	background-color: {_header_horizontal_color};
 	padding: 3px;

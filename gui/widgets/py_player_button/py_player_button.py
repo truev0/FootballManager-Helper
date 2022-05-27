@@ -128,12 +128,18 @@ class PyPlayerButton(QPushButton):
     # Event triggered when the left button is pressed
     # ///////////////////////////////////////////////////////////////
     def mousePressEvent(self, event):
+        self.__mousePressPos = None
+        self.__mouseMovePos = None
         if event.button() == Qt.LeftButton:
             self.change_style(QEvent.MouseButtonPress)
             # SET FOCUS
             self.setFocus()
             # EMIT SIGNAL
             return self.clicked.emit()
+        elif event.button() == Qt.RightButton:
+            self.__mousePressPos = event.globalPos()
+            self.__mouseMovePos = event.globalPos()
+        super(PyPlayerButton, self).mousePressEvent(event)
 
     # MOUSE RELEASED
     # Event triggered after the mouse button is released
@@ -143,6 +149,26 @@ class PyPlayerButton(QPushButton):
             self.change_style(QEvent.MouseButtonRelease)
             # EMIT SIGNAL
             return self.released.emit()
+        elif event.button() == Qt.RightButton:
+            if self.__mousePressPos is not None:
+                moved = event.globalPos() - self.__mousePressPos
+                if moved.manhattanLength() > 3:
+                    event.ignore()
+                    return
+        super(PyPlayerButton, self).mouseReleaseEvent(event)
+
+    # MOUSE MOVE EVENT
+    # ///////////////////////////////////////////////////////////////
+    def mouseMoveEvent(self, event):
+        if event.buttons() == Qt.RightButton:
+            currPos = self.mapToGlobal(self.pos())
+            globalPos = event.globalPos()
+            diff = globalPos - self.__mouseMovePos
+            newPos = self.mapFromGlobal(currPos + diff)
+            self.move(newPos)
+
+            self.__mouseMovePos = globalPos
+        super(PyPlayerButton, self).mouseMoveEvent(event)
 
     # DRAW ICON WITH COLORS
     # ///////////////////////////////////////////////////////////////
