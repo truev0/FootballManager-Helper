@@ -331,6 +331,7 @@ class MainWindow(QMainWindow):
         self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
         self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
 
+
     # LOAD FILE
     # ///////////////////////////////////////////
     def load_file(self):

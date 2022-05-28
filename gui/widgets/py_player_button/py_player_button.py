@@ -10,10 +10,6 @@ from gui.widgets.py_icon_button import PyIconButton
 # ///////////////////////////////////////////////////////////////
 from gui.core.functions import *
 
-# IMPORT CUSTOM SLIDE
-# ///////////////////////////////////////////////////////////////
-from gui.widgets.py_custom_popup_window.py_Custom_Popup_Window import QCustomSlideMenu
-
 # PY PLAYER BUTTON
 # ///////////////////////////////////////////////////////////////
 
@@ -77,58 +73,6 @@ class PyPlayerButton(QPushButton):
         #     text_foreground,
         # )
         # self._container_player.hide()
-
-        # TODO hacer que cada boton apunte a player container toggle menu
-        self.players_container = QCustomSlideMenu(
-            parent=self._app_parent
-        )
-        self.players_container.setObjectName(u"CustomListPlayer")
-        self.players_container.setMinimumHeight(40)
-        self.players_container.setMinimumWidth(150)
-        self.main_container_layout = QVBoxLayout(self.players_container)
-        self.main_container_layout.setObjectName(u"main_container_layout")
-
-        self.subContainer = QWidget(self.players_container)
-        self.subContainer.setObjectName(u"subContainer")
-        self.subContainer_layout = QVBoxLayout(self.subContainer)
-        self.subContainer_layout.setObjectName(u"subContainer_layout")
-
-        self.top_label = QLabel(self.subContainer)
-        self.top_label.setObjectName(u"top_label")
-        font = QFont()
-        font.setBold(True)
-        self.top_label.setFont(font)
-
-        self.subContainer_layout.addWidget(self.top_label)
-
-        self.frame_player = QFrame(self.subContainer)
-        self.frame_player.setObjectName(u"frame_player")
-        self.frame_player.setFrameShape(QFrame.StyledPanel)
-        self.frame_player.setFrameShadow(QFrame.Raised)
-        self.frame_player_layout = QHBoxLayout(self.frame_player)
-        self.frame_player_layout.setObjectName(u"frame_player_layout")
-        self.label_list_player = QLabel(self.frame_player)
-        self.label_list_player.setObjectName(u"label_list_player")
-        self.label_list_player.setAlignment(Qt.AlignCenter)
-        self.label_list_player.setText(tooltip_text)
-        self.frame_player_layout.addWidget(self.label_list_player)
-
-        self.closeContainerBtn = PyIconButton(
-            icon_path=Functions.set_svg_icon("icon_close.svg"),
-            parent=self.frame_player,
-            tooltip_text="close",
-            width=24,
-            height=24,
-            radius=8,
-            bg_color="#FF00000"
-        )
-
-        self.frame_player_layout.addWidget(self.closeContainerBtn)
-        self.subContainer_layout.addWidget(self.frame_player)
-        self.main_container_layout.addWidget(self.subContainer)
-
-        self.players_container.hide()
-
 
         # TODO continuar con el cuadro custom
 
@@ -248,7 +192,6 @@ class PyPlayerButton(QPushButton):
         self.move_tooltip()
         # print(self._tooltip.height(), self._tooltip.width())
         print(self.players_container.height(), self.players_container.width())
-        self.players_container.show()
         # self._tooltip.show()
 
     # MOUSE LEAVE
@@ -269,6 +212,7 @@ class PyPlayerButton(QPushButton):
             self.change_style(QEvent.MouseButtonPress)
             # SET FOCUS
             self.setFocus()
+            self.players_container.slideMenu()
             # EMIT SIGNAL
             return self.clicked.emit()
         elif event.button() == Qt.RightButton:
@@ -355,7 +299,7 @@ class _CustomListPlayer(QWidget):
             dark_one,
             text_foreground
     ):
-        QCustomSlideMenu.__init__(self)
+        QWidget.__init__(self)
         self.setParent(parent)
         self.setObjectName(u"CustomListPlayer")
         self.setMinimumHeight(40)
