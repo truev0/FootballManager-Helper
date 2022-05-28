@@ -73,13 +73,3 @@ class PyTableWidget(QTableView):
             _context_color=context_color
         )
         self.setStyleSheet(style_format)
-
-    def onLeftClick(self, index):
-        print('onClick index.row: %s, index.col: %s' % (index.row(), index.column()))
-
-    def mouseMoveEvent(self, event):
-        if event.buttons() == Qt.LeftButton:
-            index = self.clicked.connect(self.onLeftClick)
-            print('onClick index.row: %s, index.col: %s' % (index.row(), index.column()))
-
-# TODO continuar en sacar la info de la tabla

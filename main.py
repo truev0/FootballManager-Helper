@@ -23,9 +23,9 @@ import gui.core.fm_insider.FMinside as FMi
 
 # IMPORT CUSTOM CLASSES
 # ///////////////////////////////////////////
-from gui.core.custom_classes.CustomNestedNamespace.py_CustomNestedNamespace import NestedNamespace
-from gui.core.custom_classes.CustomNumpyTableModel.py_CustomNumpyTableModel import CustomizedNumpyModel
-from gui.core.custom_classes.CustomNumpyListModel.py_CustomNumpyListModel import CustomizedNumpyListModel
+from gui.core.models.CustomNestedNamespace.py_CustomNestedNamespace import NestedNamespace
+from gui.core.models.CustomNumpyTableModel.py_CustomNumpyTableModel import CustomizedNumpyModel
+from gui.core.models.CustomNumpyListModel.py_CustomNumpyListModel import CustomizedNumpyListModel
 
 # IMPORT TRANSLATIONS
 # ///////////////////////////////////////////
@@ -57,6 +57,8 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+
 
         # CLASS VARIABLES
         # ///////////////////////////////////////////
@@ -351,6 +353,8 @@ class MainWindow(QMainWindow):
 
         self.df_for_table = FMi.create_df_for_squad(self.df_squad, self.language)
         self.df_tactic = self.df_for_table.iloc[:, :1]
+        # self.df_tactic = self.df_tactic.join(self.df_for_table.iloc[:, 6:8])
+        self.df_tactic = self.df_tactic.join(self.df_for_table.iloc[:, 2:3])
         self.tables_helper()
 
     # SQUAD HELPER FUNCTION

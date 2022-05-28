@@ -2,6 +2,18 @@
 # ///////////////////////////////////////////////////////////////
 from pyside_core import *
 
+# IMPORT PY ICON BUTTON
+# ///////////////////////////////////////////////////////////////
+from gui.widgets.py_icon_button import PyIconButton
+
+# IMPORT FUNCTIONS
+# ///////////////////////////////////////////////////////////////
+from gui.core.functions import *
+
+# IMPORT CUSTOM SLIDE
+# ///////////////////////////////////////////////////////////////
+from gui.widgets.py_custom_popup_window.py_Custom_Popup_Window import QCustomSlideMenu
+
 # PY PLAYER BUTTON
 # ///////////////////////////////////////////////////////////////
 
@@ -11,6 +23,7 @@ class PyPlayerButton(QPushButton):
             self,
             icon_path=None,
             parent=None,
+            app_parent=None,
             btn_id=None,
             bg_color="#4f973c",
             bg_color_hover="#dce1ec",
@@ -19,6 +32,10 @@ class PyPlayerButton(QPushButton):
             icon_color_hover="#343b48",
             icon_color_pressed="272c36",
             icon_color_active="#1b1e23",
+            tooltip_text="                               ",
+            dark_one="#1b1e23",
+            text_foreground="#8a95aa",
+            is_active=False,
     ):
         super().__init__()
 
@@ -40,7 +57,7 @@ class PyPlayerButton(QPushButton):
         self._icon_color_pressed = icon_color_pressed
         self._icon_color_active = icon_color_active
         self._top_margin = 40
-        self._is_active = False
+        self._is_active = is_active
         # Set Parameters
         self._set_bg_color = bg_color
         self._set_icon_path = icon_path
@@ -48,26 +65,116 @@ class PyPlayerButton(QPushButton):
         self._set_border_radius = 8
         # Parent
         self._parent = parent
+        self._app_parent = app_parent
 
         # Custom attributes
         self._lista = []
+
+        # # CUSTOM PLAYER WINDOW
+        # self._container_player = _CustomListPlayer(
+        #     tooltip_text,
+        #     dark_one,
+        #     text_foreground,
+        # )
+        # self._container_player.hide()
+
+        # TODO hacer que cada boton apunte a player container toggle menu
+        self.players_container = QCustomSlideMenu(
+            parent=self._app_parent
+        )
+        self.players_container.setObjectName(u"CustomListPlayer")
+        self.players_container.setMinimumHeight(40)
+        self.players_container.setMinimumWidth(150)
+        self.main_container_layout = QVBoxLayout(self.players_container)
+        self.main_container_layout.setObjectName(u"main_container_layout")
+
+        self.subContainer = QWidget(self.players_container)
+        self.subContainer.setObjectName(u"subContainer")
+        self.subContainer_layout = QVBoxLayout(self.subContainer)
+        self.subContainer_layout.setObjectName(u"subContainer_layout")
+
+        self.top_label = QLabel(self.subContainer)
+        self.top_label.setObjectName(u"top_label")
+        font = QFont()
+        font.setBold(True)
+        self.top_label.setFont(font)
+
+        self.subContainer_layout.addWidget(self.top_label)
+
+        self.frame_player = QFrame(self.subContainer)
+        self.frame_player.setObjectName(u"frame_player")
+        self.frame_player.setFrameShape(QFrame.StyledPanel)
+        self.frame_player.setFrameShadow(QFrame.Raised)
+        self.frame_player_layout = QHBoxLayout(self.frame_player)
+        self.frame_player_layout.setObjectName(u"frame_player_layout")
+        self.label_list_player = QLabel(self.frame_player)
+        self.label_list_player.setObjectName(u"label_list_player")
+        self.label_list_player.setAlignment(Qt.AlignCenter)
+        self.label_list_player.setText(tooltip_text)
+        self.frame_player_layout.addWidget(self.label_list_player)
+
+        self.closeContainerBtn = PyIconButton(
+            icon_path=Functions.set_svg_icon("icon_close.svg"),
+            parent=self.frame_player,
+            tooltip_text="close",
+            width=24,
+            height=24,
+            radius=8,
+            bg_color="#FF00000"
+        )
+
+        self.frame_player_layout.addWidget(self.closeContainerBtn)
+        self.subContainer_layout.addWidget(self.frame_player)
+        self.main_container_layout.addWidget(self.subContainer)
+
+        self.players_container.hide()
+
+
+        # TODO continuar con el cuadro custom
+
+        # TOOLTIP
+        self._tooltip_text = tooltip_text
+        self._tooltip = _ToolTip(
+            parent,
+            tooltip_text,
+            dark_one,
+            text_foreground
+        )
+        self._tooltip.hide()
 
 
     # DRAG ENTER EVENT VERIFIER
     # ///////////////////////////////////////////////////////////////
     def dragEnterEvent(self, event):
-        if event.mimeData().hasText():
-            print("has text")
+        if 'application/x-qabstractitemmodeldatalist' in event.mimeData().formats():
             event.accept()
         else:
-            print("No text")
             event.ignore()
 
 
     # DROP EVENT
     # ///////////////////////////////////////////////////////////////
     def dropEvent(self, event):
-        self._lista.append(event.mimeData().text())
+        mimeData = event.mimeData()
+        if mimeData.hasText():
+            self._lista.append(mimeData.text())
+        elif 'application/x-qabstractitemmodeldatalist' in mimeData.formats():
+            names = []
+            stream = QDataStream(mimeData.data('application/x-qabstractitemmodeldatalist'))
+            while not stream.atEnd():
+                # All fields must be read, even if we don't use them
+                row = stream.readInt32()
+                col = stream.readInt32()
+                for _ in range(stream.readInt32()):
+                    role = stream.readInt32()
+                    value = stream.readQVariant()
+                    if role == Qt.DisplayRole:
+                        names.append(value)
+            self._lista.extend(names)
+        self.updater_height = self._tooltip.height() + 12
+        self.update_width = 150
+        self._tooltip.resize(self.update_width, self.updater_height)
+        self._tooltip.setText("\n".join(self._lista))
         print(self._lista)
 
     # SET ACTIVE MENU
@@ -76,6 +183,10 @@ class PyPlayerButton(QPushButton):
         self._is_active = is_active
         self.repaint()
 
+    # RETURN IF IS ACTIVE
+    # ///////////////////////////////////////////////////////////////
+    def is_active(self, is_active):
+        return self._is_active
 
     # PAINT EVENT
     # ///////////////////////////////////////////////////////////////
@@ -134,12 +245,19 @@ class PyPlayerButton(QPushButton):
     # ///////////////////////////////////////////////////////////////
     def enterEvent(self, event):
         self.change_style(QEvent.Enter)
+        self.move_tooltip()
+        # print(self._tooltip.height(), self._tooltip.width())
+        print(self.players_container.height(), self.players_container.width())
+        self.players_container.show()
+        # self._tooltip.show()
 
     # MOUSE LEAVE
     # Event fired when the mouse leaves the BTN
     # ///////////////////////////////////////////////////////////////
     def leaveEvent(self, event):
         self.change_style(QEvent.Leave)
+        self.move_tooltip()
+        # self._tooltip.hide()
 
     # MOUSE PRESS
     # Event triggered when the left button is pressed
@@ -156,7 +274,7 @@ class PyPlayerButton(QPushButton):
         elif event.button() == Qt.RightButton:
             self.__mousePressPos = event.globalPos()
             self.__mouseMovePos = event.globalPos()
-        super(PyPlayerButton, self).mousePressEvent(event)
+            super(PyPlayerButton, self).mousePressEvent(event)
 
     # MOUSE RELEASED
     # Event triggered after the mouse button is released
@@ -172,7 +290,7 @@ class PyPlayerButton(QPushButton):
                 if moved.manhattanLength() > 3:
                     event.ignore()
                     return
-        super(PyPlayerButton, self).mouseReleaseEvent(event)
+            super(PyPlayerButton, self).mouseReleaseEvent(event)
 
     # MOUSE MOVE EVENT
     # ///////////////////////////////////////////////////////////////
@@ -209,3 +327,124 @@ class PyPlayerButton(QPushButton):
     def set_icon(self, icon_path):
         self._set_icon_path = icon_path
         self.repaint()
+
+
+    # MOVE TOOLTIP
+    # ///////////////////////////////////////////////////////////////
+    def move_tooltip(self):
+        # GET MAIN WINDOW
+        gp = self.mapToGlobal(QPoint(0, 0))
+        # SET DIGET TO GET POSITION
+        # Return absolute position of the widget relative to the app
+        pos = self._parent.mapFromGlobal(gp)
+
+        # FORMAT POSITION
+        # Adjust the position of the tooltip
+        pos_x = (pos.x() - (self._tooltip.width() // 2)) + (self.width() // 2)
+        pos_y = pos.y() - self._top_margin
+
+        # SET POSITION TO WIDGET
+        # Move tooltip position
+        self._tooltip.move(pos_x, pos_y)
+
+class _CustomListPlayer(QWidget):
+    def __init__(
+            self,
+            parent,
+            tooltip,
+            dark_one,
+            text_foreground
+    ):
+        QCustomSlideMenu.__init__(self)
+        self.setParent(parent)
+        self.setObjectName(u"CustomListPlayer")
+        self.setMinimumHeight(40)
+        self.setMinimumWidth(150)
+        self.main_container_layout = QVBoxLayout(self)
+        self.main_container_layout.setObjectName(u"main_container_layout")
+
+        self.subContainer = QWidget(self)
+        self.subContainer.setObjectName(u"subContainer")
+        self.subContainer_layout = QVBoxLayout(self.subContainer)
+        self.subContainer_layout.setObjectName(u"subContainer_layout")
+
+        self.top_label = QLabel(self.subContainer)
+        self.top_label.setObjectName(u"top_label")
+        font = QFont()
+        font.setBold(True)
+        self.top_label.setFont(font)
+
+        self.subContainer_layout.addWidget(self.top_label)
+
+        self.frame_player = QFrame(self.subContainer)
+        self.frame_player.setObjectName(u"frame_player")
+        self.frame_player.setFrameShape(QFrame.StyledPanel)
+        self.frame_player.setFrameShadow(QFrame.Raised)
+        self.frame_player_layout = QHBoxLayout(self.frame_player)
+        self.frame_player_layout.setObjectName(u"frame_player_layout")
+        self.label_list_player = QLabel(self.frame_player)
+        self.label_list_player.setObjectName(u"label_list_player")
+        self.label_list_player.setAlignment(Qt.AlignCenter)
+        self.label_list_player.setText(tooltip)
+        self.frame_player_layout.addWidget(self.label_list_player)
+
+        self.closeContainerBtn = PyIconButton(
+            icon_path=Functions.set_svg_icon("icon_close.svg"),
+            parent=self.frame_player,
+            tooltip_text="close",
+            width=24,
+            height=24,
+            radius=8,
+            bg_color="#FF00000"
+        )
+
+        self.frame_player_layout.addWidget(self.closeContainerBtn)
+        self.subContainer_layout.addWidget(self.frame_player)
+        self.main_container_layout.addWidget(self.subContainer)
+
+
+
+class _ToolTip(QLabel):
+    # TOOLTIP / LABEL StyleSheet
+    # ///////////////////////////////////////////////////////////////
+    style_tooltip = """
+        QLabel {{		
+        background-color: {_dark_one};	
+        color: {_text_foreground};
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 17px;
+        border: 0px solid transparent;
+        font: 800 9pt "Segoe UI";
+    }}
+    """
+
+    def __init__(
+            self,
+            parent,
+            tooltip,
+            dark_one,
+            text_foreground
+    ):
+        QLabel.__init__(self)
+
+        # LABEL SETUP
+        style = self.style_tooltip.format(
+            _dark_one=dark_one,
+            _text_foreground=text_foreground
+        )
+        self.setObjectName(u"label_tooltip")
+        self.setStyleSheet(style)
+        self.setMinimumHeight(34)
+        self.setParent(parent)
+        self.setText(tooltip)
+        self.adjustSize()
+
+
+        # SET DROP SHADOW
+        self.shadow = QGraphicsDropShadowEffect(self)
+        self.shadow.setBlurRadius(30)
+        self.shadow.setXOffset(0)
+        self.shadow.setYOffset(0)
+        self.shadow.setColor(QColor(0, 0, 0, 80))
+        self.setGraphicsEffect(self.shadow)

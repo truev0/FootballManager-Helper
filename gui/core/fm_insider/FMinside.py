@@ -6,7 +6,7 @@ import numpy as np
 import json
 import warnings
 from gui.core.translations import en, es
-from gui.core.custom_classes.CustomNestedNamespace.py_CustomNestedNamespace import NestedNamespace
+from gui.core.models.CustomNestedNamespace.py_CustomNestedNamespace import NestedNamespace
 
 # INITIAL CONFIGURATION TO PROCESS
 # ///////////////////////////////////////////////////////////////

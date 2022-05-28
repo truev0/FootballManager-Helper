@@ -42,4 +42,4 @@ class CustomizedNumpyListModel(QAbstractTableModel):
         return None
 
     def flags(self, index):
-        return Qt.ItemIsEnabled | Qt.ItemIsSelectable
+        return Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsDragEnabled

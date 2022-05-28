@@ -545,6 +545,7 @@ class Ui_MainWindow(object):
         self.btn_pos_1 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_1",
         )
         self.btn_pos_1.setGeometry(QRect(250, 710, 48, 48))
@@ -553,6 +554,7 @@ class Ui_MainWindow(object):
         self.btn_pos_2 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_2",
         )
         self.btn_pos_2.setGeometry(QRect(175, 630, 48, 48))
@@ -560,6 +562,7 @@ class Ui_MainWindow(object):
         self.btn_pos_3 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_3",
         )
         self.btn_pos_3.setGeometry(QRect(327, 630, 48, 48))
@@ -567,6 +570,7 @@ class Ui_MainWindow(object):
         self.btn_pos_4 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_4",
         )
         self.btn_pos_4.setGeometry(QRect(450, 595, 48, 48))
@@ -574,6 +578,7 @@ class Ui_MainWindow(object):
         self.btn_pos_5 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_5",
         )
         self.btn_pos_5.setGeometry(QRect(50, 595, 48, 48))
@@ -581,6 +586,7 @@ class Ui_MainWindow(object):
         self.btn_pos_6 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_6",
         )
         self.btn_pos_6.setGeometry(QRect(250, 490, 48, 48))
@@ -588,6 +594,7 @@ class Ui_MainWindow(object):
         self.btn_pos_7 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_7",
         )
         self.btn_pos_7.setGeometry(QRect(155, 360, 48, 48))
@@ -595,6 +602,7 @@ class Ui_MainWindow(object):
         self.btn_pos_8 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_8",
         )
         self.btn_pos_8.setGeometry(QRect(347, 360, 48, 48))
@@ -602,6 +610,7 @@ class Ui_MainWindow(object):
         self.btn_pos_9 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_9",
         )
         self.btn_pos_9.setGeometry(QRect(50, 210, 48, 48))
@@ -609,6 +618,7 @@ class Ui_MainWindow(object):
         self.btn_pos_10 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_10",
         )
         self.btn_pos_10.setGeometry(QRect(450, 210, 48, 48))
@@ -616,6 +626,7 @@ class Ui_MainWindow(object):
         self.btn_pos_11 = PyPlayerButton(
             icon_path=Functions.set_svg_icon(self.image_player),
             parent=self.load_pages.vertical_pitch_frame,
+            app_parent=self.central_widget,
             btn_id="btn_pos_11",
         )
         self.btn_pos_11.setGeometry(QRect(250, 110, 48, 48))
@@ -635,6 +646,7 @@ class Ui_MainWindow(object):
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
             context_color=self.themes["app_color"]["context_color"]
         )
+
         # ADD WIDGETS TO PAGE 3
         self.load_pages.list_table_layout.addWidget(self.table_tactic)
 

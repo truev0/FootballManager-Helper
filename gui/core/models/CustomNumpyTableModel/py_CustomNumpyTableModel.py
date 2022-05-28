@@ -72,5 +72,4 @@ class CustomizedNumpyModel(QAbstractTableModel):
                         self._data[row, column] = tmp
                     self.dataChanged.emit(index, index)
                 return True
-            else:
-                return False
+        return False
