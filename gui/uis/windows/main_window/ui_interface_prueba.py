@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'interfaceFyGSmi.ui'
+## Form generated from reading UI file 'interfaceGGhVUy.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.3.0
 ##
@@ -18,6 +18,13 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
     QMainWindow, QPushButton, QSizePolicy, QVBoxLayout,
     QWidget)
+
+from gui\widgets\py_window\py_window import PyWindow
+from pycredits import PyCredits
+from pyleftcolumn import PyLeftColumn
+from pyleftmenu import PyLeftMenu
+from pypopupnotification import PyPopupNotification
+from pytitlebar import PyTitleBar
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -124,8 +131,16 @@ class Ui_MainWindow(object):
 
         self.right_app_layout.addWidget(self.credits_frame)
 
-        self.popup_notification_container = QWidget(self.right_app_frame)
+        self.popup_notification_container = PyPopupNotification(self.right_app_frame)
         self.popup_notification_container.setObjectName(u"popup_notification_container")
+        self.popup_notification_container.setStyleSheet(u"#popup_notification_container{\n"
+"	background-color: rgb(85, 0, 255);\n"
+"	color: rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"#popup_notification_subcontainer{\n"
+"	background-color: rgb(255, 0, 0);\n"
+"}")
         self.popup_notification_container_layout = QVBoxLayout(self.popup_notification_container)
         self.popup_notification_container_layout.setObjectName(u"popup_notification_container_layout")
         self.popup_notification_subcontainer = QWidget(self.popup_notification_container)
@@ -191,8 +206,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.title_notification.setText("")
+        self.title_notification.setText(QCoreApplication.translate("MainWindow", u"Titulo", None))
         self.btn_close_notification.setText("")
-        self.label_list.setText("")
+        self.label_list.setText(QCoreApplication.translate("MainWindow", u"Lista lista", None))
     # retranslateUi
 

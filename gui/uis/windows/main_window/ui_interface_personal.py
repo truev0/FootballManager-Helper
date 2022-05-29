@@ -292,13 +292,14 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
         self.popup_notification_container = PyPopupNotification(self.right_app_frame)
         self.popup_notification_container.setObjectName(u"popup_notification_container")
-        self.popup_notification_container.setMinimumHeight(40)
-        self.popup_notification_container.setMaximumWidth(400)
-        self.popup_notification_container.setStyleSheet(f'''
-        #popup_notification_container {{
-            background-color: red;
-        }}
-        ''')
+        self.popup_notification_container.setStyleSheet(u"#popup_notification_container{\n"
+"	background-color: rgb(85, 0, 255);\n"
+"	color: rgb(0, 0, 0);\n"
+"}\n"
+"\n"
+"#popup_notification_subcontainer{\n"
+"	background-color: rgb(255, 0, 0);\n"
+"}")
 
         # CREATE LAYOUT POPUP NOTIFICATION CONTAINER
         # ///////////////////////////////////////////////////////////////
@@ -622,6 +623,7 @@ class Ui_MainWindow(object):
 
         # PITCH WIDGET / ADD BUTTONS
         # ///////////////////////////////////////////////////////////////
+        # ADD BUTTONS
         self.pitch_widget.add_btns(Ui_MainWindow.add_players_pitch_buttons)
 
         # ADD TITLE

@@ -159,7 +159,17 @@
          </widget>
         </item>
         <item>
-         <widget class="QWidget" name="popup_notification_container" native="true">
+         <widget class="PyPopupNotification" name="popup_notification_container" native="true">
+          <property name="styleSheet">
+           <string notr="true">#popup_notification_container{
+	background-color: rgb(85, 0, 255);
+	color: rgb(0, 0, 0);
+}
+
+#popup_notification_subcontainer{
+	background-color: rgb(255, 0, 0);
+}</string>
+          </property>
           <layout class="QVBoxLayout" name="popup_notification_container_layout">
            <item>
             <widget class="QWidget" name="popup_notification_subcontainer" native="true">
@@ -193,7 +203,7 @@
                     </font>
                    </property>
                    <property name="text">
-                    <string/>
+                    <string>Titulo</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -230,7 +240,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string/>
+                 <string>Lista lista</string>
                 </property>
                </widget>
               </item>
@@ -276,6 +286,12 @@
    <class>PyCredits</class>
    <extends>QWidget</extends>
    <header>pycredits.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PyPopupNotification</class>
+   <extends>QWidget</extends>
+   <header>pypopupnotification.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

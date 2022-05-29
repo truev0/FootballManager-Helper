@@ -277,8 +277,7 @@ class MainWindow(QMainWindow):
             top_settings.set_active_tab(False)
 
         if btn.objectName() == "btn_refresh":
-            # self.squad_helper()
-            pass
+            self.ui.popup_notification_container.toggleMenu()
 
         # DEBUG
 
