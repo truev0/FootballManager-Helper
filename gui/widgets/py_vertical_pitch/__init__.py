@@ -1,5 +1,5 @@
 
 
-# PY LINE EDIT
+# PY VERTICAL PITCH
 # ///////////////////////////////////////////////////////////////
-from . py_line_edit import PyLineEdit
+from . py_vertical_pitch import PyVerticalPitch

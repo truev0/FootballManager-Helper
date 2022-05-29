@@ -5,5 +5,6 @@ __pycache__/
 .idea/
 .pyc
 gui/uis/windows/main_window/copia.py
+gui/uis/windows/main_window/copia2.py
 test_files/
 gui/widgets/py_virtual_pitch/

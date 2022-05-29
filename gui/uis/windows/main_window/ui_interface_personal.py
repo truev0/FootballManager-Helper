@@ -255,6 +255,12 @@ class Ui_MainWindow(object):
         self.content_area_layout.addWidget(self.content_area_left_frame)
         self.content_area_layout.addWidget(self.right_column_frame)
 
+        # ADD PITCH WIDGET
+        # ///////////////////////////////////////////////////////////////
+        self.pitch_widget = PyVerticalPitch(
+            parent=self.load_pages.vertical_pitch_frame
+        )
+
         # CREDITS / BOTTOM APP FRAME
         # ///////////////////////////////////////////////////////////////
         self.credits_frame = QFrame()
@@ -280,11 +286,102 @@ class Ui_MainWindow(object):
         # ADD TO CREDITS LAYOUT
         self.credits_layout.addWidget(self.credits)
 
+        ######## START NOTIFICATION SECTION ########
+
+        # CREATE POPUP NOTIFICATION CONTAINER
+        # ///////////////////////////////////////////////////////////////
+        self.popup_notification_container = PyPopupNotification(self.right_app_frame)
+        self.popup_notification_container.setObjectName(u"popup_notification_container")
+        self.popup_notification_container.setMinimumHeight(40)
+        self.popup_notification_container.setMaximumWidth(400)
+        self.popup_notification_container.setStyleSheet(f'''
+        #popup_notification_container {{
+            background-color: red;
+        }}
+        ''')
+
+        # CREATE LAYOUT POPUP NOTIFICATION CONTAINER
+        # ///////////////////////////////////////////////////////////////
+        self.popup_notification_container_layout = QVBoxLayout(self.popup_notification_container)
+        self.popup_notification_container_layout.setObjectName(u"popup_notification_container_layout")
+
+        # CREATE POPUP NOTIFICATION SUBCONTAINER
+        # ///////////////////////////////////////////////////////////////
+        self.popup_notification_subcontainer = QWidget()
+        self.popup_notification_subcontainer.setObjectName(u"popup_notification_subcontainer")
+
+        # CREATE LAYOUT POPUP NOTIFICATION SUBCONTAINER
+        # ///////////////////////////////////////////////////////////////
+        self.popup_notification_subcontainer_layout = QVBoxLayout(self.popup_notification_subcontainer)
+        self.popup_notification_subcontainer_layout.setObjectName(u"popup_notification_subcontainer_layout")
+
+        # CREATE LIST NOTIFICATION FRAME
+        # ///////////////////////////////////////////////////////////////
+        self.title_notification_frame = QFrame()
+        self.title_notification_frame.setObjectName(u"list_notification_frame")
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.title_notification_frame.sizePolicy().hasHeightForWidth())
+        self.title_notification_frame.setSizePolicy(sizePolicy)
+        self.title_notification_frame.setFrameShape(QFrame.StyledPanel)
+        self.title_notification_frame.setFrameShadow(QFrame.Raised)
+
+        # CREATE LAYOUT LIST NOTIFICATION FRAME
+        # ///////////////////////////////////////////////////////////////
+        self.title_notification_frame_layout = QHBoxLayout(self.title_notification_frame)
+        self.title_notification_frame_layout.setObjectName(u"list_notification_frame_layout")
+
+
+        # Title notification
+        self.title_notification = QLabel()
+        self.title_notification.setObjectName(u"title_notification")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.title_notification.sizePolicy().hasHeightForWidth())
+        self.title_notification.setSizePolicy(sizePolicy1)
+        font = QFont()
+        font.setBold(True)
+        self.title_notification.setFont(font)
+        self.title_notification.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.title_notification.setText("ESTE ES EL TITULOOO")
+
+        # Button close notification
+        self.btn_close_notification = QPushButton()
+        self.btn_close_notification.setObjectName(u"btn_close_notification")
+
+        self.title_notification_frame_layout.addWidget(self.title_notification)
+        self.title_notification_frame_layout.addWidget(self.btn_close_notification, 0, Qt.AlignRight)
+
+        # ADD LIST NOTIFICATION FRAME
+        self.popup_notification_subcontainer_layout.addWidget(self.title_notification_frame)
+
+
+        # List label
+        self.list_label = QLabel()
+        self.list_label.setObjectName(u"list_label")
+        self.list_label.setFont(font)
+        self.list_label.setAlignment(Qt.AlignCenter)
+        self.list_label.setText("ESTA ES LA LISTAAAAA") # TEST
+
+        # Add list label
+        self.popup_notification_subcontainer_layout.addWidget(self.list_label)
+
+        # ADD SUBCONTAINER TO CONTAINER
+        self.popup_notification_container_layout.addWidget(self.popup_notification_subcontainer)
+
+
+        ######## END NOTIFICATION SECTION  ########
+
+
         # ADD WIDGETS TO RIGHT LAYOUT
         # ///////////////////////////////////////////////////////////////
         self.right_app_layout.addWidget(self.title_bar_frame)
         self.right_app_layout.addWidget(self.content_area_frame)
+        self.right_app_layout.addWidget(self.popup_notification_container) # TEST
         self.right_app_layout.addWidget(self.credits_frame)
+
 
         # ADD WIDGETS TO "PyWindow"
         # ///////////////////////////////////////////////////////////////
@@ -414,6 +511,88 @@ class Ui_MainWindow(object):
         }
     ]
 
+    # ADD PLAYERS BUTTONS
+    # ///////////////////////////////////////////////////////////////
+    add_players_pitch_buttons = [
+        {
+            "btn_id": "btn_pos_1",
+            "is_active": False,
+            "size": 48,
+            "posX": 250,
+            "posY": 710,
+        },
+        {
+            "btn_id": "btn_pos_2",
+            "is_active": False,
+            "size": 48,
+            "posX": 175,
+            "posY": 630,
+        },
+        {
+            "btn_id": "btn_pos_3",
+            "is_active": False,
+            "size": 48,
+            "posX": 327,
+            "posY": 630,
+        },
+        {
+            "btn_id": "btn_pos_4",
+            "is_active": False,
+            "size": 48,
+            "posX": 450,
+            "posY": 595,
+        },
+        {
+            "btn_id": "btn_pos_5",
+            "is_active": False,
+            "size": 48,
+            "posX": 50,
+            "posY": 595,
+        },
+        {
+            "btn_id": "btn_pos_6",
+            "is_active": False,
+            "size": 48,
+            "posX": 250,
+            "posY": 490,
+        },
+        {
+            "btn_id": "btn_pos_7",
+            "is_active": False,
+            "size": 48,
+            "posX": 155,
+            "posY": 360,
+        },
+        {
+            "btn_id": "btn_pos_8",
+            "is_active": False,
+            "size": 48,
+            "posX": 347,
+            "posY": 360,
+        },
+        {
+            "btn_id": "btn_pos_9",
+            "is_active": False,
+            "size": 48,
+            "posX": 50,
+            "posY": 210,
+        },
+        {
+            "btn_id": "btn_pos_10",
+            "is_active": False,
+            "size": 48,
+            "posX": 450,
+            "posY": 210,
+        },
+        {
+            "btn_id": "btn_pos_11",
+            "is_active": False,
+            "size": 48,
+            "posX": 250,
+            "posY": 110,
+        },
+    ]
+
     # SETUP CUSTOM BUTTONS
     # Get sender() function when button is clicked
     # ///////////////////////////////////////////////////////////////
@@ -424,7 +603,10 @@ class Ui_MainWindow(object):
             return self.left_menu.sender()
         elif self.left_column.sender() != None:
             return self.left_column.sender()
+        elif self.pitch_widget.sender() != None:
+            return self.pitch_widget.sender()
 
+    # TODO FIX SENDER FROM PITCH WIDGET
     # SETUP MAIN WINDOW WITH CUSTOM PARAMETER
     # ///////////////////////////////////////////////////////////////
     def setup_gui(self):
@@ -437,6 +619,10 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
         # ADD BUTTONS
         self.title_bar.add_menus(Ui_MainWindow.add_title_bar_buttons)
+
+        # PITCH WIDGET / ADD BUTTONS
+        # ///////////////////////////////////////////////////////////////
+        self.pitch_widget.add_btns(Ui_MainWindow.add_players_pitch_buttons)
 
         # ADD TITLE
         if self.settings["custom_title_bar"]:
@@ -524,112 +710,113 @@ class Ui_MainWindow(object):
         self.load_pages.row_1_layout.addWidget(self.table_squad)
 
         # PAGE 3 - Tactic view
-        # Add pitch image
-        self.pitch_image = QLabel(self.load_pages.vertical_pitch_frame)
-        self.pitch_image.setObjectName(u"pitch_image")
-        self.pitch_image.setGeometry(QRect(0, 0, 550, 820))
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pitch_image.sizePolicy().hasHeightForWidth())
-        self.pitch_image.setSizePolicy(sizePolicy)
-        self.pitch_image.setMinimumSize(QSize(550, 820))
-        self.pitch_image.setPixmap(QPixmap("gui/images/png_images/vertical_pitch.png"))
-        self.pitch_image.setScaledContents(True)
-        self.pitch_image.setAlignment(Qt.AlignCenter)
-        self.pitch_image.raise_()
 
-        # Add pitch players
-        self.image_player = "icon_player_identifier.svg"
-        # BTN POS 1
-        self.btn_pos_1 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_1",
-        )
-        self.btn_pos_1.setGeometry(QRect(250, 710, 48, 48))
-
-        # BTN POS 2
-        self.btn_pos_2 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_2",
-        )
-        self.btn_pos_2.setGeometry(QRect(175, 630, 48, 48))
-        # BTN POS 3
-        self.btn_pos_3 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_3",
-        )
-        self.btn_pos_3.setGeometry(QRect(327, 630, 48, 48))
-        # BTN POS 4
-        self.btn_pos_4 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_4",
-        )
-        self.btn_pos_4.setGeometry(QRect(450, 595, 48, 48))
-        # # BTN POS 5
-        self.btn_pos_5 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_5",
-        )
-        self.btn_pos_5.setGeometry(QRect(50, 595, 48, 48))
-        # # BTN POS 6
-        self.btn_pos_6 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_6",
-        )
-        self.btn_pos_6.setGeometry(QRect(250, 490, 48, 48))
-        # # BTN POS 7
-        self.btn_pos_7 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_7",
-        )
-        self.btn_pos_7.setGeometry(QRect(155, 360, 48, 48))
-        # # BTN POS 8
-        self.btn_pos_8 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_8",
-        )
-        self.btn_pos_8.setGeometry(QRect(347, 360, 48, 48))
-        # # BTN POS 9
-        self.btn_pos_9 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_9",
-        )
-        self.btn_pos_9.setGeometry(QRect(50, 210, 48, 48))
-        # # BTN POS 10
-        self.btn_pos_10 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_10",
-        )
-        self.btn_pos_10.setGeometry(QRect(450, 210, 48, 48))
-        # # BTN POS 11
-        self.btn_pos_11 = PyPlayerButton(
-            icon_path=Functions.set_svg_icon(self.image_player),
-            parent=self.load_pages.vertical_pitch_frame,
-            app_parent=self.central_widget,
-            btn_id="btn_pos_11",
-        )
-        self.btn_pos_11.setGeometry(QRect(250, 110, 48, 48))
+        # TODO descomentar si no funciona
+        # self.pitch_image = QLabel(self.load_pages.vertical_pitch_frame)
+        # self.pitch_image.setObjectName(u"pitch_image")
+        # self.pitch_image.setGeometry(QRect(0, 0, 550, 820))
+        # sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        # sizePolicy.setHeightForWidth(self.pitch_image.sizePolicy().hasHeightForWidth())
+        # self.pitch_image.setSizePolicy(sizePolicy)
+        # self.pitch_image.setMinimumSize(QSize(550, 820))
+        # self.pitch_image.setPixmap(QPixmap("gui/images/png_images/vertical_pitch.png"))
+        # self.pitch_image.setScaledContents(True)
+        # self.pitch_image.setAlignment(Qt.AlignCenter)
+        # self.pitch_image.raise_()
+        #
+        # # Add pitch players
+        # self.image_player = "icon_player_identifier.svg"
+        # # BTN POS 1
+        # self.btn_pos_1 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_1",
+        # )
+        # self.btn_pos_1.setGeometry(QRect(250, 710, 48, 48))
+        #
+        # # BTN POS 2
+        # self.btn_pos_2 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_2",
+        # )
+        # self.btn_pos_2.setGeometry(QRect(175, 630, 48, 48))
+        # # BTN POS 3
+        # self.btn_pos_3 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_3",
+        # )
+        # self.btn_pos_3.setGeometry(QRect(327, 630, 48, 48))
+        # # BTN POS 4
+        # self.btn_pos_4 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_4",
+        # )
+        # self.btn_pos_4.setGeometry(QRect(450, 595, 48, 48))
+        # # # BTN POS 5
+        # self.btn_pos_5 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_5",
+        # )
+        # self.btn_pos_5.setGeometry(QRect(50, 595, 48, 48))
+        # # # BTN POS 6
+        # self.btn_pos_6 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_6",
+        # )
+        # self.btn_pos_6.setGeometry(QRect(250, 490, 48, 48))
+        # # # BTN POS 7
+        # self.btn_pos_7 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_7",
+        # )
+        # self.btn_pos_7.setGeometry(QRect(155, 360, 48, 48))
+        # # # BTN POS 8
+        # self.btn_pos_8 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_8",
+        # )
+        # self.btn_pos_8.setGeometry(QRect(347, 360, 48, 48))
+        # # # BTN POS 9
+        # self.btn_pos_9 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_9",
+        # )
+        # self.btn_pos_9.setGeometry(QRect(50, 210, 48, 48))
+        # # # BTN POS 10
+        # self.btn_pos_10 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_10",
+        # )
+        # self.btn_pos_10.setGeometry(QRect(450, 210, 48, 48))
+        # # # BTN POS 11
+        # self.btn_pos_11 = PyPlayerButton(
+        #     icon_path=Functions.set_svg_icon(self.image_player),
+        #     parent=self.load_pages.vertical_pitch_frame,
+        #     app_parent=self.central_widget,
+        #     btn_id="btn_pos_11",
+        # )
+        # self.btn_pos_11.setGeometry(QRect(250, 110, 48, 48))
 
 
         # Add table list

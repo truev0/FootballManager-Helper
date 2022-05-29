@@ -51,3 +51,11 @@ from . py_line_edit import PyLineEdit
 # PY TABLE WIDGET
 # ///////////////////////////////////////////////////////////////
 from . py_table_widget import PyTableWidget
+
+# PY POPUP NOTIFICATION
+# ///////////////////////////////////////////////////////////////
+from . py_popup_notification import PyPopupNotification
+
+# PY VERTICAL PITCH
+# ///////////////////////////////////////////////////////////////
+from . py_vertical_pitch import PyVerticalPitch

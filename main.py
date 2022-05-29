@@ -130,6 +130,12 @@ class MainWindow(QMainWindow):
         top_settings = self.ui.get_title_bar_btn("btn_top_settings")
         top_settings.set_active(False)
 
+        # VERTICAL PITCH
+        # ///////////////////////////////////////////
+        # Button 1
+        if btn.objectName() == "btn_pos_1":
+            print("btn_pos_1")
+
         # LEFT MENU
         # ///////////////////////////////////////////
         # Home Btn
