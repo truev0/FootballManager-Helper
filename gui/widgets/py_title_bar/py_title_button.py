@@ -69,6 +69,11 @@ class PyTitleButton(QPushButton):
         )
         self._tooltip.hide()
 
+    # DELETE TOOLTIP
+    # ///////////////////////////////////////////////////////////////
+    def delete_tooltip(self):
+        del self._tooltip
+
     # SETTER FOR TRANSLATE
     # ///////////////////////////////////////////////////////////////
     def change_tooltip(self, new_tooltip):

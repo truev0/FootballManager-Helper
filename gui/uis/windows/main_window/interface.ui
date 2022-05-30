@@ -161,26 +161,73 @@
         <item>
          <widget class="PyPopupNotification" name="popup_notification_container" native="true">
           <property name="styleSheet">
-           <string notr="true">#popup_notification_container{
-	background-color: rgb(85, 0, 255);
-	color: rgb(0, 0, 0);
+           <string notr="true">    #popup_notification_subcontainer{
+	border-color: #343b48;
+	border-radius:10px;
+	border-width: 1px;
+	margin: 0px;
+	background-color: #343b48;
+
 }
 
-#popup_notification_subcontainer{
-	background-color: rgb(255, 0, 0);
+#label_list {
+	border: 1px ;
+border-color: #1b1e23;
+border-style: solid;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+	background-color: #3c4454;
+color: #dce1ec;
+
+
+}
+
+#list_notification_frame {
+	background-color:#1b1e23;
+border-top-right-radius: 10px;
+border-top-left-radius: 10px;
+}
+
+#title_notification {
+padding-left: 7px;
+color: #dce1ec;
 }</string>
           </property>
           <layout class="QVBoxLayout" name="popup_notification_container_layout">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QWidget" name="popup_notification_subcontainer" native="true">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
              <layout class="QVBoxLayout" name="popup_notification_subcontainer_layout">
-              <item>
-               <widget class="QFrame" name="list_notification_frame">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <item alignment="Qt::AlignTop">
+               <widget class="QFrame" name="title_notification_frame">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
                 </property>
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
@@ -189,6 +236,18 @@
                  <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout">
+                 <property name="leftMargin">
+                  <number>3</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>3</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>3</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>3</number>
+                 </property>
                  <item>
                   <widget class="QLabel" name="title_notification">
                    <property name="sizePolicy">
@@ -201,6 +260,9 @@
                     <font>
                      <bold>true</bold>
                     </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
                    </property>
                    <property name="text">
                     <string>Titulo</string>
@@ -234,13 +296,25 @@
               </item>
               <item>
                <widget class="QLabel" name="label_list">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="font">
                  <font>
                   <bold>true</bold>
                  </font>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>Lista lista</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>

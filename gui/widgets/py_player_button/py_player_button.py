@@ -61,6 +61,21 @@ class PyPlayerButton(QPushButton):
 
         # Custom attributes
         self._lista = []
+        self._text = ""
+
+    # GET LEN LISTA
+    # ///////////////////////////////////////////////////////////////
+    def get_len_lista(self):
+        return len(self._lista)
+
+    # FORMAT TEXT
+    # ///////////////////////////////////////////////////////////////
+    def text_formater(self):
+        tmp = ""
+        self._text = "\n".join([str(x) for x in self._lista])
+        tmp = self._text
+        return tmp
+        # self._tooltip.setText("\n".join(self._lista))
 
 
     # DRAG ENTER EVENT VERIFIER
@@ -91,8 +106,6 @@ class PyPlayerButton(QPushButton):
                     if role == Qt.DisplayRole:
                         names.append(value)
             self._lista.extend(names)
-        # self._tooltip.setText("\n".join(self._lista))
-        print(self._lista)
 
     # SET ACTIVE MENU
     # ///////////////////////////////////////////////////////////////

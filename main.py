@@ -36,6 +36,10 @@ from gui.core.translations import en, es
 from gui.widgets import *
 from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 
+# IMPORT KHAMISIKIBET WIDGET
+# ///////////////////////////////////////////
+from Custom_Widgets.Widgets import loadJsonStyle
+
 # IMPORT INTERFACE
 # ///////////////////////////////////////////
 from gui.uis.windows.main_window.ui_interface_personal import Ui_MainWindow
@@ -90,6 +94,7 @@ class MainWindow(QMainWindow):
         self.ui.setup_gui()
         self.set_signals()
         self.connect_events()
+        loadJsonStyle(self, self.ui)
 
         self.show()
 
@@ -129,12 +134,6 @@ class MainWindow(QMainWindow):
         # Get title bar btn and reset active
         top_settings = self.ui.get_title_bar_btn("btn_top_settings")
         top_settings.set_active(False)
-
-        # VERTICAL PITCH
-        # ///////////////////////////////////////////
-        # Button 1
-        if btn.objectName() == "btn_pos_1":
-            print("btn_pos_1")
 
         # LEFT MENU
         # ///////////////////////////////////////////
@@ -277,11 +276,73 @@ class MainWindow(QMainWindow):
             top_settings.set_active_tab(False)
 
         if btn.objectName() == "btn_refresh":
-            self.ui.popup_notification_container.toggleMenu()
+            pass
+            # self.ui.popup_notification_container.toggleMenu(btn)
+
+        # VERTICAL PITCH
+        # ///////////////////////////////////////////
+        # Button 1
+        # SET DEFAULT SIZE
+        self.default_size_notification_container = self.ui.popup_notification_container.getDefaultHeight()
+        if btn.objectName() == "btn_pos_1":
+            self.adjust_notification_container(btn)
+
+        # Button 2
+        if btn.objectName() == "btn_pos_2":
+            self.adjust_notification_container(btn)
+
+        # Button 3
+        if btn.objectName() == "btn_pos_3":
+            self.adjust_notification_container(btn)
+
+        # Button 4
+        if btn.objectName() == "btn_pos_4":
+            self.adjust_notification_container(btn)
+
+        # Button 5
+        if btn.objectName() == "btn_pos_5":
+            self.adjust_notification_container(btn)
+
+        # Button 6
+        if btn.objectName() == "btn_pos_6":
+            self.adjust_notification_container(btn)
+
+        # Button 7
+        if btn.objectName() == "btn_pos_7":
+            self.adjust_notification_container(btn)
+
+        # Button 8
+        if btn.objectName() == "btn_pos_8":
+            self.adjust_notification_container(btn)
+
+        # Button 9
+        if btn.objectName() == "btn_pos_9":
+            self.adjust_notification_container(btn)
+
+        # Button 10
+        if btn.objectName() == "btn_pos_10":
+            self.adjust_notification_container(btn)
+
+        # Button 11
+        if btn.objectName() == "btn_pos_11":
+            self.adjust_notification_container(btn)
 
         # DEBUG
-
         # print(f"Button {btn.objectName()}, clicked!")
+
+    def adjust_notification_container(self, btn):
+        # RESET CONTAINER HEIGHT
+        self.ui.popup_notification_container.expandedHeight = self.default_size_notification_container
+        if btn.get_len_lista() > 5:
+            diff = btn.get_len_lista() - 5
+            # SET + HEIGHT IF HAVE A LOT OF PLAYERS
+            self.ui.popup_notification_container.expandedHeight = self.default_size_notification_container + (12 * diff)
+        # FORMAT TEXT TO BE DISPLAYED
+        tmp = btn.text_formater()
+        # DISPLAY PLAYERS
+        self.ui.list_label.setText(tmp)
+        # EXEC NOTIFICATION CONTAINER
+        self.ui.popup_notification_container.toggleMenu(btn)
 
     # LEFT MENU BTN IS RELEASED
     # Check function by object name / btn_id
@@ -307,6 +368,10 @@ class MainWindow(QMainWindow):
         # LEFT COLUMN SIGNALS
         self.ui.left_column.clicked.connect(self.btn_clicked)
         self.ui.left_column.released.connect(self.btn_released)
+
+        # VERTICAL PITCH SIGNALS
+        self.ui.pitch_widget.clicked.connect(self.btn_clicked)
+        self.ui.pitch_widget.released.connect(self.btn_released)
 
     # RESIZE EVENT
     # ///////////////////////////////////////////
@@ -335,6 +400,7 @@ class MainWindow(QMainWindow):
         self.ui.load_squad_btn.clicked.connect(lambda: self.load_file())
         self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
         self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
+        self.ui.btn_close_notification.clicked.connect(lambda: self.ui.popup_notification_container.collapseMenu())
 
 
     # LOAD FILE

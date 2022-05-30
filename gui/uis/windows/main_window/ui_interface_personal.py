@@ -17,6 +17,11 @@ from gui.core.json_themes import Themes
 # IMPORT CUSTOM WIDGETS
 # ///////////////////////////////////////////////////////////////
 from gui.widgets import *
+from gui.widgets.py_title_bar.py_title_button import PyTitleButton
+
+# IMPORT KHAMISIKIBET WIDGET
+# ///////////////////////////////////////////
+from Custom_Widgets.Widgets import QCustomSlideMenu
 
 # IMPORT MAIN WINDOW PAGES / AND SIDE BOXES FOR APP
 # ///////////////////////////////////////////////////////////////
@@ -25,6 +30,7 @@ from gui.uis.pages.ui_main_pages import Ui_MainPages
 # RIGHT COLUMN
 # ///////////////////////////////////////////////////////////////
 from gui.uis.columns.ui_right_column import Ui_RightColumn
+
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
@@ -290,21 +296,15 @@ class Ui_MainWindow(object):
 
         # CREATE POPUP NOTIFICATION CONTAINER
         # ///////////////////////////////////////////////////////////////
-        self.popup_notification_container = PyPopupNotification(self.right_app_frame)
+
+        self.popup_notification_container = QCustomSlideMenu(self.right_app_frame)
         self.popup_notification_container.setObjectName(u"popup_notification_container")
-        self.popup_notification_container.setStyleSheet(u"#popup_notification_container{\n"
-"	background-color: rgb(85, 0, 255);\n"
-"	color: rgb(0, 0, 0);\n"
-"}\n"
-"\n"
-"#popup_notification_subcontainer{\n"
-"	background-color: rgb(255, 0, 0);\n"
-"}")
 
         # CREATE LAYOUT POPUP NOTIFICATION CONTAINER
         # ///////////////////////////////////////////////////////////////
         self.popup_notification_container_layout = QVBoxLayout(self.popup_notification_container)
         self.popup_notification_container_layout.setObjectName(u"popup_notification_container_layout")
+        self.popup_notification_container_layout.setContentsMargins(0, 0, 0, 0)
 
         # CREATE POPUP NOTIFICATION SUBCONTAINER
         # ///////////////////////////////////////////////////////////////
@@ -332,7 +332,7 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
         self.title_notification_frame_layout = QHBoxLayout(self.title_notification_frame)
         self.title_notification_frame_layout.setObjectName(u"list_notification_frame_layout")
-
+        self.title_notification_frame_layout.setContentsMargins(3, 3, 3, 3)
 
         # Title notification
         self.title_notification = QLabel()
@@ -345,11 +345,21 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setBold(True)
         self.title_notification.setFont(font)
-        self.title_notification.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.title_notification.setText("ESTE ES EL TITULOOO")
+        self.title_notification.setAlignment(Qt.AlignLeading | Qt.AlignLeft | Qt.AlignVCenter)
+        self.title_notification.setText("PLAYER LIST")
 
         # Button close notification
-        self.btn_close_notification = QPushButton()
+        self.btn_close_notification = PyTitleButton(
+            self.title_notification_frame,
+            self.popup_notification_subcontainer,
+            width=24,
+            height=24,
+            radius=6,
+            tooltip_text="Close popup",
+            bg_color="transparent",
+            icon_path=Functions.set_svg_icon("icon_close.svg")
+        )
+
         self.btn_close_notification.setObjectName(u"btn_close_notification")
 
         self.title_notification_frame_layout.addWidget(self.title_notification)
@@ -358,13 +368,16 @@ class Ui_MainWindow(object):
         # ADD LIST NOTIFICATION FRAME
         self.popup_notification_subcontainer_layout.addWidget(self.title_notification_frame)
 
-
         # List label
         self.list_label = QLabel()
         self.list_label.setObjectName(u"list_label")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.list_label.sizePolicy().hasHeightForWidth())
+        self.list_label.setSizePolicy(sizePolicy2)
         self.list_label.setFont(font)
         self.list_label.setAlignment(Qt.AlignCenter)
-        self.list_label.setText("ESTA ES LA LISTAAAAA") # TEST
 
         # Add list label
         self.popup_notification_subcontainer_layout.addWidget(self.list_label)
@@ -372,17 +385,45 @@ class Ui_MainWindow(object):
         # ADD SUBCONTAINER TO CONTAINER
         self.popup_notification_container_layout.addWidget(self.popup_notification_subcontainer)
 
-
         ######## END NOTIFICATION SECTION  ########
-
 
         # ADD WIDGETS TO RIGHT LAYOUT
         # ///////////////////////////////////////////////////////////////
         self.right_app_layout.addWidget(self.title_bar_frame)
         self.right_app_layout.addWidget(self.content_area_frame)
-        self.right_app_layout.addWidget(self.popup_notification_container) # TEST
+        self.right_app_layout.addWidget(self.popup_notification_container)  # TEST
         self.right_app_layout.addWidget(self.credits_frame)
 
+        self.popup_notification_container.setStyleSheet(u"    #popup_notification_subcontainer{\n"
+                                                        "	border-color: #343b48;\n"
+                                                        "	border-radius:10px;\n"
+                                                        "	border-width: 1px;\n"
+                                                        "	margin: 0px;\n"
+                                                        "	background-color: #343b48;\n"
+                                                        "\n"
+                                                        "}\n"
+                                                        "\n"
+                                                        "#label_list {\n"
+                                                        "   border: 1px;\n"
+                                                        "   border-color: #1b1e23;\n"
+                                                        "   border-style: solid;\n"
+                                                        "	border-bottom-left-radius:10px;\n"
+                                                        "	border-bottom-right-radius:10px;\n"
+                                                        "	background-color: #3c4454;\n"
+                                                        "color: #dce1ec;\n"
+                                                        "\n"
+                                                        "}\n"
+                                                        "\n"
+                                                        "#list_notification_frame {\n"
+                                                        "	background-color:#1b1e23;\n"
+                                                        "border-top-right-radius: 10px;\n"
+                                                        "border-top-left-radius: 10px;\n"
+                                                        "}\n"
+                                                        "\n"
+                                                        "#title_notification {\n"
+                                                        "padding-left: 7px;\n"
+                                                        "color: #dce1ec;\n"
+                                                        "}")
 
         # ADD WIDGETS TO "PyWindow"
         # ///////////////////////////////////////////////////////////////
@@ -607,7 +648,7 @@ class Ui_MainWindow(object):
         elif self.pitch_widget.sender() != None:
             return self.pitch_widget.sender()
 
-    # TODO FIX SENDER FROM PITCH WIDGET
+
     # SETUP MAIN WINDOW WITH CUSTOM PARAMETER
     # ///////////////////////////////////////////////////////////////
     def setup_gui(self):
@@ -631,7 +672,6 @@ class Ui_MainWindow(object):
             self.title_bar.set_title(self.settings["app_name"])
         else:
             self.title_bar.set_title("Welcome to FM Helper")
-
 
         # SET INITIAL PAGE / LEFT & RIGHT MENUS
         # ///////////////////////////////////////////////////////////////
@@ -712,114 +752,6 @@ class Ui_MainWindow(object):
         self.load_pages.row_1_layout.addWidget(self.table_squad)
 
         # PAGE 3 - Tactic view
-
-        # TODO descomentar si no funciona
-        # self.pitch_image = QLabel(self.load_pages.vertical_pitch_frame)
-        # self.pitch_image.setObjectName(u"pitch_image")
-        # self.pitch_image.setGeometry(QRect(0, 0, 550, 820))
-        # sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.pitch_image.sizePolicy().hasHeightForWidth())
-        # self.pitch_image.setSizePolicy(sizePolicy)
-        # self.pitch_image.setMinimumSize(QSize(550, 820))
-        # self.pitch_image.setPixmap(QPixmap("gui/images/png_images/vertical_pitch.png"))
-        # self.pitch_image.setScaledContents(True)
-        # self.pitch_image.setAlignment(Qt.AlignCenter)
-        # self.pitch_image.raise_()
-        #
-        # # Add pitch players
-        # self.image_player = "icon_player_identifier.svg"
-        # # BTN POS 1
-        # self.btn_pos_1 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_1",
-        # )
-        # self.btn_pos_1.setGeometry(QRect(250, 710, 48, 48))
-        #
-        # # BTN POS 2
-        # self.btn_pos_2 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_2",
-        # )
-        # self.btn_pos_2.setGeometry(QRect(175, 630, 48, 48))
-        # # BTN POS 3
-        # self.btn_pos_3 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_3",
-        # )
-        # self.btn_pos_3.setGeometry(QRect(327, 630, 48, 48))
-        # # BTN POS 4
-        # self.btn_pos_4 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_4",
-        # )
-        # self.btn_pos_4.setGeometry(QRect(450, 595, 48, 48))
-        # # # BTN POS 5
-        # self.btn_pos_5 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_5",
-        # )
-        # self.btn_pos_5.setGeometry(QRect(50, 595, 48, 48))
-        # # # BTN POS 6
-        # self.btn_pos_6 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_6",
-        # )
-        # self.btn_pos_6.setGeometry(QRect(250, 490, 48, 48))
-        # # # BTN POS 7
-        # self.btn_pos_7 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_7",
-        # )
-        # self.btn_pos_7.setGeometry(QRect(155, 360, 48, 48))
-        # # # BTN POS 8
-        # self.btn_pos_8 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_8",
-        # )
-        # self.btn_pos_8.setGeometry(QRect(347, 360, 48, 48))
-        # # # BTN POS 9
-        # self.btn_pos_9 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_9",
-        # )
-        # self.btn_pos_9.setGeometry(QRect(50, 210, 48, 48))
-        # # # BTN POS 10
-        # self.btn_pos_10 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_10",
-        # )
-        # self.btn_pos_10.setGeometry(QRect(450, 210, 48, 48))
-        # # # BTN POS 11
-        # self.btn_pos_11 = PyPlayerButton(
-        #     icon_path=Functions.set_svg_icon(self.image_player),
-        #     parent=self.load_pages.vertical_pitch_frame,
-        #     app_parent=self.central_widget,
-        #     btn_id="btn_pos_11",
-        # )
-        # self.btn_pos_11.setGeometry(QRect(250, 110, 48, 48))
-
 
         # Add table list
         self.table_tactic = PyTableWidget(

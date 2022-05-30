@@ -1,5 +1,0 @@
-
-
-# PY POPUP NOTIFICATION
-# ///////////////////////////////////////////////////////////////
-from . py_popup_notification import PyPopupNotification

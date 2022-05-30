@@ -8,3 +8,4 @@ gui/uis/windows/main_window/copia.py
 gui/uis/windows/main_window/copia2.py
 test_files/
 gui/widgets/py_virtual_pitch/
+gui/uis/windows/main_window/ui_interface_prueba.py

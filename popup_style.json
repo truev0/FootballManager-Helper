@@ -1,0 +1,43 @@
+{
+	"QCustomSlideMenu": [{
+		"name": "popup_notification_container",
+		"defaultSize": [{
+			"width": 0,
+			"height": 150
+		}],
+		"collapsedSize": [{
+			"width": 0,
+			"height": 0
+		}],
+		"expandedSize": [{
+			"width": 300,
+			"height": 150
+		}],
+		"menuTransitionAnimation": [{
+			"animationDuration": 500,
+			"animationEasingCurve": "Linear",
+			"whenCollapsing": [{
+				"animationDuration": 500,
+				"animationEasingCurve": "Linear"
+			}],
+			"whenExpanding": [{
+				"animationDuration": 500,
+				"animationEasingCurve": "Linear"
+			}]
+		}],
+		"floatPosition": [
+			{
+				"relativeTo": "central_widget",
+				"position": "center-center",
+				"shadow":[
+					{
+						"color": "#000",
+						"blurRadius": 20,
+						"xOffset": 0,
+						"yOffset": 0
+					}
+				]
+			}
+		]
+	}]
+}

@@ -1,30 +1,17 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'interfaceGGhVUy.ui'
+## Form generated from reading UI file 'interfaceTPtaYm.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.3.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QMainWindow, QPushButton, QSizePolicy, QVBoxLayout,
-    QWidget)
 
-from gui\widgets\py_window\py_window import PyWindow
-from pycredits import PyCredits
-from pyleftcolumn import PyLeftColumn
-from pyleftmenu import PyLeftMenu
-from pypopupnotification import PyPopupNotification
-from pytitlebar import PyTitleBar
+from gui.widgets import *
+
+from Custom_Widgets.Widgets import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -131,21 +118,48 @@ class Ui_MainWindow(object):
 
         self.right_app_layout.addWidget(self.credits_frame)
 
-        self.popup_notification_container = PyPopupNotification(self.right_app_frame)
+        self.popup_notification_container = QCustomSlideMenu(self.right_app_frame)
         self.popup_notification_container.setObjectName(u"popup_notification_container")
-        self.popup_notification_container.setStyleSheet(u"#popup_notification_container{\n"
-"	background-color: rgb(85, 0, 255);\n"
-"	color: rgb(0, 0, 0);\n"
+        self.popup_notification_container.setStyleSheet(u"    #popup_notification_subcontainer{\n"
+"	border-color: #343b48;\n"
+"	border-radius:10px;\n"
+"	border-width: 1px;\n"
+"	margin: 0px;\n"
+"	background-color: #343b48;\n"
+"\n"
 "}\n"
 "\n"
-"#popup_notification_subcontainer{\n"
-"	background-color: rgb(255, 0, 0);\n"
+"#label_list {\n"
+"	border: 1px ;\n"
+"border-color: #1b1e23;\n"
+"border-style: solid;\n"
+"	border-bottom-left-radius:10px;\n"
+"	border-bottom-right-radius:10px;\n"
+"	background-color: #3c4454;\n"
+"color: #dce1ec;\n"
+"\n"
+"\n"
+"}\n"
+"\n"
+"#list_notification_frame {\n"
+"	background-color:#1b1e23;\n"
+"border-top-right-radius: 10px;\n"
+"border-top-left-radius: 10px;\n"
+"}\n"
+"\n"
+"#title_notification {\n"
+"padding-left: 7px;\n"
+"color: #dce1ec;\n"
 "}")
         self.popup_notification_container_layout = QVBoxLayout(self.popup_notification_container)
+        self.popup_notification_container_layout.setSpacing(6)
         self.popup_notification_container_layout.setObjectName(u"popup_notification_container_layout")
+        self.popup_notification_container_layout.setContentsMargins(0, 0, 0, 0)
         self.popup_notification_subcontainer = QWidget(self.popup_notification_container)
         self.popup_notification_subcontainer.setObjectName(u"popup_notification_subcontainer")
+        self.popup_notification_subcontainer.setStyleSheet(u"")
         self.popup_notification_subcontainer_layout = QVBoxLayout(self.popup_notification_subcontainer)
+        self.popup_notification_subcontainer_layout.setSpacing(0)
         self.popup_notification_subcontainer_layout.setObjectName(u"popup_notification_subcontainer_layout")
         self.list_notification_frame = QFrame(self.popup_notification_subcontainer)
         self.list_notification_frame.setObjectName(u"list_notification_frame")
@@ -154,10 +168,12 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.list_notification_frame.sizePolicy().hasHeightForWidth())
         self.list_notification_frame.setSizePolicy(sizePolicy)
+        self.list_notification_frame.setStyleSheet(u"")
         self.list_notification_frame.setFrameShape(QFrame.StyledPanel)
         self.list_notification_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.list_notification_frame)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(3, 3, 3, 3)
         self.title_notification = QLabel(self.list_notification_frame)
         self.title_notification.setObjectName(u"title_notification")
         sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
@@ -168,6 +184,7 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setBold(True)
         self.title_notification.setFont(font)
+        self.title_notification.setStyleSheet(u"")
         self.title_notification.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout.addWidget(self.title_notification)
@@ -180,11 +197,18 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.btn_close_notification, 0, Qt.AlignRight)
 
 
-        self.popup_notification_subcontainer_layout.addWidget(self.list_notification_frame)
+        self.popup_notification_subcontainer_layout.addWidget(self.list_notification_frame, 0, Qt.AlignTop)
 
         self.label_list = QLabel(self.popup_notification_subcontainer)
         self.label_list.setObjectName(u"label_list")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.label_list.sizePolicy().hasHeightForWidth())
+        self.label_list.setSizePolicy(sizePolicy2)
         self.label_list.setFont(font)
+        self.label_list.setStyleSheet(u"")
+        self.label_list.setAlignment(Qt.AlignCenter)
 
         self.popup_notification_subcontainer_layout.addWidget(self.label_list)
 
