@@ -63,6 +63,11 @@ class PyPlayerButton(QPushButton):
         self._lista = []
         self._text = ""
 
+    # SET EMPTY LIST
+    # ///////////////////////////////////////////////////////////////
+    def set_empty_list(self):
+        self._lista = []
+
     # GET LEN LISTA
     # ///////////////////////////////////////////////////////////////
     def get_len_lista(self):
@@ -86,7 +91,6 @@ class PyPlayerButton(QPushButton):
         else:
             event.ignore()
 
-
     # DROP EVENT
     # ///////////////////////////////////////////////////////////////
     def dropEvent(self, event):
@@ -103,7 +107,7 @@ class PyPlayerButton(QPushButton):
                 for _ in range(stream.readInt32()):
                     role = stream.readInt32()
                     value = stream.readQVariant()
-                    if role == Qt.DisplayRole:
+                    if role == Qt.DisplayRole and value not in names:
                         names.append(value)
             self._lista.extend(names)
 
@@ -223,9 +227,10 @@ class PyPlayerButton(QPushButton):
             globalPos = event.globalPos()
             diff = globalPos - self.__mouseMovePos
             newPos = self.mapFromGlobal(currPos + diff)
-            self.move(newPos)
+            if newPos.y() > 31 and newPos.y() < 744 and newPos.x() > 30 and newPos.x() < 476:
+                self.move(newPos)
+                self.__mouseMovePos = globalPos
 
-            self.__mouseMovePos = globalPos
         super(PyPlayerButton, self).mouseMoveEvent(event)
 
     # DRAW ICON WITH COLORS

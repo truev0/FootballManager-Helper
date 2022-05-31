@@ -135,8 +135,9 @@ class PyTitleBar(QWidget):
         # ADD BUTTONS BUTTONS
         # ///////////////////////////////////////////////////////////////
         # Functions
-        self.minimize_button.released.connect(lambda: parent.showMinimized())
-        self.maximize_restore_button.released.connect(lambda: self.maximize_restore())
+        self.minimize_button.released.connect(lambda: parent.minimize_event())
+        # self.maximize_restore_button.released.connect(lambda: self.maximize_restore())
+        self.maximize_restore_button.released.connect(lambda: parent.maximize_event())
         self.close_button.released.connect(lambda: parent.close())
 
         # Extra BTNs layout
@@ -272,7 +273,6 @@ class PyTitleBar(QWidget):
         self.custom_buttons_layout.setSpacing(3)
 
         # MINIMIZE BUTTON
-        # TODO edit connect function
         self.minimize_button = PyTitleButton(
             self._parent,
             self._app_parent,

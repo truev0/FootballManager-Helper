@@ -17,6 +17,10 @@ from gui.core.json_settings import Settings
 # ///////////////////////////////////////////
 from gui.core.functions import Functions
 
+# IMPORT UTILS
+# ///////////////////////////////////////////
+from gui.core.util import get_screen_size
+
 # IMPORT FM INSIDE
 # ///////////////////////////////////////////
 import gui.core.fm_insider.FMinside as FMi
@@ -53,16 +57,16 @@ os.environ["QT_FONT_DPI"] = "96"
 
 
 class MainWindow(QMainWindow):
+    closing = Signal()
+
     def __init__(self):
-        super().__init__()
+        super(MainWindow, self).__init__()
 
         # SETUP MAIN WINDOW
         # Load widgets from "gui\uis\main_window\ui_interface_personal.py"
         # ///////////////////////////////////////////
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-
 
         # CLASS VARIABLES
         # ///////////////////////////////////////////
@@ -80,7 +84,6 @@ class MainWindow(QMainWindow):
         self.ui_text.update({'en': NestedNamespace(en.english)})
         self.ui_text.update({'es': NestedNamespace(es.espanol)})
 
-
         # LOAD SETTINGS
         # ///////////////////////////////////////////
         settings = Settings()
@@ -96,7 +99,115 @@ class MainWindow(QMainWindow):
         self.connect_events()
         loadJsonStyle(self, self.ui)
 
-        self.show()
+        # CUSTOM MAIN ANIMATIONS
+        # ///////////////////////////////////////////
+        self.windowObject = self
+        self.windowObject.move(20, 20)
+
+        # CREATING VAR FOR SHOWING ANIMATION
+        # ///////////////////////////////////////////
+        self.showAnimation = QPropertyAnimation(self, b"pos")
+        self.showAnimation.setDuration(700)
+
+        # CREATING VAR FOR HIDING ANIMATION
+        # ///////////////////////////////////////////
+        self.hideAnimation = QPropertyAnimation(self, b"pos")
+        self.hideAnimation.setDuration(400)
+
+        # SAVING OLD POSITION
+        self.oldPos = self.get_center()
+        self._is_started = False
+
+
+    # CENTRE WINDOW
+    # ///////////////////////////////////////////
+    def center(self):
+        frame_geo = self.frameGeometry()
+        screen = self.window().windowHandle().screen()
+        center_loc = screen.geometry().center()
+        frame_geo.moveCenter(center_loc)
+        self.move(frame_geo.topLeft())
+
+
+    # GET CENTER OF THE SCREEN
+    # ///////////////////////////////////////////
+    def get_center(self):
+        geometry = self.frameGeometry()
+        geometry.moveCenter(get_screen_size().center())
+        return geometry.topLeft()
+
+    # SRE-IMPLEMENT SHOW EVENT
+    # ///////////////////////////////////////////
+    def showEvent(self, event: QShowEvent) -> None:
+        self.showAnimation.setStartValue(
+            QPoint(self.x(), get_screen_size().height())
+        )
+        self.showAnimation.setEndValue(self.oldPos)
+        self.showAnimation.setEasingCurve(QEasingCurve.OutCubic)
+        self.showAnimation.start()
+
+        QMainWindow.showEvent(self, event)
+
+    # RE-IMPLEMENT CLOSE EVENT
+    # ///////////////////////////////////////////
+    def closeEvent(self, event: QCloseEvent) -> None:
+        if not self._is_started:
+            self.oldPos = self.pos()
+            self.hideAnimation.setStartValue(self.oldPos)
+            self.hideAnimation.setEndValue(
+                QPoint(
+                    self.x(), get_screen_size().height()
+                )
+            )
+            self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
+            self.hideAnimation.start()
+            self._is_started = True
+            event.ignore()
+        else:
+            event.accept()
+
+        self.hideAnimation.finished.connect(self.close)
+
+    # CREATE MINIMIZE EVENT
+    # ///////////////////////////////////////////
+    def minimize_event(self):
+        self.oldPos = self.pos()
+        self.hideAnimation.setStartValue(self.oldPos)
+        self.hideAnimation.setEndValue(
+            QPoint(
+                self.x(), get_screen_size().height()
+            )
+        )
+        self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
+        self.hideAnimation.setDuration(400)
+        self.hideAnimation.start()
+        self.hideAnimation.finished.connect(lambda: self.showMinimized())
+
+    # CREATE MAXIMIZE EVENT
+    # ///////////////////////////////////////////
+    def maximize_event(self):
+        self.oldPos = self.pos()
+        self.hideAnimation.setStartValue(self.oldPos)
+        # self.hideAnimation.setEndValue(
+        #     QPoint(
+        #         self.x(), get_screen_size().height()
+        #     )
+        # )
+        self.hideAnimation.setEndValue(
+            QRect(
+                self.x(),
+                self.y(),
+                get_screen_size().width(),
+                get_screen_size().height()
+            )
+        )
+        self.hideAnimation.setDuration(200)
+        self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
+        self.hideAnimation.start()
+        self.center()
+        self.hideAnimation.finished.connect(lambda: self.ui.title_bar.maximize_restore())
+
+        # TODO fix animation maximize restor check connection in title bar
 
     # CUSTOM PARAMETERS FOR WINDOW
     # ///////////////////////////////////////////
@@ -276,8 +387,12 @@ class MainWindow(QMainWindow):
             top_settings.set_active_tab(False)
 
         if btn.objectName() == "btn_refresh":
+            # lista = self.ui.load_pages.vertical_pitch_frame.findChildren(QPushButton)
+            # for b in lista:
+            #     if b.objectName() == "btn_pos_1":
+            #         b.set_empty_list()
+            #         self.adjust_notification_container(b)
             pass
-            # self.ui.popup_notification_container.toggleMenu(btn)
 
         # VERTICAL PITCH
         # ///////////////////////////////////////////
@@ -450,7 +565,6 @@ class MainWindow(QMainWindow):
         fin = time.time()
         print(f"Tiempo de ejecución: {fin - inicio}")
 
-
     # TRANSLATE UI
     # ///////////////////////////////////////////
     def translate_lang(self, lang):
@@ -506,19 +620,20 @@ class MainWindow(QMainWindow):
         self.ui.right_btn_2.setText(self.ui_text[lang].right_content.b2)
 
 
-
 # SETTINGS WHEN TO START
 # Set initial class and also additional parameter of the "QApplication" class
 # ///////////////////////////////////////////
-
-
-if __name__ == "__main__":
+def main():
     # APPLICATION
     # ///////////////////////////////////////////
     app = QApplication(sys.argv)
     # app.setWindowIcon()
     window = MainWindow()
+    window.show()
 
-    # EXEC APP
+    # EXEC EXIT APP
     # ///////////////////////////////////////////
     sys.exit(app.exec())
+
+if __name__ == "__main__":
+    main()
