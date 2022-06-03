@@ -56,3 +56,8 @@ from . py_table_widget import PyTableWidget
 # PY VERTICAL PITCH
 # ///////////////////////////////////////////////////////////////
 from . py_vertical_pitch import PyVerticalPitch
+
+
+# PY STATS WIDGET
+# ///////////////////////////////////////////////////////////////
+from . py_stats_widget import PyStatsWidget

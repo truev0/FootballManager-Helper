@@ -152,13 +152,55 @@ class Ui_MainPages(object):
 
         self.pages.addWidget(self.page_3)
 
-        self.main_pages_layout.addWidget(self.pages)
+        # START NEW SECTION
+        # ///////////////////////////////////////////////
 
+        self.page_4 = QWidget()
+        self.page_4.setObjectName(u"page_4")
+
+        self.pages.addWidget(self.page_4)
+
+        self.page_5 = QWidget()
+        self.page_5.setObjectName(u"page_5")
+
+        self.column_1_layout_5 = QHBoxLayout(self.page_5)
+        self.column_1_layout_5.setObjectName(u"column_1_layout_5")
+
+        self.pages.addWidget(self.page_5)
+
+        self.page_6 = QWidget()
+        self.page_6.setObjectName(u"page_6")
+
+        self.pages.addWidget(self.page_6)
+
+        self.page_7 = QWidget()
+        self.page_7.setObjectName(u"page_7")
+
+        self.pages.addWidget(self.page_7)
+
+        self.page_8 = QWidget()
+        self.page_8.setObjectName(u"page_8")
+
+        self.pages.addWidget(self.page_8)
+
+        self.page_9 = QWidget()
+        self.page_9.setObjectName(u"page_9")
+
+        self.pages.addWidget(self.page_9)
+
+        self.page10 = QWidget()
+        self.page10.setObjectName(u"page10")
+
+        self.pages.addWidget(self.page10)
+
+        # END NEW SECTION
+        # ///////////////////////////////////////////////
+
+        self.main_pages_layout.addWidget(self.pages)
 
         self.retranslateUi(MainPages)
 
         self.pages.setCurrentIndex(2)
-
 
         QMetaObject.connectSlotsByName(MainPages)
     # setupUi

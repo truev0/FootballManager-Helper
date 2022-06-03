@@ -296,7 +296,7 @@ class Ui_MainWindow(object):
 
         # CREATE POPUP NOTIFICATION CONTAINER
         # ///////////////////////////////////////////////////////////////
-
+        # TODO FIX STYLE
         self.popup_notification_container = QCustomSlideMenu(self.right_app_frame)
         self.popup_notification_container.setObjectName(u"popup_notification_container")
 
@@ -771,6 +771,28 @@ class Ui_MainWindow(object):
         # ADD WIDGETS TO PAGE 3
         self.load_pages.list_table_layout.addWidget(self.table_tactic)
 
+        # PAGE 4 - Development view
+        # TODO crear layout later
+
+        # PAGE 5 - Statistics view
+        self.graph_statistics = PyStatsWidget()
+        self.load_pages.column_1_layout_5.addWidget(self.graph_statistics)
+
+        # PAGE 6 - Metrics view
+        # TODO crear layout
+
+        # PAGE 7 - Compare view
+        # TODO crear layout
+
+        # PAGE 8 - Scouting view
+        # TODO crear layout
+
+        # PAGE 9 - Employees view
+        # TODO crear layout
+
+        # PAGE 10 - Help view
+        # TODO crear layout
+
         # RIGHT COLUMN CONFIGURATION
         # ///////////////////////////////////////////////////////////////
 
@@ -822,7 +844,6 @@ class Ui_MainWindow(object):
         self.icon_english = QIcon(Functions.set_svg_image("us.svg"))
         self.english_language_btn.setIcon(self.icon_english)
         self.english_language_btn.setMaximumHeight(40)
-        # TODO connect function
 
         self.right_column.btn_en_layout.addWidget(self.english_language_btn)
 
@@ -840,7 +861,6 @@ class Ui_MainWindow(object):
         self.icon_spanish = QIcon(Functions.set_svg_image("es.svg"))
         self.spanish_language_btn.setIcon(self.icon_spanish)
         self.spanish_language_btn.setMaximumHeight(40)
-        # TODO connect function
 
         self.right_column.btn_es_layout.addWidget(self.spanish_language_btn)
 

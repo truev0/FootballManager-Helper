@@ -32,7 +32,7 @@
    <item>
     <widget class="QStackedWidget" name="pages">
      <property name="currentIndex">
-      <number>2</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="page_1">
       <property name="styleSheet">
@@ -183,8 +183,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>840</width>
-            <height>580</height>
+            <width>100</width>
+            <height>30</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -257,8 +257,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1031</width>
-            <height>838</height>
+            <width>830</width>
+            <height>808</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -333,6 +333,15 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="page_4"/>
+     <widget class="QWidget" name="page_5">
+      <layout class="QHBoxLayout" name="column_1_layout_5"/>
+     </widget>
+     <widget class="QWidget" name="page_6"/>
+     <widget class="QWidget" name="page_7"/>
+     <widget class="QWidget" name="page_8"/>
+     <widget class="QWidget" name="page_9"/>
+     <widget class="QWidget" name="page10"/>
     </widget>
    </item>
   </layout>

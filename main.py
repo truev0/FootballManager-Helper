@@ -207,8 +207,6 @@ class MainWindow(QMainWindow):
         self.center()
         self.hideAnimation.finished.connect(lambda: self.ui.title_bar.maximize_restore())
 
-        # TODO fix animation maximize restor check connection in title bar
-
     # CUSTOM PARAMETERS FOR WINDOW
     # ///////////////////////////////////////////
     def custom_settings(self):
@@ -284,7 +282,7 @@ class MainWindow(QMainWindow):
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load page 5
-            # self.ui.set_page(self.ui.load_pages.page_5)
+            self.ui.set_page(self.ui.load_pages.page_5)
 
         # Metrics Btn
         if btn.objectName() == "btn_metrics":
