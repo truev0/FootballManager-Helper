@@ -775,7 +775,11 @@ class Ui_MainWindow(object):
         # TODO crear layout later
 
         # PAGE 5 - Statistics view
-        self.graph_statistics = PyStatsWidget()
+        self.graph_statistics = PyStatsWidget(
+            dark_one=self.themes["app_color"]["dark_one"],
+            text_foreground=self.themes["app_color"]["text_foreground"],
+            combo_border=self.themes["app_color"]["context_hover"],
+        )
         self.load_pages.column_1_layout_5.addWidget(self.graph_statistics)
 
         # PAGE 6 - Metrics view

@@ -8,16 +8,8 @@ from pyside_core import *
 # ///////////////////////////////////////////////////////////////
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
-import pandas as pd
 
-style = '''
-QComboBox {{
-border: 1px solid #ced4da;
-border-radius: 4px;
-padding-left: 10px;
-}}
 
-'''
 # TODO continuar editando este widget
 # PY STATS WIDGET
 # ///////////////////////////////////////////////////////////////
@@ -58,19 +50,18 @@ class _QCustomCombo(QComboBox):
             color: {_text_foreground};
             padding-left: 40px;
             border-radius: 4px;
-            border: 1px solid {_combo_border};
             font: 800 9pt "Segoe UI";
         }}
         
         QComboBox:on {{
-            border: 4px solid #c2dbfe;
+            border: 2px solid #c2dbfe;
         }}
         
         QComboBox QListView {{
             font-size: 12px;
             border: 1px solid rgba(0, 0, 0, 10%);
             padding: 5px;
-            background-color: #fff;
+            background-color: {_dark_one};
             outline: 0px;
         }}
         """

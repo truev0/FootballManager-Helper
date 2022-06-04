@@ -2,7 +2,6 @@
 # ///////////////////////////////////////////
 import sys
 import os
-import json
 import time
 
 # IMPORT PYSIDE CORE
@@ -38,7 +37,6 @@ from gui.core.translations import en, es
 # IMPORT WIDGETS
 # ///////////////////////////////////////////
 from gui.widgets import *
-from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 
 # IMPORT KHAMISIKIBET WIDGET
 # ///////////////////////////////////////////
@@ -65,6 +63,7 @@ class MainWindow(QMainWindow):
         # SETUP MAIN WINDOW
         # Load widgets from "gui\uis\main_window\ui_interface_personal.py"
         # ///////////////////////////////////////////
+
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -72,6 +71,8 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////
         self.dragPos = None
         self.df_squad = None
+        self.df_tactic = None
+        self.df_for_table = None
         self.bottom_right_grip = None
         self.bottom_left_grip = None
         self.top_right_grip = None
@@ -118,25 +119,11 @@ class MainWindow(QMainWindow):
         self.oldPos = self.get_center()
         self._is_started = False
 
-
-    # CENTRE WINDOW
     # ///////////////////////////////////////////
-    def center(self):
-        frame_geo = self.frameGeometry()
-        screen = self.window().windowHandle().screen()
-        center_loc = screen.geometry().center()
-        frame_geo.moveCenter(center_loc)
-        self.move(frame_geo.topLeft())
-
-
-    # GET CENTER OF THE SCREEN
+    # START IMPLEMENTED FUNCTIONS
     # ///////////////////////////////////////////
-    def get_center(self):
-        geometry = self.frameGeometry()
-        geometry.moveCenter(get_screen_size().center())
-        return geometry.topLeft()
 
-    # SRE-IMPLEMENT SHOW EVENT
+    # RE-IMPLEMENT SHOW EVENT
     # ///////////////////////////////////////////
     def showEvent(self, event: QShowEvent) -> None:
         self.showAnimation.setStartValue(
@@ -167,6 +154,51 @@ class MainWindow(QMainWindow):
             event.accept()
 
         self.hideAnimation.finished.connect(self.close)
+
+    # RESIZE EVENT
+    # ///////////////////////////////////////////
+    def resizeEvent(self, event):
+        # RESIZE GRIPS AND CHANGE POSITION
+        if self.settings["custom_title_bar"]:
+            self.left_grip.setGeometry(5, 10, 10, self.height())
+            self.right_grip.setGeometry(self.width() - 15, 10, 10, self.height())
+            self.top_grip.setGeometry(5, 5, self.width() - 10, 10)
+            self.bottom_grip.setGeometry(5, self.height() - 15, self.width() - 10, 10)
+            self.top_right_grip.setGeometry(self.width() - 20, 5, 15, 15)
+            self.bottom_left_grip.setGeometry(5, self.height() - 20, 15, 15)
+            self.bottom_right_grip.setGeometry(self.width() - 20, self.height() - 20, 15, 15)
+
+    # MOUSE CLICK EVENTS
+    # ///////////////////////////////////////////
+    def mousePressEvent(self, event):
+        # SET DRAG POS WINDOW
+        p = event.globalPosition()
+        global_pos = p.toPoint()
+        self.dragPos = global_pos
+
+    # ///////////////////////////////////////////
+    # END IMPLEMENTED FUNCTIONS
+    # ///////////////////////////////////////////
+
+    # ///////////////////////////////////////////
+    # START CUSTOM FUNCTIONS FOR UI
+    # ///////////////////////////////////////////
+
+    # CENTRE WINDOW
+    # ///////////////////////////////////////////
+    def center_window(self):
+        frame_geo = self.frameGeometry()
+        screen = self.window().windowHandle().screen()
+        center_loc = screen.geometry().center()
+        frame_geo.moveCenter(center_loc)
+        self.move(frame_geo.topLeft())
+
+    # GET CENTER OF THE SCREEN
+    # ///////////////////////////////////////////
+    def get_center(self):
+        geometry = self.frameGeometry()
+        geometry.moveCenter(get_screen_size().center())
+        return geometry.topLeft()
 
     # CREATE MINIMIZE EVENT
     # ///////////////////////////////////////////
@@ -204,8 +236,32 @@ class MainWindow(QMainWindow):
         self.hideAnimation.setDuration(200)
         self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
         self.hideAnimation.start()
-        self.center()
+        self.center_window()
         self.hideAnimation.finished.connect(lambda: self.ui.title_bar.maximize_restore())
+
+    # RESIZE NOTIFICATION POPUP
+    # ///////////////////////////////////////////
+    def adjust_notification_container(self, btn):
+        # RESET CONTAINER HEIGHT
+        self.ui.popup_notification_container.expandedHeight = self.default_size_notification_container
+        if btn.get_len_lista() > 5:
+            diff = btn.get_len_lista() - 5
+            # SET + HEIGHT IF HAVE A LOT OF PLAYERS
+            self.ui.popup_notification_container.expandedHeight = self.default_size_notification_container + (12 * diff)
+        # FORMAT TEXT TO BE DISPLAYED
+        tmp = btn.text_formater()
+        # DISPLAY PLAYERS
+        self.ui.list_label.setText(tmp)
+        # EXEC NOTIFICATION CONTAINER
+        self.ui.popup_notification_container.toggleMenu(btn)
+
+    # ///////////////////////////////////////////
+    # END CUSTOM FUNCTIONS FOR UI
+    # ///////////////////////////////////////////
+
+    # ///////////////////////////////////////////
+    # START CUSTOM FUNCTIONS FOR SETTINGS
+    # ///////////////////////////////////////////
 
     # CUSTOM PARAMETERS FOR WINDOW
     # ///////////////////////////////////////////
@@ -231,7 +287,16 @@ class MainWindow(QMainWindow):
             self.bottom_left_grip = PyGrips(self, "bottom_left", self.hide_grips)
             self.bottom_right_grip = PyGrips(self, "bottom_right", self.hide_grips)
 
-    # LEFT MENU BTN IS CLICKED
+    # ///////////////////////////////////////////
+    # END CUSTOM FUNCTIONS FOR SETTINGS
+    # ///////////////////////////////////////////
+
+    # ///////////////////////////////////////////
+    # START PRINCIPAL FUNCTIONS FOR CLICKS AND SIGNALS
+    # ///////////////////////////////////////////
+
+    # BUTTONS WITH SIGNALS CLICKED
+    # ///////////////////////////////////////////
     def btn_clicked(self):
         # GET BTN CLICKED
         btn = self.ui.setup_btns()
@@ -385,11 +450,9 @@ class MainWindow(QMainWindow):
             top_settings.set_active_tab(False)
 
         if btn.objectName() == "btn_refresh":
-            # lista = self.ui.load_pages.vertical_pitch_frame.findChildren(QPushButton)
-            # for b in lista:
-            #     if b.objectName() == "btn_pos_1":
-            #         b.set_empty_list()
-            #         self.adjust_notification_container(b)
+            '''
+            No ha sido implementada por que aun no se para que
+            '''
             pass
 
         # VERTICAL PITCH
@@ -443,22 +506,7 @@ class MainWindow(QMainWindow):
         # DEBUG
         # print(f"Button {btn.objectName()}, clicked!")
 
-    def adjust_notification_container(self, btn):
-        # RESET CONTAINER HEIGHT
-        self.ui.popup_notification_container.expandedHeight = self.default_size_notification_container
-        if btn.get_len_lista() > 5:
-            diff = btn.get_len_lista() - 5
-            # SET + HEIGHT IF HAVE A LOT OF PLAYERS
-            self.ui.popup_notification_container.expandedHeight = self.default_size_notification_container + (12 * diff)
-        # FORMAT TEXT TO BE DISPLAYED
-        tmp = btn.text_formater()
-        # DISPLAY PLAYERS
-        self.ui.list_label.setText(tmp)
-        # EXEC NOTIFICATION CONTAINER
-        self.ui.popup_notification_container.toggleMenu(btn)
-
-    # LEFT MENU BTN IS RELEASED
-    # Check function by object name / btn_id
+    # BUTTONS WITH SIGNALS RELEASED
     # ///////////////////////////////////////////
     def btn_released(self):
         # GET BTN CLICKED
@@ -486,35 +534,34 @@ class MainWindow(QMainWindow):
         self.ui.pitch_widget.clicked.connect(self.btn_clicked)
         self.ui.pitch_widget.released.connect(self.btn_released)
 
-    # RESIZE EVENT
     # ///////////////////////////////////////////
-    def resizeEvent(self, event):
-        # RESIZE GRIPS AND CHANGE POSITION
-        if self.settings["custom_title_bar"]:
-            self.left_grip.setGeometry(5, 10, 10, self.height())
-            self.right_grip.setGeometry(self.width() - 15, 10, 10, self.height())
-            self.top_grip.setGeometry(5, 5, self.width() - 10, 10)
-            self.bottom_grip.setGeometry(5, self.height() - 15, self.width() - 10, 10)
-            self.top_right_grip.setGeometry(self.width() - 20, 5, 15, 15)
-            self.bottom_left_grip.setGeometry(5, self.height() - 20, 15, 15)
-            self.bottom_right_grip.setGeometry(self.width() - 20, self.height() - 20, 15, 15)
-
-    # MOUSE CLICK EVENTS
+    # END PRINCIPAL FUNCTIONS FOR CLICKS AND SIGNALS
     # ///////////////////////////////////////////
-    def mousePressEvent(self, event):
-        # SET DRAG POS WINDOW
-        p = event.globalPosition()
-        global_pos = p.toPoint()
-        self.dragPos = global_pos
 
-    # CONNECT EVENT CLICKS
+    # ///////////////////////////////////////////
+    # START CUSTOM FUNCTIONS FOR EVENTS
+    # ///////////////////////////////////////////
+
+    # CONNECT EVENTS
     # ///////////////////////////////////////////
     def connect_events(self):
+        # CLICK EVENTS
+        # ///////////////////////////////////////////
         self.ui.load_squad_btn.clicked.connect(lambda: self.load_file())
         self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
         self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
         self.ui.btn_close_notification.clicked.connect(lambda: self.ui.popup_notification_container.collapseMenu())
 
+        # CHANGE EVENTS
+        # ///////////////////////////////////////////
+
+    # ///////////////////////////////////////////
+    # END CUSTOM FUNCTIONS FOR EVENTS
+    # ///////////////////////////////////////////
+
+    # ///////////////////////////////////////////
+    # START CUSTOM FUNCTIONS FOR FUNCTIONALITY
+    # ///////////////////////////////////////////
 
     # LOAD FILE
     # ///////////////////////////////////////////
@@ -538,7 +585,6 @@ class MainWindow(QMainWindow):
 
         self.df_for_table = FMi.create_df_for_squad(self.df_squad, self.language)
         self.df_tactic = self.df_for_table.iloc[:, :1]
-        # self.df_tactic = self.df_tactic.join(self.df_for_table.iloc[:, 6:8])
         self.df_tactic = self.df_tactic.join(self.df_for_table.iloc[:, 2:3])
         self.tables_helper()
 
@@ -608,17 +654,20 @@ class MainWindow(QMainWindow):
         self.ui.title_bar.maximize_restore_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b4)
         self.ui.title_bar.close_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b5)
 
-
         # Translating left inside menu
         self.ui.load_squad_btn.setText(self.ui_text[lang].left_content.b1)
         self.ui.load_scouting_btn.setText(self.ui_text[lang].left_content.b2)
 
-        # Translatin right inside menu
+        # Translating right inside menu
         self.ui.right_btn_1.setText(self.ui_text[lang].right_content.b1)
         self.ui.right_btn_2.setText(self.ui_text[lang].right_content.b2)
 
+    # ///////////////////////////////////////////
+    # END CUSTOM FUNCTIONS FOR FUNCTIONALITY
+    # ///////////////////////////////////////////
 
-# SETTINGS WHEN TO START
+
+# MAIN FUNCTION TO START
 # Set initial class and also additional parameter of the "QApplication" class
 # ///////////////////////////////////////////
 def main():
@@ -632,6 +681,7 @@ def main():
     # EXEC EXIT APP
     # ///////////////////////////////////////////
     sys.exit(app.exec())
+
 
 if __name__ == "__main__":
     main()
