@@ -776,6 +776,7 @@ class Ui_MainWindow(object):
 
         # PAGE 5 - Statistics view
         self.graph_statistics = PyStatsWidget(
+            language=self.language,
             dark_one=self.themes["app_color"]["dark_one"],
             text_foreground=self.themes["app_color"]["text_foreground"],
             combo_border=self.themes["app_color"]["context_hover"],

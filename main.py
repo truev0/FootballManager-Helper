@@ -70,6 +70,7 @@ class MainWindow(QMainWindow):
         # CLASS VARIABLES
         # ///////////////////////////////////////////
         self.dragPos = None
+        self.df_original = None
         self.df_squad = None
         self.df_tactic = None
         self.df_for_table = None
@@ -547,13 +548,14 @@ class MainWindow(QMainWindow):
     def connect_events(self):
         # CLICK EVENTS
         # ///////////////////////////////////////////
-        self.ui.load_squad_btn.clicked.connect(lambda: self.load_file())
+        self.ui.load_squad_btn.clicked.connect(lambda: self.load_all_data())
         self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
         self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
         self.ui.btn_close_notification.clicked.connect(lambda: self.ui.popup_notification_container.collapseMenu())
 
         # CHANGE EVENTS
         # ///////////////////////////////////////////
+
 
     # ///////////////////////////////////////////
     # END CUSTOM FUNCTIONS FOR EVENTS
@@ -565,7 +567,7 @@ class MainWindow(QMainWindow):
 
     # LOAD FILE
     # ///////////////////////////////////////////
-    def load_file(self):
+    def load_all_data(self):
         # FILE DIALOG
         dlg_file = QFileDialog.getOpenFileName(
             self,
@@ -575,18 +577,34 @@ class MainWindow(QMainWindow):
 
         # READ FILE
         if dlg_file:
-            self.df_squad = FMi.setting_up_pandas(dlg_file[0], 'squad_btn')
-            self.df_squad = FMi.convert_values(self.df_squad, self.language)
-            self.df_squad = FMi.create_metrics_for_gk(self.df_squad, self.language)
-            self.df_squad = FMi.data_for_rankings(self.df_squad, self.language)
+            # SETTING ORIGINAL DATAFRAME
+            self.df_original = FMi.setting_up_pandas(dlg_file[0], 'squad_btn')
+            self.df_original = FMi.convert_values(self.df_original, self.language)
+            self.df_original = FMi.create_metrics_for_gk(self.df_original, self.language)
+
+            # SETTING MODIFIED DATAFRAME
+            self.df_squad = FMi.data_for_rankings(self.df_original, self.language)
             self.df_squad = FMi.create_scores_for_position(self.df_squad, self.language)
             self.df_squad = FMi.round_data(self.df_squad)
             self.df_squad = FMi.ranking_values(self.df_squad)
 
+        # SETTING DATAFRAME FOR SQUAD TABLE
         self.df_for_table = FMi.create_df_for_squad(self.df_squad, self.language)
+        # SETTING DATAFRAME FOR SQUAD TABLE
         self.df_tactic = self.df_for_table.iloc[:, :1]
         self.df_tactic = self.df_tactic.join(self.df_for_table.iloc[:, 2:3])
+
         self.tables_helper()
+        # SETTING DATAFRAME FOR STATS WIDGET
+        self.df_helper = self.df_original.iloc[:, :1]
+        self.df_helper = self.df_helper.join(self.df_original.iloc[:, 11:42])
+        # CONVERT TO LIST HEADERS OF DATAFRAME
+        lista_g = self.df_helper.columns.values.tolist()
+
+        self.ui.graph_statistics.combo_selector.addItems(lista_g)
+        self.ui.graph_statistics.combo_selector.removeItem(1)
+        self.ui.graph_statistics.chart.set_data(self.df_helper)
+        self.ui.graph_statistics.chart.add_to_list(lista_g)
 
     # SQUAD HELPER FUNCTION
     # ///////////////////////////////////////////
