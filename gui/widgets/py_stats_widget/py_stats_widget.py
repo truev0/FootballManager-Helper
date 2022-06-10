@@ -8,9 +8,9 @@ from pyside_core import *
 # ///////////////////////////////////////////////////////////////
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider
+import plotly.express as px
 
-graph = {
+stats_list = {
     'Mins': 'Minutes',
     'Svt': 'Saves Tipped',
     'Svp': 'Saves Parried',
@@ -47,7 +47,7 @@ graph = {
     'Enc': 'Encajados',
     '% Pase': '% Pases',
     'Ps C/90': 'Pases Completados / 90',
-    'Ent Cl': 'Entradas Completadas',
+    'Ent Cl': 'Entradas Clave',
     'Ent P': 'Promedio Entradas',
     'Rob/90': 'Robos / 90',
     'Rcg %': '% Cabezazos',
@@ -73,28 +73,48 @@ graph = {
     'Media': 'Media'
 }
 
-# TODO continuar editando este widget
+metrics_list = {
+    "Ground Duels": ("Tck R", "Int/90")
+}
+
+
 # PY STATS WIDGET
 # ///////////////////////////////////////////////////////////////
 class PyStatsWidget(QWidget):
     def __init__(
             self,
-            language,
+            name,
             parent=None,
             dark_one="#1b1e23",
             text_foreground="#8a95aa",
-            combo_border="#6c99f4"
+            combo_border="#6c99f4",
+            bg_two="#343b48",
+            dark_three="21252d",
+            axis_color="f5f6f9",
+            color_title="dce1ec",
+            bar_color="3f6fd1"
     ):
         super().__init__(parent)
-
+        self.name = name
         self.combo_selector = _QCustomCombo(
             dark_one=dark_one,
             text_foreground=text_foreground,
             combo_border=combo_border
         )
-        self.combo_selector.addItem("Choose a stat")
+        if self.name == "graph_statistics":
+            self.combo_selector.addItem("Choose a stat")
+        elif self.name == "graph_metrics":
+            self.combo_selector.addItem("Choose a metric")
 
-        self.chart = _CustomCanvas(self)
+        self.chart = _CustomCanvas(
+            self,
+            name=self.name,
+            bg_two=bg_two,
+            dark_three=dark_three,
+            axis_color=axis_color,
+            color_title=color_title,
+            bar_color=bar_color
+        )
 
         self.principal_layout = QVBoxLayout(self)
         self.alter_layout = QHBoxLayout()
@@ -149,48 +169,86 @@ class _QCustomCombo(QComboBox):
 
 
 class _CustomCanvas(FigureCanvas):
-    def __init__(self, parent):
+    def __init__(
+            self,
+            parent,
+            name,
+            bg_two,
+            dark_three,
+            axis_color,
+            color_title,
+            bar_color,
+    ):
         fig, self.ax = plt.subplots(figsize=(6, 5), dpi=100)
         super().__init__(fig)
+        # COLORS
+        self.bg_two = bg_two
+        self.dark_three = dark_three
+        self.axis_color = axis_color
+        self.color_title = color_title
+        self.bar_color = bar_color
+
+        self._name = name
         self._actual_list = ['']
         self._data = None
         self.setParent(parent)
-        plt.title("Initial chart")
+        if self._name == "graph_statistics":
+            plt.title("Statistics Chart")
+        elif self._name == "graph_metrics":
+            plt.title("Metrics Chart")
         # plt.show()
-        fig.patch.set_facecolor('#343b48')  # BG TWO
-        self.ax.set_facecolor('#21252d')  # Dark Three
-        self.ax.tick_params(axis='x', colors='#f5f6f9')  # Icon active
-        self.ax.tick_params(axis='y', colors='#f5f6f9')
-        self.ax.title.set_color('#dce1ec')  # Text title
+        fig.patch.set_facecolor(self.bg_two)
+        self.ax.set_facecolor(self.dark_three)
+        self.ax.tick_params(axis='x', colors=self.axis_color)
+        self.ax.tick_params(axis='y', colors=self.axis_color)
+        self.ax.title.set_color(self.color_title)
         plt.tight_layout()
 
     def set_data(self, data):
         self._data = data
 
-    def get_head_list(self):
-        return self._actual_list[0]
-
     def add_to_list(self, list):
         self._actual_list[0] = list[0]
-        for i in range(1, len(list)):
-            self._actual_list.append(list[i])
+        if len(list) > 1:
+            for i in range(1, len(list)):
+                self._actual_list.append(list[i])
 
     def update_chart(self, new_parameter):
         self.ax.clear()
         if self._data is not None:
-            custom_df = self._data[[self._actual_list[0], new_parameter]]
-            if new_parameter in self._actual_list:
-                custom_df.plot.bar(
-                    x=self._actual_list[0],
-                    y=new_parameter,
-                    ax=self.ax,
-                    color='#3f6fd1'  # Context pressed
-                )
-                plt.subplots_adjust(bottom=0.22)
-                plt.title(graph[new_parameter], color='#dce1ec')
-                self.ax.tick_params(axis='x', rotation=80)
-                plt.axhline(y=custom_df[new_parameter].mean(), color='r', linestyle='--')
-                plt.xlabel("")
-                plt.draw()
-            else:
-                self.ax.clear()
+            if self._name == "graph_statistics":
+                custom_df = self._data[[self._actual_list[0], new_parameter]]
+                if new_parameter in self._actual_list:
+                    custom_df.plot.bar(
+                        x=self._actual_list[0],
+                        y=new_parameter,
+                        ax=self.ax,
+                        color=self.bar_color
+                    )
+                    plt.subplots_adjust(bottom=0.22)
+                    plt.title(stats_list[new_parameter], color=self.color_title)
+                    self.ax.tick_params(axis='x', rotation=80)
+                    plt.axhline(y=custom_df[new_parameter].mean(), color='r', linestyle='--')
+                    plt.xlabel("")
+                    plt.draw()
+                else:
+                    self.ax.clear()
+            elif self._name == "graph_metrics":
+                if new_parameter in self._actual_list:
+                    custom_df = self._data[["Name", metrics_list[new_parameter][0],
+                                            metrics_list[new_parameter][1]]]
+                    fig = px.scatter(
+                        custom_df,
+                        x=metrics_list[new_parameter][0],
+                        y=metrics_list[new_parameter][1],
+                        text="Name",
+                        log_x=False,
+                        size_max=60
+                    )
+                    fig.update_traces(textposition='top center')
+                    fig.update_layout(height=500)
+                    fig.update_xaxes(title_text=stats_list[metrics_list[new_parameter][0]])
+                    fig.update_yaxes(title_text=stats_list[metrics_list[new_parameter][1]])
+                    fig.update_layout(template="plotly_dark", title=new_parameter)
+                    fig.show()
+# TODO READ ACTUAL STACK FOR ADD MPLCURSORS

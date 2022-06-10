@@ -227,7 +227,7 @@ class PyPlayerButton(QPushButton):
             globalPos = event.globalPos()
             diff = globalPos - self.__mouseMovePos
             newPos = self.mapFromGlobal(currPos + diff)
-            if newPos.y() > 31 and newPos.y() < 744 and newPos.x() > 30 and newPos.x() < 476:
+            if 31 < newPos.y() < 744 and newPos.x() > 30 and newPos.x() < 476:
                 self.move(newPos)
                 self.__mouseMovePos = globalPos
 

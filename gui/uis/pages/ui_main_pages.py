@@ -25,12 +25,20 @@ class Ui_MainPages(object):
         if not MainPages.objectName():
             MainPages.setObjectName(u"MainPages")
         MainPages.resize(1051, 858)
+        # MAIN WIDGET LAYOUT
+        # /////////////////////////////////////////////////////////
         self.main_pages_layout = QVBoxLayout(MainPages)
         self.main_pages_layout.setSpacing(0)
         self.main_pages_layout.setObjectName(u"main_pages_layout")
         self.main_pages_layout.setContentsMargins(5, 5, 5, 5)
+
+        # MAIN PAGES
+        # /////////////////////////////////////////////////////////
         self.pages = QStackedWidget(MainPages)
         self.pages.setObjectName(u"pages")
+
+        # PAGE 1
+        # /////////////////////////////////////////////////////////
         self.page_1 = QWidget()
         self.page_1.setObjectName(u"page_1")
         self.page_1.setStyleSheet(u"font-size: 14pt")
@@ -67,10 +75,12 @@ class Ui_MainPages(object):
 
         self.center_page_layout.addWidget(self.label)
 
-
         self.page_1_layout.addWidget(self.welcome_base, 0, Qt.AlignHCenter)
 
         self.pages.addWidget(self.page_1)
+
+        # PAGE 2
+        # /////////////////////////////////////////////////////////
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
         self.page_2_layout = QVBoxLayout(self.page_2)
@@ -102,6 +112,9 @@ class Ui_MainPages(object):
         self.page_2_layout.addWidget(self.scroll_area)
 
         self.pages.addWidget(self.page_2)
+
+        # PAGE 3
+        # /////////////////////////////////////////////////////////
         self.page_3 = QWidget()
         self.page_3.setObjectName(u"page_3")
         self.page_3_layout = QVBoxLayout(self.page_3)
@@ -152,14 +165,15 @@ class Ui_MainPages(object):
 
         self.pages.addWidget(self.page_3)
 
-        # START NEW SECTION
-        # ///////////////////////////////////////////////
-
+        # PAGE 4
+        # /////////////////////////////////////////////////////////
         self.page_4 = QWidget()
         self.page_4.setObjectName(u"page_4")
 
         self.pages.addWidget(self.page_4)
 
+        # PAGE 5
+        # /////////////////////////////////////////////////////////
         self.page_5 = QWidget()
         self.page_5.setObjectName(u"page_5")
 
@@ -168,34 +182,46 @@ class Ui_MainPages(object):
 
         self.pages.addWidget(self.page_5)
 
+        # PAGE 6
+        # /////////////////////////////////////////////////////////
         self.page_6 = QWidget()
         self.page_6.setObjectName(u"page_6")
 
+        self.column_1_layout_6 = QHBoxLayout(self.page_6)
+        self.column_1_layout_6.setObjectName(u"column_1_layout_6")
+
         self.pages.addWidget(self.page_6)
 
+        # PAGE 7
+        # /////////////////////////////////////////////////////////
         self.page_7 = QWidget()
         self.page_7.setObjectName(u"page_7")
 
         self.pages.addWidget(self.page_7)
 
+        # PAGE 8
+        # /////////////////////////////////////////////////////////
         self.page_8 = QWidget()
         self.page_8.setObjectName(u"page_8")
 
         self.pages.addWidget(self.page_8)
 
+        # PAGE 9
+        # /////////////////////////////////////////////////////////
         self.page_9 = QWidget()
         self.page_9.setObjectName(u"page_9")
 
         self.pages.addWidget(self.page_9)
 
+        # PAGE 10
+        # /////////////////////////////////////////////////////////
         self.page10 = QWidget()
         self.page10.setObjectName(u"page10")
 
         self.pages.addWidget(self.page10)
 
-        # END NEW SECTION
-        # ///////////////////////////////////////////////
-
+        # ADD PAGES TO MAIN LAYOUT
+        # /////////////////////////////////////////////////////////
         self.main_pages_layout.addWidget(self.pages)
 
         self.retranslateUi(MainPages)

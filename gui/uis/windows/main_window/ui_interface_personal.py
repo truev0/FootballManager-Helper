@@ -39,6 +39,7 @@ class Ui_MainWindow(object):
         if not parent.objectName():
             parent.setObjectName("MainWindow")
 
+
         # LOAD SETTINGS
         # ///////////////////////////////////////////////////////////////
         settings = Settings()
@@ -775,16 +776,35 @@ class Ui_MainWindow(object):
         # TODO crear layout later
 
         # PAGE 5 - Statistics view
+
         self.graph_statistics = PyStatsWidget(
-            language=self.language,
+            name="graph_statistics",
             dark_one=self.themes["app_color"]["dark_one"],
             text_foreground=self.themes["app_color"]["text_foreground"],
             combo_border=self.themes["app_color"]["context_hover"],
+            bg_two=self.themes["app_color"]["bg_two"],
+            dark_three=self.themes["app_color"]["dark_three"],
+            axis_color=self.themes["app_color"]["icon_active"],
+            color_title=self.themes["app_color"]["text_title"],
+            bar_color=self.themes["app_color"]["context_pressed"],
         )
         self.load_pages.column_1_layout_5.addWidget(self.graph_statistics)
 
         # PAGE 6 - Metrics view
-        # TODO crear layout
+        # TODO descomentar
+        # self.graph_metrics = PyStatsWidget(
+        #     name="graph_metrics",
+        #     dark_one=self.themes["app_color"]["dark_one"],
+        #     text_foreground=self.themes["app_color"]["text_foreground"],
+        #     combo_border=self.themes["app_color"]["context_hover"],
+        #     bg_two=self.themes["app_color"]["bg_two"],
+        #     dark_three=self.themes["app_color"]["dark_three"],
+        #     axis_color=self.themes["app_color"]["icon_active"],
+        #     color_title=self.themes["app_color"]["text_title"],
+        #     bar_color=self.themes["app_color"]["context_pressed"],
+        # )
+        #
+        # self.load_pages.column_1_layout_6.addWidget(self.graph_metrics)
 
         # PAGE 7 - Compare view
         # TODO crear layout

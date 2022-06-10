@@ -61,3 +61,4 @@ from . py_vertical_pitch import PyVerticalPitch
 # PY STATS WIDGET
 # ///////////////////////////////////////////////////////////////
 from . py_stats_widget import PyStatsWidget
+from . py_stats_widget import PyGraphWidget

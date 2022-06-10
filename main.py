@@ -42,6 +42,7 @@ from gui.widgets import *
 # ///////////////////////////////////////////
 from Custom_Widgets.Widgets import loadJsonStyle
 
+
 # IMPORT INTERFACE
 # ///////////////////////////////////////////
 from gui.uis.windows.main_window.ui_interface_personal import Ui_MainWindow
@@ -63,7 +64,6 @@ class MainWindow(QMainWindow):
         # SETUP MAIN WINDOW
         # Load widgets from "gui\uis\main_window\ui_interface_personal.py"
         # ///////////////////////////////////////////
-
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -264,6 +264,11 @@ class MainWindow(QMainWindow):
     # START CUSTOM FUNCTIONS FOR SETTINGS
     # ///////////////////////////////////////////
 
+    # RETURN PLOTLY APP
+    # ///////////////////////////////////////////
+    # def get_plotly_app(self):
+    #     return self.plotly_app
+
     # CUSTOM PARAMETERS FOR WINDOW
     # ///////////////////////////////////////////
     def custom_settings(self):
@@ -355,7 +360,7 @@ class MainWindow(QMainWindow):
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load page 6
-            # self.ui.set_page(self.ui.load_pages.page_6)
+            self.ui.set_page(self.ui.load_pages.page_6)
 
         # Compare Btn
         if btn.objectName() == "btn_compare":
@@ -595,16 +600,26 @@ class MainWindow(QMainWindow):
         self.df_tactic = self.df_tactic.join(self.df_for_table.iloc[:, 2:3])
 
         self.tables_helper()
-        # SETTING DATAFRAME FOR STATS WIDGET
+        # SETTING DATAFRAME FOR STATS / METRICS WIDGET
         self.df_helper = self.df_original.iloc[:, :1]
         self.df_helper = self.df_helper.join(self.df_original.iloc[:, 11:42])
-        # CONVERT TO LIST HEADERS OF DATAFRAME
-        lista_g = self.df_helper.columns.values.tolist()
+        # CONVERT TO LIST HEADERS OF DATAFRAME FOR STATS / METRICS WIDGET
+        stats_list = self.df_helper.columns.values.tolist()
 
-        self.ui.graph_statistics.combo_selector.addItems(lista_g)
+        # STATISTICS GRAPH
+        self.ui.graph_statistics.combo_selector.addItems(stats_list)
         self.ui.graph_statistics.combo_selector.removeItem(1)
         self.ui.graph_statistics.chart.set_data(self.df_helper)
-        self.ui.graph_statistics.chart.add_to_list(lista_g)
+        self.ui.graph_statistics.chart.add_to_list(stats_list)
+
+        # TODO descomentar
+        # # METRICS GRAPH
+        # metrics_list = ['Ground Duels', 'Aerial Duels']
+        # self.ui.graph_metrics.combo_selector.addItems(metrics_list)
+        #
+        # self.ui.graph_metrics.chart.set_data(self.df_helper)
+        # self.ui.graph_metrics.chart.add_to_list(metrics_list)
+
 
     # SQUAD HELPER FUNCTION
     # ///////////////////////////////////////////
