@@ -796,7 +796,82 @@ class Ui_MainWindow(object):
         # TODO crear layout later
 
         # PAGE 7 - Compare view
-        # TODO crear layout
+        # TODO ACTUAL creando layout
+        # LEFT TOP SIDE OF PAGE
+        # ///////////////////////////////////////////////////////////////
+
+        # COMBO BOX TO SELECT SQUAD OF THE FIRST PLAYER TO COMPARE
+        self.first_squad_player_combo = PyComboBox(
+            dark_one=self.themes["app_color"]["dark_one"],
+            text_foreground=self.themes["app_color"]["text_foreground"],
+            combo_border=self.themes["app_color"]["context_hover"]
+        )
+
+        # COMBO BOX TO SELECT THE FIRST PLAYER DEPENDING ON THE SQUAD
+        self.first_player_combo = PyComboBox(
+            dark_one=self.themes["app_color"]["dark_one"],
+            text_foreground=self.themes["app_color"]["text_foreground"],
+            combo_border=self.themes["app_color"]["context_hover"]
+        )
+
+        # COMBO BOX TO SELECT SQUAD OF THE SECOND PLAYER TO COMPARE
+        self.second_squad_player_combo = PyComboBox(
+            dark_one=self.themes["app_color"]["dark_one"],
+            text_foreground=self.themes["app_color"]["text_foreground"],
+            combo_border=self.themes["app_color"]["context_hover"]
+        )
+
+        # COMBO BOX TO SELECT THE SECOND PLAYER DEPENDING ON THE SQUAD
+        self.second_player_combo = PyComboBox(
+            dark_one=self.themes["app_color"]["dark_one"],
+            text_foreground=self.themes["app_color"]["text_foreground"],
+            combo_border=self.themes["app_color"]["context_hover"]
+        )
+
+        # RIGHT SIDE
+        # ///////////////////////////////////////////////////////////////
+        self.btn_compare_stats = PyPushButton(
+            text="Select Statistics",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.btn_compare_stats.clicked.connect(
+            lambda: self.set_compare_column_menu(
+                self.load_pages.menu1_compare
+            )
+        )
+        self.btn_compare_stats.setMaximumHeight(40)
+
+        self.btn_compare_metrics = PyPushButton(
+            text="Select Metrics",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.btn_compare_metrics.clicked.connect(
+            lambda: self.set_compare_column_menu(
+                self.load_pages.menu2_compare
+            )
+        )
+        self.btn_compare_metrics.setMaximumHeight(40)
+
+        # ADDING WIDGETS TO ITS RESPECTIVE LAYOUT
+        # Left Side
+        self.load_pages.compare_sub1_top_left_frame_layout.addWidget(self.first_squad_player_combo)
+        self.load_pages.compare_sub1_top_left_frame_layout.addWidget(self.second_squad_player_combo)
+        self.load_pages.compare_sub2_top_left_frame_layout.addWidget(self.first_player_combo)
+        self.load_pages.compare_sub2_top_left_frame_layout.addWidget(self.second_player_combo)
+
+        # Right Side
+        self.load_pages.btn_compare_1_layout.addWidget(self.btn_compare_stats)
+        self.load_pages.btn_compare_2_layout.addWidget(self.btn_compare_metrics)
+        # TODO make connection of this buttons in main
+
 
         # PAGE 8 - Scouting view
         # TODO crear layout
@@ -843,7 +918,7 @@ class Ui_MainWindow(object):
             self.right_column.menu_1
         ))
         self.right_column.btn_1_menu_2_layout.addWidget(self.right_btn_2)
-
+        # TODO make connection of above buttons in main
         # ENGLISH BUTTON
         # Button to change UI to english
         # ///////////////////////////////////////////////////////////////
@@ -915,6 +990,11 @@ class Ui_MainWindow(object):
     # ///////////////////////////////////////////////////////////////
     def set_right_column_menu(self, menu):
         self.right_column.menus.setCurrentWidget(menu)
+
+    # SET COMPARE COLUMN PAGES
+    # ///////////////////////////////////////////////////////////////
+    def set_compare_column_menu(self, menu):
+        self.load_pages.compare_pages.setCurrentWidget(menu)
 
     # GET TITLE BUTTON BY OBJECT NAME
     # ///////////////////////////////////////////////////////////////

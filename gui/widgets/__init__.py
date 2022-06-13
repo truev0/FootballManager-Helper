@@ -58,6 +58,12 @@ from . py_table_widget import PyTableWidget
 from . py_vertical_pitch import PyVerticalPitch
 
 
+# PY COMBO BOX
+# ///////////////////////////////////////////////////////////////
+from . py_combo_box import PyComboBox
+
+
 # PY STATS WIDGET
 # ///////////////////////////////////////////////////////////////
 from . py_stats_widget import PyStatsWidget
+

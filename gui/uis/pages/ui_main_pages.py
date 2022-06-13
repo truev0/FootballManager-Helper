@@ -8,16 +8,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
-    QVBoxLayout, QWidget)
+from pyside_core import *
 
 
 class Ui_MainPages(object):
@@ -196,6 +187,112 @@ class Ui_MainPages(object):
         # /////////////////////////////////////////////////////////
         self.page_7 = QWidget()
         self.page_7.setObjectName(u"page_7")
+
+        # Main Page 7 Layout
+        self.page_7_main_layout = QHBoxLayout(self.page_7)
+        self.page_7_main_layout.setObjectName(u"page_7_main_layout")
+        self.page_7_main_layout.setContentsMargins(3, 3, 3, 3)
+        self.page_7_main_layout.setSpacing(0)
+
+        # Left Frame (Page 7)
+        self.compare_left_frame = QFrame()
+        self.compare_left_frame_layout = QVBoxLayout(self.compare_left_frame)
+        self.compare_left_frame.setStyleSheet("background-color: #ff0000")
+
+        # Left Top Frame (Page 7)
+        self.compare_top_left_frame = QFrame()
+        self.compare_top_left_frame.setMaximumHeight(150)
+        self.compare_top_left_frame.setStyleSheet("background-color: #000000")
+        self.compare_top_left_frame_layout = QVBoxLayout(self.compare_top_left_frame)
+
+        # Sub1 Left Top Frame (Page 7)
+        self.compare_sub1_top_left_frame = QFrame()
+        self.compare_sub1_top_left_frame_layout = QHBoxLayout(self.compare_sub1_top_left_frame)
+
+        # Sub2 Left Top Frame (Page 7)
+        self.compare_sub2_top_left_frame = QFrame()
+        self.compare_sub2_top_left_frame_layout = QHBoxLayout(self.compare_sub2_top_left_frame)
+
+        self.compare_top_left_frame_layout.addWidget(self.compare_sub1_top_left_frame)
+        self.compare_top_left_frame_layout.addWidget(self.compare_sub2_top_left_frame)
+
+        # Left Bottom Frame (Page 7)
+        self.compare_bottom_left_frame = QFrame()
+        self.compare_bottom_left_frame.setStyleSheet("background-color: #fff")
+        self.compare_bottom_left_frame_layout = QHBoxLayout(self.compare_bottom_left_frame)
+
+
+        self.compare_left_frame_layout.addWidget(self.compare_top_left_frame)
+        self.compare_left_frame_layout.addWidget(self.compare_bottom_left_frame)
+
+        # Right Frame (Page 7)
+        self.compare_right_frame = QFrame()
+        self.compare_right_frame.setMinimumWidth(400)
+        self.compare_right_frame.setMaximumWidth(450)
+        self.compare_right_frame_layout = QVBoxLayout(self.compare_right_frame)
+        self.compare_right_frame.setStyleSheet("background-color: #0000ff")
+
+        # Frame for first button
+        self.btn_compare_1_frame = QFrame()
+        self.btn_compare_1_frame.setObjectName("btn_compare_1_frame")
+        self.btn_compare_1_frame.setMinimumSize(QSize(0, 40))
+        self.btn_compare_1_frame.setMaximumSize(QSize(16777215, 40))
+        self.btn_compare_1_layout = QVBoxLayout(self.btn_compare_1_frame)
+        self.btn_compare_1_layout.setContentsMargins(0, 0, 0, 0)
+        self.btn_compare_1_layout.setSpacing(0)
+
+        self.compare_right_frame_layout.addWidget(self.btn_compare_1_frame)
+
+        # Frame for second button
+        self.btn_compare_2_frame = QFrame()
+        self.btn_compare_2_frame.setObjectName("btn_compare_2_frame")
+        self.btn_compare_2_frame.setMinimumSize(QSize(0, 40))
+        self.btn_compare_2_frame.setMaximumSize(QSize(16777215, 40))
+        self.btn_compare_2_layout = QVBoxLayout(self.btn_compare_2_frame)
+        self.btn_compare_2_layout.setContentsMargins(0, 0, 0, 0)
+        self.btn_compare_2_layout.setSpacing(0)
+
+        self.compare_right_frame_layout.addWidget(self.btn_compare_2_frame)
+
+        # Stacked for change between attrs and stats
+        self.compare_pages = QStackedWidget()
+        self.compare_pages.setObjectName("compare_pages")
+
+        # Menu 1
+        self.menu1_compare = QWidget()
+        # TODO eliminar color
+        self.menu1_compare.setStyleSheet("background-color: #5271A3")
+        self.menu1_compare.setObjectName("menu1_compare")
+        self.menu1_compare_layout = QVBoxLayout(self.menu1_compare)
+        self.menu1_compare_layout.setContentsMargins(5, 5, 5, 5)
+        self.menu1_compare_layout.setSpacing(5)
+
+
+        # self.vertical_spacer_1 = QSpacerItem(20, 15, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        # self.menu1_compare_layout.addItem(self.vertical_spacer_1)
+
+        self.compare_pages.addWidget(self.menu1_compare)
+
+        # Menu 2
+        self.menu2_compare = QWidget()
+        # TODO eliminar color
+        self.menu2_compare.setStyleSheet("background-color: #A9179C")
+        self.menu2_compare.setObjectName("menu2_compare")
+        self.menu2_compare_layout = QVBoxLayout(self.menu2_compare)
+        self.menu2_compare_layout.setContentsMargins(5, 5, 5, 5)
+        self.menu2_compare_layout.setSpacing(5)
+
+
+        # self.vertical_spacer_2 = QSpacerItem(20, 15, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        # self.menu2_compare_layout.addItem(self.vertical_spacer_2)
+
+        self.compare_pages.addWidget(self.menu2_compare)
+        self.compare_pages.setCurrentIndex(0)
+
+        self.compare_right_frame_layout.addWidget(self.compare_pages)
+
+        self.page_7_main_layout.addWidget(self.compare_left_frame)
+        self.page_7_main_layout.addWidget(self.compare_right_frame)
 
         self.pages.addWidget(self.page_7)
 

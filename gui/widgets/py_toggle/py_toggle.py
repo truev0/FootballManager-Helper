@@ -4,14 +4,16 @@
 # ///////////////////////////////////////////////////////////////
 from pyside_core import *
 
+
 class PyToggle(QCheckBox):
     def __init__(
-        self,
-        width = 50,
-        bg_color = "#777", 
-        circle_color = "#DDD",
-        active_color = "#00BCFF",
-        animation_curve = QEasingCurve.OutBounce
+            self,
+            width=50,
+            bg_color="#777",
+            circle_color="#DDD",
+            active_color="#00BCFF",
+            animation_curve=QEasingCurve.OutBounce,
+            checked=False
     ):
         QCheckBox.__init__(self)
         self.setFixedSize(width, 28)

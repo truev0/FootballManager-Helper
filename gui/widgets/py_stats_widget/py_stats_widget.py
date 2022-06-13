@@ -14,6 +14,10 @@ import mplcursors
 # ///////////////////////////////////////////////////////////////
 from gui.core.dicts import util_lists
 
+# IMPORT PY COMBO BOX
+# ///////////////////////////////////////////////////////////////
+from gui.widgets.py_combo_box import PyComboBox
+
 
 # PY STATS WIDGET
 # ///////////////////////////////////////////////////////////////
@@ -35,12 +39,12 @@ class PyStatsWidget(QWidget):
         super().__init__(parent)
         self.name = name
         self.language = language
-        self.type_selector = _QCustomCombo(
+        self.type_selector = PyComboBox(
             dark_one=dark_one,
             text_foreground=text_foreground,
             combo_border=combo_border,
         )
-        self.combo_selector = _QCustomCombo(
+        self.combo_selector = PyComboBox(
             dark_one=dark_one,
             text_foreground=text_foreground,
             combo_border=combo_border
@@ -76,47 +80,6 @@ class PyStatsWidget(QWidget):
         dependent_list = self.type_selector.itemData(index)
         if dependent_list:
             self.combo_selector.addItems(dependent_list)
-
-
-class _QCustomCombo(QComboBox):
-    style_combobox = """ 
-        QComboBox {{		
-            background-color: {_dark_one};	
-            color: {_text_foreground};
-            padding-left: 40px;
-            border-radius: 4px;
-            font: 800 9pt "Segoe UI";
-        }}
-        
-        QComboBox:on {{
-            border: 2px solid #c2dbfe;
-        }}
-        
-        QComboBox QListView {{
-            font-size: 12px;
-            border: 1px solid rgba(0, 0, 0, 10%);
-            padding: 5px;
-            background-color: {_dark_one};
-            outline: 0px;
-        }}
-        """
-
-    def __init__(
-            self,
-            text_foreground,
-            dark_one,
-            combo_border
-    ):
-        QComboBox.__init__(self)
-        # LABEL SETUP
-        style = self.style_combobox.format(
-            _dark_one=dark_one,
-            _text_foreground=text_foreground,
-            _combo_border=combo_border
-        )
-        self.setMaximumWidth(200)
-        self.setMinimumHeight(40)
-        self.setStyleSheet(style)
 
 
 class _CustomCanvas(FigureCanvas):

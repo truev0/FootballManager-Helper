@@ -362,7 +362,7 @@ class MainWindow(QMainWindow):
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load page 7
-            # self.ui.set_page(self.ui.load_pages.page_7)
+            self.ui.set_page(self.ui.load_pages.page_7)
 
         # Scouting Btn
         if btn.objectName() == "btn_scouting":
