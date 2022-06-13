@@ -13,19 +13,21 @@ espanol = {
         "o10": "Ajustes",
         "o11": "Info",
         "o12": "Ayuda",
+        "oaux1": "Estadisticas y Metricas",
         "t0": "Pagina inicio",
         "t1": "Ver plantilla",
         "t2": "Ver tactica",
         "t3": "Ver desarrollo",
         "t4": "Mostrar menu",
-        "t5": "Ver estadisticas",
-        "t6": "Ver metricas",
+        "t5": "Ver Estadisticas",
+        "t6": "EMPTY",
         "t7": "Ver comparativa",
         "t8": "Ir a scouting",
         "t9": "Ver empleados",
         "t10": "Ir a ajustes",
         "t11": "Ir a info",
-        "t12": "Ir a ayuda"
+        "t12": "Ir a ayuda",
+        "taux1": "Ver Estadisticas y Metricas"
     },
     "pages": {
         "p1": {
@@ -148,6 +150,8 @@ column_headers = {
         "s28": "Ps I/90",
         "s29": "Pen M",
         "s30": "Media",
+        "s31": "Ent",
+        "s32": "Gl Err",
         "a1": "Ace",
         "a2": "Sac",
         "a3": "Vis",

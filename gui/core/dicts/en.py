@@ -13,6 +13,7 @@ english = {
         "o10": "Settings",
         "o11": "Info",
         "o12": "Help",
+        "oaux1": "Statistics and Metrics",
         "t0": "Home Page",
         "t1": "Show your squad",
         "t2": "Show your tactic",
@@ -25,7 +26,8 @@ english = {
         "t9": "Show your employees",
         "t10": "Open Settings",
         "t11": "Open Info",
-        "t12": "Open Help"
+        "t12": "Open Help",
+        "taux1": "Show Statistics and Metrics"
     },
     "pages": {
         "p1": {
@@ -148,6 +150,8 @@ column_headers = {
         "s28": "Ps A/90",
         "s29": "Pens S",
         "s30": "Av Rat",
+        "s31": "Tck",
+        "s32": "Gl Mst",
         "a1": "Acc",
         "a2": "Wor",
         "a3": "Vis",

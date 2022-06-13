@@ -32,6 +32,7 @@ from gui.uis.pages.ui_main_pages import Ui_MainPages
 from gui.uis.columns.ui_right_column import Ui_RightColumn
 
 
+
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
 class Ui_MainWindow(object):
@@ -779,6 +780,7 @@ class Ui_MainWindow(object):
 
         self.graph_statistics = PyStatsWidget(
             name="graph_statistics",
+            language=self.language,
             dark_one=self.themes["app_color"]["dark_one"],
             text_foreground=self.themes["app_color"]["text_foreground"],
             combo_border=self.themes["app_color"]["context_hover"],
@@ -791,20 +793,7 @@ class Ui_MainWindow(object):
         self.load_pages.column_1_layout_5.addWidget(self.graph_statistics)
 
         # PAGE 6 - Metrics view
-        # TODO descomentar
-        # self.graph_metrics = PyStatsWidget(
-        #     name="graph_metrics",
-        #     dark_one=self.themes["app_color"]["dark_one"],
-        #     text_foreground=self.themes["app_color"]["text_foreground"],
-        #     combo_border=self.themes["app_color"]["context_hover"],
-        #     bg_two=self.themes["app_color"]["bg_two"],
-        #     dark_three=self.themes["app_color"]["dark_three"],
-        #     axis_color=self.themes["app_color"]["icon_active"],
-        #     color_title=self.themes["app_color"]["text_title"],
-        #     bar_color=self.themes["app_color"]["context_pressed"],
-        # )
-        #
-        # self.load_pages.column_1_layout_6.addWidget(self.graph_metrics)
+        # TODO crear layout later
 
         # PAGE 7 - Compare view
         # TODO crear layout

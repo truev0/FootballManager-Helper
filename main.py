@@ -32,7 +32,7 @@ from gui.core.models.CustomNumpyListModel.py_CustomNumpyListModel import Customi
 
 # IMPORT TRANSLATIONS
 # ///////////////////////////////////////////
-from gui.core.translations import en, es
+from gui.core.dicts import en, es, util_lists
 
 # IMPORT WIDGETS
 # ///////////////////////////////////////////
@@ -263,11 +263,6 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     # START CUSTOM FUNCTIONS FOR SETTINGS
     # ///////////////////////////////////////////
-
-    # RETURN PLOTLY APP
-    # ///////////////////////////////////////////
-    # def get_plotly_app(self):
-    #     return self.plotly_app
 
     # CUSTOM PARAMETERS FOR WINDOW
     # ///////////////////////////////////////////
@@ -601,30 +596,35 @@ class MainWindow(QMainWindow):
 
         self.tables_helper()
         # SETTING DATAFRAME FOR STATS / METRICS WIDGET
-        self.df_helper = self.df_original.iloc[:, :1]
-        self.df_helper = self.df_helper.join(self.df_original.iloc[:, 11:42])
-        # CONVERT TO LIST HEADERS OF DATAFRAME FOR STATS / METRICS WIDGET
-        stats_list = self.df_helper.columns.values.tolist()
+        self.df_helper = self.df_original.iloc[:, :2]
+        if self.language == 'en':
+            self.df_helper = self.df_helper.join(self.df_original['Salary'])
+            self.df_helper['Salary'] = self.df_helper['Salary'].fillna(0)
+        elif self.language == 'es':
+            self.df_helper = self.df_helper.join(self.df_original['Sueldo'])
+            self.df_helper['Sueldo'] = self.df_helper['Sueldo'].fillna(0)
+        self.df_helper = self.df_helper.join(self.df_original.iloc[:, 11:44])
 
-        # STATISTICS GRAPH
-        self.ui.graph_statistics.combo_selector.addItems(stats_list)
-        self.ui.graph_statistics.combo_selector.removeItem(1)
+        # STATS & METRICS DATA
+        if self.ui.graph_statistics.chart.count_actual_list() > 1:
+            self.ui.graph_statistics.type_selector.clear()
+            self.ui.graph_statistics.combo_selector.clear()
+
+        if self.language == 'en':
+            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o5, util_lists.list_en[0])
+            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o6, util_lists.list_en[1])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[0])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[1])
+        elif self.language == 'es':
+            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o5, util_lists.list_es[0])
+            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o6, util_lists.list_es[1])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[0])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[1])
         self.ui.graph_statistics.chart.set_data(self.df_helper)
-        self.ui.graph_statistics.chart.add_to_list(stats_list)
-
-        # TODO descomentar
-        # # METRICS GRAPH
-        # metrics_list = ['Ground Duels', 'Aerial Duels']
-        # self.ui.graph_metrics.combo_selector.addItems(metrics_list)
-        #
-        # self.ui.graph_metrics.chart.set_data(self.df_helper)
-        # self.ui.graph_metrics.chart.add_to_list(metrics_list)
-
 
     # SQUAD HELPER FUNCTION
     # ///////////////////////////////////////////
     def tables_helper(self):
-        inicio = time.time()
         model = CustomizedNumpyModel(self.df_for_table)
         column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
         self.ui.table_squad.setSelectionBehavior(QTableView.SelectItems)
@@ -639,9 +639,6 @@ class MainWindow(QMainWindow):
         self.ui.table_tactic.show()
         self.ui.table_tactic.horizontalHeader().setStretchLastSection(True)
 
-        fin = time.time()
-        print(f"Tiempo de ejecución: {fin - inicio}")
-
     # TRANSLATE UI
     # ///////////////////////////////////////////
     def translate_lang(self, lang):
@@ -653,7 +650,7 @@ class MainWindow(QMainWindow):
         self.ui.left_menu.findChild(QPushButton, 'btn_squad').setText(self.ui_text[lang].menu.o1)
         self.ui.left_menu.findChild(QPushButton, 'btn_tactic').setText(self.ui_text[lang].menu.o2)
         self.ui.left_menu.findChild(QPushButton, 'btn_development').setText(self.ui_text[lang].menu.o3)
-        self.ui.left_menu.findChild(QPushButton, 'btn_stats').setText(self.ui_text[lang].menu.o5)
+        self.ui.left_menu.findChild(QPushButton, 'btn_stats').setText(self.ui_text[lang].menu.oaux1)
         self.ui.left_menu.findChild(QPushButton, 'btn_metrics').setText(self.ui_text[lang].menu.o6)
         self.ui.left_menu.findChild(QPushButton, 'btn_compare').setText(self.ui_text[lang].menu.o7)
         self.ui.left_menu.findChild(QPushButton, 'btn_scouting').setText(self.ui_text[lang].menu.o8)
@@ -668,7 +665,7 @@ class MainWindow(QMainWindow):
         self.ui.left_menu.findChild(QPushButton, 'btn_squad').change_tooltip(self.ui_text[lang].menu.t1)
         self.ui.left_menu.findChild(QPushButton, 'btn_tactic').change_tooltip(self.ui_text[lang].menu.t2)
         self.ui.left_menu.findChild(QPushButton, 'btn_development').change_tooltip(self.ui_text[lang].menu.t3)
-        self.ui.left_menu.findChild(QPushButton, 'btn_stats').change_tooltip(self.ui_text[lang].menu.t5)
+        self.ui.left_menu.findChild(QPushButton, 'btn_stats').change_tooltip(self.ui_text[lang].menu.taux1)
         self.ui.left_menu.findChild(QPushButton, 'btn_metrics').change_tooltip(self.ui_text[lang].menu.t6)
         self.ui.left_menu.findChild(QPushButton, 'btn_compare').change_tooltip(self.ui_text[lang].menu.t7)
         self.ui.left_menu.findChild(QPushButton, 'btn_scouting').change_tooltip(self.ui_text[lang].menu.t8)

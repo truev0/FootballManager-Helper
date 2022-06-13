@@ -5,7 +5,7 @@ import plotly.express as px
 import numpy as np
 import json
 import warnings
-from gui.core.translations import en, es
+from gui.core.dicts import en, es
 from gui.core.models.CustomNestedNamespace.py_CustomNestedNamespace import NestedNamespace
 
 # INITIAL CONFIGURATION TO PROCESS
@@ -59,6 +59,7 @@ def convert_values(df, l):
             df[column] = df[column].str.replace(',', '.')
         else:
             df[column] = df[column].str.replace('N/A', '0')
+            df[column] = df[column].str.replace('N/D', '0')
             df[column] = df[column].str.replace('$', '')
             df[column] = df[column].str.replace('Â', '')
             df[column] = df[column].str.replace('p/a', '')
@@ -71,7 +72,7 @@ def convert_values(df, l):
     for column in [text[l].h.s6, text[l].h.s3, text[l].h.s2, text[l].h.s14, text[l].h.s18, text[l].h.s21, text[l].h.s9,
                    text[l].h.s13, text[l].h.s11, text[l].h.s1, text[l].h.s15, text[l].h.s16, text[l].h.s22,
                    text[l].h.s4, text[l].h.s27, text[l].h.s28, text[l].h.s26, text[l].h.s5, text[l].h.s8,
-                   text[l].h.s10, text[l].h.s17, text[l].h.s19, text[l].h.s20,
+                   text[l].h.s10, text[l].h.s17, text[l].h.s19, text[l].h.s20, text[l].h.s31
                    ]:
         df[column] = df[column].str.replace('-', '0')
         if column in [text[l].h.s5, text[l].h.s8, text[l].h.s10, text[l].h.s17, text[l].h.s20, ]:
@@ -80,15 +81,16 @@ def convert_values(df, l):
     for column in [text[l].h.s6, text[l].h.s20, text[l].h.s10, text[l].h.s8, text[l].h.s5, text[l].h.s19,
                    text[l].h.s28, text[l].h.s18, text[l].h.s27, text[l].h.s23, text[l].h.s16, text[l].h.s22,
                    text[l].h.s15, text[l].h.s14, text[l].h.s13, text[l].h.s11, text[l].h.s9, text[l].h.s17,
-                   text[l].h.s30]:
+                   text[l].h.s30, text[l].h.s31]:
         df[column] = pd.to_numeric(df[column], downcast="float")
 
-    for column in [text[l].h.s1, text[l].h.s2, text[l].h.s3, text[l].h.s4, text[l].h.s21, text[l].h.s26, text[l].h.h11]:
+    for column in [text[l].h.s1, text[l].h.s2, text[l].h.s3, text[l].h.s4, text[l].h.s21, text[l].h.s26, text[l].h.h11,
+                   text[l].h.s32]:
         df[column] = pd.to_numeric(df[column], downcast="integer")
 
-    for column in [text[l].h.s6, text[l].h.s9, text[l].h.s11, text[l].h.s13, text[l].h.s14, text[l].h.s15, text[l].h.s16,
-                   text[l].h.s18, text[l].h.s19, text[l].h.s22, text[l].h.s27, text[l].h.s28]:
-        df[column] = df[column].div(100).round(2)
+    # for column in [text[l].h.s6, text[l].h.s9, text[l].h.s11, text[l].h.s13, text[l].h.s14, text[l].h.s15, text[l].h.s16,
+    #                text[l].h.s18, text[l].h.s19, text[l].h.s22, text[l].h.s27, text[l].h.s28]:
+    #     df[column] = df[column].div(100).round(2)
     return df
 
 # CREATE METRICS FOR GOALKEEPERS

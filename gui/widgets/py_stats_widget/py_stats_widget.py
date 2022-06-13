@@ -8,74 +8,11 @@ from pyside_core import *
 # ///////////////////////////////////////////////////////////////
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
-import plotly.express as px
+import mplcursors
 
-stats_list = {
-    'Mins': 'Minutes',
-    'Svt': 'Saves Tipped',
-    'Svp': 'Saves Parried',
-    'Svh': 'Saves Held',
-    'Conc': 'Conceded',
-    'Pas %': '% Passes',
-    'Ps C/90': "Completed Passes / 90'",
-    'K Tck': 'Key Tackles',
-    'Tck R': 'Tackles Ratio',
-    'Int/90': 'Interceptions / 90',
-    'Hdr %': '% Headers',
-    'Hdrs W/90': 'Headers Won / 90',
-    'Fls': 'Fouls',
-    'K Ps/90': 'Key Passes / 90',
-    'Ch C/90': 'Chances Created / 90',
-    'Gls/90': 'Goals / 90',
-    'Shot %': '% Shots',
-    'Drb/90': 'Dribbles / 90',
-    'Shot/90': 'Shots / 90',
-    'Cr C/A': 'Crosses Completed vs Attempts',
-    'ShT/90': 'Shots on Target / 90',
-    'Dist/90': 'Distance Covered / 90',
-    'Gls': 'Goals',
-    'Ast': 'Assits',
-    'Tall': 'Team allowed',
-    'Tcon/90': 'Team conceded / 90',
-    'Ps A/90': 'Passes Attempted / 90',
-    'Pens S': 'Penalties Scored',
-    'Av Rat': 'Average Rating',
-    'Min': 'Minutos',
-    'BDs': 'Translate 1',
-    'BRe': 'Translate 2',
-    'BAt': 'Translate 3',
-    'Enc': 'Encajados',
-    '% Pase': '% Pases',
-    'Ps C/90': 'Pases Completados / 90',
-    'Ent Cl': 'Entradas Clave',
-    'Ent P': 'Promedio Entradas',
-    'Rob/90': 'Robos / 90',
-    'Rcg %': '% Cabezazos',
-    'Cab G/90': 'Cabezazos Ganados / 90',
-    'FC': 'Faltas Cometidas',
-    'Pas Clv/90': 'Pases Clave / 90',
-    'Oc C/90': 'Ocasiones Creadas / 90',
-    'Gol/90': 'Goles / 90',
-    'Asis/90': 'Asistencias / 90',
-    '% disparos': '% Disparos',
-    'Reg/90': 'Regates / 90',
-    'Tir/90': 'Tiros / 90',
-    'Cen.C/I': 'Centros Completados vs Intentados',
-    'Cen.Com': 'Centros Completados',
-    'TirP/90': 'Tiros a puerta / 90',
-    'Dist/90': 'Distancia Recorrida / 90',
-    'Gol': 'Goles',
-    'Asis': 'Asistencias',
-    'EnEq': 'Encajados Equipo',
-    'EnEq/90': 'Encajados Equipo / 90',
-    'Ps I/90': 'Pases Intentados / 90',
-    'Pen M': 'Penalties Marcados',
-    'Media': 'Media'
-}
-
-metrics_list = {
-    "Ground Duels": ("Tck R", "Int/90")
-}
+# IMPORT DICTS
+# ///////////////////////////////////////////////////////////////
+from gui.core.dicts import util_lists
 
 
 # PY STATS WIDGET
@@ -84,6 +21,7 @@ class PyStatsWidget(QWidget):
     def __init__(
             self,
             name,
+            language,
             parent=None,
             dark_one="#1b1e23",
             text_foreground="#8a95aa",
@@ -96,19 +34,22 @@ class PyStatsWidget(QWidget):
     ):
         super().__init__(parent)
         self.name = name
+        self.language = language
+        self.type_selector = _QCustomCombo(
+            dark_one=dark_one,
+            text_foreground=text_foreground,
+            combo_border=combo_border,
+        )
         self.combo_selector = _QCustomCombo(
             dark_one=dark_one,
             text_foreground=text_foreground,
             combo_border=combo_border
         )
-        if self.name == "graph_statistics":
-            self.combo_selector.addItem("Choose a stat")
-        elif self.name == "graph_metrics":
-            self.combo_selector.addItem("Choose a metric")
 
         self.chart = _CustomCanvas(
             self,
             name=self.name,
+            language=self.language,
             bg_two=bg_two,
             dark_three=dark_three,
             axis_color=axis_color,
@@ -118,14 +59,23 @@ class PyStatsWidget(QWidget):
 
         self.principal_layout = QVBoxLayout(self)
         self.alter_layout = QHBoxLayout()
-
+        self.alter_layout.addWidget(self.type_selector)
         self.alter_layout.addWidget(self.combo_selector)
         self.principal_layout.addLayout(self.alter_layout)
         self.principal_layout.addWidget(self.chart)
 
+        self.type_selector.currentIndexChanged.connect(self.updateDependentCombo)
+        self.updateDependentCombo(self.type_selector.currentIndex())
+
         self.combo_selector.currentTextChanged.connect(
             self.chart.update_chart
         )
+
+    def updateDependentCombo(self, index):
+        self.combo_selector.clear()
+        dependent_list = self.type_selector.itemData(index)
+        if dependent_list:
+            self.combo_selector.addItems(dependent_list)
 
 
 class _QCustomCombo(QComboBox):
@@ -150,6 +100,7 @@ class _QCustomCombo(QComboBox):
             outline: 0px;
         }}
         """
+
     def __init__(
             self,
             text_foreground,
@@ -172,6 +123,7 @@ class _CustomCanvas(FigureCanvas):
     def __init__(
             self,
             parent,
+            language,
             name,
             bg_two,
             dark_three,
@@ -189,66 +141,126 @@ class _CustomCanvas(FigureCanvas):
         self.bar_color = bar_color
 
         self._name = name
+        self._language = language
         self._actual_list = ['']
         self._data = None
+        self._parent = parent
         self.setParent(parent)
-        if self._name == "graph_statistics":
+        if self._name == "graph_statistics" and self._language == "en":
             plt.title("Statistics Chart")
-        elif self._name == "graph_metrics":
+        elif self._name == "graph_statistics" and self._language == "es":
+            plt.title("Gráfico de Estadísticas")
+        elif self._name == "graph_metrics" and self._language == "en":
             plt.title("Metrics Chart")
-        # plt.show()
+        elif self._name == "graph_metrics" and self._language == "es":
+            plt.title("Gráfico de Métricas")
+
         fig.patch.set_facecolor(self.bg_two)
         self.ax.set_facecolor(self.dark_three)
+        self.ax.xaxis.label.set_color(self.axis_color)
+        self.ax.yaxis.label.set_color(self.axis_color)
         self.ax.tick_params(axis='x', colors=self.axis_color)
         self.ax.tick_params(axis='y', colors=self.axis_color)
         self.ax.title.set_color(self.color_title)
         plt.tight_layout()
 
+    def count_actual_list(self):
+        return len(self._actual_list)
+
     def set_data(self, data):
         self._data = data
 
-    def add_to_list(self, list):
-        self._actual_list[0] = list[0]
-        if len(list) > 1:
-            for i in range(1, len(list)):
-                self._actual_list.append(list[i])
+    def add_to_list(self, e_list):
+        if len(self._actual_list) == 1:
+            self._actual_list[0] = e_list[0]
+            if len(e_list) > 1:
+                for i in range(1, len(e_list)):
+                    self._actual_list.append(e_list[i])
+        else:
+            for e in e_list:
+                self._actual_list.append(e)
 
     def update_chart(self, new_parameter):
-        self.ax.clear()
         if self._data is not None:
-            if self._name == "graph_statistics":
-                custom_df = self._data[[self._actual_list[0], new_parameter]]
+            self.ax.clear()
+            curr = self._parent.type_selector.currentText()
+            if curr == "Statistics" or curr == "Estadisticas":
                 if new_parameter in self._actual_list:
+                    custom_df = self._data.iloc[:, :1]
+                    custom_df = custom_df.join(
+                        self._data[new_parameter]
+                    )
                     custom_df.plot.bar(
-                        x=self._actual_list[0],
-                        y=new_parameter,
+                        x=custom_df.columns[0],
+                        y=custom_df.columns[1],
                         ax=self.ax,
                         color=self.bar_color
                     )
                     plt.subplots_adjust(bottom=0.22)
-                    plt.title(stats_list[new_parameter], color=self.color_title)
+                    plt.title(util_lists.stats_list[new_parameter], color=self.color_title, size=15)
                     self.ax.tick_params(axis='x', rotation=80)
                     plt.axhline(y=custom_df[new_parameter].mean(), color='r', linestyle='--')
                     plt.xlabel("")
-                    plt.draw()
+                    cursor = mplcursors.cursor(hover=mplcursors.HoverMode.Transient)
+
+                    @cursor.connect("add")
+                    def on_add(sel):
+                        try:
+                            x, y, width, height = sel.artist[sel.index].get_bbox().bounds
+                            if ((x+width/2)+4) > len(custom_df):
+                                sel.annotation.set(
+                                    text=f"{custom_df[custom_df.columns[0]][sel.index]}: {height:g}",
+                                    position=(-10, 0), anncoords="offset points"
+                                )
+                            else:
+                                sel.annotation.set(
+                                    text=f"{custom_df[custom_df.columns[0]][sel.index]}: {height:g}",
+                                    position=(10, 0), anncoords="offset points"
+                                )
+                            sel.annotation.xy = (x + width / 2, y + height)
+                            sel.annotation.get_bbox_patch().set(alpha=0.8)
+                        except TypeError:
+                            pass
                 else:
                     self.ax.clear()
-            elif self._name == "graph_metrics":
+            elif curr == "Metrics" or curr == "Metricas":
                 if new_parameter in self._actual_list:
-                    custom_df = self._data[["Name", metrics_list[new_parameter][0],
-                                            metrics_list[new_parameter][1]]]
-                    fig = px.scatter(
-                        custom_df,
-                        x=metrics_list[new_parameter][0],
-                        y=metrics_list[new_parameter][1],
-                        text="Name",
-                        log_x=False,
-                        size_max=60
+                    custom_df = self._data.iloc[:, :1]
+                    custom_df = custom_df.join(
+                        self._data[
+                            [
+                                util_lists.metrics_list[new_parameter][0],
+                                util_lists.metrics_list[new_parameter][1]
+                            ]
+                        ]
                     )
-                    fig.update_traces(textposition='top center')
-                    fig.update_layout(height=500)
-                    fig.update_xaxes(title_text=stats_list[metrics_list[new_parameter][0]])
-                    fig.update_yaxes(title_text=stats_list[metrics_list[new_parameter][1]])
-                    fig.update_layout(template="plotly_dark", title=new_parameter)
-                    fig.show()
-# TODO READ ACTUAL STACK FOR ADD MPLCURSORS
+                    custom_df.plot.scatter(
+                        x=custom_df.columns[1],
+                        y=custom_df.columns[2],
+                        ax=self.ax,
+                        color=self.bar_color
+                    )
+                    plt.subplots_adjust(bottom=0.1)
+                    self.ax.set_xlabel(util_lists.stats_list[custom_df.columns[1]], size=12)
+                    self.ax.set_ylabel(util_lists.stats_list[custom_df.columns[2]], size=12)
+                    plt.title(new_parameter, color=self.color_title, size=15)
+                    plt.axhline(y=custom_df[custom_df.columns[2]].mean(), color='r', linestyle=':')
+                    plt.axvline(x=custom_df[custom_df.columns[1]].mean(), color='r', linestyle=':')
+                    cursor = mplcursors.cursor(hover=mplcursors.HoverMode.Transient)
+
+                    @cursor.connect("add")
+                    def on_add(sel):
+                        try:
+                            sel.annotation.set_text(
+                                "{}\n{}: {:.2f}\n{}: {:.2f}".format(custom_df[custom_df.columns[0]][sel.index],
+                                                                    util_lists.stats_list[custom_df.columns[1]],
+                                                                    sel.target[0],
+                                                                    util_lists.stats_list[custom_df.columns[2]],
+                                                                    sel.target[1])
+                            )
+                            sel.annotation.get_bbox_patch().set(alpha=0.8)
+                        except KeyError:
+                            pass
+                else:
+                    self.ax.clear()
+            plt.draw()
