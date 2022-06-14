@@ -836,29 +836,39 @@ class Ui_MainWindow(object):
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
-        )
-        self.btn_compare_stats.clicked.connect(
-            lambda: self.set_compare_column_menu(
-                self.load_pages.menu1_compare
-            )
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
+            name='stats'
         )
         self.btn_compare_stats.setMaximumHeight(40)
 
-        self.btn_compare_metrics = PyPushButton(
-            text="Select Metrics",
+        self.btn_compare_attrs = PyPushButton(
+            text="Select Attributes",
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
+            name="attrs"
         )
-        self.btn_compare_metrics.clicked.connect(
-            lambda: self.set_compare_column_menu(
-                self.load_pages.menu2_compare
-            )
+        self.btn_compare_attrs.setMaximumHeight(40)
+
+        # MID RIGHT SIDE
+        # ///////////////////////////////////////////////////////////////
+        self.group_chk_attrs_widget = PyButtonGroup()
+
+        self.group_chk_stats_widget = PyButtonGroup()
+
+        # BOTTOM  RIGHT SIDE
+        self.btn_send = PyPushButton(
+            text="Send Data",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
+            name="send_data"
         )
-        self.btn_compare_metrics.setMaximumHeight(40)
+        self.btn_send.setMaximumHeight(40)
 
         # ADDING WIDGETS TO ITS RESPECTIVE LAYOUT
         # Left Side
@@ -869,9 +879,14 @@ class Ui_MainWindow(object):
 
         # Right Side
         self.load_pages.btn_compare_1_layout.addWidget(self.btn_compare_stats)
-        self.load_pages.btn_compare_2_layout.addWidget(self.btn_compare_metrics)
-        # TODO make connection of this buttons in main
+        self.load_pages.btn_compare_2_layout.addWidget(self.btn_compare_attrs)
 
+        # Mid Right Side
+        self.load_pages.menu1_compare_layout.addWidget(self.group_chk_attrs_widget)
+        self.load_pages.menu2_compare_layout.addWidget(self.group_chk_stats_widget)
+
+        # Bottom Right Side
+        self.load_pages.btn_send_layout.addWidget(self.btn_send)
 
         # PAGE 8 - Scouting view
         # TODO crear layout
@@ -897,9 +912,6 @@ class Ui_MainWindow(object):
         self.icon_right = QIcon(Functions.set_svg_icon("icon_arrow_right.svg"))
         self.right_btn_1.setIcon(self.icon_right)
         self.right_btn_1.setMaximumHeight(40)
-        self.right_btn_1.clicked.connect(lambda: self.set_right_column_menu(
-            self.right_column.menu_2
-        ))
         self.right_column.btn_1_menu_1_layout.addWidget(self.right_btn_1)
 
         # Button to change to menu 1
@@ -914,11 +926,9 @@ class Ui_MainWindow(object):
         self.icon_left = QIcon(Functions.set_svg_icon("icon_arrow_left.svg"))
         self.right_btn_2.setIcon(self.icon_left)
         self.right_btn_2.setMaximumHeight(40)
-        self.right_btn_2.clicked.connect(lambda: self.set_right_column_menu(
-            self.right_column.menu_1
-        ))
+
         self.right_column.btn_1_menu_2_layout.addWidget(self.right_btn_2)
-        # TODO make connection of above buttons in main
+
         # ENGLISH BUTTON
         # Button to change UI to english
         # ///////////////////////////////////////////////////////////////
@@ -993,8 +1003,14 @@ class Ui_MainWindow(object):
 
     # SET COMPARE COLUMN PAGES
     # ///////////////////////////////////////////////////////////////
-    def set_compare_column_menu(self, menu):
+    def set_compare_column_menu(self, menu, button):
         self.load_pages.compare_pages.setCurrentWidget(menu)
+        if 'attrs' in button.get_name():
+            self.btn_compare_attrs.setEnabled(False)
+            self.btn_compare_stats.setEnabled(True)
+        else:
+            self.btn_compare_stats.setEnabled(False)
+            self.btn_compare_attrs.setEnabled(True)
 
     # GET TITLE BUTTON BY OBJECT NAME
     # ///////////////////////////////////////////////////////////////

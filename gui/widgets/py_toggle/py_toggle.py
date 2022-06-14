@@ -8,14 +8,15 @@ from pyside_core import *
 class PyToggle(QCheckBox):
     def __init__(
             self,
+            name,
             width=50,
             bg_color="#777",
             circle_color="#DDD",
             active_color="#00BCFF",
             animation_curve=QEasingCurve.OutBounce,
-            checked=False
     ):
         QCheckBox.__init__(self)
+        self.name = name
         self.setFixedSize(width, 28)
         self.setCursor(Qt.PointingHandCursor)
 

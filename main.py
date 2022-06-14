@@ -553,6 +553,35 @@ class MainWindow(QMainWindow):
         self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
         self.ui.btn_close_notification.clicked.connect(lambda: self.ui.popup_notification_container.collapseMenu())
 
+        # SLIDE BETWEEN PAGES
+        # ///////////////////////////////////////////
+        # Change to pages in right column
+        self.ui.right_btn_1.clicked.connect(
+            lambda: self.ui.set_right_column_menu(
+                self.ui.right_column.menu_2
+            )
+        )
+
+        self.ui.right_btn_2.clicked.connect(
+            lambda: self.ui.set_right_column_menu(
+                self.ui.right_column.menu_1
+            )
+        )
+
+        # Change to checkbox list of stats in compare page
+        self.ui.btn_compare_stats.clicked.connect(
+            lambda: self.ui.set_compare_column_menu(
+                self.ui.load_pages.menu2_compare,
+                self.ui.btn_compare_stats
+            )
+        )
+        # Change to checkbox list of metrics in compare page
+        self.ui.btn_compare_attrs.clicked.connect(
+            lambda: self.ui.set_compare_column_menu(
+                self.ui.load_pages.menu1_compare,
+                self.ui.btn_compare_attrs
+            )
+        )
         # CHANGE EVENTS
         # ///////////////////////////////////////////
 
@@ -622,6 +651,8 @@ class MainWindow(QMainWindow):
             self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[1])
         self.ui.graph_statistics.chart.set_data(self.df_helper)
 
+        self.create_and_load_checkboxes()
+
     # SQUAD HELPER FUNCTION
     # ///////////////////////////////////////////
     def tables_helper(self):
@@ -642,7 +673,6 @@ class MainWindow(QMainWindow):
     # TRANSLATE UI
     # ///////////////////////////////////////////
     def translate_lang(self, lang):
-        print("Translation")
         self.language = lang
 
         # Translating side menu buttons
@@ -691,6 +721,19 @@ class MainWindow(QMainWindow):
         # Translating right inside menu
         self.ui.right_btn_1.setText(self.ui_text[lang].right_content.b1)
         self.ui.right_btn_2.setText(self.ui_text[lang].right_content.b2)
+
+    # CREATE AND LOAD CHECHBOXES TO COMPARE
+    # ///////////////////////////////////////////
+    def create_and_load_checkboxes(self):
+        if self.ui.group_chk_stats_widget.get_count() is not None and self.ui.group_chk_attrs_widget.get_count() is not None:
+            self.ui.group_chk_attrs_widget.remove_all_buttons()
+            self.ui.group_chk_stats_widget.remove_all_buttons()
+        if self.language == 'en':
+            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_en[2])
+            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_en[0])
+        elif self.language == 'es':
+            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_es[2])
+            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_es[0])
 
     # ///////////////////////////////////////////
     # END CUSTOM FUNCTIONS FOR FUNCTIONALITY

@@ -227,8 +227,8 @@ class Ui_MainPages(object):
 
         # Right Frame (Page 7)
         self.compare_right_frame = QFrame()
-        self.compare_right_frame.setMinimumWidth(400)
-        self.compare_right_frame.setMaximumWidth(450)
+        self.compare_right_frame.setMinimumWidth(450)
+        self.compare_right_frame.setMaximumWidth(500)
         self.compare_right_frame_layout = QVBoxLayout(self.compare_right_frame)
         self.compare_right_frame.setStyleSheet("background-color: #0000ff")
 
@@ -263,13 +263,10 @@ class Ui_MainPages(object):
         # TODO eliminar color
         self.menu1_compare.setStyleSheet("background-color: #5271A3")
         self.menu1_compare.setObjectName("menu1_compare")
-        self.menu1_compare_layout = QVBoxLayout(self.menu1_compare)
+        self.menu1_compare_layout = QHBoxLayout(self.menu1_compare)
         self.menu1_compare_layout.setContentsMargins(5, 5, 5, 5)
         self.menu1_compare_layout.setSpacing(5)
-
-
-        # self.vertical_spacer_1 = QSpacerItem(20, 15, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        # self.menu1_compare_layout.addItem(self.vertical_spacer_1)
+        # ANADIR AQUI LOS CHECKBOX DE ATTRS
 
         self.compare_pages.addWidget(self.menu1_compare)
 
@@ -278,18 +275,26 @@ class Ui_MainPages(object):
         # TODO eliminar color
         self.menu2_compare.setStyleSheet("background-color: #A9179C")
         self.menu2_compare.setObjectName("menu2_compare")
-        self.menu2_compare_layout = QVBoxLayout(self.menu2_compare)
+        self.menu2_compare_layout = QHBoxLayout(self.menu2_compare)
         self.menu2_compare_layout.setContentsMargins(5, 5, 5, 5)
         self.menu2_compare_layout.setSpacing(5)
-
-
-        # self.vertical_spacer_2 = QSpacerItem(20, 15, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        # self.menu2_compare_layout.addItem(self.vertical_spacer_2)
+        # ANADIR AQUI LOS CHECKBOX DE STATS
 
         self.compare_pages.addWidget(self.menu2_compare)
         self.compare_pages.setCurrentIndex(0)
 
         self.compare_right_frame_layout.addWidget(self.compare_pages)
+
+        # Frame for 'send' button
+        self.btn_send_frame = QFrame()
+        self.btn_send_frame.setObjectName("btn_send_frame")
+        self.btn_send_frame.setMinimumSize(QSize(0, 40))
+        self.btn_send_frame.setMaximumSize(QSize(16777215, 40))
+        self.btn_send_layout = QVBoxLayout(self.btn_send_frame)
+        self.btn_send_layout.setContentsMargins(0, 0, 0, 0)
+        self.btn_send_layout.setSpacing(0)
+
+        self.compare_right_frame_layout.addWidget(self.btn_send_frame)
 
         self.page_7_main_layout.addWidget(self.compare_left_frame)
         self.page_7_main_layout.addWidget(self.compare_right_frame)

@@ -67,3 +67,7 @@ from . py_combo_box import PyComboBox
 # ///////////////////////////////////////////////////////////////
 from . py_stats_widget import PyStatsWidget
 
+
+# PY BUTTON GROUP WIDGET
+# ///////////////////////////////////////////////////////////////
+from . py_button_group import PyButtonGroup

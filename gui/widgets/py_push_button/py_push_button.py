@@ -1,5 +1,4 @@
 
-
 # IMPORT QT CORE
 # ///////////////////////////////////////////////////////////////
 from pyside_core import *
@@ -23,22 +22,25 @@ QPushButton:pressed {{
 }}
 '''
 
+
 # PY PUSH BUTTON
 # ///////////////////////////////////////////////////////////////
 class PyPushButton(QPushButton):
     def __init__(
-        self, 
-        text,
-        radius,
-        color,
-        bg_color,
-        bg_color_hover,
-        bg_color_pressed,
-        parent=None
+      self,
+      text,
+      radius,
+      color,
+      bg_color,
+      bg_color_hover,
+      bg_color_pressed,
+      parent=None,
+      name=None
     ):
         super().__init__()
 
         # SET PARAMETRES
+        self._name = name
         self.setText(text)
         if parent != None:
             self.setParent(parent)
@@ -54,4 +56,5 @@ class PyPushButton(QPushButton):
         )
         self.setStyleSheet(custom_style)
 
-        
+    def get_name(self):
+        return self._name
