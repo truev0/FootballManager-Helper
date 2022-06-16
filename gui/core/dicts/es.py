@@ -27,7 +27,10 @@ espanol = {
         "t10": "Ir a ajustes",
         "t11": "Ir a info",
         "t12": "Ir a ayuda",
-        "taux1": "Ver Estadisticas y Metricas"
+        "taux1": "Ver Estadisticas y Metricas",
+        "g0": "Plantilla Actual",
+        "g1": "Scouting",
+        "g2": "Plantilla Vieja",
     },
     "pages": {
         "p1": {

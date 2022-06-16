@@ -2,7 +2,6 @@
 # ///////////////////////////////////////////
 import sys
 import os
-import time
 
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////
@@ -82,9 +81,15 @@ class MainWindow(QMainWindow):
         self.top_grip = None
         self.right_grip = None
         self.left_grip = None
+        self.haveSquadInfo = False
+        self.haveScoutingInfo = False
+        self.haveOldSquadInfo = False
         self.ui_text = {}
         self.ui_text.update({'en': NestedNamespace(en.english)})
         self.ui_text.update({'es': NestedNamespace(es.espanol)})
+        self.ui_headers = {}
+        self.ui_headers.update({'en': NestedNamespace(en.column_headers)})
+        self.ui_headers.update({'es': NestedNamespace(es.column_headers)})
 
         # LOAD SETTINGS
         # ///////////////////////////////////////////
@@ -452,7 +457,7 @@ class MainWindow(QMainWindow):
 
         if btn.objectName() == "btn_refresh":
             '''
-            No ha sido implementada por que aun no se para que
+            No implementado por que es buton auxiliar
             '''
             pass
 
@@ -548,10 +553,13 @@ class MainWindow(QMainWindow):
     def connect_events(self):
         # CLICK EVENTS
         # ///////////////////////////////////////////
-        self.ui.load_squad_btn.clicked.connect(lambda: self.load_all_data())
+        self.ui.load_squad_btn.clicked.connect(lambda: self.load_all_data(self.ui.load_squad_btn))
+        self.ui.load_scouting_btn.clicked.connect(lambda: self.load_all_data(self.ui.load_scouting_btn))
+        # ADD OLD SQUAD BUTTON
         self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
         self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
         self.ui.btn_close_notification.clicked.connect(lambda: self.ui.popup_notification_container.collapseMenu())
+        self.ui.btn_send.clicked.connect(lambda: self.process_data_compare_players())
 
         # SLIDE BETWEEN PAGES
         # ///////////////////////////////////////////
@@ -585,7 +593,6 @@ class MainWindow(QMainWindow):
         # CHANGE EVENTS
         # ///////////////////////////////////////////
 
-
     # ///////////////////////////////////////////
     # END CUSTOM FUNCTIONS FOR EVENTS
     # ///////////////////////////////////////////
@@ -596,7 +603,7 @@ class MainWindow(QMainWindow):
 
     # LOAD FILE
     # ///////////////////////////////////////////
-    def load_all_data(self):
+    def load_all_data(self, button_object):
         # FILE DIALOG
         dlg_file = QFileDialog.getOpenFileName(
             self,
@@ -606,16 +613,41 @@ class MainWindow(QMainWindow):
 
         # READ FILE
         if dlg_file:
-            # SETTING ORIGINAL DATAFRAME
-            self.df_original = FMi.setting_up_pandas(dlg_file[0], 'squad_btn')
-            self.df_original = FMi.convert_values(self.df_original, self.language)
-            self.df_original = FMi.create_metrics_for_gk(self.df_original, self.language)
+            if 'squad' in button_object.text():
+                # SETTING ORIGINAL DATAFRAME
+                self.df_original = FMi.setting_up_pandas(dlg_file[0], 'squad_btn')
+                self.process_squad_info()
 
-            # SETTING MODIFIED DATAFRAME
-            self.df_squad = FMi.data_for_rankings(self.df_original, self.language)
-            self.df_squad = FMi.create_scores_for_position(self.df_squad, self.language)
-            self.df_squad = FMi.round_data(self.df_squad)
-            self.df_squad = FMi.ranking_values(self.df_squad)
+                self.tables_helper()
+
+                self.load_data_for_graphs()
+
+                self.create_and_load_checkboxes()
+                tmp_list = self.df_original[self.ui_headers[self.language].h.h1].values.tolist()
+                self.add_squad_names(tmp_list)
+                self.haveSquadInfo = True
+            elif 'scouting' in button_object.text():
+                '''
+                No implementado aun
+                '''
+                pass
+            elif 'old' in button_object.text():
+                '''
+                No implementado aun por que no se que hacer aqui
+                '''
+                pass
+
+    # PROCESS ACTUAL SQUAD INFO
+    # ///////////////////////////////////////////
+    def process_squad_info(self):
+        self.df_original = FMi.convert_values(self.df_original, self.language)
+        self.df_original = FMi.create_metrics_for_gk(self.df_original, self.language)
+
+        # SETTING MODIFIED DATAFRAME
+        self.df_squad = FMi.data_for_rankings(self.df_original, self.language)
+        self.df_squad = FMi.create_scores_for_position(self.df_squad, self.language)
+        self.df_squad = FMi.round_data(self.df_squad)
+        self.df_squad = FMi.ranking_values(self.df_squad)
 
         # SETTING DATAFRAME FOR SQUAD TABLE
         self.df_for_table = FMi.create_df_for_squad(self.df_squad, self.language)
@@ -623,7 +655,26 @@ class MainWindow(QMainWindow):
         self.df_tactic = self.df_for_table.iloc[:, :1]
         self.df_tactic = self.df_tactic.join(self.df_for_table.iloc[:, 2:3])
 
-        self.tables_helper()
+    # SQUAD HELPER FUNCTION
+    # ///////////////////////////////////////////
+    def tables_helper(self):
+        model = CustomizedNumpyModel(self.df_for_table)
+        column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
+        self.ui.table_squad.setSelectionBehavior(QTableView.SelectItems)
+        self.ui.table_squad.setModel(model)
+        self.ui.table_squad.show()
+        headers = self.ui.table_squad.horizontalHeader()
+        for c in column_indexes:
+            headers.setSectionResizeMode(c, QHeaderView.ResizeToContents)
+
+        model2 = CustomizedNumpyListModel(self.df_tactic)
+        self.ui.table_tactic.setModel(model2)
+        self.ui.table_tactic.show()
+        self.ui.table_tactic.horizontalHeader().setStretchLastSection(True)
+
+    # SET / LOAD DATA FOR STATS AND METRICS GRAPHS
+    # ///////////////////////////////////////////
+    def load_data_for_graphs(self):
         # SETTING DATAFRAME FOR STATS / METRICS WIDGET
         self.df_helper = self.df_original.iloc[:, :2]
         if self.language == 'en':
@@ -650,25 +701,6 @@ class MainWindow(QMainWindow):
             self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[0])
             self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[1])
         self.ui.graph_statistics.chart.set_data(self.df_helper)
-
-        self.create_and_load_checkboxes()
-
-    # SQUAD HELPER FUNCTION
-    # ///////////////////////////////////////////
-    def tables_helper(self):
-        model = CustomizedNumpyModel(self.df_for_table)
-        column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
-        self.ui.table_squad.setSelectionBehavior(QTableView.SelectItems)
-        self.ui.table_squad.setModel(model)
-        self.ui.table_squad.show()
-        headers = self.ui.table_squad.horizontalHeader()
-        for c in column_indexes:
-            headers.setSectionResizeMode(c, QHeaderView.ResizeToContents)
-
-        model2 = CustomizedNumpyListModel(self.df_tactic)
-        self.ui.table_tactic.setModel(model2)
-        self.ui.table_tactic.show()
-        self.ui.table_tactic.horizontalHeader().setStretchLastSection(True)
 
     # TRANSLATE UI
     # ///////////////////////////////////////////
@@ -725,7 +757,8 @@ class MainWindow(QMainWindow):
     # CREATE AND LOAD CHECHBOXES TO COMPARE
     # ///////////////////////////////////////////
     def create_and_load_checkboxes(self):
-        if self.ui.group_chk_stats_widget.get_count() is not None and self.ui.group_chk_attrs_widget.get_count() is not None:
+        if self.ui.group_chk_stats_widget.get_count() is not None\
+                and self.ui.group_chk_attrs_widget.get_count() is not None:
             self.ui.group_chk_attrs_widget.remove_all_buttons()
             self.ui.group_chk_stats_widget.remove_all_buttons()
         if self.language == 'en':
@@ -734,6 +767,90 @@ class MainWindow(QMainWindow):
         elif self.language == 'es':
             self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_es[2])
             self.ui.group_chk_stats_widget.add_buttons(util_lists.list_es[0])
+
+        # TEST SECTION
+        self.ui.first_squad_player_combo.currentIndexChanged.connect(
+            self.update_inner_combo
+        )
+        self.update_inner_combo(self.ui.first_squad_player_combo.currentIndex())
+
+        self.ui.second_squad_player_combo.currentIndexChanged.connect(
+            self.second_update_inner_combo
+        )
+        self.second_update_inner_combo(self.ui.second_squad_player_combo.currentIndex())
+
+    def update_inner_combo(self, index):
+        first_dependent_list = self.ui.first_squad_player_combo.itemData(index)
+        if first_dependent_list:
+            self.ui.first_player_combo.addItems(first_dependent_list)
+
+    def second_update_inner_combo(self, index):
+        second_dependent_list = self.ui.second_squad_player_combo.itemData(index)
+        if second_dependent_list:
+            self.ui.second_player_combo.addItems(second_dependent_list)
+
+    # THREE FUNCTIONS FOR ACTUAL SQUAD, SCOUT, OLD SQUAD
+    # //////////////////////////////////////////////////
+    def add_squad_names(self, tmp_l):
+
+        if self.ui.first_squad_player_combo.count() == 3:
+            self.ui.first_squad_player_combo.clear()
+            self.ui.first_player_combo.clear()
+            self.ui.second_squad_player_combo.clear()
+            self.ui.second_player_combo.clear()
+        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
+        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
+
+    def add_scouting_names(self):
+        # TODO traer la lista
+        if self.ui.first_squad_player_combo.count() == 3:
+            self.ui.first_squad_player_combo.clear()
+            self.ui.first_player_combo.clear()
+            self.ui.second_squad_player_combo.clear()
+            self.ui.second_player_combo.clear()
+        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, [])
+        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, [])
+
+    def add_old_squad_names(self):
+        # TODO traer la lista
+        if self.ui.first_squad_player_combo.count() == 3:
+            self.ui.first_squad_player_combo.clear()
+            self.ui.first_player_combo.clear()
+            self.ui.second_squad_player_combo.clear()
+            self.ui.second_player_combo.clear()
+        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g2, [])
+        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g2, [])
+
+    # SEND DATA FOR COMPARE GRAPHIC
+    # ///////////////////////////////////////////////////
+    def send_data_compare_graphic(self):
+        checked_buttons = []
+        actual_players = []
+        if not self.ui.btn_compare_attrs.isEnabled():
+            for i in range(self.ui.group_chk_attrs_widget.get_count()):
+                if self.ui.group_chk_attrs_widget.button_group.button(i).isChecked():
+                    checked_buttons.append(self.ui.group_chk_attrs_widget.button_group.button(i).get_name())
+        elif not self.ui.btn_compare_stats.isEnabled():
+            for i in range(self.ui.group_chk_stats_widget.get_count()):
+                if self.ui.group_chk_stats_widget.button_group.button(i).isChecked():
+                    checked_buttons.append(self.ui.group_chk_stats_widget.button_group.button(i).get_name())
+        actual_players.append(
+            (
+                self.ui.first_squad_player_combo.currentText(),
+                self.ui.first_player_combo.currentText()
+            )
+        )
+        actual_players.append(
+            (
+                self.ui.second_squad_player_combo.currentText(),
+                self.ui.second_player_combo.currentText()
+            )
+        )
+        return actual_players, checked_buttons
+
+    def process_data_compare_players(self):
+        players_info, options_info = self.send_data_compare_graphic()
+        print(players_info, options_info)
 
     # ///////////////////////////////////////////
     # END CUSTOM FUNCTIONS FOR FUNCTIONALITY

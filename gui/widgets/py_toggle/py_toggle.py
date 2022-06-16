@@ -75,3 +75,6 @@ class PyToggle(QCheckBox):
             p.drawEllipse(self._position, 3, 22, 22)
 
         p.end()
+
+    def get_name(self):
+        return self.name

@@ -796,7 +796,6 @@ class Ui_MainWindow(object):
         # TODO crear layout later
 
         # PAGE 7 - Compare view
-        # TODO ACTUAL creando layout
         # LEFT TOP SIDE OF PAGE
         # ///////////////////////////////////////////////////////////////
 
@@ -827,6 +826,18 @@ class Ui_MainWindow(object):
             text_foreground=self.themes["app_color"]["text_foreground"],
             combo_border=self.themes["app_color"]["context_hover"]
         )
+
+        # LEFT BOTTOM SIDE
+        # ///////////////////////////////////////////////////////////////
+        self.spyder_graph_widget = PySpyderWidget(
+            language=self.language,
+            bg_two=self.themes["app_color"]["bg_two"],
+            dark_three=self.themes["app_color"]["dark_three"],
+            axis_color=self.themes["app_color"]["icon_active"],
+            color_title=self.themes["app_color"]["text_title"],
+            line_color=self.themes["app_color"]["context_pressed"]
+        )
+        # TODO continuar agregando y modificando el widget de arriba
 
         # RIGHT SIDE
         # ///////////////////////////////////////////////////////////////

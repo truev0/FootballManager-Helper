@@ -27,7 +27,10 @@ english = {
         "t10": "Open Settings",
         "t11": "Open Info",
         "t12": "Open Help",
-        "taux1": "Show Statistics and Metrics"
+        "taux1": "Show Statistics and Metrics",
+        "g0": "Actual Squad",
+        "g1": "Scouting",
+        "g2": "Old Squad",
     },
     "pages": {
         "p1": {

@@ -1,6 +1,6 @@
 
 
-# IMPORT QT CORE
+# IMPORT PYSIDE CORE
 # ///////////////////////////////////////////////////////////////
 from pyside_core import *
 

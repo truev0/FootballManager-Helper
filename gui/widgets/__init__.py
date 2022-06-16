@@ -68,6 +68,10 @@ from . py_combo_box import PyComboBox
 from . py_stats_widget import PyStatsWidget
 
 
+# PY SPYDER WIDGET
+# ///////////////////////////////////////////////////////////////
+from . py_stats_widget import PySpyderWidget
+
 # PY BUTTON GROUP WIDGET
 # ///////////////////////////////////////////////////////////////
 from . py_button_group import PyButtonGroup
