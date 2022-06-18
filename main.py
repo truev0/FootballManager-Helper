@@ -800,6 +800,7 @@ class MainWindow(QMainWindow):
             self.ui.second_player_combo.clear()
         self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
         self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
+        self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_squad)
 
     def add_scouting_names(self):
         # TODO traer la lista
@@ -835,22 +836,16 @@ class MainWindow(QMainWindow):
                 if self.ui.group_chk_stats_widget.button_group.button(i).isChecked():
                     checked_buttons.append(self.ui.group_chk_stats_widget.button_group.button(i).get_name())
         actual_players.append(
-            (
-                self.ui.first_squad_player_combo.currentText(),
                 self.ui.first_player_combo.currentText()
-            )
         )
         actual_players.append(
-            (
-                self.ui.second_squad_player_combo.currentText(),
                 self.ui.second_player_combo.currentText()
-            )
         )
         return actual_players, checked_buttons
 
     def process_data_compare_players(self):
         players_info, options_info = self.send_data_compare_graphic()
-        print(players_info, options_info)
+        self.ui.spyder_graph_widget.spyder_chart.set_chart(players_info, options_info)
 
     # ///////////////////////////////////////////
     # END CUSTOM FUNCTIONS FOR FUNCTIONALITY

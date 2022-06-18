@@ -277,6 +277,7 @@ def create_scores_for_position(df, l):
                                  + df[text[l].h.a9] + df[text[l].h.a8]
     return df
 
+
 # DATAFRAME FOR SQUAD VIEW
 # Cut original dataframe to make readable for squad view
 # ///////////////////////////////////////////////////////////////

@@ -830,14 +830,12 @@ class Ui_MainWindow(object):
         # LEFT BOTTOM SIDE
         # ///////////////////////////////////////////////////////////////
         self.spyder_graph_widget = PySpyderWidget(
-            language=self.language,
             bg_two=self.themes["app_color"]["bg_two"],
             dark_three=self.themes["app_color"]["dark_three"],
             axis_color=self.themes["app_color"]["icon_active"],
             color_title=self.themes["app_color"]["text_title"],
             line_color=self.themes["app_color"]["context_pressed"]
         )
-        # TODO continuar agregando y modificando el widget de arriba
 
         # RIGHT SIDE
         # ///////////////////////////////////////////////////////////////
@@ -887,6 +885,9 @@ class Ui_MainWindow(object):
         self.load_pages.compare_sub1_top_left_frame_layout.addWidget(self.second_squad_player_combo)
         self.load_pages.compare_sub2_top_left_frame_layout.addWidget(self.first_player_combo)
         self.load_pages.compare_sub2_top_left_frame_layout.addWidget(self.second_player_combo)
+
+        # Left Bottom Side
+        self.load_pages.compare_bottom_left_frame_layout.addWidget(self.spyder_graph_widget)
 
         # Right Side
         self.load_pages.btn_compare_1_layout.addWidget(self.btn_compare_stats)

@@ -94,8 +94,8 @@ class _CustomCanvas(FigureCanvas):
             color_title,
             bar_color,
     ):
-        fig, self.ax = plt.subplots(figsize=(6, 5), dpi=100)
-        super().__init__(fig)
+        self.fig, self.ax = plt.subplots(1, dpi=100, figsize=(6, 5), sharey=True)
+        super().__init__(self.fig)
         # COLORS
         self.bg_two = bg_two
         self.dark_three = dark_three
@@ -110,22 +110,21 @@ class _CustomCanvas(FigureCanvas):
         self._parent = parent
         self.setParent(parent)
         if self._name == "graph_statistics" and self._language == "en":
-            plt.title("Statistics Chart")
+            self.ax.set_title("Statistics Chart", fontsize=15, color=self.color_title)
         elif self._name == "graph_statistics" and self._language == "es":
-            plt.title("Gráfico de Estadísticas")
+            self.ax.set_title("Gráfico de Estadísticas", fontsize=15, color=self.color_title)
         elif self._name == "graph_metrics" and self._language == "en":
-            plt.title("Metrics Chart")
+            self.ax.set_title("Metrics Chart", fontsize=15, color=self.color_title)
         elif self._name == "graph_metrics" and self._language == "es":
-            plt.title("Gráfico de Métricas")
+            self.ax.set_title("Gráfico de Métricas", fontsize=15, color=self.color_title)
 
-        fig.patch.set_facecolor(self.bg_two)
+        self.fig.patch.set_facecolor(self.bg_two)
         self.ax.set_facecolor(self.dark_three)
         self.ax.xaxis.label.set_color(self.axis_color)
         self.ax.yaxis.label.set_color(self.axis_color)
         self.ax.tick_params(axis='x', colors=self.axis_color)
         self.ax.tick_params(axis='y', colors=self.axis_color)
         self.ax.title.set_color(self.color_title)
-        plt.tight_layout()
 
     def count_actual_list(self):
         return len(self._actual_list)
@@ -153,17 +152,19 @@ class _CustomCanvas(FigureCanvas):
                     custom_df = custom_df.join(
                         self._data[new_parameter]
                     )
+
                     custom_df.plot.bar(
                         x=custom_df.columns[0],
                         y=custom_df.columns[1],
                         ax=self.ax,
                         color=self.bar_color
                     )
-                    plt.subplots_adjust(bottom=0.22)
-                    plt.title(util_lists.stats_list[new_parameter], color=self.color_title, size=15)
+                    self.fig.subplots_adjust(bottom=0.22)
+                    self.ax.set_title(util_lists.stats_list[new_parameter], fontsize=15, color=self.color_title)
+
                     self.ax.tick_params(axis='x', rotation=80)
-                    plt.axhline(y=custom_df[new_parameter].mean(), color='r', linestyle='--')
-                    plt.xlabel("")
+                    self.ax.axhline(y=custom_df[new_parameter].mean(), color='r', linestyle='--')
+                    self.ax.set_xlabel("")
                     cursor = mplcursors.cursor(hover=mplcursors.HoverMode.Transient)
 
                     @cursor.connect("add")
@@ -203,12 +204,12 @@ class _CustomCanvas(FigureCanvas):
                         ax=self.ax,
                         color=self.bar_color
                     )
-                    plt.subplots_adjust(bottom=0.1)
+                    self.fig.subplots_adjust(bottom=0.1)
                     self.ax.set_xlabel(util_lists.stats_list[custom_df.columns[1]], size=12)
                     self.ax.set_ylabel(util_lists.stats_list[custom_df.columns[2]], size=12)
-                    plt.title(new_parameter, color=self.color_title, size=15)
-                    plt.axhline(y=custom_df[custom_df.columns[2]].mean(), color='r', linestyle=':')
-                    plt.axvline(x=custom_df[custom_df.columns[1]].mean(), color='r', linestyle=':')
+                    self.ax.set_title(new_parameter, color=self.color_title, size=15)
+                    self.ax.axhline(y=custom_df[custom_df.columns[2]].mean(), color='r', linestyle=':')
+                    self.ax.axvline(x=custom_df[custom_df.columns[1]].mean(), color='r', linestyle=':')
                     cursor = mplcursors.cursor(hover=mplcursors.HoverMode.Transient)
 
                     @cursor.connect("add")
@@ -226,4 +227,4 @@ class _CustomCanvas(FigureCanvas):
                             pass
                 else:
                     self.ax.clear()
-            plt.draw()
+            self.fig.canvas.draw()
