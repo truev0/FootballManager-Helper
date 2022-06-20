@@ -1,1 +1,225 @@
-"# Football Manager Helper" 
+<div id="top"></div>
+
+<!-- PROJECT SHIELDS -->
+![GitHub repo size](https://img.shields.io/github/repo-size/truev0/FootballManager-Helper?style=for-the-badge)
+![Lines of code](https://img.shields.io/tokei/lines/github/truev0/FootballManager-Helper?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/truev0/FootballManager-Helper?style=for-the-badge)
+![Twitter Follow](https://img.shields.io/twitter/follow/soy_elparce?logo=Twitter&style=for-the-badge)
+
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/truev0/FootballManager-Helper">
+    <img src="gui/images/logo.png" alt="Logo" >
+  </a>
+
+<h2 align="center">Football Manager Helper</h2>
+
+  <p align="center">
+    Aplicación para administrar, organizar y gestionar plantillas en el juego Football Manager. Analizando evolución de jugadores y sus datos.
+    <br />
+    <a href="https://github.com/truev0/FootballManager-Helper"><strong>Explorar documentación »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/truev0/FootballManager-Helper">Ver Demo</a>
+    ·
+    <a href="https://github.com/truev0/FootballManager-Helper/issues">Reportar un error</a>
+    ·
+    <a href="https://github.com/truev0/FootballManager-Helper/issues">Solicitar funcionalidad</a>
+  </p>
+</div>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Tabla de contenidos</summary>
+  <ol>
+    <li>
+      <a href="#sobre-el-proyecto">Sobre el proyecto</a>
+      <ul>
+        <li><a href="#construido-con">Contruido con</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#empecemos">Empecemos!</a>
+      <ul>
+        <li><a href="#pre-requisitos">Pre-requisitos</a></li>
+        <li><a href="#instalacion">Instalación</a></li>
+      </ul>
+    </li>
+    <li><a href="#usos">Usos</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contribuir">Contribuir</a></li>
+    <li><a href="#apoyos">Apoyos</a></li>
+    <li><a href="#stargazers">Stargazers</a></li>
+    <li><a href="#licencia">Licencia</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#agradecimientos">Agradecimientos</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## Sobre el proyecto
+
+  <b>Football Manager Helper</b> es una aplicación desarrollada en <a href="https://github.com/expressjs/express">Python
+  </a> inspirada en el documento de excel <a href="https://www.fmsite.net/files/file/1120-organizador-de-plantilla-y-empleados-v30-pandafm-ft-el-parce-excel-actualizado-al-12422/">
+  Organizador de Plantilla y Empleados</a>, de  <b><a href="https://twitter.com/f_mpanda">PandaFM</a></b>. Diseñado para
+  <b>facilitar</b> la gestion de equipo para mejorar la <b>inmersión</b> en el juego, permitiendo conocer cada detalle 
+  de tu plantilla y asi tener un control <b>total</b> de la misma.
+
+
+<p align="right">(<a href="#top">volver arriba</a>)</p>
+
+
+
+### Construido con
+
+* [Python](https://www.python.org/)
+
+<p align="right">(<a href="#top">volver arriba</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## 🚀 Empecemos!
+
+🛠 <b>Bajo construcción</b>
+
+### 💻 Pre-requisitos
+
+Antes de comenzar, verifique si cuenta con los siguientes requisitos:
+* Un computador que cuente con `Windows`.
+* Ganas de viciar con `Football Manager`.
+
+### ⚙️ Instalación
+
+🛠 <b>Bajo construcción</b>
+
+<p align="right">(<a href="#top">volver arriba</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## 🎯 Usos
+
+🛠 <b>Bajo construcción</b>
+
+<p align="right">(<a href="#top">volver arriba</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## 📝 Roadmap
+
+- [x] Estructura del proyecto
+- [x] Estructura de interfaz gráfica
+- [x] Estructura de datos
+- [x] Core para el tratamiento de datos
+- [ ] Funcionalidades principales
+    - [x] Edición de la tabla de la plantilla
+    - [x] Campo de tactica y gestión por posición
+    - [x] Gráficos de estadísticas y métricas
+    - [x] Gráfico de comparación de jugadores
+    - [ ] Tabla de scouting
+    - [ ] Gestion de empleados
+- [ ] Soporte multi-lenguaje
+    - [ ] Español
+    - [x] Inglés
+- [ ] Interactividad
+- [ ] Documentación
+
+Ver [issues](https://github.com/truev0/FootballManager-Helper/issues) para ver un listado de caracteristicas propuestas y errores pendientes por resolver
+
+<p align="right">(<a href="#top">volver arriba</a>)</p>
+
+
+
+<!-- CONTRIBUTING -->
+## 👍 Contribuir
+
+Si quieres decirme **GRACIAS** por el trabajo realizado y/o apoyar el constante desarrollo y mantenimiento de `FootballManager Helper`:
+
+Las contribuciones son lo que hace que la comunidad de código abierto sea un lugar increíble para aprender, inspirar y crear. Cualquier contribución que hagas será **muy apreciada**
+
+Si tienes alguna sugerencia para mejorar esto, por favor, haz un fork del repositorio y crea un pull request. Tambien puedes abrir un issue con la etiqueta "MEJORAS".
+No olvides dar una estrella al proyecto. Gracias de nuevo.
+
+1. Dale una [Estrella de Github](https://github.com/truev0/FootballManager-Helper/stargazers) al proyecto.
+2. Tuitea sobre el proyecto [en tu Twitter]().
+3. Haz una review sobre la aplicación en [Youtube](https://youtube.com) o en tu blog personal.
+4. Apoya el proyecto donando una [cerveza](https://www.buymeacoffee.com/soyelparce)
+<p align="right">(<a href="#top">volver arriba</a>)</p>
+
+
+<!-- SUPPORTERS -->
+## 🍺 Apoyos
+
+
+Football Manager Helper es un proyecto de codigo abierto que funciona con donaciones para pagar las facturas como por 
+ejemplo el internet, energía, etc. Si me quieres apoyar tu puedes 🍺, [**comprar una cerveza aqui**](https://www.buymeacoffee.com/soyelparce).
+
+|                                                            | Usuario | Donación |
+| :--------------------------------------------------------- |:--------|:---------|
+
+
+
+## ⭐️ Stargazers
+
+[![Stargazers over time](https://starchart.cc/truev0/FootballManager-Helper.svg)](https://starchart.cc/truev0/FootballManager-Helper)
+
+<!-- LICENSE -->
+## ⚠️ Licencia
+
+Copyright (c) 2022
+`Football Manager Helper` es un software libre y de código abierto bajo la licencia MIT. El logo
+oficial fue creado por [Victor Caicedo](https://github.com/truev0) y distribuido bajo la licencia [Creative Commons](https://creativecommons.org/licenses/by-sa/4.0/)
+(CC BY-SA 4.0 International)
+
+Para mas informacion lea el archivo `LICENSE`.
+
+
+<p align="right">(<a href="#top">volver arriba</a>)</p>
+
+
+
+<!-- CONTACT -->
+## 😄 Contacto
+
+Victor Caicedo - [@soy_elparce](https://twitter.com/soy_elparce) - victorcaiicedo@gmail.com
+
+Link del proyecto: [https://github.com/truev0/FootballManager-Helper](https://github.com/truev0/FootballManager-Helper)
+
+<p align="right">(<a href="#top">volver arriba</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## 🤝 Agradecimientos
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://twitter.com/f_mpanda">
+        <img src=".github/readme_images/pandafm.jpg" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
+        <sub>
+          <b>PandaFM</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://twitter.com/JuanchoLavigne">
+        <img src=".github/readme_images/juancholavigne.jpg" width="100px;" alt="Foto do Mark Zuckerberg"/><br>
+        <sub>
+          <b>Juancho Lavigne</b>
+        </sub>
+      </a>
+    </td>
+    
+  </tr>
+</table>
+
+<p align="right">(<a href="#top">volver arriba</a>)</p>

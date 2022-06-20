@@ -61,7 +61,3 @@ class PyButtonGroup(QWidget):
 
     def get_count(self):
         return self._count
-
-    def get_checked(self):
-        # TODO implementar y conetar el boton para enviar la informacion al grafico
-        pass
