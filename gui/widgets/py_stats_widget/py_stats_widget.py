@@ -2,6 +2,8 @@
 
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////////////////////////
+import numpy as np
+
 from pyside_core import *
 
 # IMPORT MODULES
@@ -198,18 +200,29 @@ class _CustomCanvas(FigureCanvas):
                             ]
                         ]
                     )
+                    tmp_x = custom_df.columns[1]
+                    tmp_y = custom_df.columns[2]
+                    # a, b = np.polyfit(custom_df[tmp_x], custom_df[tmp_y], deg=1)
+                    # y_est = a * custom_df[tmp_x] + b
+                    # self.ax.plot(
+                    #     custom_df[tmp_x],
+                    #     y_est,
+                    #     '-',
+                    #     color='yellow'
+                    # )
                     custom_df.plot.scatter(
-                        x=custom_df.columns[1],
-                        y=custom_df.columns[2],
+                        x=tmp_x,
+                        y=tmp_y,
                         ax=self.ax,
                         color=self.bar_color
                     )
                     self.fig.subplots_adjust(bottom=0.1)
-                    self.ax.set_xlabel(util_lists.stats_list[custom_df.columns[1]], size=12)
-                    self.ax.set_ylabel(util_lists.stats_list[custom_df.columns[2]], size=12)
+                    self.ax.set_xlabel(util_lists.stats_list[tmp_x], size=12)
+                    self.ax.set_ylabel(util_lists.stats_list[tmp_y], size=12)
                     self.ax.set_title(new_parameter, color=self.color_title, size=15)
-                    self.ax.axhline(y=custom_df[custom_df.columns[2]].mean(), color='r', linestyle=':')
-                    self.ax.axvline(x=custom_df[custom_df.columns[1]].mean(), color='r', linestyle=':')
+
+                    self.ax.axhline(y=custom_df[tmp_y].mean(), color='r', linestyle=':')
+                    self.ax.axvline(x=custom_df[tmp_x].mean(), color='r', linestyle=':')
                     cursor = mplcursors.cursor(hover=mplcursors.HoverMode.Transient)
 
                     @cursor.connect("add")

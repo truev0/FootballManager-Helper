@@ -197,12 +197,10 @@ class Ui_MainPages(object):
         # Left Frame (Page 7)
         self.compare_left_frame = QFrame()
         self.compare_left_frame_layout = QVBoxLayout(self.compare_left_frame)
-        self.compare_left_frame.setStyleSheet("background-color: #ff0000")
 
         # Left Top Frame (Page 7)
         self.compare_top_left_frame = QFrame()
         self.compare_top_left_frame.setMaximumHeight(150)
-        self.compare_top_left_frame.setStyleSheet("background-color: #000000")
         self.compare_top_left_frame_layout = QVBoxLayout(self.compare_top_left_frame)
 
         # Sub1 Left Top Frame (Page 7)
@@ -218,7 +216,6 @@ class Ui_MainPages(object):
 
         # Left Bottom Frame (Page 7)
         self.compare_bottom_left_frame = QFrame()
-        self.compare_bottom_left_frame.setStyleSheet("background-color: #fff")
         self.compare_bottom_left_frame_layout = QHBoxLayout(self.compare_bottom_left_frame)
 
 
@@ -230,7 +227,6 @@ class Ui_MainPages(object):
         self.compare_right_frame.setMinimumWidth(450)
         self.compare_right_frame.setMaximumWidth(500)
         self.compare_right_frame_layout = QVBoxLayout(self.compare_right_frame)
-        self.compare_right_frame.setStyleSheet("background-color: #0000ff")
 
         # Frame for first button
         self.btn_compare_1_frame = QFrame()
@@ -260,8 +256,6 @@ class Ui_MainPages(object):
 
         # Menu 1
         self.menu1_compare = QWidget()
-        # TODO eliminar color
-        self.menu1_compare.setStyleSheet("background-color: #5271A3")
         self.menu1_compare.setObjectName("menu1_compare")
         self.menu1_compare_layout = QHBoxLayout(self.menu1_compare)
         self.menu1_compare_layout.setContentsMargins(5, 5, 5, 5)
@@ -272,8 +266,6 @@ class Ui_MainPages(object):
 
         # Menu 2
         self.menu2_compare = QWidget()
-        # TODO eliminar color
-        self.menu2_compare.setStyleSheet("background-color: #A9179C")
         self.menu2_compare.setObjectName("menu2_compare")
         self.menu2_compare_layout = QHBoxLayout(self.menu2_compare)
         self.menu2_compare_layout.setContentsMargins(5, 5, 5, 5)

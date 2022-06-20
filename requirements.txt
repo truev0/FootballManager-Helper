@@ -1,3 +1,4 @@
+beautifulsoup4==4.11.1
 Brotli==1.0.9
 cairocffi==1.3.0
 CairoSVG==2.5.2
@@ -24,6 +25,7 @@ libsass==0.21.0
 lxml==4.8.0
 matplotlib==3.5.2
 mock==4.0.3
+mplcursors==0.5.1
 numpy==1.22.4
 packaging==21.3
 pandas==1.4.2
@@ -43,10 +45,13 @@ pytz==2022.1
 QT-PyQt-PySide-Custom-Widgets==0.6.1
 qtsass==0.3.0
 requests==2.23.0
+scipy==1.8.1
+seaborn==0.11.2
 self==2020.12.3
 shiboken2==5.15.2.1
 shiboken6==6.3.0
 six==1.16.0
+soupsieve==2.3.2.post1
 tenacity==8.0.1
 tinycss2==1.1.1
 typing==3.7.4

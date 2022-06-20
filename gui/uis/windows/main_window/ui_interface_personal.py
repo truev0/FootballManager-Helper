@@ -831,6 +831,7 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
         self.spyder_graph_widget = PySpyderWidget(
             bg_two=self.themes["app_color"]["bg_two"],
+            bg_one=self.themes["app_color"]["bg_one"],
             dark_three=self.themes["app_color"]["dark_three"],
             axis_color=self.themes["app_color"]["icon_active"],
             color_title=self.themes["app_color"]["text_title"],

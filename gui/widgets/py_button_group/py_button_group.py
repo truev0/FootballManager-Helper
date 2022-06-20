@@ -18,7 +18,8 @@ class PyButtonGroup(QWidget):
 
         self.layout = QGridLayout(self)
         self.setLayout(self.layout)
-        self.setStyleSheet("background-color: #000;")
+        self.setStyleSheet("border: 2px solid;"
+                           "border-radius: 10px;")
 
         self.button_group = QButtonGroup(self)
         self.button_group.setExclusive(False)
