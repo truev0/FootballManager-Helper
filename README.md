@@ -149,7 +149,7 @@ Si tienes alguna sugerencia para mejorar esto, por favor, haz un fork del reposi
 No olvides dar una estrella al proyecto. Gracias de nuevo.
 
 1. Dale una [Estrella de Github](https://github.com/truev0/FootballManager-Helper/stargazers) al proyecto.
-2. Tuitea sobre el proyecto [en tu Twitter]().
+2. Tuitea sobre el proyecto [en tu Twitter](https://twitter.com/intent/tweet?text=FM+Helper+es+una+app+para+la+gesti%C3%B3n+de+tu+club+y+sus+plantillas%2C+inspirado+en+el+excel+de+%40f_mpanda+y+construido+en+%23python.+Dise%C3%B1ado+para+tener+todo+bajo+control+de+una+manera+f%C3%A1cil+y+sencilla%F0%9F%9A%80+https%3A%2F%2Fgithub.com%2Ftruev0%2FFootballManager-Helper).
 3. Haz una review sobre la aplicación en [Youtube](https://youtube.com) o en tu blog personal.
 4. Apoya el proyecto donando una [cerveza](https://www.buymeacoffee.com/soyelparce)
 <p align="right">(<a href="#top">volver arriba</a>)</p>
