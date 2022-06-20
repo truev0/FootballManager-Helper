@@ -4,6 +4,11 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/truev0/FootballManager-Helper?style=for-the-badge)
 ![Lines of code](https://img.shields.io/tokei/lines/github/truev0/FootballManager-Helper?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/truev0/FootballManager-Helper?style=for-the-badge)
+![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/truev0/FootballManager-Helper?style=for-the-badge)
+![LGTM Grade](https://img.shields.io/lgtm/grade/python/github/truev0/FootballManager-Helper?style=for-the-badge)
+ <a href="https://www.paypal.me/soyelparcee/2">
+    <img src="https://img.shields.io/badge/Donate-PayPal-blue.svg?logo=paypal&style=for-the-badge" alt="Donate">
+  </a>
 ![Twitter Follow](https://img.shields.io/twitter/follow/soy_elparce?logo=Twitter&style=for-the-badge)
 
 
