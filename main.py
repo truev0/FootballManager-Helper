@@ -1,3 +1,19 @@
+# ///////////////////////////////////////////////////////////////
+#
+# BY: VICTOR CAICEDO
+# PROJECT MADE WITH: PySide6
+# V: 1.0.0
+#
+# This project can be used freely for all uses, as long as they maintain the
+# respective credits only in the Python scripts, any information in the visual
+# interface (GUI) can be modified without any implication.
+#
+# There are limitations on Qt licenses if you want to use your products
+# commercially, I recommend reading them on the official website:
+# https://doc.qt.io/qtforpython/licenses.html
+#
+# ///////////////////////////////////////////////////////////////
+
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////
 import sys
@@ -5,6 +21,8 @@ import os
 
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////
+import pandas as pd
+
 from pyside_core import *
 
 # IMPORT SETTINGS
@@ -28,6 +46,7 @@ import gui.core.fm_insider.FMinside as FMi
 from gui.core.models.CustomNestedNamespace.py_CustomNestedNamespace import NestedNamespace
 from gui.core.models.CustomNumpyTableModel.py_CustomNumpyTableModel import CustomizedNumpyModel
 from gui.core.models.CustomNumpyListModel.py_CustomNumpyListModel import CustomizedNumpyListModel
+from gui.core.models.CustomNumpyScoutTableModel.py_CustomNumpyScoutTableModel import CustomizedNumpyScoutModel
 
 # IMPORT TRANSLATIONS
 # ///////////////////////////////////////////
@@ -73,6 +92,8 @@ class MainWindow(QMainWindow):
         self.df_squad = None
         self.df_tactic = None
         self.df_for_table = None
+        self.df_scouting = None
+        self.df_scout_for_table = None
         self.bottom_right_grip = None
         self.bottom_left_grip = None
         self.top_right_grip = None
@@ -83,6 +104,7 @@ class MainWindow(QMainWindow):
         self.left_grip = None
         self.haveSquadInfo = False
         self.haveScoutingInfo = False
+        self.scoutingCounter = 0
         self.haveOldSquadInfo = False
         self.ui_text = {}
         self.ui_text.update({'en': NestedNamespace(en.english)})
@@ -346,7 +368,7 @@ class MainWindow(QMainWindow):
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load page 4
-            # self.ui.set_page(self.ui.load_pages.page_4)
+            self.ui.set_page(self.ui.load_pages.page_4)
 
         # Stats Btn
         if btn.objectName() == "btn_stats":
@@ -374,7 +396,7 @@ class MainWindow(QMainWindow):
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load page 8
-            # self.ui.set_page(self.ui.load_pages.page_8)
+            self.ui.set_page(self.ui.load_pages.page_8)
 
         # Employees Btn
         if btn.objectName() == "btn_employees":
@@ -613,12 +635,12 @@ class MainWindow(QMainWindow):
 
         # READ FILE
         if dlg_file:
-            if 'squad' in button_object.text():
+            if 'squad' in button_object.get_name():
                 # SETTING ORIGINAL DATAFRAME
                 self.df_original = FMi.setting_up_pandas(dlg_file[0], 'squad_btn')
                 self.process_squad_info()
 
-                self.tables_helper()
+                self.tables_helper_squad()
 
                 self.load_data_for_graphs()
 
@@ -626,11 +648,17 @@ class MainWindow(QMainWindow):
                 tmp_list = self.df_original[self.ui_headers[self.language].h.h1].values.tolist()
                 self.add_squad_names(tmp_list)
                 self.haveSquadInfo = True
-            elif 'scouting' in button_object.text():
-                '''
-                No implementado aun
-                '''
-                pass
+            elif 'scouting' in button_object.get_name():
+                if self.df_scouting is None:
+                    self.df_scouting = FMi.setting_up_pandas(dlg_file[0], 'scout_btn')
+                else:
+                    self.df_scouting = pd.concat([self.df_scouting, FMi.setting_up_pandas(dlg_file[0], 'scout_btn')])
+                self.process_scouting_info()
+                self.tables_helper_scouting(self.df_scout_for_table)
+                tmp_list = self.df_scouting[self.ui_headers[self.language].h.h1].values.tolist()
+                self.create_edits_for_scouting()
+                self.add_scouting_names(tmp_list)
+
             elif 'old' in button_object.text():
                 '''
                 No implementado aun por que no se que hacer aqui
@@ -645,7 +673,6 @@ class MainWindow(QMainWindow):
 
         # SETTING MODIFIED DATAFRAME
         self.df_squad = FMi.data_for_rankings(self.df_original, self.language)
-        self.df_squad = FMi.create_scores_for_position(self.df_squad, self.language)
         self.df_squad = FMi.round_data(self.df_squad)
         self.df_squad = FMi.ranking_values(self.df_squad)
 
@@ -655,9 +682,34 @@ class MainWindow(QMainWindow):
         self.df_tactic = self.df_for_table.iloc[:, :1]
         self.df_tactic = self.df_tactic.join(self.df_for_table.iloc[:, 2:3])
 
+    # PROCESS SCOUTING SQUAD INFO
+    # ///////////////////////////////////////////
+    def process_scouting_info(self):
+        if self.scoutingCounter < 4:
+            self.df_scouting = FMi.convert_values(self.df_scouting, self.language)
+            self.df_scouting = FMi.convert_values_scout(self.df_scouting)
+            self.df_scouting = FMi.create_metrics_for_gk(self.df_scouting, self.language)
+
+            # SETTING MODIFIED DATAFRAME
+            self.df_scouting = FMi.data_for_rankings(self.df_scouting, self.language)
+            self.df_scouting = FMi.round_data(self.df_scouting)
+            self.df_scouting = FMi.ranking_values(self.df_scouting)
+
+            self.df_scout_for_table = FMi.create_df_for_scouting_team(self.df_scouting, self.language)
+            self.scoutingCounter += 1
+
+        if self.scoutingCounter == 3:
+            self.haveScoutingInfo = True
+
+    # PROCESS OLD SQUAD INFO
+    # ///////////////////////////////////////////
+    def process_old_squad_info(self):
+        # TODO implement
+        self.haveOldSquadInfo = True
+
     # SQUAD HELPER FUNCTION
     # ///////////////////////////////////////////
-    def tables_helper(self):
+    def tables_helper_squad(self):
         model = CustomizedNumpyModel(self.df_for_table)
         column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
         self.ui.table_squad.setSelectionBehavior(QTableView.SelectItems)
@@ -671,6 +723,25 @@ class MainWindow(QMainWindow):
         self.ui.table_tactic.setModel(model2)
         self.ui.table_tactic.show()
         self.ui.table_tactic.horizontalHeader().setStretchLastSection(True)
+
+    # SCOUTING HELPER FUNCTION
+    # ///////////////////////////////////////////
+    def tables_helper_scouting(self, df_to_set=None):
+        tmp_model = CustomizedNumpyModel(df_to_set)
+        column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
+        self.ui.table_scouting.setSelectionBehavior(QTableView.SelectItems)
+        self.ui.table_scouting.setModel(tmp_model)
+        self.ui.table_scouting.show()
+        headers = self.ui.table_scouting.horizontalHeader()
+        for c in column_indexes:
+            headers.setSectionResizeMode(c, QHeaderView.ResizeToContents)
+
+
+    def filter_scout_data(self):
+        # TODO apuntar boton hacia esta funcio y hacer verificacion y filtrado de datos
+        # TODO terminar estilizado del scrollbar en la columna derecha y completar el esquema para estadisticas
+        self.filtered_df = None
+        pass
 
     # SET / LOAD DATA FOR STATS AND METRICS GRAPHS
     # ///////////////////////////////////////////
@@ -762,11 +833,11 @@ class MainWindow(QMainWindow):
             self.ui.group_chk_attrs_widget.remove_all_buttons()
             self.ui.group_chk_stats_widget.remove_all_buttons()
         if self.language == 'en':
-            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_en[2])
-            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_en[0])
+            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_en[2], 0)
+            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_en[0], 0)
         elif self.language == 'es':
-            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_es[2])
-            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_es[0])
+            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_es[2], 0)
+            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_es[0], 0)
 
         # TEST SECTION
         self.ui.first_squad_player_combo.currentIndexChanged.connect(
@@ -782,17 +853,26 @@ class MainWindow(QMainWindow):
     def update_inner_combo(self, index):
         first_dependent_list = self.ui.first_squad_player_combo.itemData(index)
         if first_dependent_list:
+            self.ui.first_player_combo.clear()
             self.ui.first_player_combo.addItems(first_dependent_list)
 
     def second_update_inner_combo(self, index):
         second_dependent_list = self.ui.second_squad_player_combo.itemData(index)
         if second_dependent_list:
+            self.ui.second_player_combo.clear()
             self.ui.second_player_combo.addItems(second_dependent_list)
+
+    def create_edits_for_scouting(self):
+        if self.ui.group_lineedits_attrs_widget.get_lines() is not None:
+            self.ui.group_lineedits_attrs_widget.reset_all_lines()
+        if self.language == 'en':
+            self.ui.group_lineedits_attrs_widget.add_buttons(util_lists.list_en[2], 1)
+        elif self.language == 'es':
+            self.ui.group_lineedits_attrs_widget.add_buttons(util_lists.list_es[2], 1)
 
     # THREE FUNCTIONS FOR ACTUAL SQUAD, SCOUT, OLD SQUAD
     # //////////////////////////////////////////////////
     def add_squad_names(self, tmp_l):
-
         if self.ui.first_squad_player_combo.count() == 3:
             self.ui.first_squad_player_combo.clear()
             self.ui.first_player_combo.clear()
@@ -802,15 +882,15 @@ class MainWindow(QMainWindow):
         self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
         self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_squad)
 
-    def add_scouting_names(self):
-        # TODO traer la lista
+    def add_scouting_names(self, tmp_l):
         if self.ui.first_squad_player_combo.count() == 3:
             self.ui.first_squad_player_combo.clear()
             self.ui.first_player_combo.clear()
             self.ui.second_squad_player_combo.clear()
             self.ui.second_player_combo.clear()
-        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, [])
-        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, [])
+        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, tmp_l)
+        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, tmp_l)
+        self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_scouting)
 
     def add_old_squad_names(self):
         # TODO traer la lista
@@ -827,6 +907,7 @@ class MainWindow(QMainWindow):
     def send_data_compare_graphic(self):
         checked_buttons = []
         actual_players = []
+        squad = []
         if not self.ui.btn_compare_attrs.isEnabled():
             for i in range(self.ui.group_chk_attrs_widget.get_count()):
                 if self.ui.group_chk_attrs_widget.button_group.button(i).isChecked():
@@ -836,16 +917,22 @@ class MainWindow(QMainWindow):
                 if self.ui.group_chk_stats_widget.button_group.button(i).isChecked():
                     checked_buttons.append(self.ui.group_chk_stats_widget.button_group.button(i).get_name())
         actual_players.append(
-                self.ui.first_player_combo.currentText()
+            self.ui.first_player_combo.currentText()
         )
         actual_players.append(
-                self.ui.second_player_combo.currentText()
+            self.ui.second_player_combo.currentText()
         )
-        return actual_players, checked_buttons
+        squad.append(
+            self.ui.first_squad_player_combo.currentText()
+        )
+        squad.append(
+            self.ui.second_squad_player_combo.currentText(),
+        )
+        return actual_players, squad, checked_buttons
 
     def process_data_compare_players(self):
-        players_info, options_info = self.send_data_compare_graphic()
-        self.ui.spyder_graph_widget.spyder_chart.set_chart(players_info, options_info)
+        players_info, squads, options_info = self.send_data_compare_graphic()
+        self.ui.spyder_graph_widget.spyder_chart.set_chart(players_info, squads, options_info)
 
     # ///////////////////////////////////////////
     # END CUSTOM FUNCTIONS FOR FUNCTIONALITY

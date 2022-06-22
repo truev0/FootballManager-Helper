@@ -97,6 +97,17 @@ class Ui_LeftColumn(object):
 
         self.verticalLayout_2.addWidget(self.btn_4_widget)
 
+        self.btn_5_widget = QWidget(self.menu_2)
+        self.btn_5_widget.setObjectName(u"btn_5_widget")
+        self.btn_5_widget.setMinimumSize(QSize(0, 40))
+        self.btn_5_widget.setMaximumSize(QSize(16777215, 40))
+        self.btn_5_layout = QVBoxLayout(self.btn_5_widget)
+        self.btn_5_layout.setSpacing(0)
+        self.btn_5_layout.setObjectName(u"btn_5_layout")
+        self.btn_5_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.verticalLayout_2.addWidget(self.btn_5_widget)
+
         self.label_2 = QLabel(self.menu_2)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setFont(font)

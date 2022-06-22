@@ -167,8 +167,9 @@ No olvides dar una estrella al proyecto. Gracias de nuevo.
 Football Manager Helper es un proyecto de codigo abierto que funciona con donaciones para pagar las facturas como por 
 ejemplo el internet, energía, etc. Si me quieres apoyar tu puedes 🍺, [**comprar una cerveza aqui**](https://www.buymeacoffee.com/soyelparce).
 
-|                                                            | Usuario | Donación |
-| :--------------------------------------------------------- |:--------|:---------|
+|                                                                                                                  | Usuario | Donación |
+|:-----------------------------------------------------------------------------------------------------------------|:--------|:---------|
+| <img src="https://pbs.twimg.com/profile_images/1530276210688892928/lpF2mnxf_400x400.jpg" width="50" height="50"> | [@JuanchoLavigne](https://twitter.com/JuanchoLavigne) | 🍺 x 3     |
 
 
 
@@ -209,7 +210,7 @@ Link del proyecto: [https://github.com/truev0/FootballManager-Helper](https://gi
   <tr>
     <td align="center">
       <a href="https://twitter.com/f_mpanda">
-        <img src=".github/readme_images/pandafm.jpg" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
+        <img src="https://pbs.twimg.com/profile_images/1508552782437044225/Hn-QPati_400x400.jpg" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
         <sub>
           <b>PandaFM</b>
         </sub>
@@ -217,7 +218,7 @@ Link del proyecto: [https://github.com/truev0/FootballManager-Helper](https://gi
     </td>
     <td align="center">
       <a href="https://twitter.com/JuanchoLavigne">
-        <img src=".github/readme_images/juancholavigne.jpg" width="100px;" alt="Foto do Mark Zuckerberg"/><br>
+        <img src="https://pbs.twimg.com/profile_images/1530276210688892928/lpF2mnxf_400x400.jpg" width="100px;" alt="Foto do Mark Zuckerberg"/><br>
         <sub>
           <b>Juancho Lavigne</b>
         </sub>

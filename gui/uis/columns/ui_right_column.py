@@ -8,15 +8,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QSizePolicy,
-    QSpacerItem, QStackedWidget, QVBoxLayout, QWidget)
+from pyside_core import *
 
 class Ui_RightColumn(object):
     def setupUi(self, RightColumn):
@@ -35,6 +27,7 @@ class Ui_RightColumn(object):
         self.verticalLayout.setSpacing(5)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(5, 5, 5, 5)
+
         self.btn_1_frame = QFrame(self.menu_1)
         self.btn_1_frame.setObjectName(u"btn_1_frame")
         self.btn_1_frame.setMinimumSize(QSize(0, 40))
@@ -51,42 +44,13 @@ class Ui_RightColumn(object):
         self.verticalSpacer = QSpacerItem(20, 15, QSizePolicy.Minimum, QSizePolicy.Maximum)
 
         self.verticalLayout.addItem(self.verticalSpacer)
+        self.scroll_area_1 = QScrollArea()
 
-        self.btn_en_frame = QFrame(self.menu_1)
-        self.btn_en_frame.setObjectName(u"btn_en_frame")
-        self.btn_en_frame.setMinimumSize(QSize(0, 40))
-        self.btn_en_frame.setMaximumSize(QSize(16777215, 40))
-        self.btn_en_frame.setFrameShape(QFrame.NoFrame)
-        self.btn_en_frame.setFrameShadow(QFrame.Raised)
-        self.btn_en_layout = QVBoxLayout(self.btn_en_frame)
-        self.btn_en_layout.setSpacing(0)
-        self.btn_en_layout.setObjectName(u"btn_en_layout")
-        self.btn_en_layout.setContentsMargins(0, 0, 0, 0)
+        self.scroll_area_1.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scroll_area_1.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll_area_1.setWidgetResizable(True)
 
-        self.verticalLayout.addWidget(self.btn_en_frame)
-
-        self.btn_es_frame = QFrame(self.menu_1)
-        self.btn_es_frame.setObjectName(u"btn_es_frame")
-        self.btn_es_frame.setMinimumSize(QSize(0, 40))
-        self.btn_es_frame.setMaximumSize(QSize(16777215, 40))
-        self.btn_es_frame.setFrameShape(QFrame.NoFrame)
-        self.btn_es_frame.setFrameShadow(QFrame.Raised)
-        self.btn_es_layout = QVBoxLayout(self.btn_es_frame)
-        self.btn_es_layout.setSpacing(0)
-        self.btn_es_layout.setObjectName(u"btn_es_layout")
-        self.btn_es_layout.setContentsMargins(0, 0, 0, 0)
-
-        self.verticalLayout.addWidget(self.btn_es_frame)
-
-        self.label_1 = QLabel(self.menu_1)
-        self.label_1.setObjectName(u"label_1")
-        font = QFont()
-        font.setPointSize(16)
-        self.label_1.setFont(font)
-        self.label_1.setStyleSheet(u"font-size: 16pt")
-        self.label_1.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout.addWidget(self.label_1)
+        self.verticalLayout.addWidget(self.scroll_area_1)
 
         self.menus.addWidget(self.menu_1)
         self.menu_2 = QWidget()
@@ -107,7 +71,8 @@ class Ui_RightColumn(object):
         self.btn_1_menu_2_layout.setContentsMargins(0, 0, 0, 0)
 
         self.verticalLayout_2.addWidget(self.btn_2_frame)
-
+        font = QFont()
+        font.setPointSize(16)
         self.label_2 = QLabel(self.menu_2)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setFont(font)
@@ -131,7 +96,6 @@ class Ui_RightColumn(object):
 
     def retranslateUi(self, RightColumn):
         RightColumn.setWindowTitle(QCoreApplication.translate("RightColumn", u"Form", None))
-        self.label_1.setText(QCoreApplication.translate("RightColumn", u"Menu 1 - Right Menu", None))
         self.label_2.setText(QCoreApplication.translate("RightColumn", u"Menu 2 - Right Menu", None))
     # retranslateUi
 

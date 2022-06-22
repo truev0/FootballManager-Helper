@@ -189,7 +189,7 @@ class Ui_MainWindow(object):
             parent,
             logo_width=100,
             app_parent=self.central_widget,
-            logo_image="logo_top_100x22.svg",
+            logo_image="logotop_100x22.svg",
             bg_color=self.themes["app_color"]["bg_two"],
             div_color=self.themes["app_color"]["bg_three"],
             btn_bg_color=self.themes["app_color"]["bg_two"],
@@ -706,6 +706,7 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
         # Load Squad Btn
         self.load_squad_btn = PyPushButton(
+            name='squad',
             text="Load squad file",
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
@@ -719,6 +720,7 @@ class Ui_MainWindow(object):
 
         # Load Scouting Btn
         self.load_scouting_btn = PyPushButton(
+            name='scouting',
             text="Load scouting file",
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
@@ -727,13 +729,18 @@ class Ui_MainWindow(object):
             bg_color_pressed=self.themes["app_color"]["dark_four"]
         )
         self.load_scouting_btn.setMaximumHeight(40)
-        self.load_scouting_btn.setEnabled(False)  # TODO enable button
         self.left_column.menus.btn_2_layout.addWidget(self.load_scouting_btn)
 
         # PAGES CONFIGURATION
         # ///////////////////////////////////////////////////////////////
+        # COMMON SECTION FOR ALL PAGES
+        # ///////////////////////////////////////////////////////////////
+        common_uc = QPixmap(u"gui/images/png_images/work-in-progress.png")
+
         # PAGE 1 - Introduction to App
-        # TODO edit layouts
+        self.logo_svg = QSvgWidget(Functions.set_svg_image("logo.svg"))
+
+        self.load_pages.logo_layout.addWidget(self.logo_svg, Qt.AlignCenter, Qt.AlignCenter)
 
         # PAGE 2 - Squad view
         # Add table model
@@ -774,7 +781,12 @@ class Ui_MainWindow(object):
         self.load_pages.list_table_layout.addWidget(self.table_tactic)
 
         # PAGE 4 - Development view
-        # TODO crear layout later
+
+        self.develop_label = QLabel()
+        self.develop_label.setScaledContents(True)
+        self.develop_label.setPixmap(common_uc)
+
+        self.load_pages.logo_layout_4.addWidget(self.develop_label)
 
         # PAGE 5 - Statistics view
 
@@ -830,6 +842,7 @@ class Ui_MainWindow(object):
         # LEFT BOTTOM SIDE
         # ///////////////////////////////////////////////////////////////
         self.spyder_graph_widget = PySpyderWidget(
+            language=self.language,
             bg_two=self.themes["app_color"]["bg_two"],
             bg_one=self.themes["app_color"]["bg_one"],
             dark_three=self.themes["app_color"]["dark_three"],
@@ -902,7 +915,28 @@ class Ui_MainWindow(object):
         self.load_pages.btn_send_layout.addWidget(self.btn_send)
 
         # PAGE 8 - Scouting view
-        # TODO crear layout
+        self.table_scouting = PyTableWidget(
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["dark_two"],
+            bg_color=self.themes["app_color"]["bg_two"],
+            header_horizontal_color=self.themes["app_color"]["dark_two"],
+            header_vertical_color=self.themes["app_color"]["bg_three"],
+            bottom_line_color=self.themes["app_color"]["bg_three"],
+            grid_line_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+            context_color=self.themes["app_color"]["context_color"]
+        )
+        # ADD WIDGETS TO PAGE 8
+        self.load_pages.row_1_layout_8.addWidget(self.table_scouting)
+
+        self.group_lineedits_attrs_widget = PyButtonGroup()
+
+        self.group_lineedits_stats_widget = None
+
+        # ADD LINEEDITS FOR FILTER IN PAGE 8
+        self.right_column.scroll_area_1.setWidget(self.group_lineedits_attrs_widget)
 
         # PAGE 9 - Employees view
         # TODO crear layout
@@ -957,7 +991,7 @@ class Ui_MainWindow(object):
         self.english_language_btn.setIcon(self.icon_english)
         self.english_language_btn.setMaximumHeight(40)
 
-        self.right_column.btn_en_layout.addWidget(self.english_language_btn)
+        self.left_column.menus.btn_4_layout.addWidget(self.english_language_btn)
 
         # SPANISH BUTTON
         # Button to change UI to spanish
@@ -974,7 +1008,7 @@ class Ui_MainWindow(object):
         self.spanish_language_btn.setIcon(self.icon_spanish)
         self.spanish_language_btn.setMaximumHeight(40)
 
-        self.right_column.btn_es_layout.addWidget(self.spanish_language_btn)
+        self.left_column.menus.btn_5_layout.addWidget(self.spanish_language_btn)
 
         # ///////////////////////////////////////////////////////////////
         # END CUSTOM WIDGETS

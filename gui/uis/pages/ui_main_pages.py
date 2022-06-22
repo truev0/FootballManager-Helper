@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-################################################################################
-## Form generated from reading UI file 'main_pagesyeoGXi.ui'
-##
-## Created by: Qt User Interface Compiler version 6.3.0
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
 
 from pyside_core import *
 
@@ -160,6 +151,35 @@ class Ui_MainPages(object):
         # /////////////////////////////////////////////////////////
         self.page_4 = QWidget()
         self.page_4.setObjectName(u"page_4")
+        self.column_1_layout_4 = QVBoxLayout(self.page_4)
+        self.column_1_layout_4.setObjectName(u"column_1_layout_5")
+        self.column_1_layout_4.setContentsMargins(5, 5, 5, 5)
+        self.column_1_layout_4.setSpacing(5)
+
+        self.welcome_base_4 = QFrame(self.page_4)
+        self.welcome_base_4.setObjectName(u"welcome_base")
+        self.welcome_base_4.setMinimumSize(QSize(300, 180))
+        self.welcome_base_4.setMaximumSize(QSize(300, 180))
+        self.welcome_base_4.setFrameShape(QFrame.NoFrame)
+        self.welcome_base_4.setFrameShadow(QFrame.Raised)
+        self.center_page_layout_4 = QVBoxLayout(self.welcome_base_4)
+        self.center_page_layout_4.setObjectName(u"center_page_layout_4")
+        self.center_page_layout_4.setContentsMargins(0, 0, 0, 0)
+        self.center_page_layout_4.setSpacing(10)
+        self.logo_4 = QFrame(self.welcome_base_4)
+        self.logo_4.setObjectName(u"logo_4")
+        self.logo_4.setMinimumSize(QSize(250, 150))
+        self.logo_4.setMaximumSize(QSize(250, 150))
+        self.logo_4.setFrameShape(QFrame.NoFrame)
+        self.logo_4.setFrameShadow(QFrame.Raised)
+        self.logo_layout_4 = QHBoxLayout(self.logo_4)
+        self.logo_layout_4.setObjectName(u"logo_layout_4")
+        self.logo_layout_4.setContentsMargins(0, 0, 0, 0)
+        self.logo_layout_4.setSpacing(0)
+
+        self.center_page_layout_4.addWidget(self.logo_4)
+
+        self.column_1_layout_4.addWidget(self.welcome_base_4, 0, Qt.AlignHCenter)
 
         self.pages.addWidget(self.page_4)
 
@@ -297,6 +317,33 @@ class Ui_MainPages(object):
         # /////////////////////////////////////////////////////////
         self.page_8 = QWidget()
         self.page_8.setObjectName(u"page_8")
+        self.page_8_layout = QVBoxLayout(self.page_8)
+        self.page_8_layout.setSpacing(5)
+        self.page_8_layout.setObjectName(u"page_8_layout")
+        self.page_8_layout.setContentsMargins(5, 5, 5, 5)
+        self.scroll_area_8 = QScrollArea(self.page_8)
+        self.scroll_area_8.setObjectName(u"scroll_area_8")
+        self.scroll_area_8.setStyleSheet(u"background: transparent;")
+        self.scroll_area_8.setFrameShape(QFrame.NoFrame)
+        self.scroll_area_8.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll_area_8.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll_area_8.setWidgetResizable(True)
+        self.contents_8 = QWidget()
+        self.contents_8.setObjectName(u"contents_8")
+        self.contents_8.setGeometry(QRect(0, 0, 840, 580))
+        self.contents_8.setStyleSheet(u"background: transparent;")
+        self.verticalLayout_8 = QVBoxLayout(self.contents_8)
+        self.verticalLayout_8.setSpacing(15)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.verticalLayout_8.setContentsMargins(5, 5, 5, 5)
+        self.row_1_layout_8 = QHBoxLayout()
+        self.row_1_layout_8.setObjectName(u"row_1_layout_8")
+
+        self.verticalLayout_8.addLayout(self.row_1_layout_8)
+
+        self.scroll_area_8.setWidget(self.contents_8)
+
+        self.page_8_layout.addWidget(self.scroll_area_8)
 
         self.pages.addWidget(self.page_8)
 

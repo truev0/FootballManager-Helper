@@ -28,6 +28,7 @@ from . py_radar_chart import Radar
 class PySpyderWidget(QWidget):
     def __init__(
             self,
+            language='en',
             parent=None,
             bg_two="#343b48",
             bg_one="#343b48",
@@ -38,8 +39,11 @@ class PySpyderWidget(QWidget):
     ):
         super().__init__(parent)
 
+        self.language = language
+
         self.spyder_chart = _CustomSpyder(
             self,
+            language=self.language,
             bg_two=bg_two,
             bg_one=bg_one,
             dark_three=dark_three,
@@ -62,6 +66,7 @@ class _CustomSpyder(FigureCanvas):
             axis_color,
             color_title,
             line_color,
+            language='en',
             width=8,
             height=6,
             dpi=100
@@ -78,6 +83,13 @@ class _CustomSpyder(FigureCanvas):
         self.line_color = line_color
         self.COLORS = ["#FF5A5F", "#007A87", "#FFB400"]
 
+        # Inner Dataframes
+        self._inner_squad = None
+        self._inner_scouting = None
+        self._inner_old_squad = None
+
+        self.language = language
+
         self.fig.set_facecolor(self.bg_one)
         self.ax['radar'].axis('off')
         self.ax['title'].set_facecolor(self.bg_one)
@@ -92,17 +104,32 @@ class _CustomSpyder(FigureCanvas):
         self.setParent(parent)
 
     def set_data(self, data):
-        if self._data is not None:
-            self._data = pd.concat([self._data, data], axis=0)
-        else:
+        if self._data is None and self._inner_squad is None:
             self._data = data
+            self._inner_squad = data
+        elif self._data is not None and self._inner_scouting is None:
+            self._data = pd.concat([self._data, data], axis=0)
+            self._data.reset_index(drop=True, inplace=True)
+            self._inner_scouting = data
+        elif self._data is not None and self._inner_old_squad is None:
+            self._data = pd.concat([self._data, data], axis=0)
+            self._data.reset_index(drop=True, inplace=True)
+            self._inner_old_squad = data
+        elif self._data is not None and self._inner_scouting is not None:
+            self._data = None
+            self._data = self._inner_squad
+            self._data = pd.concat([self._data, data], axis=0)
+            self._data = pd.concat([self._data, self._inner_old_squad], axis=0)
+            self._data.reset_index(drop=True, inplace=True)
 
-    def set_chart(self, players, opts):
+    def set_chart(self, players, squads, opts):
         if opts:
             self.ax['radar'].clear()
             self.ax['title'].clear()
             self.ax['title'].axis('off')
             if self._data is not None and len(players) <= 3:
+                var1 = ''
+                var2 = ''
                 min_ranges = []
                 max_ranges = []
                 column_index_name = self._data.columns[0]
@@ -161,15 +188,19 @@ class _CustomSpyder(FigureCanvas):
                                          c=self.COLORS[0], marker='D', s=90, zorder=2)
                 self.ax['radar'].scatter(vertices2[:, 0], vertices2[:, 1],
                                          c=self.COLORS[1], marker='D', s=90, zorder=2)
-                # self.ax.plot(angles, values, linewidth=2.5, label=players[i], color=self.COLORS[i])
                 self.ax['radar'].plot(vertices11[:, 0], vertices11[:, 1], self.COLORS[0], linewidth=2.5,
                                       linestyle=':', zorder=2)
                 self.ax['radar'].plot(vertices22[:, 0], vertices22[:, 1], self.COLORS[1], linewidth=2.5,
                                       linestyle=':', zorder=2)
-                left_text = self.ax['title'].text(0.01, 0.65, players[0], fontsize=18,
+                var1, var2 = change_squad(squads, self.language)
+                top_left_text = self.ax['title'].text(0.01, 0.65, players[0], fontsize=18,
                                                   color=self.COLORS[0], ha='left', va='center')
-                right_text = self.ax['title'].text(0.99, 0.65, players[1], fontsize=18,
+                top_right_text = self.ax['title'].text(0.99, 0.65, players[1], fontsize=18,
                                                     color=self.COLORS[1], ha='right', va='center')
+                bottom_left_text = self.ax['title'].text(0.01, 0.1, var1, fontsize=10,
+                                                         color=self.COLORS[0], ha='left', va='center')
+                bottom_right_text = self.ax['title'].text(0.99, 0.1, var2, fontsize=10,
+                                                          color=self.COLORS[1], ha='right', va='center')
                 self.fig.canvas.draw()
 
 
@@ -206,3 +237,37 @@ def radar_mosaic(radar_height=0.915, title_height=0.06, figheight=14):
     axes['title'].axis('off')
     axes['endnote'].axis('off')
     return figure, axes
+
+def change_squad(inner_squad, lang):
+    inner_var1 = ''
+    inner_var2 = ''
+    if lang == 'en':
+        if 'Actual' in inner_squad[0]:
+            inner_var1 = 'Actual Squad list'
+        elif 'Scouting' in inner_squad[0]:
+            inner_var1 = 'Scouting Squad list'
+        elif 'Old' in inner_squad[0]:
+            inner_var1 = 'Old Squad list'
+
+        if 'Actual' in inner_squad[1]:
+            inner_var2 = 'Actual Squad list'
+        elif 'Scouting' in inner_squad[1]:
+            inner_var2 = 'Scouting Squad list'
+        elif 'Old' in inner_squad[1]:
+            inner_var2 = 'Old Squad list'
+    elif lang == 'es':
+        if 'Actual' in inner_squad[0]:
+            inner_var1 = 'Lista actual del equipo'
+        elif 'Scouting' in inner_squad[0]:
+            inner_var1 = 'Lista de scouting'
+        elif 'Old' in inner_squad[0]:
+            inner_var1 = 'Lista vieja del equipo'
+
+        if 'Actual' in inner_squad[1]:
+            inner_var2 = 'Lista actual del equipo'
+        elif 'Scouting' in inner_squad[1]:
+            inner_var2 = 'Lista de scouting'
+        elif 'Old' in inner_squad[1]:
+            inner_var2 = 'Lista vieja del equipo'
+
+    return inner_var1, inner_var2

@@ -18,6 +18,7 @@ poss = {}
 poss.update({'en': NestedNamespace(en.positions)})
 poss.update({'es': NestedNamespace(es.positions)})
 
+
 # SETTING PANDAS
 # Load file to create the dataframe
 # ///////////////////////////////////////////////////////////////
@@ -46,6 +47,7 @@ def setting_up_pandas(path_file, btn_press):
         except FileNotFoundError:
             return None
         return df_s
+
 
 # CONVERT VALUES TO ITS RESPECTIVE TYPE
 # Convert value to str, float, int / replace text in number cells
@@ -93,12 +95,22 @@ def convert_values(df, l):
     #     df[column] = df[column].div(100).round(2)
     return df
 
+
+# CONVERT VALUES IN SCOUTING DATAFRAME
+# Convert value to str, float, int / replace text in number cells
+# ///////////////////////////////////////////////////////////////
+def convert_values_scout(df):
+    for i in range(len(df.columns)):
+        if df.dtypes[i] == 'object':
+            df[df.columns[i]] = df[df.columns[i]].str.replace('-', '0')
+    return df
+
+
 # CREATE METRICS FOR GOALKEEPERS
 # Create columns and process values to create KPI for goalkeepers
 # ///////////////////////////////////////////////////////////////
 def create_metrics_for_gk(df, l):
     # Create Saves_90 metric (saves made per 90)
-
     df['Tot_Sav'] = df[text[l].h.s1] + df[text[l].h.s2] + df[text[l].h.s3]
     df['Per_90'] = df[text[l].h.h12] / 90
     df['Saves_90'] = df['Tot_Sav'] / df['Per_90']
@@ -107,6 +119,7 @@ def create_metrics_for_gk(df, l):
     df['Faced_90'] = df['Shots_Faced'] / df['Per_90']
     return df
 
+
 # ROUND DATA
 # Round all float values to 2 decimals
 # ///////////////////////////////////////////////////////////////
@@ -114,6 +127,7 @@ def round_data(df):
     tmp = df.select_dtypes(include=[np.number, np.float])
     df.loc[:, tmp.columns] = np.round(tmp, decimals=2)
     return df
+
 
 # DATA FOR RANKINGS
 # Load data to make metrics for rankings
@@ -145,136 +159,13 @@ def data_for_rankings(df, lang):
 
     return df
 
+
 # RANK VALUES
 # Make a rank with values previously setted
 # ///////////////////////////////////////////////////////////////
 def ranking_values(df):
     f = lambda x: x.replace(x[-1], x[-1] + '_rank')
-    df = df.join(df.iloc[:, 94:177].rank(axis=1, method='first', ascending=False).astype(int).rename(columns=f))
-    return df
-
-# SCORES FOR POSITION
-# Create scores for every position in game for every player in dataframe
-# ///////////////////////////////////////////////////////////////
-def create_scores_for_position(df, l):
-    # Create score for each position and club DNA.\n",
-    df['dna_score'] = df[text[l].h.a46] + df[text[l].h.a44] + df[text[l].h.a34] + df[text[l].h.a6] + df[text[l].h.a2] \
-                      + df[text[l].h.a1] + df[text[l].h.a9]
-
-    df[poss[l].p3 + "_score"] = df[text[l].h.a47] + df[text[l].h.a41] + df[text[l].h.a40] + df[text[l].h.a27] + \
-                                df[text[l].h.a24] + df[text[l].h.a11] + df[text[l].h.a10] + df[text[l].h.a4] + \
-                                df[text[l].h.a17] + df[text[l].h.a15] + df[text[l].h.a30] + df[text[l].h.a44] + \
-                                df[text[l].h.a3] + df[text[l].h.a35] + df[text[l].h.a13] + df[text[l].h.a39] + \
-                                df[text[l].h.a38] + df[text[l].h.a1] + df[text[l].h.a45]
-
-    df[poss[l].p8 + "_score"] = df[text[l].h.a26] + df[text[l].h.a20] + df[text[l].h.a7] + df[text[l].h.a46] + df[
-        text[l].h.a44] \
-                                + df[text[l].h.a42] + df[text[l].h.a35] + df[text[l].h.a13] + df[text[l].h.a39] + df[
-                                    text[l].h.a38] \
-                                + df[text[l].h.a16] + df[text[l].h.a8] + df[text[l].h.a25]
-
-    df[poss[l].p21 + "_score"] = df[text[l].h.a36] + df[text[l].h.a33] + df[text[l].h.a20] + df[text[l].h.a15] + df[
-        text[l].h.a7] \
-                                 + df[text[l].h.a5] + df[text[l].h.a30] + df[text[l].h.a44] + df[text[l].h.a35] + df[
-                                     text[l].h.a18] \
-                                 + df[text[l].h.a13] + df[text[l].h.a6] + df[text[l].h.a2] + df[text[l].h.a38] + df[
-                                     text[l].h.a1] \
-                                 + df[text[l].h.a45] + df[text[l].h.a16] + df[text[l].h.a9]
-
-    df[poss[l].p22 + "_score"] = df[text[l].h.a36] + df[text[l].h.a33] + df[text[l].h.a20] + df[text[l].h.a15] + df[
-        text[l].h.a7] \
-                                 + df[text[l].h.a5] + df[text[l].h.a30] + df[text[l].h.a44] + df[text[l].h.a35] + df[
-                                     text[l].h.a29] \
-                                 + df[text[l].h.a18] + df[text[l].h.a13] + df[text[l].h.a6] + df[text[l].h.a2] + df[
-                                     text[l].h.a38] \
-                                 + df[text[l].h.a1] + df[text[l].h.a45] + df[text[l].h.a16] + df[text[l].h.a9]
-
-    df[poss[l].p18 + "_score"] = df[text[l].h.a36] + df[text[l].h.a33] + df[text[l].h.a15] + df[text[l].h.a7] + df[
-        text[l].h.a5] \
-                                 + df[text[l].h.a30] + df[text[l].h.a44] + df[text[l].h.a35] + df[text[l].h.a29] + df[
-                                     text[l].h.a18] \
-                                 + df[text[l].h.a6] + df[text[l].h.a2] + df[text[l].h.a39] + df[text[l].h.a1] + df[
-                                     text[l].h.a45] \
-                                 + df[text[l].h.a43] + df[text[l].h.a16] + df[text[l].h.a9]
-
-    df[poss[l].p32 + "_score"] = df[text[l].h.a20] + df[text[l].h.a15] + df[text[l].h.a7] + df[text[l].h.a46] + df[
-        text[l].h.a44] \
-                                 + df[text[l].h.a35] + df[text[l].h.a13] + df[text[l].h.a6] + df[text[l].h.a2] + df[
-                                     text[l].h.a39] \
-                                 + df[text[l].h.a38] + df[text[l].h.a9] + df[text[l].h.a8]
-
-    df[poss[l].p40 + "_score"] = df[text[l].h.a20] + df[text[l].h.a15] + df[text[l].h.a7] + df[text[l].h.a46] + df[
-        text[l].h.a44] \
-                                 + df[text[l].h.a42] + df[text[l].h.a6] + df[text[l].h.a2] + df[text[l].h.a38] + df[
-                                     text[l].h.a45] \
-                                 + df[text[l].h.a16] + df[text[l].h.a9] + df[text[l].h.a8]
-
-    df[poss[l].p38 + "_score"] = df[text[l].h.a15] + df[text[l].h.a5] + df[text[l].h.a30] + df[text[l].h.a44] + df[
-        text[l].h.a3] \
-                                 + df[text[l].h.a35] + df[text[l].h.a18] + df[text[l].h.a6] + df[text[l].h.a2] + df[
-                                     text[l].h.a39] \
-                                 + df[text[l].h.a43]
-
-    df[poss[l].p35 + "_score"] = df[text[l].h.a31] + df[text[l].h.a22] + df[text[l].h.a20] + df[text[l].h.a15] + df[
-        text[l].h.a7] \
-                                 + df[text[l].h.a30] + df[text[l].h.a44] + df[text[l].h.a35] + df[text[l].h.a18] + df[
-                                     text[l].h.a13] \
-                                 + df[text[l].h.a2] + df[text[l].h.a39] + df[text[l].h.a38] + df[text[l].h.a1] + df[
-                                     text[l].h.a43] \
-                                 + df[text[l].h.a16] + df[text[l].h.a9] + df[text[l].h.a8]
-
-    df[poss[l].p44 + "_score"] = df[text[l].h.a15] + df[text[l].h.a7] + df[text[l].h.a5] + df[text[l].h.a30] + df[
-        text[l].h.a44] \
-                                 + df[text[l].h.a3] + df[text[l].h.a35] + df[text[l].h.a18] + df[text[l].h.a13] + df[
-                                     text[l].h.a6] \
-                                 + df[text[l].h.a2] + df[text[l].h.a39] + df[text[l].h.a38] + df[text[l].h.a9]
-
-    df[poss[l].p68 + "_score"] = df[text[l].h.a36] + df[text[l].h.a33] + df[text[l].h.a22] + df[text[l].h.a15] + df[
-        text[l].h.a5] \
-                                 + df[text[l].h.a30] + df[text[l].h.a44] + df[text[l].h.a3] + df[text[l].h.a35] + df[
-                                     text[l].h.a29] \
-                                 + df[text[l].h.a18] + df[text[l].h.a39] + df[text[l].h.a1] + df[text[l].h.a45] + df[
-                                     text[l].h.a16]
-
-    df[poss[l].p65 + "_score"] = df[text[l].h.a33] + df[text[l].h.a31] + df[text[l].h.a22] + df[text[l].h.a15] + df[
-        text[l].h.a5] \
-                                 + df[text[l].h.a30] + df[text[l].h.a44] + df[text[l].h.a3] + df[text[l].h.a29] + df[
-                                     text[l].h.a18] \
-                                 + df[text[l].h.a39] + df[text[l].h.a1] + df[text[l].h.a45] + df[text[l].h.a43] + df[
-                                     text[l].h.a16]
-
-    df[poss[l].p66 + "_score"] = df[text[l].h.a33] + df[text[l].h.a31] + df[text[l].h.a22] + df[text[l].h.a15] + df[
-        text[l].h.a5] \
-                                 + df[text[l].h.a30] + df[text[l].h.a44] + df[text[l].h.a29] + df[text[l].h.a18] + df[
-                                     text[l].h.a39] \
-                                 + df[text[l].h.a1] + df[text[l].h.a45] + df[text[l].h.a43] + df[text[l].h.a16]
-
-    df[poss[l].p59 + "_score"] = df[text[l].h.a33] + df[text[l].h.a22] + df[text[l].h.a15] + df[text[l].h.a5] + df[
-        text[l].h.a30] \
-                                 + df[text[l].h.a44] + df[text[l].h.a3] + df[text[l].h.a35] + df[text[l].h.a29] + df[
-                                     text[l].h.a18] \
-                                 + df[text[l].h.a39] + df[text[l].h.a45]
-
-    df[poss[l].p49 + "_score"] = df[text[l].h.a33] + df[text[l].h.a15] + df[text[l].h.a5] + df[text[l].h.a30] + df[
-        text[l].h.a44] \
-                                 + df[text[l].h.a3] + df[text[l].h.a35] + df[text[l].h.a29] + df[text[l].h.a18] + df[
-                                     text[l].h.a6] \
-                                 + df[text[l].h.a39] + df[text[l].h.a45]
-
-    df[poss[l].p83 + "_score"] = df[text[l].h.a33] + df[text[l].h.a31] + df[text[l].h.a15] + df[text[l].h.a5] + df[
-        text[l].h.a30] \
-                                 + df[text[l].h.a44] + df[text[l].h.a3] + df[text[l].h.a35] + df[text[l].h.a29] + df[
-                                     text[l].h.a18] \
-                                 + df[text[l].h.a6] + df[text[l].h.a39] + df[text[l].h.a1] + df[text[l].h.a45] + df[
-                                     text[l].h.a43]
-
-    df[poss[l].p78 + "_score"] = df[text[l].h.a31] + df[text[l].h.a30] + df[text[l].h.a46] + df[text[l].h.a44] + df[
-        text[l].h.a42] \
-                                 + df[text[l].h.a35] + df[text[l].h.a18] + df[text[l].h.a6] + df[text[l].h.a2] + df[
-                                     text[l].h.a39] \
-                                 + df[text[l].h.a38] + df[text[l].h.a1] + df[text[l].h.a45] + df[text[l].h.a43] + df[
-                                     text[l].h.a16] \
-                                 + df[text[l].h.a9] + df[text[l].h.a8]
+    df = df.join(df.iloc[:, 96:179].rank(axis=1, method='first', ascending=False).astype(int).rename(columns=f))
     return df
 
 
@@ -303,9 +194,10 @@ def create_df_for_squad(df, l):
         df_for_squad['Rol 2S'] = role_es
         df_for_squad['Trol'] = 3
         df_for_squad['Rol 3S'] = role_es
-    df_for_squad = df_for_squad.join(df.iloc[:, 94:177])
-    df_for_squad = df_for_squad.join(df.iloc[:, 196:279])
+    df_for_squad = df_for_squad.join(df.iloc[:, 96:179])
+    df_for_squad = df_for_squad.join(df.iloc[:, 180:263])
     return df_for_squad
+
 
 # DATAFRAME FOR TACTIC VIEW
 # Cut original dataframe to make readable for tactic view
@@ -314,87 +206,35 @@ def create_df_for_tactic(df, l):
     df_for_tactic = df.loc[:, [text[l].h.h1]]
     return df_for_tactic
 
-# DATAFRAME FOR EVERY POSITION
-# Cut original dataframe to make readable for positions
+
+# DATAFRAME FOR SCOUTING TEAM
+# Cut original dataframe to make readable for sc
 # ///////////////////////////////////////////////////////////////
-def create_df_for_position(df, l):
-    # Create custom DataFrame for each position and club DNA
-    dna = df.loc[:, [text[l].h.h1, text[l].h.h3, text[l].h.h2, text[l].h.a46, text[l].h.a44, text[l].h.a34,
-                     text[l].h.a6, text[l].h.a2, text[l].h.a1, text[l].h.a9, 'dna']]
-
-    sk_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a47, text[l].h.a41, text[l].h.a40, text[l].h.a27,
-                       text[l].h.a24, text[l].h.a11, text[l].h.a10, text[l].h.a4, text[l].h.a17, text[l].h.a15,
-                       text[l].h.a30, text[l].h.a44, text[l].h.a3, text[l].h.a35, text[l].h.a13, text[l].h.a39,
-                       text[l].h.a38, text[l].h.a1, text[l].h.a45, poss[l].p3]]
-
-    cd_de = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a26, text[l].h.a20, text[l].h.a7, text[l].h.a46,
-                       text[l].h.a44, text[l].h.a42, text[l].h.a35, text[l].h.a13, text[l].h.a39, text[l].h.a38,
-                       text[l].h.a16, text[l].h.a8, text[l].h.a25, poss[l].p8]]
-
-    wb_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a36, text[l].h.a33, text[l].h.a20, text[l].h.a15,
-                       text[l].h.a7, text[l].h.a5, text[l].h.a30, text[l].h.a44, text[l].h.a35, text[l].h.a18,
-                       text[l].h.a13, text[l].h.a6, text[l].h.a2, text[l].h.a38, text[l].h.a1, text[l].h.a45,
-                       text[l].h.a16, text[l].h.a9, poss[l].p21]]
-
-    wb_at = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a36, text[l].h.a33, text[l].h.a20, text[l].h.a15,
-                       text[l].h.a7, text[l].h.a5, text[l].h.a30, text[l].h.a44, text[l].h.a35, text[l].h.a29,
-                       text[l].h.a18, text[l].h.a13, text[l].h.a6, text[l].h.a2, text[l].h.a38, text[l].h.a1,
-                       text[l].h.a45, text[l].h.a16, text[l].h.a9, poss[l].p22]]
-
-    cwb_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a36, text[l].h.a33, text[l].h.a15, text[l].h.a7,
-                        text[l].h.a5, text[l].h.a30, text[l].h.a44, text[l].h.a35, text[l].h.a29, text[l].h.a18,
-                        text[l].h.a6, text[l].h.a2, text[l].h.a39, text[l].h.a1, text[l].h.a45, text[l].h.a43,
-                        text[l].h.a16, text[l].h.a9, poss[l].p18]]
-
-    dm_de = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a20, text[l].h.a15, text[l].h.a7, text[l].h.a46,
-                       text[l].h.a44, text[l].h.a35, text[l].h.a13, text[l].h.a6, text[l].h.a2, text[l].h.a39,
-                       text[l].h.a38, text[l].h.a9, text[l].h.a8, poss[l].p32]]
-
-    bwm_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a20, text[l].h.a15, text[l].h.a7, text[l].h.a46,
-                        text[l].h.a44, text[l].h.a42, text[l].h.a6, text[l].h.a2, text[l].h.a38, text[l].h.a45,
-                        text[l].h.a16, text[l].h.a9, text[l].h.a8, poss[l].p40]]
-
-    dlp_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a15, text[l].h.a5, text[l].h.a30, text[l].h.a44,
-                        text[l].h.a3, text[l].h.a35, text[l].h.a18, text[l].h.a6, text[l].h.a2, text[l].h.a39,
-                        text[l].h.a43, poss[l].p38]]
-
-    vol_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a31, text[l].h.a22, text[l].h.a20, text[l].h.a15,
-                        text[l].h.a7, text[l].h.a30, text[l].h.a44, text[l].h.a35, text[l].h.a18, text[l].h.a13,
-                        text[l].h.a2, text[l].h.a39, text[l].h.a38, text[l].h.a1, text[l].h.a43, text[l].h.a16,
-                        text[l].h.a9, text[l].h.a8, poss[l].p35]]
-
-    car_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a15, text[l].h.a7, text[l].h.a5, text[l].h.a30,
-                        text[l].h.a44, text[l].h.a3, text[l].h.a35, text[l].h.a18, text[l].h.a13, text[l].h.a6,
-                        text[l].h.a2, text[l].h.a39, text[l].h.a38, text[l].h.a9, poss[l].p44]]
-
-    iw_at = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a36, text[l].h.a33, text[l].h.a22, text[l].h.a15,
-                       text[l].h.a5, text[l].h.a30, text[l].h.a44, text[l].h.a3, text[l].h.a35, text[l].h.a29,
-                       text[l].h.a18, text[l].h.a39, text[l].h.a1, text[l].h.a45, text[l].h.a16, poss[l].p68]]
-
-    if_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a33, text[l].h.a31, text[l].h.a22, text[l].h.a15,
-                       text[l].h.a5, text[l].h.a30, text[l].h.a44, text[l].h.a3, text[l].h.a29, text[l].h.a18,
-                       text[l].h.a39, text[l].h.a1, text[l].h.a45, text[l].h.a43, text[l].h.a16, poss[l].p65]]
-
-    if_at = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a33, text[l].h.a31, text[l].h.a22, text[l].h.a15,
-                       text[l].h.a5, text[l].h.a30, text[l].h.a44, text[l].h.a29, text[l].h.a18, text[l].h.a39,
-                       text[l].h.a1, text[l].h.a45, text[l].h.a43, text[l].h.a16, poss[l].p66]]
-
-    am_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a33, text[l].h.a22, text[l].h.a15, text[l].h.a5,
-                       text[l].h.a30, text[l].h.a44, text[l].h.a3, text[l].h.a35, text[l].h.a29, text[l].h.a18,
-                       text[l].h.a39, text[l].h.a45, poss[l].p59]]
-
-    ap_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a33, text[l].h.a15, text[l].h.a5, text[l].h.a30,
-                       text[l].h.a44, text[l].h.a3, text[l].h.a35, text[l].h.a29, text[l].h.a18, text[l].h.a6,
-                       text[l].h.a39, text[l].h.a45, poss[l].p49]]
-
-    f9_su = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a33, text[l].h.a31, text[l].h.a15, text[l].h.a5,
-                       text[l].h.a30, text[l].h.a44, text[l].h.a3, text[l].h.a35, text[l].h.a29, text[l].h.a18,
-                       text[l].h.a6, text[l].h.a39, text[l].h.a1, text[l].h.a45, text[l].h.a43, poss[l].p83]]
-
-    pf_at = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.a31, text[l].h.a30, text[l].h.a46, text[l].h.a44,
-                       text[l].h.a42, text[l].h.a35, text[l].h.a18, text[l].h.a6, text[l].h.a2, text[l].h.a39,
-                       text[l].h.a38, text[l].h.a1, text[l].h.a45, text[l].h.a43, text[l].h.a16, text[l].h.a9,
-                       text[l].h.a8, poss[l].p78]]
+def create_df_for_scouting_team(df, l):
+    role_es = '<- EDITA'
+    role_en = '<- EDIT'
+    df_for_scouting = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.h4, text[l].h.h7, text[l].h.h5, 'Global']]
+    if l == 'en':
+        df_for_scouting["Role Ideal"] = '-'
+        df_for_scouting["Role Score"] = 1
+        df_for_scouting['Frol'] = 1
+        df_for_scouting['Role 1S'] = role_en
+        df_for_scouting['Srol'] = 2
+        df_for_scouting['Role 2S'] = role_en
+        df_for_scouting['Trol'] = 3
+        df_for_scouting['Role 3S'] = role_en
+    elif l == 'es':
+        df_for_scouting["Rol Ideal"] = '-'
+        df_for_scouting["Ptj Rol"] = 1
+        df_for_scouting['Frol'] = 1
+        df_for_scouting['Rol 1S'] = role_es
+        df_for_scouting['Srol'] = 2
+        df_for_scouting['Rol 2S'] = role_es
+        df_for_scouting['Trol'] = 3
+        df_for_scouting['Rol 3S'] = role_es
+    df_for_scouting = df_for_scouting.join(df.iloc[:, 10:179])
+    df_for_scouting = df_for_scouting.join(df.iloc[:, 180:263])
+    return df_for_scouting
 
 
 # METRICS
