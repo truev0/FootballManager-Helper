@@ -16,7 +16,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/truev0/FootballManager-Helper">
-    <img src="gui/images/logo.png" alt="Logo" >
+    <img src="gui/images/project_images/logo.png" alt="Logo" >
   </a>
 
 <h2 align="center">Football Manager Helper</h2>
