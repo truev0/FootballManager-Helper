@@ -94,6 +94,7 @@ class MainWindow(QMainWindow):
         self.df_for_table = None
         self.df_scouting = None
         self.df_scout_for_table = None
+        self.filtered_df = None
         self.bottom_right_grip = None
         self.bottom_left_grip = None
         self.top_right_grip = None
@@ -580,6 +581,7 @@ class MainWindow(QMainWindow):
         # ADD OLD SQUAD BUTTON
         self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
         self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
+        self.ui.right_btn_3.clicked.connect(lambda: self.collect_scout_data())
         self.ui.btn_close_notification.clicked.connect(lambda: self.ui.popup_notification_container.collapseMenu())
         self.ui.btn_send.clicked.connect(lambda: self.process_data_compare_players())
 
@@ -696,6 +698,7 @@ class MainWindow(QMainWindow):
             self.df_scouting = FMi.ranking_values(self.df_scouting)
 
             self.df_scout_for_table = FMi.create_df_for_scouting_team(self.df_scouting, self.language)
+            self.df_scout_for_table.fillna(0, inplace=True)
             self.scoutingCounter += 1
 
         if self.scoutingCounter == 3:
@@ -727,7 +730,7 @@ class MainWindow(QMainWindow):
     # SCOUTING HELPER FUNCTION
     # ///////////////////////////////////////////
     def tables_helper_scouting(self, df_to_set=None):
-        tmp_model = CustomizedNumpyModel(df_to_set)
+        tmp_model = CustomizedNumpyScoutModel(df_to_set)
         column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
         self.ui.table_scouting.setSelectionBehavior(QTableView.SelectItems)
         self.ui.table_scouting.setModel(tmp_model)
@@ -736,12 +739,114 @@ class MainWindow(QMainWindow):
         for c in column_indexes:
             headers.setSectionResizeMode(c, QHeaderView.ResizeToContents)
 
+    def collect_scout_data(self):
+        attrs_set = []
+        stats_set = []
+        if self.language == 'en':
+            for value_child, operator_child, identifier in zip(
+                self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
+                self.ui.right_column.scroll_area_1.findChildren(QComboBox),
+                util_lists.list_en[2]
+            ):
+                if value_child.text() == '':
+                    tmp_value_child = float(0)
+                else:
+                    tmp_value_child = float(value_child.text().replace(',', '.'))
 
-    def filter_scout_data(self):
-        # TODO apuntar boton hacia esta funcio y hacer verificacion y filtrado de datos
-        # TODO terminar estilizado del scrollbar en la columna derecha y completar el esquema para estadisticas
-        self.filtered_df = None
-        pass
+                attrs_set.append(
+                    [
+                        identifier,
+                        operator_child.currentText(),
+                        tmp_value_child
+                    ]
+                )
+            for value_child, operator_child, identifier in zip(
+                self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
+                self.ui.right_column.scroll_area_2.findChildren(QComboBox),
+                util_lists.list_en[0]
+            ):
+                if value_child.text() == '':
+                    tmp_value_child = float(0)
+                else:
+                    tmp_value_child = float(value_child.text().replace(',', '.'))
+
+                stats_set.append(
+                    [
+                        identifier,
+                        operator_child.currentText(),
+                        tmp_value_child
+                    ]
+                )
+        if self.language == 'es':
+            for value_child, operator_child, identifier in zip(
+                    self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
+                    self.ui.right_column.scroll_area_1.findChildren(QComboBox),
+                    util_lists.list_es[2]
+            ):
+                if value_child.text() == '':
+                    tmp_value_child = float(0)
+                else:
+                    tmp_value_child = float(value_child.text().replace(',', '.'))
+
+                attrs_set.append(
+                    [
+                        identifier,
+                        operator_child.currentText(),
+                        tmp_value_child
+                    ]
+                )
+            for value_child, operator_child, identifier in zip(
+                    self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
+                    self.ui.right_column.scroll_area_2.findChildren(QComboBox),
+                    util_lists.list_es[0]
+            ):
+                if value_child.text() == '':
+                    tmp_value_child = float(0)
+                else:
+                    tmp_value_child = float(value_child.text().replace(',', '.'))
+
+                stats_set.append(
+                    [
+                        identifier,
+                        operator_child.currentText(),
+                        tmp_value_child
+                    ]
+                )
+        self.filter_scout_data(stats_set, attrs_set)
+
+    def filter_scout_data(self, stats, attrs):
+        filtered_df = self.df_scout_for_table.copy()
+        for i in range(len(attrs)):
+            if attrs[i][1] == '>' and attrs[i][2] == 0.0:
+                continue
+            if attrs[i][1] == '>':
+                filtered_df = filtered_df[filtered_df[attrs[i][0]] > attrs[i][2]]
+            if attrs[i][1] == '<':
+                if attrs[i][2] > 0.0:
+                    filtered_df = filtered_df[filtered_df[attrs[i][0]] < attrs[i][2]]
+                elif attrs[i][2] == 0.0:
+                    continue
+            if attrs[i][1] == '>=':
+                filtered_df = filtered_df[filtered_df[attrs[i][0]] >= attrs[i][2]]
+            if attrs[i][1] == '<=':
+                filtered_df = filtered_df[filtered_df[attrs[i][0]] <= attrs[i][2]]
+
+        for j in range(len(stats)):
+            if stats[j][1] == '>' and stats[j][2] == 0.0:
+                continue
+            if stats[j][1] == '>':
+                filtered_df = filtered_df[filtered_df[stats[j][0]] > stats[j][2]]
+            if stats[j][1] == '<':
+                if stats[j][2] > 0.0:
+                    filtered_df = filtered_df[filtered_df[stats[j][0]] < stats[j][2]]
+                elif stats[j][2] == 0.0:
+                    continue
+            if stats[j][1] == '>=':
+                filtered_df = filtered_df[filtered_df[stats[j][0]] >= stats[j][2]]
+            if stats[j][1] == '<=':
+                filtered_df = filtered_df[filtered_df[stats[j][0]] <= stats[j][2]]
+
+        self.tables_helper_scouting(filtered_df)
 
     # SET / LOAD DATA FOR STATS AND METRICS GRAPHS
     # ///////////////////////////////////////////
@@ -863,12 +968,15 @@ class MainWindow(QMainWindow):
             self.ui.second_player_combo.addItems(second_dependent_list)
 
     def create_edits_for_scouting(self):
-        if self.ui.group_lineedits_attrs_widget.get_lines() is not None:
+        if self.ui.group_lineedits_attrs_widget.get_lines() is not None and self.ui.group_lineedits_stats_widget.get_lines() is not None:
             self.ui.group_lineedits_attrs_widget.reset_all_lines()
+            self.ui.group_lineedits_stats_widget.reset_all_lines()
         if self.language == 'en':
             self.ui.group_lineedits_attrs_widget.add_buttons(util_lists.list_en[2], 1)
+            self.ui.group_lineedits_stats_widget.add_buttons(util_lists.list_en[0], 1)
         elif self.language == 'es':
             self.ui.group_lineedits_attrs_widget.add_buttons(util_lists.list_es[2], 1)
+            self.ui.group_lineedits_stats_widget.add_buttons(util_lists.list_es[0], 1)
 
     # THREE FUNCTIONS FOR ACTUAL SQUAD, SCOUT, OLD SQUAD
     # //////////////////////////////////////////////////

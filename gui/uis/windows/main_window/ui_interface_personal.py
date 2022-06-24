@@ -933,10 +933,11 @@ class Ui_MainWindow(object):
 
         self.group_lineedits_attrs_widget = PyButtonGroup()
 
-        self.group_lineedits_stats_widget = None
+        self.group_lineedits_stats_widget = PyButtonGroup()
 
         # ADD LINEEDITS FOR FILTER IN PAGE 8
         self.right_column.scroll_area_1.setWidget(self.group_lineedits_attrs_widget)
+        self.right_column.scroll_area_2.setWidget(self.group_lineedits_stats_widget)
 
         # PAGE 9 - Employees view
         # TODO crear layout
@@ -976,6 +977,20 @@ class Ui_MainWindow(object):
 
         self.right_column.btn_1_menu_2_layout.addWidget(self.right_btn_2)
 
+        # FILTER DATA BUTTON
+        self.right_btn_3 = PyPushButton(
+            text="Filter Data",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.right_btn_3.setMaximumHeight(40)
+        self.right_column.filter_data_btn_layout.addWidget(self.right_btn_3)
+
+
+        # TODO reubicar los botones de lenguaje a otra seccion en este mismo archivo
         # ENGLISH BUTTON
         # Button to change UI to english
         # ///////////////////////////////////////////////////////////////

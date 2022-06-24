@@ -8,7 +8,7 @@ from pyside_core import *
 # ///////////////////////////////////////////////////////////////
 style = '''
 QLineEdit {{
-	background-color: {_bg_color};
+	background-color: {_bg_color_active};
 	border-radius: {_radius}px;
 	border: {_border_size}px solid transparent;
 	padding-left: 10px;
@@ -27,19 +27,21 @@ QLineEdit:focus {{
 # ///////////////////////////////////////////////////////////////
 class PyLineEdit(QLineEdit):
     def __init__(
-        self, 
-        text = "",
-        place_holder_text = "",
-        radius = 8,
-        border_size = 2,
-        color = "#FFF",
-        selection_color = "#FFF",
-        bg_color = "#333",
-        bg_color_active = "#222",
-        context_color = "#00ABE8"
+            self,
+            text="",
+            place_holder_text="",
+            radius=8,
+            border_size=2,
+            color="#FFF",
+            selection_color="#FFF",
+            bg_color="#333",
+            bg_color_active="#1b1e23",
+            context_color="#00ABE8",
     ):
         super().__init__()
-
+        self.KEYS_MAPPING = {
+            ".": ","
+        }
         # PARAMETERS
         if text:
             self.setText(text)
@@ -79,3 +81,13 @@ class PyLineEdit(QLineEdit):
             _context_color = context_color
         )
         self.setStyleSheet(style_format)
+
+    def keyPressEvent(self, event):
+        event = self.change_letter(event)
+        super().keyPressEvent(event)
+
+    def change_letter(self, event):
+        text = self.KEYS_MAPPING.get(event.text())
+        if text is None:
+            return event
+        return QKeyEvent(event.type(), Qt.Key_unknown, event.modifiers(), text)

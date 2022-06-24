@@ -10,8 +10,8 @@ class PyComboBox(QComboBox):
         QComboBox {{		
             background-color: {_dark_one};	
             color: {_text_foreground};
-            padding-left: 40px;
             border-radius: 4px;
+            padding-left: 10px;
             font: 800 9pt "Segoe UI";
         }}
 

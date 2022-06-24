@@ -25,7 +25,7 @@
     },
     "right_column_size" : {
         "minimum" : 0,
-        "maximum" : 240
+        "maximum" : 300
     },
     "time_animation" : 500,
     "font" : {

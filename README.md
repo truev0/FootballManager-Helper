@@ -129,8 +129,9 @@ Antes de comenzar, verifique si cuenta con los siguientes requisitos:
     - [x] Campo de tactica y gestión por posición
     - [x] Gráficos de estadísticas y métricas
     - [x] Gráfico de comparación de jugadores
-    - [ ] Tabla de scouting
+    - [ ] Tabla y filtrado de scouting
     - [ ] Gestion de empleados
+    - [ ] Funcionalidad sorpresa
 - [ ] Soporte multi-lenguaje
     - [ ] Español
     - [x] Inglés
@@ -146,7 +147,7 @@ Ver [issues](https://github.com/truev0/FootballManager-Helper/issues) para ver u
 <!-- CONTRIBUTING -->
 ## 👍 Contribuir
 
-Si quieres decirme **GRACIAS** por el trabajo realizado y/o apoyar el constante desarrollo y mantenimiento de `FootballManager Helper`:
+Si quieres decirme **GRACIAS** por el trabajo realizado y/o apoyar el constante desarrollo y mantenimiento de `Football Manager Helper`:
 
 Las contribuciones son lo que hace que la comunidad de código abierto sea un lugar increíble para aprender, inspirar y crear. Cualquier contribución que hagas será **muy apreciada**
 
