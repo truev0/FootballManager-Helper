@@ -2,21 +2,15 @@
 
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////////////////////////
-import numpy as np
-
 from pyside_core import *
 
 # IMPORT MODULES
 # ///////////////////////////////////////////////////////////////
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 from math import pi
-
-# IMPORT DICTS
-# ///////////////////////////////////////////////////////////////
-from gui.core.dicts import util_lists
 
 # IMPORT MPLSOCCER
 # ///////////////////////////////////////////////////////////////
@@ -72,7 +66,7 @@ class _CustomSpyder(FigureCanvas):
             dpi=100
     ):
 
-        self.fig, self.ax = radar_mosaic(radar_height=0.915, title_height=0.06, figheight=14)
+        self.fig, self.ax = radar_mosaic(radar_height=0.915, title_height=0.06, fig_height=14)
         super(_CustomSpyder, self).__init__(self.fig)
         # COLORS
         self.bg_two = bg_two
@@ -149,7 +143,7 @@ class _CustomSpyder(FigureCanvas):
                               num_rings=6, ring_width=1, center_circle_radius=1)
 
                 radar.setup_axis(ax=self.ax['radar'], facecolor=self.bg_one)
-                rings_inner = radar.draw_circles(
+                radar.draw_circles(
                     ax=self.ax['radar'],
                     facecolor=self.dark_three,
                     edgecolor=self.dark_three,
@@ -160,7 +154,10 @@ class _CustomSpyder(FigureCanvas):
                 tmp_df = tmp_df.set_index(column_index_name)
 
                 values1 = tmp_df.iloc[0].tolist()
-                values2 = tmp_df.iloc[1].tolist()
+                if players[0] == players[1]:
+                    values2 = tmp_df.iloc[0].tolist()
+                else:
+                    values2 = tmp_df.iloc[1].tolist()
                 # /////////////////////////////////////////////////////////////////////////////
                 radar_output = radar.draw_radar_compare(
                     values1,
@@ -170,12 +167,14 @@ class _CustomSpyder(FigureCanvas):
                     kwargs_compare={'facecolor': self.COLORS[1], 'alpha': 0.15},
                 )
                 radar_poly, radar_poly2, vertices1, vertices2 = radar_output
-                range_labels = radar.draw_range_labels(
+
+                radar.draw_range_labels(
                     ax=self.ax['radar'],
                     fontsize=10,
                     color=self.axis_color
                 )
-                param_labels = radar.draw_param_labels(
+
+                radar.draw_param_labels(
                     ax=self.ax['radar'],
                     fontsize=15,
                     color=self.axis_color
@@ -193,24 +192,21 @@ class _CustomSpyder(FigureCanvas):
                 self.ax['radar'].plot(vertices22[:, 0], vertices22[:, 1], self.COLORS[1], linewidth=2.5,
                                       linestyle=':', zorder=2)
                 var1, var2 = change_squad(squads, self.language)
-                top_left_text = self.ax['title'].text(0.01, 0.65, players[0], fontsize=18,
-                                                  color=self.COLORS[0], ha='left', va='center')
-                top_right_text = self.ax['title'].text(0.99, 0.65, players[1], fontsize=18,
-                                                    color=self.COLORS[1], ha='right', va='center')
-                bottom_left_text = self.ax['title'].text(0.01, 0.1, var1, fontsize=10,
-                                                         color=self.COLORS[0], ha='left', va='center')
-                bottom_right_text = self.ax['title'].text(0.99, 0.1, var2, fontsize=10,
-                                                          color=self.COLORS[1], ha='right', va='center')
+                self.ax['title'].text(0.01, 0.65, players[0], fontsize=18, color=self.COLORS[0], ha='left', va='center')
+                self.ax['title'].text(0.99, 0.65, players[1], fontsize=18, color=self.COLORS[1], ha='right',
+                                      va='center')
+                self.ax['title'].text(0.01, 0.1, var1, fontsize=10, color=self.COLORS[0], ha='left', va='center')
+                self.ax['title'].text(0.99, 0.1, var2, fontsize=10, color=self.COLORS[1], ha='right', va='center')
                 self.fig.canvas.draw()
 
 
-def radar_mosaic(radar_height=0.915, title_height=0.06, figheight=14):
+def radar_mosaic(radar_height=0.915, title_height=0.06, fig_height=14):
 
     if title_height + radar_height > 1:
         error_msg = 'Reduce one of the radar_height or title_height so the total is <= 1.'
         raise ValueError(error_msg)
-    endnote_height = 1 - radar_height - title_height
-    figwidth = figheight * radar_height
+    end_note_height = 1 - radar_height - title_height
+    fig_width = fig_height * radar_height
     figure, axes = plt.subplot_mosaic(
         [
             ['title'],
@@ -221,7 +217,7 @@ def radar_mosaic(radar_height=0.915, title_height=0.06, figheight=14):
             'height_ratios': [
                 title_height,
                 radar_height,
-                endnote_height
+                end_note_height
             ],
             'bottom': 0,
             'left': 0,
@@ -230,8 +226,8 @@ def radar_mosaic(radar_height=0.915, title_height=0.06, figheight=14):
             'hspace': 0
         },
         figsize=(
-            figwidth,
-            figheight
+            fig_width,
+            fig_height
         )
     )
     axes['title'].axis('off')

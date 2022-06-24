@@ -2,8 +2,6 @@
 
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////////////////////////
-import numpy as np
-
 from pyside_core import *
 
 # IMPORT MODULES

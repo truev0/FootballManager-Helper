@@ -63,7 +63,7 @@ from Custom_Widgets.Widgets import loadJsonStyle
 
 # IMPORT INTERFACE
 # ///////////////////////////////////////////
-from gui.uis.windows.main_window.ui_interface_personal import Ui_MainWindow
+from gui.uis.windows.main_window.ui_interface import Ui_MainWindow
 
 # ADJUST QT FONT DPI FOR HIGH SCALE
 # ///////////////////////////////////////////
@@ -80,7 +80,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
 
         # SETUP MAIN WINDOW
-        # Load widgets from "gui\uis\main_window\ui_interface_personal.py"
+        # Load widgets from "gui\uis\main_window\ui_interface.py"
         # ///////////////////////////////////////////
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -482,7 +482,6 @@ class MainWindow(QMainWindow):
             '''
             No implementado por que es buton auxiliar
             '''
-            pass
 
         # VERTICAL PITCH
         # ///////////////////////////////////////////
@@ -539,10 +538,8 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def btn_released(self):
         # GET BTN CLICKED
-        btn = self.ui.setup_btns()
-
-        # DEBUG
-        # print(f"Button {btn.objectName()}, released!")
+        # btn = self.ui.setup_btns()
+        pass
 
     # SET ALL SIGNALS
     # ///////////////////////////////////////////
@@ -665,7 +662,6 @@ class MainWindow(QMainWindow):
                 '''
                 No implementado aun por que no se que hacer aqui
                 '''
-                pass
 
     # PROCESS ACTUAL SQUAD INFO
     # ///////////////////////////////////////////
