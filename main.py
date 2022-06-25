@@ -364,26 +364,12 @@ class MainWindow(QMainWindow):
             # Load page 3
             self.ui.set_page(self.ui.load_pages.page_3)
 
-        # Development Btn
-        if btn.objectName() == "btn_development":
-            self.ui.left_menu.select_only_one(btn.objectName())
-
-            # Load page 4
-            self.ui.set_page(self.ui.load_pages.page_4)
-
         # Stats Btn
         if btn.objectName() == "btn_stats":
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load page 5
             self.ui.set_page(self.ui.load_pages.page_5)
-
-        # Metrics Btn
-        if btn.objectName() == "btn_metrics":
-            self.ui.left_menu.select_only_one(btn.objectName())
-
-            # Load page 6
-            self.ui.set_page(self.ui.load_pages.page_6)
 
         # Compare Btn
         if btn.objectName() == "btn_compare":
@@ -399,12 +385,12 @@ class MainWindow(QMainWindow):
             # Load page 8
             self.ui.set_page(self.ui.load_pages.page_8)
 
-        # Employees Btn
-        if btn.objectName() == "btn_employees":
-            self.ui.left_menu.select_only_one(btn.objectName())
-
-            # Load page 9
-            # self.ui.set_page(self.ui.load_pages.page_9)
+        # # Employees Btn
+        # if btn.objectName() == "btn_employees":
+        #     self.ui.left_menu.select_only_one(btn.objectName())
+        #
+        #     # Load page 9
+        #     self.ui.set_page(self.ui.load_pages.page_9)
 
         # Help Btn
         if btn.objectName() == "btn_help":
@@ -413,8 +399,15 @@ class MainWindow(QMainWindow):
             # Load page 10
             # self.ui.set_page(self.ui.load_pages.page_10)
 
-        # Information Btn
-        if btn.objectName() == "btn_info":
+        # Clustering Btn
+        if btn.objectName() == "btn_clustering":
+            self.ui.left_menu.select_only_one(btn.objectName())
+
+            # Load page 11
+            # self.ui.set_page(self.ui.load_pages.page_11)
+
+        # Languages Btn
+        if btn.objectName() == "btn_languages":
             # Check if left column is visible
             if not self.ui.left_column_is_visible():
                 self.ui.left_menu.select_only_one_tab(btn.objectName())
@@ -433,7 +426,7 @@ class MainWindow(QMainWindow):
             if btn.objectName() != "btn_close_left_column":
                 self.ui.set_left_column_menu(
                     menu=self.ui.left_column.menus.menu_2,
-                    title="Info tab",
+                    title="Language tab",
                     icon_path=Functions.set_svg_icon("icon_info.svg")
                 )
 
@@ -479,9 +472,18 @@ class MainWindow(QMainWindow):
             top_settings.set_active_tab(False)
 
         if btn.objectName() == "btn_refresh":
-            '''
-            No implementado por que es buton auxiliar
-            '''
+            for line, combo in zip(
+                self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
+                self.ui.right_column.scroll_area_1.findChildren(QComboBox)
+            ):
+                line.setText("0")
+                combo.setCurrentIndex(0)
+            for line, combo in zip(
+                self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
+                self.ui.right_column.scroll_area_2.findChildren(QComboBox)
+            ):
+                line.setText("0")
+                combo.setCurrentIndex(0)
 
         # VERTICAL PITCH
         # ///////////////////////////////////////////
@@ -575,7 +577,7 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////
         self.ui.load_squad_btn.clicked.connect(lambda: self.load_all_data(self.ui.load_squad_btn))
         self.ui.load_scouting_btn.clicked.connect(lambda: self.load_all_data(self.ui.load_scouting_btn))
-        # ADD OLD SQUAD BUTTON
+        # TODO ADD OLD SQUAD BUTTON
         self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
         self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
         self.ui.right_btn_3.clicked.connect(lambda: self.collect_scout_data())
@@ -883,14 +885,12 @@ class MainWindow(QMainWindow):
         self.ui.left_menu.findChild(QPushButton, 'btn_home').setText(self.ui_text[lang].menu.o0)
         self.ui.left_menu.findChild(QPushButton, 'btn_squad').setText(self.ui_text[lang].menu.o1)
         self.ui.left_menu.findChild(QPushButton, 'btn_tactic').setText(self.ui_text[lang].menu.o2)
-        self.ui.left_menu.findChild(QPushButton, 'btn_development').setText(self.ui_text[lang].menu.o3)
         self.ui.left_menu.findChild(QPushButton, 'btn_stats').setText(self.ui_text[lang].menu.oaux1)
-        self.ui.left_menu.findChild(QPushButton, 'btn_metrics').setText(self.ui_text[lang].menu.o6)
         self.ui.left_menu.findChild(QPushButton, 'btn_compare').setText(self.ui_text[lang].menu.o7)
         self.ui.left_menu.findChild(QPushButton, 'btn_scouting').setText(self.ui_text[lang].menu.o8)
         self.ui.left_menu.findChild(QPushButton, 'btn_employees').setText(self.ui_text[lang].menu.o9)
         self.ui.left_menu.findChild(QPushButton, 'btn_settings').setText(self.ui_text[lang].menu.o10)
-        self.ui.left_menu.findChild(QPushButton, 'btn_info').setText(self.ui_text[lang].menu.o11)
+        self.ui.left_menu.findChild(QPushButton, 'btn_languages').setText(self.ui_text[lang].menu.o11)
         self.ui.left_menu.findChild(QPushButton, 'btn_help').setText(self.ui_text[lang].menu.o12)
         self.ui.left_menu.toggle_button.setText(self.ui_text[lang].menu.o4)
 
@@ -898,14 +898,12 @@ class MainWindow(QMainWindow):
         self.ui.left_menu.findChild(QPushButton, 'btn_home').change_tooltip(self.ui_text[lang].menu.t0)
         self.ui.left_menu.findChild(QPushButton, 'btn_squad').change_tooltip(self.ui_text[lang].menu.t1)
         self.ui.left_menu.findChild(QPushButton, 'btn_tactic').change_tooltip(self.ui_text[lang].menu.t2)
-        self.ui.left_menu.findChild(QPushButton, 'btn_development').change_tooltip(self.ui_text[lang].menu.t3)
         self.ui.left_menu.findChild(QPushButton, 'btn_stats').change_tooltip(self.ui_text[lang].menu.taux1)
-        self.ui.left_menu.findChild(QPushButton, 'btn_metrics').change_tooltip(self.ui_text[lang].menu.t6)
         self.ui.left_menu.findChild(QPushButton, 'btn_compare').change_tooltip(self.ui_text[lang].menu.t7)
         self.ui.left_menu.findChild(QPushButton, 'btn_scouting').change_tooltip(self.ui_text[lang].menu.t8)
         self.ui.left_menu.findChild(QPushButton, 'btn_employees').change_tooltip(self.ui_text[lang].menu.t9)
         self.ui.left_menu.findChild(QPushButton, 'btn_settings').change_tooltip(self.ui_text[lang].menu.t10)
-        self.ui.left_menu.findChild(QPushButton, 'btn_info').change_tooltip(self.ui_text[lang].menu.t11)
+        self.ui.left_menu.findChild(QPushButton, 'btn_languages').change_tooltip(self.ui_text[lang].menu.t11)
         self.ui.left_menu.findChild(QPushButton, 'btn_help').change_tooltip(self.ui_text[lang].menu.t12)
         self.ui.left_menu.toggle_button.change_tooltip(self.ui_text[lang].menu.t4)
 
@@ -925,6 +923,7 @@ class MainWindow(QMainWindow):
         # Translating right inside menu
         self.ui.right_btn_1.setText(self.ui_text[lang].right_content.b1)
         self.ui.right_btn_2.setText(self.ui_text[lang].right_content.b2)
+        self.ui.right_btn_3.setText(self.ui_text[lang].right_content.b3)
 
     # CREATE AND LOAD CHECHBOXES TO COMPARE
     # ///////////////////////////////////////////

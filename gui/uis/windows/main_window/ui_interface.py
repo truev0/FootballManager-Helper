@@ -465,26 +465,10 @@ class Ui_MainWindow(object):
             "is_active": False
         },
         {
-            "btn_icon": "icon_development.svg",
-            "btn_id": "btn_development",
-            "btn_text": "Development",
-            "btn_tooltip": "Show flaws of your players",
-            "show_top": True,
-            "is_active": False
-        },
-        {
             "btn_icon": "icon_stats.svg",
             "btn_id": "btn_stats",
             "btn_text": "Statistics",
             "btn_tooltip": "Show statistics",
-            "show_top": True,
-            "is_active": False
-        },
-        {
-            "btn_icon": "icon_metrics.svg",
-            "btn_id": "btn_metrics",
-            "btn_text": "Metrics",
-            "btn_tooltip": "Show players metrics",
             "show_top": True,
             "is_active": False
         },
@@ -513,6 +497,14 @@ class Ui_MainWindow(object):
             "is_active": False
         },
         {
+            "btn_icon": "icon_metrics.svg",
+            "btn_id": "btn_clustering",
+            "btn_text": "PCA & KMeans Clustering",
+            "btn_tooltip": "Clustering players",
+            "show_top": True,
+            "is_active": False
+        },
+        {
             "btn_icon": "icon_settings.svg",
             "btn_id": "btn_settings",
             "btn_text": "Settings",
@@ -522,9 +514,9 @@ class Ui_MainWindow(object):
         },
         {
             "btn_icon": "icon_info.svg",
-            "btn_id": "btn_info",
-            "btn_text": "Information",
-            "btn_tooltip": "Open information",
+            "btn_id": "btn_languages",
+            "btn_text": "Languages",
+            "btn_tooltip": "Open languages",
             "show_top": False,
             "is_active": False
         },
@@ -780,14 +772,6 @@ class Ui_MainWindow(object):
         # ADD WIDGETS TO PAGE 3
         self.load_pages.list_table_layout.addWidget(self.table_tactic)
 
-        # PAGE 4 - Development view
-
-        self.develop_label = QLabel()
-        self.develop_label.setScaledContents(True)
-        self.develop_label.setPixmap(common_uc)
-
-        self.load_pages.logo_layout_4.addWidget(self.develop_label)
-
         # PAGE 5 - Statistics view
 
         self.graph_statistics = PyStatsWidget(
@@ -873,6 +857,7 @@ class Ui_MainWindow(object):
             bg_color_pressed=self.themes["app_color"]["dark_four"],
             name="attrs"
         )
+        self.btn_compare_attrs.setEnabled(False)
         self.btn_compare_attrs.setMaximumHeight(40)
 
         # MID RIGHT SIDE

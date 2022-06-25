@@ -11,7 +11,7 @@ espanol = {
         "o8": "Scouting",
         "o9": "Empleados",
         "o10": "Ajustes",
-        "o11": "Info",
+        "o11": "Lenguaje",
         "o12": "Ayuda",
         "oaux1": "Estadisticas y Metricas",
         "t0": "Pagina inicio",
@@ -25,7 +25,7 @@ espanol = {
         "t8": "Ir a scouting",
         "t9": "Ver empleados",
         "t10": "Ir a ajustes",
-        "t11": "Ir a info",
+        "t11": "Ir a lenguajes",
         "t12": "Ir a ayuda",
         "taux1": "Ver Estadisticas y Metricas",
         "g0": "Plantilla Actual",
@@ -97,12 +97,13 @@ espanol = {
         "b2": "Cargar archivo scouting"
     },
     "right_content": {
-        "b1": "Deslizar menu 2",
-        "b2": "Deslizar menu 1"
+        "b1": "Filtros de estadisticas",
+        "b2": "Filtros de atributos",
+        "b3": "Filtrar datos",
     },
     "title_buttons_tooltips": {
         "b1": "Refrescar",
-        "b2": "Ajustes Superiores",
+        "b2": "Filtros de scouting",
         "b3": "Minimizar",
         "b4": "Maximizar",
         "b5": "Cerrar"
@@ -202,6 +203,18 @@ column_headers = {
         "a45": "Agi",
         "a46": "Agr",
         "a47": "Aér"
+    },
+    "a": {
+        "au0": "<- EDITAR",
+        "au1": "Rol Ideal",
+        "au2": "Ptj Rol",
+        "au3": "Frol",
+        "au4": "Role 1S",
+        "au5": "Srol",
+        "au6": "Role 2S",
+        "au7": "Trol",
+        "au8": "Role 3S",
+        "au9": "Entrenamiento preferido",
     }
 }
 

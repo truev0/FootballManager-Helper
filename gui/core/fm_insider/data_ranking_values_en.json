@@ -534,5 +534,71 @@
         "Tec", "Agg", "Ant", "Bra", "Cmp", "Cnt", "Dec", "Det", "Fla", "Ldr", "OtB", "Pos", "Tea", "Vis", "Wor", "Acc",
         "Agi", "Bal", "Jum", "Nat", "Pac", "Sta", "Str"]
     }
+  ],
+  "development": [
+    {
+      "training": "Free kicks",
+      "e_trained": ["Fre", "Tec"]
+    },
+    {
+      "training": "Corners",
+      "e_trained": ["Cor", "Tec"]
+    },
+    {
+      "training": "Penalty kicks",
+      "e_trained": ["Pen", "Tec"]
+    },
+    {
+      "training": "Long throws",
+      "e_trained": ["L Th"]
+    },
+    {
+      "training": "Speed",
+      "e_trained": ["Acc", "Pac"]
+    },
+    {
+      "training": "Agility and balance",
+      "e_trained": ["Bal", "Agi"]
+    },
+    {
+      "training": "Strength",
+      "e_trained": ["Str", "Jum"]
+    },
+    {
+      "training": "Support",
+      "e_trained": ["Sta", "Wor"]
+    },
+    {
+      "training": "Defensive positioning",
+      "e_trained": ["Pos", "Dec", "Mar"]
+    },
+    {
+      "training": "Attacking moves",
+      "e_trained": ["Dec, OtB", "Ant"]
+    },
+    {
+      "training": "Last third",
+      "e_trained": ["Dec", "Cmp"]
+    },
+    {
+      "training": "Shoots",
+      "e_trained": ["Tec", "Lon", "Fin"]
+    },
+    {
+      "training": "Passes",
+      "e_trained": ["Tec", "Pas", "Vis"]
+    },
+    {
+      "training": "Crossings",
+      "e_trained": ["Cro", "Tec"]
+    },
+    {
+      "training": "Ball control",
+      "e_trained": ["Dri", "Fir", "Tec"]
+    },
+    {
+      "training": "Aerial game",
+      "e_trained": ["Hea", "Bra"]
+    }
   ]
 }

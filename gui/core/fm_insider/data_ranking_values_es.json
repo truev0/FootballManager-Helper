@@ -534,5 +534,71 @@
         "Téc", "Agr", "Ant", "Val", "Ser", "Cnc", "Dec", "Det", "Tal", "Lid", "Dmq", "Col", "JEq", "Vis", "Sac", "Ace",
         "Agi", "Equ", "Sal", "Fís", "Vel", "Res", "Fue"]
     }
+  ],
+  "development": [
+    {
+      "training": "Tiros libres",
+      "e_trained": ["Lib", "Téc"]
+    },
+    {
+      "training": "Corners",
+      "e_trained": ["Cór", "Téc"]
+    },
+    {
+      "training": "Lanzamiento penalty",
+      "e_trained": ["Pen", "Téc"]
+    },
+    {
+      "training": "Saques largos",
+      "e_trained": ["Sq L"]
+    },
+    {
+      "training": "Rapidez",
+      "e_trained": ["Ace", "Vel"]
+    },
+    {
+      "training": "Equilibrio y agilidad",
+      "e_trained": ["Equ", "Agi"]
+    },
+    {
+      "training": "Fuerza",
+      "e_trained": ["Fue", "Sal"]
+    },
+    {
+      "training": "Aguante",
+      "e_trained": ["Res", "Sac"]
+    },
+    {
+      "training": "Colocacion defensiva",
+      "e_trained": ["Col", "Dec", "Mar"]
+    },
+    {
+      "training": "Movimientos en ataque",
+      "e_trained": ["Dec", "Dmq", "Ant"]
+    },
+    {
+      "training": "Ultimo tercio",
+      "e_trained": ["Dec", "Ser"]
+    },
+    {
+      "training": "Disparos",
+      "e_trained": ["Téc", "Lej", "Rem"]
+    },
+    {
+      "training": "Pases",
+      "e_trained": ["Téc", "Pas", "Vis"]
+    },
+    {
+      "training": "Centros",
+      "e_trained": ["Cen", "Téc"]
+    },
+    {
+      "training": "Control de balon",
+      "e_trained": ["Reg", "Ctr", "Téc"]
+    },
+    {
+      "training": "Juego aereo",
+      "e_trained": ["Cab", "Val"]
+    }
   ]
 }

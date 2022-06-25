@@ -160,7 +160,7 @@ def data_for_rankings(df, lang):
     return df
 
 
-# RANK VALUES
+# RANK POSITION VALUES
 # Make a rank with values previously setted
 # ///////////////////////////////////////////////////////////////
 def ranking_values(df):
@@ -173,27 +173,16 @@ def ranking_values(df):
 # Cut original dataframe to make readable for squad view
 # ///////////////////////////////////////////////////////////////
 def create_df_for_squad(df, l):
-    role_es = '<- EDITA'
-    role_en = '<- EDIT'
+    role_id = text[l].a.au0
     df_for_squad = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.h4, text[l].h.h7, text[l].h.h5, 'Global']]
-    if l == 'en':
-        df_for_squad["Role Ideal"] = '-'
-        df_for_squad["Role Score"] = 1
-        df_for_squad['Frol'] = 1
-        df_for_squad['Role 1S'] = role_en
-        df_for_squad['Srol'] = 2
-        df_for_squad['Role 2S'] = role_en
-        df_for_squad['Trol'] = 3
-        df_for_squad['Role 3S'] = role_en
-    elif l == 'es':
-        df_for_squad["Rol Ideal"] = '-'
-        df_for_squad["Ptj Rol"] = 1
-        df_for_squad['Frol'] = 1
-        df_for_squad['Rol 1S'] = role_es
-        df_for_squad['Srol'] = 2
-        df_for_squad['Rol 2S'] = role_es
-        df_for_squad['Trol'] = 3
-        df_for_squad['Rol 3S'] = role_es
+    df_for_squad[text[l].a.au1] = '-'
+    df_for_squad[text[l].a.au2] = 1
+    df_for_squad[text[l].a.au3] = 1
+    df_for_squad[text[l].a.au4] = role_id
+    df_for_squad[text[l].a.au5] = 2
+    df_for_squad[text[l].a.au6] = role_id
+    df_for_squad[text[l].a.au7] = 3
+    df_for_squad[text[l].a.au8] = role_id
     df_for_squad = df_for_squad.join(df.iloc[:, 96:179])
     df_for_squad = df_for_squad.join(df.iloc[:, 180:263])
     return df_for_squad
@@ -211,297 +200,16 @@ def create_df_for_tactic(df, l):
 # Cut original dataframe to make readable for sc
 # ///////////////////////////////////////////////////////////////
 def create_df_for_scouting_team(df, l):
-    role_es = '<- EDITA'
-    role_en = '<- EDIT'
+    role_id = text[l].a.au0
     df_for_scouting = df.loc[:, [text[l].h.h1, text[l].h.h2, text[l].h.h4, text[l].h.h7, text[l].h.h5, 'Global']]
-    if l == 'en':
-        df_for_scouting["Role Ideal"] = '-'
-        df_for_scouting["Role Score"] = 1
-        df_for_scouting['Frol'] = 1
-        df_for_scouting['Role 1S'] = role_en
-        df_for_scouting['Srol'] = 2
-        df_for_scouting['Role 2S'] = role_en
-        df_for_scouting['Trol'] = 3
-        df_for_scouting['Role 3S'] = role_en
-    elif l == 'es':
-        df_for_scouting["Rol Ideal"] = '-'
-        df_for_scouting["Ptj Rol"] = 1
-        df_for_scouting['Frol'] = 1
-        df_for_scouting['Rol 1S'] = role_es
-        df_for_scouting['Srol'] = 2
-        df_for_scouting['Rol 2S'] = role_es
-        df_for_scouting['Trol'] = 3
-        df_for_scouting['Rol 3S'] = role_es
+    df_for_scouting[text[l].a.au1] = '-'
+    df_for_scouting[text[l].a.au2] = 1
+    df_for_scouting[text[l].a.au3] = 1
+    df_for_scouting[text[l].a.au4] = role_id
+    df_for_scouting[text[l].a.au5] = 2
+    df_for_scouting[text[l].a.au6] = role_id
+    df_for_scouting[text[l].a.au7] = 3
+    df_for_scouting[text[l].a.au8] = role_id
     df_for_scouting = df_for_scouting.join(df.iloc[:, 10:179])
     df_for_scouting = df_for_scouting.join(df.iloc[:, 180:263])
     return df_for_scouting
-
-
-# METRICS
-# Model metrics to make it visible
-# ///////////////////////////////////////////////////////////////
-def metric_choice(df, choice):
-    if choice == "Paradas":
-        fig = px.scatter(df,
-                         x="Saves_90",
-                         y="Faced_90",
-                         text="Name",
-                         log_x=False,
-                         size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800,
-                          font_family="Century Gothic",
-                          font_color="white",
-                          title_font_family="Century Gothic",
-                          title_font_color="white",
-                          legend_title_font_color="white")
-        fig.update_xaxes(title_font_family="Century Gothic")
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800, title_text='Goalkeepers')
-        fig.show()
-        return fig
-    elif choice == "Duelos Terrestres":
-        fig = px.scatter(
-            df,
-            x="Tck",
-            y="Int/90",
-            text="Name",
-            log_x=False,
-            size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=500)
-        fig.update_xaxes(title_text='Tackles Won/90')
-        fig.update_yaxes(title_text='Interceptions/90')
-        fig.update_layout(template="plotly_dark", title="Ground Duels")
-        fig.show()
-        return fig
-    elif choice == "Duelos aereos":
-        fig = px.scatter(
-            df,
-            x="Hdrs W/90",
-            y="Hdr %",
-            text="Name",
-            log_x=False,
-            size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=500)
-        fig.update_xaxes(title_text='Headers Won/90')
-        fig.update_yaxes(title_text='Headers Won %')
-        fig.update_layout(template="plotly_dark", title="Aerial Duels")
-        fig.show()
-        return fig
-    elif choice == "Habilidad para transportar":
-        fig = px.scatter(
-            df,
-            x="Ch C/90",
-            y="DrbPG",
-            text="Name",
-            log_x=False,
-            size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=500)
-        fig.update_xaxes(title_text='Progressive Passes/90')
-        fig.update_yaxes(title_text='Progressive Runs/90')
-        fig.update_layout(template="plotly_dark", title="Ball carrying skills")
-        fig.show()
-        return fig
-    elif choice == "Habilidad de centros":
-        fig = px.scatter(
-            df,
-            x="Cr C",
-            y="Cr C/A",
-            text="Name",
-            log_x=False,
-            size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=500)
-        fig.update_xaxes(title_text='Crossed Completed/90')
-        fig.update_yaxes(title_text='Crossing Accuracy')
-        fig.update_layout(title="Crossing ability")
-        fig.show()
-        return fig
-    elif choice == "Habilidad de pase":
-        fig = px.scatter(
-            df,
-            x="Ps C/90",
-            y="Pas %",
-            text="Name",
-            log_x=False,
-            size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=500)
-        fig.update_xaxes(title_text='Passes Completed/90')
-        fig.update_yaxes(title_text='Pass Completion %')
-        fig.update_layout(template="plotly_dark", title="Passing Ability")
-        fig.show()
-        return fig
-    elif choice == "Creacion con amplitud":
-        fig = px.scatter(
-            df,
-            x="Cr C",
-            y="K Ps/90",
-            text="Name",
-            log_x=False,
-            size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=500)
-        fig.update_xaxes(title_text='Crossed Completed/90')
-        fig.update_yaxes(title_text='Key Passes/90')
-        fig.update_layout(template="plotly_dark", title="Wide Creation")
-        fig.show()
-        return fig
-    elif choice == "Impacto en ataque":
-        fig = px.scatter(
-            df,
-            x="Gls/90",
-            y="Asts/90",
-            text="Name",
-            log_x=False,
-            size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=500)
-        fig.update_xaxes(title_text='Goals/90')
-        fig.update_yaxes(title_text='Assists/90')
-        fig.update_layout(template="plotly_dark", title="Attacking Impact")
-        fig.show()
-        return fig
-    elif choice == "Eficiencia de gol":
-        fig = px.scatter(df,
-                         x="Gls/90",
-                         y="ShT/90",
-                         text="Name",
-                         log_x=False,
-                         size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800,
-                          font_family="Century Gothic",
-                          font_color="white",
-                          title_font_family="Century Gothic",
-                          title_font_color="white",
-                          legend_title_font_color="white")
-        fig.update_xaxes(title_font_family="Century Gothic")
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800, title_text='Goalscoring Efficiency')
-        fig.show()
-        return fig
-    elif choice == "Creacion de juego":
-        fig = px.scatter(df,
-                         x="K Ps/90",
-                         y="Ch C/90",
-                         text="Name",
-                         log_x=False,
-                         size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800,
-                          font_family="Century Gothic",
-                          font_color="white",
-                          title_font_family="Century Gothic",
-                          title_font_color="white",
-                          legend_title_font_color="white")
-        fig.update_xaxes(title_font_family="Century Gothic")
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800, title_text='Playmakers')
-        fig.show()
-        return fig
-    elif choice == "Creacion de gol":
-        fig = px.scatter(df, x="Ch C/90", y="Asts/90", text="Name",
-                         title="Goal Creation (Chances Created/90 vs Assists/90)", log_x=False, size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800,
-                          font_family="Century Gothic",
-                          font_color="white",
-                          title_font_family="Century Gothic",
-                          title_font_color="white",
-                          legend_title_font_color="white")
-        fig.update_xaxes(title_font_family="Century Gothic")
-        fig.show()
-        return fig
-    elif choice == "Juego por banda":
-        fig = px.scatter(df,
-                         x="Drb/90",
-                         y="Asts/90",
-                         text="Name",
-                         log_x=False,
-                         size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800,
-                          font_family="Century Gothic",
-                          font_color="white",
-                          title_font_family="Century Gothic",
-                          title_font_color="white",
-                          legend_title_font_color="white")
-        fig.update_xaxes(title_font_family="Century Gothic")
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800, title_text='Wing Play')
-        fig.show()
-        return fig
-    elif choice == "Mejores entradores":
-        fig = px.scatter(df,
-                         x="Tck_90",
-                         y="Tck R",
-                         text="Name",
-                         log_x=False,
-                         size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800,
-                          font_family="Century Gothic",
-                          font_color="white",
-                          title_font_family="Century Gothic",
-                          title_font_color="white",
-                          legend_title_font_color="white")
-        fig.update_xaxes(title_font_family="Century Gothic")
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800, title_text='Best Tacklers')
-        fig.show()
-        return fig
-    elif choice == "Perfil de edad":
-        fig = px.scatter(df,
-                         x="Age",
-                         y="Mins",
-                         text="Name",
-                         title="Current Squad - Squad Age Profile",
-                         log_x=False,
-                         size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800,
-                          font_family="Century Gothic",
-                          font_color="white",
-                          title_font_family="Century Gothic",
-                          title_font_color="white")
-        # legend_title_font_color="white")
-        fig.update_xaxes(title_font_family="Century Gothic")
-        fig.update_layout(shapes=[
-            dict(type='line',
-                 line_color="white",
-                 line_width=550,
-                 opacity=0.1,
-                 yref='paper',
-                 y0=0,
-                 y1=1,
-                 xref='x',
-                 x0=26.5,
-                 x1=26.5)
-        ])
-        fig.show()
-        return fig
-    elif choice == "Perfil salarial":
-        # Tratar de separar financial
-        fig = px.scatter(df,
-                         x="Mins",
-                         y="Salary",
-                         text="Name",
-                         log_x=False,
-
-                         size_max=60)
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800,
-                          font_family="Century Gothic",
-                          font_color="white",
-                          title_font_family="Century Gothic",
-                          title_font_color="white",
-                          legend_title_font_color="white")
-        fig.update_xaxes(title_font_family="Century Gothic")
-        fig.update_traces(textposition='top center')
-        fig.update_layout(height=800, title_text='Current Squad - Value for Money')
-        fig.show()
-        return fig

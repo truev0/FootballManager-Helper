@@ -147,42 +147,6 @@ class Ui_MainPages(object):
 
         self.pages.addWidget(self.page_3)
 
-        # PAGE 4
-        # /////////////////////////////////////////////////////////
-        self.page_4 = QWidget()
-        self.page_4.setObjectName(u"page_4")
-        self.column_1_layout_4 = QVBoxLayout(self.page_4)
-        self.column_1_layout_4.setObjectName(u"column_1_layout_5")
-        self.column_1_layout_4.setContentsMargins(5, 5, 5, 5)
-        self.column_1_layout_4.setSpacing(5)
-
-        self.welcome_base_4 = QFrame(self.page_4)
-        self.welcome_base_4.setObjectName(u"welcome_base")
-        self.welcome_base_4.setMinimumSize(QSize(300, 180))
-        self.welcome_base_4.setMaximumSize(QSize(300, 180))
-        self.welcome_base_4.setFrameShape(QFrame.NoFrame)
-        self.welcome_base_4.setFrameShadow(QFrame.Raised)
-        self.center_page_layout_4 = QVBoxLayout(self.welcome_base_4)
-        self.center_page_layout_4.setObjectName(u"center_page_layout_4")
-        self.center_page_layout_4.setContentsMargins(0, 0, 0, 0)
-        self.center_page_layout_4.setSpacing(10)
-        self.logo_4 = QFrame(self.welcome_base_4)
-        self.logo_4.setObjectName(u"logo_4")
-        self.logo_4.setMinimumSize(QSize(250, 150))
-        self.logo_4.setMaximumSize(QSize(250, 150))
-        self.logo_4.setFrameShape(QFrame.NoFrame)
-        self.logo_4.setFrameShadow(QFrame.Raised)
-        self.logo_layout_4 = QHBoxLayout(self.logo_4)
-        self.logo_layout_4.setObjectName(u"logo_layout_4")
-        self.logo_layout_4.setContentsMargins(0, 0, 0, 0)
-        self.logo_layout_4.setSpacing(0)
-
-        self.center_page_layout_4.addWidget(self.logo_4)
-
-        self.column_1_layout_4.addWidget(self.welcome_base_4, 0, Qt.AlignHCenter)
-
-        self.pages.addWidget(self.page_4)
-
         # PAGE 5
         # /////////////////////////////////////////////////////////
         self.page_5 = QWidget()
@@ -192,16 +156,6 @@ class Ui_MainPages(object):
         self.column_1_layout_5.setObjectName(u"column_1_layout_5")
 
         self.pages.addWidget(self.page_5)
-
-        # PAGE 6
-        # /////////////////////////////////////////////////////////
-        self.page_6 = QWidget()
-        self.page_6.setObjectName(u"page_6")
-
-        self.column_1_layout_6 = QHBoxLayout(self.page_6)
-        self.column_1_layout_6.setObjectName(u"column_1_layout_6")
-
-        self.pages.addWidget(self.page_6)
 
         # PAGE 7
         # /////////////////////////////////////////////////////////
@@ -356,10 +310,17 @@ class Ui_MainPages(object):
 
         # PAGE 10
         # /////////////////////////////////////////////////////////
-        self.page10 = QWidget()
-        self.page10.setObjectName(u"page10")
+        self.page_10 = QWidget()
+        self.page_10.setObjectName(u"page_10")
 
-        self.pages.addWidget(self.page10)
+        self.pages.addWidget(self.page_10)
+
+        # PAGE 11
+        # /////////////////////////////////////////////////////////
+        self.page_11 = QWidget()
+        self.page_11.setObjectName(u"page_11")
+
+        self.pages.addWidget(self.page_11)
 
         # ADD PAGES TO MAIN LAYOUT
         # /////////////////////////////////////////////////////////

@@ -11,7 +11,7 @@ english = {
         "o8": "Scouting",
         "o9": "Employees",
         "o10": "Settings",
-        "o11": "Info",
+        "o11": "Language",
         "o12": "Help",
         "oaux1": "Statistics and Metrics",
         "t0": "Home Page",
@@ -25,7 +25,7 @@ english = {
         "t8": "Show scouted players",
         "t9": "Show your employees",
         "t10": "Open Settings",
-        "t11": "Open Info",
+        "t11": "Open Languages",
         "t12": "Open Help",
         "taux1": "Show Statistics and Metrics",
         "g0": "Actual Squad",
@@ -97,12 +97,13 @@ english = {
         "b2": "Load scouting file"
     },
     "right_content": {
-        "b1": "Slide menu 2",
-        "b2": "Slide menu 1"
+        "b1": "Slide to stats filters",
+        "b2": "Slide to attrs filters",
+        "b3": "Filter Data"
     },
     "title_buttons_tooltips": {
         "b1": "Refresh",
-        "b2": "Top Settings",
+        "b2": "Scouting filters",
         "b3": "Minimize app",
         "b4": "Maximize app",
         "b5": "Close app"
@@ -202,6 +203,18 @@ column_headers = {
         "a45": "Agi",
         "a46": "Agg",
         "a47": "Aer"
+    },
+    "a": {
+        "au0": "<- EDIT",
+        "au1": "Role Ideal",
+        "au2": "Role Score",
+        "au3": "Frol",
+        "au4": "Role 1S",
+        "au5": "Srol",
+        "au6": "Role 2S",
+        "au7": "Trol",
+        "au8": "Role 3S",
+        "au9": "Preferred training"
     }
 }
 

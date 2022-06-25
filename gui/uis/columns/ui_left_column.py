@@ -69,16 +69,6 @@ class Ui_LeftColumn(object):
 
         self.verticalLayout.addWidget(self.btn_3_widget)
 
-        self.label_1 = QLabel(self.menu_1)
-        self.label_1.setObjectName(u"label_1")
-        font = QFont()
-        font.setPointSize(16)
-        self.label_1.setFont(font)
-        self.label_1.setStyleSheet(u"font-size: 16pt")
-        self.label_1.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout.addWidget(self.label_1)
-
         self.menus.addWidget(self.menu_1)
         self.menu_2 = QWidget()
         self.menu_2.setObjectName(u"menu_2")
@@ -108,25 +98,6 @@ class Ui_LeftColumn(object):
 
         self.verticalLayout_2.addWidget(self.btn_5_widget)
 
-        self.label_2 = QLabel(self.menu_2)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setFont(font)
-        self.label_2.setStyleSheet(u"font-size: 16pt")
-        self.label_2.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_2.addWidget(self.label_2)
-
-        self.label_3 = QLabel(self.menu_2)
-        self.label_3.setObjectName(u"label_3")
-        font1 = QFont()
-        font1.setPointSize(9)
-        self.label_3.setFont(font1)
-        self.label_3.setStyleSheet(u"font-size: 9pt")
-        self.label_3.setAlignment(Qt.AlignCenter)
-        self.label_3.setWordWrap(True)
-
-        self.verticalLayout_2.addWidget(self.label_3)
-
         self.menus.addWidget(self.menu_2)
 
         self.main_pages_layout.addWidget(self.menus)
@@ -142,9 +113,5 @@ class Ui_LeftColumn(object):
 
     def retranslateUi(self, LeftColumn):
         LeftColumn.setWindowTitle(QCoreApplication.translate("LeftColumn", u"Form", None))
-        self.label_1.setText(QCoreApplication.translate("LeftColumn", u"Menu 1 - Left Menu", None))
-        self.label_2.setText(QCoreApplication.translate("LeftColumn", u"Menu 2 - Left Menu", None))
-        self.label_3.setText(QCoreApplication.translate("LeftColumn", u"This is just an example menu.\n"
-"Add Qt Widgets or your custom widgets here.", None))
     # retranslateUi
 
