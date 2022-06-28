@@ -162,9 +162,11 @@ class _CustomCanvas(FigureCanvas):
                     )
                     self.fig.subplots_adjust(bottom=0.22)
                     if self._language == 'en':
-                        self.ax.set_title(util_lists.stats_list_en[new_parameter], fontsize=15, color=self.color_title)
+                        self.ax.set_title(util_lists.stats_list_en[new_parameter],
+                                          fontsize=15, color=self.color_title)
                     elif self._language == 'es':
-                        self.ax.set_title(util_lists.stats_list_es[new_parameter], fontsize=15, color=self.color_title)
+                        self.ax.set_title(util_lists.stats_list_es[new_parameter],
+                                          fontsize=15, color=self.color_title)
 
                     self.ax.tick_params(axis='x', rotation=80)
                     self.ax.axhline(y=custom_df[new_parameter].mean(), color='r', linestyle='--')

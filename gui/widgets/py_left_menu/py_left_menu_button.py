@@ -231,7 +231,8 @@ class PyLeftMenuButton(QPushButton):
 
     # DRAW ICON WITH COLORS
     # ///////////////////////////////////////////////////////////////
-    def icon_paint(self, qp, image, rect, color):
+    @staticmethod
+    def icon_paint(qp, image, rect, color):
         icon = QPixmap(image)
         painter = QPainter(icon)
         painter.setCompositionMode(QPainter.CompositionMode_SourceIn)

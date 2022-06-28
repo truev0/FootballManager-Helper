@@ -1155,25 +1155,25 @@ class MainWindow(QMainWindow):
         player_cluster = int(reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]['cluster'].
                              tolist()[0])
         df_player_selected_cluster = reduced[(reduced['cluster'] == player_cluster)]
-        for i in range(len(tmp_filters)):
-            if tmp_filters[i][1] == '>' and tmp_filters[i][2] == 0.0:
+        for index, element in enumerate(tmp_filters):
+            if tmp_filters[index][1] == '>' and tmp_filters[index][2] == 0.0:
                 continue
-            if tmp_filters[i][1] == '>':
-                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[i][0]] >
-                                                                        tmp_filters[i][2]]
-            if tmp_filters[i][1] == '<':
-                if tmp_filters[i][2] > 0.0:
-                    df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[i][0]] < tmp_filters[i][2]]
-                elif tmp_filters[i][2] == 0.0:
+            if tmp_filters[index][1] == '>':
+                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[index][0]] >
+                                                                        tmp_filters[index][2]]
+            if tmp_filters[index][1] == '<':
+                if tmp_filters[index][2] > 0.0:
+                    df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[index][0]] < tmp_filters[index][2]]
+                elif tmp_filters[index][2] == 0.0:
                     continue
 
-            if tmp_filters[i][1] == '>=':
-                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[i][0]] >=
-                                                                        tmp_filters[i][2]]
+            if tmp_filters[index][1] == '>=':
+                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[index][0]] >=
+                                                                        tmp_filters[index][2]]
 
-            if tmp_filters[i][1] == '<=':
-                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[i][0]] <=
-                                                                        tmp_filters[i][2]]
+            if tmp_filters[index][1] == '<=':
+                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[index][0]] <=
+                                                                        tmp_filters[index][2]]
 
         df_player_selected_cluster = df_player_selected_cluster[
             df_player_selected_cluster[col_name] != self.ui.clustering_player_combo.currentText()

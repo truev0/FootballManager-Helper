@@ -76,7 +76,6 @@ class PyPlayerButton(QPushButton):
         tmp = self._text
         return tmp
 
-
     # DRAG ENTER EVENT VERIFIER
     # ///////////////////////////////////////////////////////////////
     def dragEnterEvent(self, event):
