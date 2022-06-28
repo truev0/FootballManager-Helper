@@ -261,11 +261,6 @@ class MainWindow(QMainWindow):
     def maximize_event(self):
         self.oldPos = self.pos()
         self.hideAnimation.setStartValue(self.oldPos)
-        # self.hideAnimation.setEndValue(
-        #     QPoint(
-        #         self.x(), get_screen_size().height()
-        #     )
-        # )
         self.hideAnimation.setEndValue(
             QRect(
                 self.x(),
@@ -290,7 +285,7 @@ class MainWindow(QMainWindow):
             # SET + HEIGHT IF HAVE A LOT OF PLAYERS
             self.ui.popup_notification_container.expandedHeight = self.default_size_notification_container + (12 * diff)
         # FORMAT TEXT TO BE DISPLAYED
-        tmp = btn.text_formater()
+        tmp = btn.text_formatter()
         # DISPLAY PLAYERS
         self.ui.list_label.setText(tmp)
         # EXEC NOTIFICATION CONTAINER
@@ -538,9 +533,6 @@ class MainWindow(QMainWindow):
         # Button 11
         if btn.objectName() == "btn_pos_11":
             self.adjust_notification_container(btn)
-
-        # DEBUG
-        # print(f"Button {btn.objectName()}, clicked!")
 
     # BUTTONS WITH SIGNALS RELEASED
     # ///////////////////////////////////////////

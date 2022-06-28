@@ -146,7 +146,7 @@ class _CustomCanvas(FigureCanvas):
         if self._data is not None:
             self.ax.clear()
             curr = self._parent.type_selector.currentText()
-            if curr == "Statistics" or curr == "Estadisticas":
+            if curr in ("Statistics", "Estadisticas"):
                 if new_parameter in self._actual_list:
                     custom_df = self._data.iloc[:, :1]
                     custom_df = custom_df.join(
@@ -161,7 +161,10 @@ class _CustomCanvas(FigureCanvas):
                         legend=None
                     )
                     self.fig.subplots_adjust(bottom=0.22)
-                    self.ax.set_title(util_lists.stats_list[new_parameter], fontsize=15, color=self.color_title)
+                    if self._language == 'en':
+                        self.ax.set_title(util_lists.stats_list_en[new_parameter], fontsize=15, color=self.color_title)
+                    elif self._language == 'es':
+                        self.ax.set_title(util_lists.stats_list_es[new_parameter], fontsize=15, color=self.color_title)
 
                     self.ax.tick_params(axis='x', rotation=80)
                     self.ax.axhline(y=custom_df[new_parameter].mean(), color='r', linestyle='--')
@@ -188,7 +191,7 @@ class _CustomCanvas(FigureCanvas):
                             pass
                 else:
                     self.ax.clear()
-            elif curr == "Metrics" or curr == "Metricas":
+            elif curr in ("Metrics", "Metricas"):
                 if new_parameter in self._actual_list:
                     custom_df = self._data.iloc[:, :1]
                     custom_df = custom_df.join(
@@ -209,8 +212,12 @@ class _CustomCanvas(FigureCanvas):
                         legend=None
                     )
                     self.fig.subplots_adjust(bottom=0.1)
-                    self.ax.set_xlabel(util_lists.stats_list[tmp_x], size=12)
-                    self.ax.set_ylabel(util_lists.stats_list[tmp_y], size=12)
+                    if self._language == 'en':
+                        self.ax.set_xlabel(util_lists.stats_list_en[tmp_x], size=12)
+                        self.ax.set_ylabel(util_lists.stats_list_en[tmp_y], size=12)
+                    elif self._language == 'es':
+                        self.ax.set_xlabel(util_lists.stats_list_es[tmp_x], size=12)
+                        self.ax.set_ylabel(util_lists.stats_list_es[tmp_y], size=12)
                     self.ax.set_title(new_parameter, color=self.color_title, size=15)
 
                     self.ax.axhline(y=custom_df[tmp_y].mean(), color='r', linestyle=':')
@@ -220,13 +227,22 @@ class _CustomCanvas(FigureCanvas):
                     @cursor.connect("add")
                     def on_add(sel):
                         try:
-                            sel.annotation.set_text(
-                                "{}\n{}: {:.2f}\n{}: {:.2f}".format(custom_df[custom_df.columns[0]][sel.index],
-                                                                    util_lists.stats_list[custom_df.columns[1]],
-                                                                    sel.target[0],
-                                                                    util_lists.stats_list[custom_df.columns[2]],
-                                                                    sel.target[1])
-                            )
+                            if self._language == 'en':
+                                sel.annotation.set_text(
+                                    "{}\n{}: {:.2f}\n{}: {:.2f}".format(custom_df[custom_df.columns[0]][sel.index],
+                                                                        util_lists.stats_list_en[custom_df.columns[1]],
+                                                                        sel.target[0],
+                                                                        util_lists.stats_list_en[custom_df.columns[2]],
+                                                                        sel.target[1])
+                                )
+                            elif self._language == 'es':
+                                sel.annotation.set_text(
+                                    "{}\n{}: {:.2f}\n{}: {:.2f}".format(custom_df[custom_df.columns[0]][sel.index],
+                                                                        util_lists.stats_list_es[custom_df.columns[1]],
+                                                                        sel.target[0],
+                                                                        util_lists.stats_list_es[custom_df.columns[2]],
+                                                                        sel.target[1])
+                                )
                             sel.annotation.get_bbox_patch().set(alpha=0.8)
                         except KeyError:
                             pass

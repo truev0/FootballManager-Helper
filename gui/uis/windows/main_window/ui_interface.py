@@ -625,15 +625,14 @@ class Ui_MainWindow(object):
     # Get sender() function when button is clicked
     # ///////////////////////////////////////////////////////////////
     def setup_btns(self):
-        if self.title_bar.sender() != None:
+        if self.title_bar.sender() is not None:
             return self.title_bar.sender()
-        elif self.left_menu.sender() != None:
+        elif self.left_menu.sender() is not None:
             return self.left_menu.sender()
-        elif self.left_column.sender() != None:
+        elif self.left_column.sender() is not None:
             return self.left_column.sender()
-        elif self.pitch_widget.sender() != None:
+        elif self.pitch_widget.sender() is not None:
             return self.pitch_widget.sender()
-
 
     # SETUP MAIN WINDOW WITH CUSTOM PARAMETER
     # ///////////////////////////////////////////////////////////////

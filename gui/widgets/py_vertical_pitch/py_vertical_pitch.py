@@ -70,7 +70,7 @@ class PyVerticalPitch(QWidget):
     # Add btns and emit signals
     # ///////////////////////////////////////////////////////////////
     def add_btns(self, parameters):
-        if parameters != None:
+        if parameters is not None:
             for parameter in parameters:
                 _btn_id = parameter['btn_id']
                 _is_active = parameter['is_active']

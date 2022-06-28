@@ -29,7 +29,7 @@ class PyPlayerButton(QPushButton):
 
         # SET PARAMETERS
         self.setFixedSize(48, 48)
-        if app_parent != None:
+        if app_parent is not None:
             self.setParent(app_parent)
         self.setCursor(Qt.PointingHandCursor)
         self.setObjectName(btn_id)
@@ -53,7 +53,6 @@ class PyPlayerButton(QPushButton):
         self._set_border_radius = 8
         # Parent
         self._parent = app_parent
-        # self._app_parent = app_parent
 
         # Custom attributes
         self._lista = []
@@ -71,12 +70,11 @@ class PyPlayerButton(QPushButton):
 
     # FORMAT TEXT
     # ///////////////////////////////////////////////////////////////
-    def text_formater(self):
+    def text_formatter(self):
         tmp = ""
         self._text = "\n".join([str(x) for x in self._lista])
         tmp = self._text
         return tmp
-        # self._tooltip.setText("\n".join(self._lista))
 
 
     # DRAG ENTER EVENT VERIFIER

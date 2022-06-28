@@ -106,7 +106,6 @@ class PyClusteringWidget(QWidget):
 
         self.right_layout.addWidget(self.scroller_area)
 
-
         self.inner_layout.addWidget(self.right_frame)
 
     def add_player_to_list(self, players):
@@ -119,8 +118,6 @@ class PyClusteringWidget(QWidget):
 
         for i in range(len(players)):
             label = QLabel(players[i], parent=self.scroller_area_widget_content)
-            # sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-            # label.setSizePolicy(sizePolicy1)
             label.setMinimumHeight(50)
             label.setMaximumHeight(50)
             label.setAlignment(Qt.AlignCenter)
@@ -176,9 +173,6 @@ class _PyCanvas(FigureCanvas):
             s=100
         )
         self.ax.set(ylim=(-2, 2))
-        # handles = [Line2D([0], [0], marker='o', color='w', markerfacecolor=v,
-        #                   label='Cluster ' + str(k), markersize=8) for k, v in colors.items()]
-        # self.ax.legend(title="Clusters", handles=handles, bbox_to_anchor=(1.05, 1), loc='upper left')
         for x, y, s in zip(
             data.x,
             data.y,

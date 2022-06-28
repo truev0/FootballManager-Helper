@@ -92,7 +92,6 @@ class PyTitleBar(QWidget):
         # SET LOGO AND WIDTH
         self.top_logo.setMinimumWidth(logo_width)
         self.top_logo.setMaximumWidth(logo_width)
-        #self.top_logo.setPixmap(Functions.set_svg_image(logo_image))
 
         # MOVE WINDOW / MAXIMIZE / RESTORE
         # ///////////////////////////////////////////////////////////////
@@ -153,7 +152,7 @@ class PyTitleBar(QWidget):
     # Add btns and emit signals
     # ///////////////////////////////////////////////////////////////
     def add_menus(self, parameters):
-        if parameters != None and len(parameters) > 0:
+        if parameters is not None and len(parameters) > 0:
             for parameter in parameters:
                 _btn_icon = Functions.set_svg_icon(parameter['btn_icon'])
                 _btn_id = parameter['btn_id']

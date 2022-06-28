@@ -39,7 +39,7 @@ class PyIcon(QWidget):
     def set_icon(self, icon_path, icon_color = None):
         # GET COLOR
         color = ""
-        if icon_color != None:
+        if icon_color is not None:
             color = icon_color
         else:
             color = self._icon_color

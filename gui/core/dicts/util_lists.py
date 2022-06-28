@@ -1,11 +1,11 @@
-stats_list = {
+stats_list_en = {
     'Mins': 'Minutes',
     'Svt': 'Saves Tipped',
     'Svp': 'Saves Parried',
     'Svh': 'Saves Held',
     'Conc': 'Conceded',
     'Pas %': '% Passes',
-    'Ps C/90': "Completed Passes / 90'",  # lgtm [py/duplicate-key-dict-literal]
+    'Ps C/90': "Completed Passes / 90'",
     'K Tck': 'Key Tackles',
     'Tck R': 'Tackles Ratio',
     'Int/90': 'Interceptions / 90',
@@ -22,7 +22,7 @@ stats_list = {
     'Cr C': 'Crosses Completed',
     'Cr C/A': 'Crosses Completed vs Attempts',
     'ShT/90': 'Shots on Target / 90',
-    'Dist/90': 'Distance Covered / 90',  # lgtm [py/duplicate-key-dict-literal]
+    'Dist/90': 'Distance Covered / 90',
     'Gls': 'Goals',
     'Ast': 'Assits',
     'Tall': 'Team allowed',
@@ -30,6 +30,13 @@ stats_list = {
     'Ps A/90': 'Passes Attempted / 90',
     'Pens S': 'Penalties Scored',
     'Av Rat': 'Average Rating',
+    'Tck': 'Tackles / 90',
+    'Gl Mst': 'Mistakes costing goals',
+    'Salary': 'Salary',
+    'Age': 'Age',
+}
+
+stats_list_es = {
     'Min': 'Minutos',
     'BDs': 'Translate 1',
     'BRe': 'Balones Rechazados',
@@ -61,13 +68,9 @@ stats_list = {
     'Ps I/90': 'Pases Intentados / 90',
     'Pen M': 'Penalties Marcados',
     'Media': 'Media',
-    'Tck': 'Tackles / 90',
-    'Gl Mst': 'Mistakes costing goals',
     'Gl Err': 'Errores que costaron goles',
     'Ent': 'Entradas / 90',
-    'Salary': 'Salary',
     'Sueldo': 'Sueldo',
-    'Age': 'Age',
     'Edad': 'Edad'
 }
 

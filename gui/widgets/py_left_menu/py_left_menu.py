@@ -112,7 +112,7 @@ class PyLeftMenu(QWidget):
     # Add btns and emit signals
     # ///////////////////////////////////////////////////////////////
     def add_menus(self, parameters):
-        if parameters != None:
+        if parameters is not None:
             for parameter in parameters:
                 _btn_icon = parameter['btn_icon']
                 _btn_id = parameter['btn_id']
