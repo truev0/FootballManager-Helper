@@ -1,13 +1,20 @@
+# IMPORT OTHER PACKAGES AND MODULES
+# ///////////////////////////////////////////////////////////////
 import textwrap
 
+# IMPORT PROCESSING, CHART & CLUSTERING MODULES
+# ///////////////////////////////////////////////////////////////
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.collections import PatchCollection
 from matplotlib.patches import Polygon, Wedge
 
+# IMPORT UTILS
+# ///////////////////////////////////////////////////////////////
 from . py_radar_utils import set_visible
 
 __all__ = ['Radar']
+
 
 class Radar:
     def __init__(

@@ -1,10 +1,17 @@
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////////////////////////
-from gui.core.functions import Functions
+from gui.core.functions import set_svg_icon, set_svg_image
 
-# IMPORT PYSIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, \
+    QLabel, QSizePolicy, QPushButton
+
+from PySide6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QParallelAnimationGroup
+
+from PySide6.QtGui import QIcon, QFont
+
+from PySide6.QtSvgWidgets import QSvgWidget
 
 # IMPORT SETTINGS
 # ///////////////////////////////////////////////////////////////
@@ -16,8 +23,11 @@ from gui.core.json_themes import Themes
 
 # IMPORT CUSTOM WIDGETS
 # ///////////////////////////////////////////////////////////////
-from gui.widgets import *
+from gui.widgets import PyWindow, PyLeftMenu, PyTitleBar, PyLeftColumn, \
+    PyCredits, PyVerticalPitch, PyPushButton, PyTableWidget, PyComboBox, \
+    PySpyderWidget, PyStatsWidget, PyButtonGroup, PyClusteringWidget
 from gui.widgets.py_title_bar.py_title_button import PyTitleButton
+
 
 # IMPORT KHAMISIKIBET WIDGET
 # ///////////////////////////////////////////
@@ -32,14 +42,12 @@ from gui.uis.pages.ui_main_pages import Ui_MainPages
 from gui.uis.columns.ui_right_column import Ui_RightColumn
 
 
-
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
 class Ui_MainWindow(object):
     def setupUi(self, parent):
         if not parent.objectName():
             parent.setObjectName("MainWindow")
-
 
         # LOAD SETTINGS
         # ///////////////////////////////////////////////////////////////
@@ -149,7 +157,7 @@ class Ui_MainWindow(object):
             text_title="Settings Left Frame",
             text_title_size=self.settings["font"]["title_size"],
             text_title_color=self.themes["app_color"]["text_foreground"],
-            icon_path=Functions.set_svg_icon("icon_settings.svg"),
+            icon_path=set_svg_icon("icon_settings.svg"),
             dark_one=self.themes["app_color"]["dark_one"],
             bg_color=self.themes["app_color"]["bg_three"],
             btn_color=self.themes["app_color"]["bg_three"],
@@ -159,7 +167,7 @@ class Ui_MainWindow(object):
             icon_color_hover=self.themes["app_color"]["icon_hover"],
             context_color=self.themes["app_color"]["context_color"],
             icon_color_pressed=self.themes["app_color"]["icon_pressed"],
-            icon_close_path=Functions.set_svg_icon("icon_close.svg")
+            icon_close_path=set_svg_icon("icon_close.svg")
         )
 
         self.left_column_layout.addWidget(self.left_column)
@@ -284,7 +292,7 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
         self.credits = PyCredits(
             bg_two=self.themes["app_color"]["bg_two"],
-            copyright=self.settings["copyright"],
+            copyright_text=self.settings["copyright"],
             version=self.settings["version"],
             font_family=self.settings["font"]["family"],
             text_size=self.settings["font"]["text_size"],
@@ -322,11 +330,11 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
         self.title_notification_frame = QFrame()
         self.title_notification_frame.setObjectName(u"list_notification_frame")
-        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.title_notification_frame.sizePolicy().hasHeightForWidth())
-        self.title_notification_frame.setSizePolicy(sizePolicy)
+        size_policy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        size_policy.setHorizontalStretch(0)
+        size_policy.setVerticalStretch(0)
+        size_policy.setHeightForWidth(self.title_notification_frame.sizePolicy().hasHeightForWidth())
+        self.title_notification_frame.setSizePolicy(size_policy)
         self.title_notification_frame.setFrameShape(QFrame.StyledPanel)
         self.title_notification_frame.setFrameShadow(QFrame.Raised)
 
@@ -339,11 +347,11 @@ class Ui_MainWindow(object):
         # Title notification
         self.title_notification = QLabel()
         self.title_notification.setObjectName(u"title_notification")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.title_notification.sizePolicy().hasHeightForWidth())
-        self.title_notification.setSizePolicy(sizePolicy1)
+        size_policy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        size_policy1.setHorizontalStretch(0)
+        size_policy1.setVerticalStretch(0)
+        size_policy1.setHeightForWidth(self.title_notification.sizePolicy().hasHeightForWidth())
+        self.title_notification.setSizePolicy(size_policy1)
         font = QFont()
         font.setBold(True)
         self.title_notification.setFont(font)
@@ -359,7 +367,7 @@ class Ui_MainWindow(object):
             radius=6,
             tooltip_text="Close popup",
             bg_color="transparent",
-            icon_path=Functions.set_svg_icon("icon_close.svg")
+            icon_path=set_svg_icon("icon_close.svg")
         )
 
         self.btn_close_notification.setObjectName(u"btn_close_notification")
@@ -373,11 +381,11 @@ class Ui_MainWindow(object):
         # List label
         self.list_label = QLabel()
         self.list_label.setObjectName(u"list_label")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.list_label.sizePolicy().hasHeightForWidth())
-        self.list_label.setSizePolicy(sizePolicy2)
+        size_policy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
+        size_policy2.setHorizontalStretch(0)
+        size_policy2.setVerticalStretch(0)
+        size_policy2.setHeightForWidth(self.list_label.sizePolicy().hasHeightForWidth())
+        self.list_label.setSizePolicy(size_policy2)
         self.list_label.setFont(font)
         self.list_label.setAlignment(Qt.AlignCenter)
 
@@ -664,7 +672,7 @@ class Ui_MainWindow(object):
         self.set_left_column_menu(
             menu=self.left_column.menus.menu_1,
             title="Settings Left Column",
-            icon_path=Functions.set_svg_icon("icon_settings.svg")
+            icon_path=set_svg_icon("icon_settings.svg")
         )
         self.set_right_column_menu(self.right_column.menu_1)
 
@@ -720,7 +728,7 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
 
         # PAGE 1 - Introduction to App
-        self.logo_svg = QSvgWidget(Functions.set_svg_image("logo.svg"))
+        self.logo_svg = QSvgWidget(set_svg_image("logo.svg"))
 
         self.load_pages.logo_layout.addWidget(self.logo_svg, Qt.AlignCenter, Qt.AlignCenter)
 
@@ -964,7 +972,7 @@ class Ui_MainWindow(object):
             bg_color_hover=self.themes["app_color"]["dark_three"],
             bg_color_pressed=self.themes["app_color"]["dark_four"]
         )
-        self.icon_right = QIcon(Functions.set_svg_icon("icon_arrow_right.svg"))
+        self.icon_right = QIcon(set_svg_icon("icon_arrow_right.svg"))
         self.right_btn_1.setIcon(self.icon_right)
         self.right_btn_1.setMaximumHeight(40)
         self.right_column.btn_1_menu_1_layout.addWidget(self.right_btn_1)
@@ -978,7 +986,7 @@ class Ui_MainWindow(object):
             bg_color_hover=self.themes["app_color"]["dark_three"],
             bg_color_pressed=self.themes["app_color"]["dark_four"]
         )
-        self.icon_left = QIcon(Functions.set_svg_icon("icon_arrow_left.svg"))
+        self.icon_left = QIcon(set_svg_icon("icon_arrow_left.svg"))
         self.right_btn_2.setIcon(self.icon_left)
         self.right_btn_2.setMaximumHeight(40)
 
@@ -1009,7 +1017,7 @@ class Ui_MainWindow(object):
             bg_color_hover=self.themes["app_color"]["dark_three"],
             bg_color_pressed=self.themes["app_color"]["dark_four"]
         )
-        self.icon_english = QIcon(Functions.set_svg_image("us.svg"))
+        self.icon_english = QIcon(set_svg_image("us.svg"))
         self.english_language_btn.setIcon(self.icon_english)
         self.english_language_btn.setMaximumHeight(40)
 
@@ -1026,7 +1034,7 @@ class Ui_MainWindow(object):
             bg_color_hover=self.themes["app_color"]["dark_three"],
             bg_color_pressed=self.themes["app_color"]["dark_four"]
         )
-        self.icon_spanish = QIcon(Functions.set_svg_image("es.svg"))
+        self.icon_spanish = QIcon(set_svg_image("es.svg"))
         self.spanish_language_btn.setIcon(self.icon_spanish)
         self.spanish_language_btn.setMaximumHeight(40)
 

@@ -1,12 +1,14 @@
-# IMPORT PYSIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QFrame, QScrollArea, \
+    QLabel, QVBoxLayout
+
+from PySide6.QtCore import Qt
 
 # IMPORT MODULES
 # ///////////////////////////////////////////////////////////////
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D
 
 
 # CLUSTERING WIDGET
@@ -16,8 +18,6 @@ class PyClusteringWidget(QWidget):
             self,
             language,
             parent=None,
-            dark_one="#1b1e23",
-            text_foreground="#8a95aa",
             bg_two="#343b48",
             dark_three="21252d",
             axis_color="f5f6f9",
@@ -75,7 +75,6 @@ class PyClusteringWidget(QWidget):
             axis_color=axis_color,
             color_title=color_title
         )
-
 
         self.inner_layout.addWidget(self.inner_chart)
 
@@ -164,7 +163,10 @@ class _PyCanvas(FigureCanvas):
     def update_chart(self, data, printable_names, player):
         self.ax.clear()
         texts = []
-        self.ax.set_title("Clustering for players similar to " + player, fontsize=15, color=self.color_title)
+        if self._language == 'en':
+            self.ax.set_title("Clustering for players similar to " + player, fontsize=15, color=self.color_title)
+        elif self._language == 'es':
+            self.ax.set_title("Clusters con jugadores similares a " + player, fontsize=15, color=self.color_title)
         data.plot.scatter(
             x='x',
             y='y',
@@ -192,3 +194,6 @@ class _PyCanvas(FigureCanvas):
         self.ax.set_ylabel('PC2', size=12, color=self.axis_color)
         self.ax.grid(False)
         self.fig.canvas.draw()
+
+    def change_language(self, new_lang):
+        self._language = new_lang

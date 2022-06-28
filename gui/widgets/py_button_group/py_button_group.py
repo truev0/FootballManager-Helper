@@ -1,6 +1,11 @@
-# IMPORT PYSIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QWidget, QGridLayout, QButtonGroup, QLabel, \
+    QLineEdit
+
+from PySide6.QtCore import Qt
+
+from PySide6.QtGui import QDoubleValidator
 
 # IMPORT THEME COLORS
 # ///////////////////////////////////////////////////////////////

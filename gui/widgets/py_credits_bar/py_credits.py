@@ -1,27 +1,29 @@
-
-
-# IMPORT QT CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QFrame, QLabel, \
+    QSizePolicy, QSpacerItem
+
+from PySide6.QtCore import Qt
+
 
 # PY CREDITS BAR AND VERSION
 # ///////////////////////////////////////////////////////////////
 class PyCredits(QWidget):
     def __init__(
         self,
-        copyright,
+        copyright_text,
         version,
         bg_two,
         font_family,
         text_size,
         text_description_color,
-        radius = 8,
-        padding = 10
+        radius=8,
+        padding=10
     ):
         super().__init__()
 
         # PROPERTIES
-        self._copyright = copyright
+        self._copyright = copyright_text
         self._version = version
         self._bg_two = bg_two
         self._font_family = font_family
@@ -36,7 +38,7 @@ class PyCredits(QWidget):
     def setup_ui(self):
         # ADD LAYOUT
         self.widget_layout = QHBoxLayout(self)
-        self.widget_layout.setContentsMargins(0,0,0,0)
+        self.widget_layout.setContentsMargins(0, 0, 0, 0)
 
         # BG STYLE
         style = f"""
@@ -62,7 +64,7 @@ class PyCredits(QWidget):
 
         # ADD BG LAYOUT
         self.bg_layout = QHBoxLayout(self.bg_frame)
-        self.bg_layout.setContentsMargins(0,0,0,0)
+        self.bg_layout.setContentsMargins(0, 0, 0, 0)
 
         # ADD COPYRIGHT TEXT
         self.copyright_label = QLabel(self._copyright)

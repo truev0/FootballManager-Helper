@@ -1,16 +1,16 @@
-
-
-# IMPORT PACKAGES AND MODULES
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
+from PySide6.QtWidgets import QWidget, QSizeGrip, QFrame
 
-# IMPORT QT CORE
-# ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtCore import Qt, QRect, QSize
+
+from PySide6.QtGui import QCursor
+
 
 # PY GRIPS
 # ///////////////////////////////////////////////////////////////
 class PyGrips(QWidget):
-    def __init__(self, parent, position, disable_color = False):
+    def __init__(self, parent, position, disable_color=False):
 
         # SETUP UI
         # ///////////////////////////////////////////////////////////////
@@ -18,6 +18,7 @@ class PyGrips(QWidget):
         self.parent = parent
         self.setParent(parent)
         self.wi = Widgets()
+        self.common_background = "background: transparent;"
 
         # SHOW TOP LEFT GRIP
         # ///////////////////////////////////////////////////////////////
@@ -29,7 +30,7 @@ class PyGrips(QWidget):
             
             # ENABLE COLOR
             if disable_color:
-                self.wi.top_left_grip.setStyleSheet("background: transparent")
+                self.wi.top_left_grip.setStyleSheet(self.common_background)
 
         # SHOW TOP RIGHT GRIP
         # ///////////////////////////////////////////////////////////////
@@ -41,7 +42,7 @@ class PyGrips(QWidget):
             
             # ENABLE COLOR
             if disable_color:
-                self.wi.top_right_grip.setStyleSheet("background: transparent")
+                self.wi.top_right_grip.setStyleSheet(self.common_background)
 
         # SHOW BOTTOM LEFT GRIP
         # ///////////////////////////////////////////////////////////////
@@ -53,7 +54,7 @@ class PyGrips(QWidget):
             
             # ENABLE COLOR
             if disable_color:
-                self.wi.bottom_left_grip.setStyleSheet("background: transparent")
+                self.wi.bottom_left_grip.setStyleSheet(self.common_background)
 
         # SHOW BOTTOM RIGHT GRIP
         # ///////////////////////////////////////////////////////////////
@@ -65,7 +66,7 @@ class PyGrips(QWidget):
             
             # ENABLE COLOR
             if disable_color:
-                self.wi.bottom_right_grip.setStyleSheet("background: transparent")
+                self.wi.bottom_right_grip.setStyleSheet(self.common_background)
 
         # SHOW TOP GRIP
         # ///////////////////////////////////////////////////////////////
@@ -86,7 +87,7 @@ class PyGrips(QWidget):
 
             # ENABLE COLOR
             if disable_color:
-                self.wi.top_grip.setStyleSheet("background: transparent")
+                self.wi.top_grip.setStyleSheet(self.common_background)
 
         # SHOW BOTTOM GRIP
         # ///////////////////////////////////////////////////////////////
@@ -105,7 +106,7 @@ class PyGrips(QWidget):
 
             # ENABLE COLOR
             if disable_color:
-                self.wi.bottom_grip.setStyleSheet("background: transparent")
+                self.wi.bottom_grip.setStyleSheet(self.common_background)
 
         # SHOW LEFT GRIP
         # ///////////////////////////////////////////////////////////////
@@ -126,7 +127,7 @@ class PyGrips(QWidget):
 
             # ENABLE COLOR
             if disable_color:
-                self.wi.left_grip.setStyleSheet("background: transparent")
+                self.wi.left_grip.setStyleSheet(self.common_background)
 
         # RESIZE RIGHT
         # ///////////////////////////////////////////////////////////////
@@ -144,7 +145,7 @@ class PyGrips(QWidget):
 
             # ENABLE COLOR
             if disable_color:
-                self.wi.right_grip.setStyleSheet("background: transparent")
+                self.wi.right_grip.setStyleSheet(self.common_background)
 
     # MOUSE RELEASE
     # ///////////////////////////////////////////////////////////////

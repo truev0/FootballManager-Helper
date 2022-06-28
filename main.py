@@ -14,17 +14,25 @@
 #
 # ///////////////////////////////////////////////////////////////
 
+# IMPORT INTERFACE
+# ///////////////////////////////////////////
+from gui.uis.windows.main_window.ui_interface import Ui_MainWindow
+
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////
 import sys
 import os
 
-# IMPORT PYSIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////
-import matplotlib.pyplot as plt
-import pandas as pd
+# from gui.core.pyside_modules import *
+from PySide6.QtCore import Signal, QPoint, Qt, QPropertyAnimation,\
+    QEasingCurve, QRect
 
-from pyside_core import *
+from PySide6.QtGui import QShowEvent, QCloseEvent
+
+from PySide6.QtWidgets import QMainWindow, QApplication, QLineEdit, \
+    QFileDialog, QComboBox, QTableView, QHeaderView, QPushButton
 
 # IMPORT SETTINGS
 # ///////////////////////////////////////////
@@ -32,7 +40,8 @@ from gui.core.json_settings import Settings
 
 # IMPORT FUNCTIONS
 # ///////////////////////////////////////////
-from gui.core.functions import Functions
+# from gui.core.functions import Functions
+from gui.core.functions import set_svg_icon
 
 # IMPORT UTILS
 # ///////////////////////////////////////////
@@ -53,28 +62,24 @@ from gui.core.models.CustomNumpyScoutTableModel.py_CustomNumpyScoutTableModel im
 # ///////////////////////////////////////////
 from gui.core.dicts import en, es, util_lists
 
-# IMPORT WIDGETS
+# IMPORT CUSTOM WIDGETS
 # ///////////////////////////////////////////
-from gui.widgets import *
+from gui.widgets import PyGrips
 
 # IMPORT KHAMISIKIBET WIDGET
 # ///////////////////////////////////////////
 from Custom_Widgets.Widgets import loadJsonStyle
 
-# CLUSTERING MODULES
+# PROCESSING, CHARTS AND CLUSTERING MODULES
 # ///////////////////////////////////////////
 from sklearn import preprocessing
-from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
-import seaborn as sns
 import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
 
 plt.style.use('seaborn-whitegrid')
-
-# IMPORT INTERFACE
-# ///////////////////////////////////////////
-from gui.uis.windows.main_window.ui_interface import Ui_MainWindow
 
 # ADJUST QT FONT DPI FOR HIGH SCALE
 # ///////////////////////////////////////////
@@ -107,6 +112,7 @@ class MainWindow(QMainWindow):
         self.df_scouting = None
         self.df_scout_for_table = None
         self.filtered_df = None
+        self.df_helper = None
         self.bottom_right_grip = None
         self.bottom_left_grip = None
         self.top_right_grip = None
@@ -125,6 +131,7 @@ class MainWindow(QMainWindow):
         self.ui_headers = {}
         self.ui_headers.update({'en': NestedNamespace(en.column_headers)})
         self.ui_headers.update({'es': NestedNamespace(es.column_headers)})
+        self.default_size_notification_container = None
 
         # LOAD SETTINGS
         # ///////////////////////////////////////////
@@ -427,7 +434,7 @@ class MainWindow(QMainWindow):
                 self.ui.set_left_column_menu(
                     menu=self.ui.left_column.menus.menu_2,
                     title="Language tab",
-                    icon_path=Functions.set_svg_icon("icon_info.svg")
+                    icon_path=set_svg_icon("icon_info.svg")
                 )
 
         # Settings left
@@ -448,7 +455,7 @@ class MainWindow(QMainWindow):
                 self.ui.set_left_column_menu(
                     menu=self.ui.left_column.menus.menu_1,
                     title="Settings left column",
-                    icon_path=Functions.set_svg_icon("icon_settings.svg")
+                    icon_path=set_svg_icon("icon_settings.svg")
                 )
 
         # TITLE BAR MENU
@@ -484,7 +491,6 @@ class MainWindow(QMainWindow):
             ):
                 line.setText("0")
                 combo.setCurrentIndex(0)
-
 
         # VERTICAL PITCH
         # ///////////////////////////////////////////
@@ -815,6 +821,19 @@ class MainWindow(QMainWindow):
         self.ui.right_btn_2.setText(self.ui_text[lang].right_content.b2)
         self.ui.right_btn_3.setText(self.ui_text[lang].right_content.b3)
 
+        # Translate page 7
+        self.ui.btn_compare_stats.setText(self.ui_text[lang].pages.p7.btn_compare_s)
+        self.ui.btn_compare_attrs.setText(self.ui_text[lang].pages.p7.btn_compare_a)
+        self.ui.btn_send.setText(self.ui_text[lang].pages.p7.btn_compare_d)
+
+        # Translating page 10
+        self.ui.clustering_btn_send.setText(self.ui_text[lang].pages.p10.process_btn)
+
+        # Translate charts
+        self.ui.graph_statistics.chart.change_language(lang)
+        self.ui.spyder_graph_widget.spyder_chart.change_language(lang)
+        self.ui.clustering_chart.inner_chart.change_language(lang)
+
     # CREATE AND LOAD CHECHBOXES TO COMPARE
     # ///////////////////////////////////////////
     def create_and_load_checkboxes(self):
@@ -853,7 +872,8 @@ class MainWindow(QMainWindow):
             self.ui.second_player_combo.addItems(second_dependent_list)
 
     def create_edits_for_scouting(self):
-        if self.ui.group_lineedits_attrs_widget.get_lines() is not None and self.ui.group_lineedits_stats_widget.get_lines() is not None:
+        if self.ui.group_lineedits_attrs_widget.get_lines() is not None and \
+                self.ui.group_lineedits_stats_widget.get_lines() is not None:
             self.ui.group_lineedits_attrs_widget.reset_all_lines()
             self.ui.group_lineedits_stats_widget.reset_all_lines()
         if self.language == 'en':
@@ -1088,21 +1108,20 @@ class MainWindow(QMainWindow):
     def clustering_management(self):
         tmp_filters = self.collect_results_clustering()
         base_columns_plus = None
-        compl_df = None
-        compl_df2 = None
+        complementary_df = None
         df_alone = None
         tmp_df = None
         col_name = self.df_scouting.columns[0]
         if self.language == 'en':
             tmp_df = self.df_scouting[util_lists.numerical_clustering_en]
-            compl_df = self.df_scouting[util_lists.list_en[0]]
+            complementary_df = self.df_scouting[util_lists.list_en[0]]
             df_alone = self.df_squad[self.df_squad[col_name].str.contains(
                 self.ui.clustering_player_combo.currentText()
             )]
             df_alone = df_alone[util_lists.numerical_clustering_en]
         elif self.language == 'es':
             tmp_df = self.df_scouting[util_lists.numerical_clustering_es]
-            compl_df = self.df_scouting[util_lists.list_es[0]]
+            complementary_df = self.df_scouting[util_lists.list_es[0]]
             df_alone = self.df_squad[self.df_squad[col_name].str.contains(
                 self.ui.clustering_player_combo.currentText()
             )]
@@ -1118,10 +1137,10 @@ class MainWindow(QMainWindow):
         x = df_player_clusters.values
         scaler = preprocessing.MinMaxScaler()
         x_scaled = scaler.fit_transform(x)
-        X_norm = pd.DataFrame(x_scaled)
+        x_norm = pd.DataFrame(x_scaled)
 
         pca = PCA(n_components=2)
-        reduced = pd.DataFrame(pca.fit_transform(X_norm))
+        reduced = pd.DataFrame(pca.fit_transform(x_norm))
 
         kmeans = KMeans(n_clusters=5)
         kmeans = kmeans.fit(reduced)
@@ -1134,7 +1153,7 @@ class MainWindow(QMainWindow):
         reduced = pd.concat(
             [
                 reduced,
-                compl_df
+                complementary_df
             ],
             axis=1
         )
@@ -1154,32 +1173,29 @@ class MainWindow(QMainWindow):
 
         player_cluster = int(reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]['cluster'].
                              tolist()[0])
-        df_player_selected_cluster = reduced[(reduced['cluster'] == player_cluster)]
+        df_p_s_c = reduced[(reduced['cluster'] == player_cluster)]
         for index, element in enumerate(tmp_filters):
             if tmp_filters[index][1] == '>' and tmp_filters[index][2] == 0.0:
                 continue
             if tmp_filters[index][1] == '>':
-                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[index][0]] >
-                                                                        tmp_filters[index][2]]
+                df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] > tmp_filters[index][2]]
             if tmp_filters[index][1] == '<':
                 if tmp_filters[index][2] > 0.0:
-                    df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[index][0]] < tmp_filters[index][2]]
+                    df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] < tmp_filters[index][2]]
                 elif tmp_filters[index][2] == 0.0:
                     continue
 
             if tmp_filters[index][1] == '>=':
-                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[index][0]] >=
-                                                                        tmp_filters[index][2]]
+                df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] >= tmp_filters[index][2]]
 
             if tmp_filters[index][1] == '<=':
-                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[index][0]] <=
-                                                                        tmp_filters[index][2]]
+                df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] <= tmp_filters[index][2]]
 
-        df_player_selected_cluster = df_player_selected_cluster[
-            df_player_selected_cluster[col_name] != self.ui.clustering_player_combo.currentText()
-        ]
-        df_player_selected_cluster = df_player_selected_cluster.sort_values(by='dist_to_player', ascending=True)
-        printable_names = df_player_selected_cluster[col_name].values.tolist()
+        df_p_s_c = df_p_s_c[
+            df_p_s_c[col_name] != self.ui.clustering_player_combo.currentText()
+            ]
+        df_p_s_c = df_p_s_c.sort_values(by='dist_to_player', ascending=True)
+        printable_names = df_p_s_c[col_name].values.tolist()
         self.ui.clustering_chart.inner_chart.update_chart(reduced, printable_names,
                                                           self.ui.clustering_player_combo.currentText())
         self.ui.clustering_chart.add_player_to_list(printable_names)

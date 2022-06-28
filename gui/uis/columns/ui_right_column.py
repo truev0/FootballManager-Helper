@@ -1,7 +1,10 @@
-
-# IMPORT PYSIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QVBoxLayout, QFrame, QStackedWidget, QWidget, QHBoxLayout, \
+    QSizePolicy, QSpacerItem, QScrollArea
+
+from PySide6.QtCore import QSize, Qt, QMetaObject, QCoreApplication
+
 
 class Ui_RightColumn(object):
     def setupUi(self, RightColumn):
@@ -58,7 +61,7 @@ class Ui_RightColumn(object):
         self.menu_1.setObjectName(u"menu_1")
         self.verticalLayout = QVBoxLayout(self.menu_1)
         self.verticalLayout.setSpacing(5)
-        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setObjectName(u"vertical_layout_menu_1")
         self.verticalLayout.setContentsMargins(5, 5, 5, 5)
 
         self.btn_1_frame = QFrame(self.menu_1)

@@ -1,6 +1,6 @@
-# IMPORT PYSIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QComboBox
 
 
 # PY COMBO BOX

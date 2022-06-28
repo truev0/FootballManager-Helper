@@ -1,6 +1,7 @@
 # IMPORT PACKAGES AND MODULES
 from types import SimpleNamespace
 
+
 # CUSTOM NESTED NAMESPACES
 # ///////////////////////////////////////////
 class NestedNamespace(SimpleNamespace):

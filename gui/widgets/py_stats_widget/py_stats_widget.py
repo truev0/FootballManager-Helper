@@ -1,10 +1,8 @@
-
-
-# IMPORT PYSIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
 
-# IMPORT MODULES
+# IMPORT PROCESSING, CHART AND CLUSTERING MODULES
 # ///////////////////////////////////////////////////////////////
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
@@ -68,14 +66,14 @@ class PyStatsWidget(QWidget):
         self.principal_layout.addLayout(self.alter_layout)
         self.principal_layout.addWidget(self.chart)
 
-        self.type_selector.currentIndexChanged.connect(self.updateDependentCombo)
-        self.updateDependentCombo(self.type_selector.currentIndex())
+        self.type_selector.currentIndexChanged.connect(self.update_dependent_combo)
+        self.update_dependent_combo(self.type_selector.currentIndex())
 
         self.combo_selector.currentTextChanged.connect(
             self.chart.update_chart
         )
 
-    def updateDependentCombo(self, index):
+    def update_dependent_combo(self, index):
         self.combo_selector.clear()
         dependent_list = self.type_selector.itemData(index)
         if dependent_list:
@@ -141,6 +139,9 @@ class _CustomCanvas(FigureCanvas):
         else:
             for e in e_list:
                 self._actual_list.append(e)
+
+    def change_language(self, new_lang):
+        self._language = new_lang
 
     def update_chart(self, new_parameter):
         if self._data is not None:

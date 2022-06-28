@@ -1,8 +1,8 @@
-# IMPORT PYSIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtCore import QAbstractTableModel, Qt
 
-# IMPORT PACKAGES AND MODULES
+# IMPORT OTHER PACKAGES AND MODULES
 # ///////////////////////////////////////////
 from past.builtins import unicode
 import numpy as np

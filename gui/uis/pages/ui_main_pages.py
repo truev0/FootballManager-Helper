@@ -1,5 +1,9 @@
+# IMPORT PYSIDE MODULES
+# /////////////////////////////////////////////////////
+from PySide6.QtCore import QSize, Qt, QRect, QMetaObject, QCoreApplication
 
-from pyside_core import *
+from PySide6.QtWidgets import QVBoxLayout, QStackedWidget, QWidget, QFrame, QScrollArea, \
+    QLabel, QHBoxLayout, QSpacerItem, QSizePolicy
 
 
 class Ui_MainPages(object):
@@ -82,7 +86,7 @@ class Ui_MainPages(object):
         self.contents.setStyleSheet(u"background: transparent;")
         self.verticalLayout = QVBoxLayout(self.contents)
         self.verticalLayout.setSpacing(15)
-        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setObjectName(u"vertical_layout_menu_1")
         self.verticalLayout.setContentsMargins(5, 5, 5, 5)
         self.row_1_layout = QHBoxLayout()
         self.row_1_layout.setObjectName(u"row_1_layout")

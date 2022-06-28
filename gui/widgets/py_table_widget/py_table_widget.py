@@ -1,8 +1,6 @@
-
-
-# IMPORT QT CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QTableView
 
 # IMPORT STYLE
 # ///////////////////////////////////////////////////////////////
@@ -28,7 +26,6 @@ class PyTableWidget(QTableView):
     ):
         super().__init__()
         self.setDragEnabled(True)
-
 
         self.set_stylesheet(
             radius,

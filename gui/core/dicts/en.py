@@ -52,7 +52,9 @@ english = {
 
         },
         "p7": {
-
+            "btn_compare_s": "Select Statistics",
+            "btn_compare_a": "Select Attributes",
+            "btn_compare_d": "Send Data",
         },
         "p8": {
 
@@ -61,26 +63,7 @@ english = {
 
         },
         "p10": {
-            "label_top": "SETTINGS",
-            "frame_1": {
-                "label_top": "LOAD SQUAD FILE",
-                "path": "... Path file ...",
-                "btn_1": "BROWSE FILE",
-                "btn_2": "LOAD FILE"
-            },
-            "frame_2": {
-                "label_top": "LOAD SCOUTING FILE",
-                "path": "... Path file ...",
-                "btn_1": "BROWSE FILE",
-                "btn_2": "LOAD FILE"
-            },
-            "frame_3": {
-                "label_top": "LANGUAGE",
-                "text_1": "ENGLISH",
-                "text_2": "SPANISH",
-                "btn_text": "SAVE"
-            }
-
+            "process_btn": "Process Data"
         },
         "p11": {
 

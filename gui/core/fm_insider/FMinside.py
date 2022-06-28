@@ -160,6 +160,7 @@ def data_for_rankings(df, lang):
 # Make a rank with values previously setted
 # ///////////////////////////////////////////////////////////////
 def ranking_values(df):
+    # TODO check lambda function
     f = lambda x: x.replace(x[-1], x[-1] + '_rank')
     df = df.join(df.iloc[:, 96:179].rank(axis=1, method='first', ascending=False).astype(int).rename(columns=f))
     return df

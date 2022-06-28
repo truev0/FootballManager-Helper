@@ -1,11 +1,12 @@
-# IMPORT PSYIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtCore import QAbstractTableModel, Qt
 
-# IMPORT PACKAGES AND MODULES
+# IMPORT OTHER PACKAGES AND MODULES
 # ///////////////////////////////////////////
 from past.builtins import unicode
 import numpy as np
+
 
 # CUSTOM LIST MODEL FOR PANDAS
 # ///////////////////////////////////////////
@@ -32,13 +33,13 @@ class CustomizedNumpyListModel(QAbstractTableModel):
     def columnCount(self, parent=None):
         return self.c
 
-    def headerData(self, p_int, orientation, role):
+    def headerData(self, section, orientation, role):
         if role == Qt.DisplayRole:
             if orientation == Qt.Horizontal:
-                return str(self._cols[p_int])
+                return str(self._cols[section])
 
             if orientation == Qt.Vertical:
-                return p_int
+                return section
         return None
 
     def flags(self, index):

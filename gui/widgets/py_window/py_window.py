@@ -1,10 +1,13 @@
-
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////////////////////////
 
-# IMPORT PYSIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QFrame, QHBoxLayout, QGraphicsDropShadowEffect
+
+from PySide6.QtCore import Qt
+
+from PySide6.QtGui import QColor
 
 # IMPORT SETTINGS
 # ///////////////////////////////////////////////////////////////

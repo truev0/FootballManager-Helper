@@ -1,8 +1,11 @@
-
-
-# IMPORT QT CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
+
+from PySide6.QtGui import QPixmap, QPainter
+
+from PySide6.QtCore import Qt
+
 
 # PY ICON WITH CUSTOM COLORS
 # ///////////////////////////////////////////////////////////////
@@ -24,7 +27,7 @@ class PyIcon(QWidget):
     def setup_ui(self):
         # LAYOUT
         self.layout = QVBoxLayout(self)
-        self.layout.setContentsMargins(0,0,0,0)
+        self.layout.setContentsMargins(0, 0, 0, 0)
 
         # LABEL
         self.icon = QLabel()
@@ -36,9 +39,8 @@ class PyIcon(QWidget):
         # ADD TO LAYOUT
         self.layout.addWidget(self.icon)
 
-    def set_icon(self, icon_path, icon_color = None):
+    def set_icon(self, icon_path, icon_color=None):
         # GET COLOR
-        color = ""
         if icon_color is not None:
             color = icon_color
         else:
@@ -53,4 +55,3 @@ class PyIcon(QWidget):
 
         # SET PIXMAP
         self.icon.setPixmap(icon)
-

@@ -1,8 +1,11 @@
-
-
-# IMPORT QT CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QCheckBox
+
+from PySide6.QtCore import QEasingCurve, QPropertyAnimation, Qt, QPoint, \
+    QRect, Property
+
+from PySide6.QtGui import QPainter, QColor, QFont
 
 
 class PyToggle(QCheckBox):
@@ -65,12 +68,12 @@ class PyToggle(QCheckBox):
 
         if not self.isChecked():
             p.setBrush(QColor(self._bg_color))
-            p.drawRoundedRect(0,0,rect.width(), 28, 14, 14)
+            p.drawRoundedRect(0, 0, rect.width(), 28, 14, 14)
             p.setBrush(QColor(self._circle_color))
             p.drawEllipse(self._position, 3, 22, 22)
         else:
             p.setBrush(QColor(self._active_color))
-            p.drawRoundedRect(0,0,rect.width(), 28, 14, 14)
+            p.drawRoundedRect(0, 0, rect.width(), 28, 14, 14)
             p.setBrush(QColor(self._circle_color))
             p.drawEllipse(self._position, 3, 22, 22)
 

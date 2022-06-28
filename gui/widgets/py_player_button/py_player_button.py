@@ -1,10 +1,13 @@
-# IMPORT QT CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QPushButton, QLabel, QGraphicsDropShadowEffect
+
+from PySide6.QtCore import Qt, QEvent, QRect, QDataStream
+
+from PySide6.QtGui import QPainter, QColor, QBrush, QPixmap
 
 # IMPORT FUNCTIONS
 # ///////////////////////////////////////////////////////////////
-from gui.core.functions import *
 
 # PY PLAYER BUTTON
 # ///////////////////////////////////////////////////////////////
@@ -28,6 +31,8 @@ class PyPlayerButton(QPushButton):
         super().__init__()
 
         # SET PARAMETERS
+        self.__mousePressPos = None
+        self.__mouseMovePos = None
         self.setFixedSize(48, 48)
         if app_parent is not None:
             self.setParent(app_parent)
@@ -71,7 +76,6 @@ class PyPlayerButton(QPushButton):
     # FORMAT TEXT
     # ///////////////////////////////////////////////////////////////
     def text_formatter(self):
-        tmp = ""
         self._text = "\n".join([str(x) for x in self._lista])
         tmp = self._text
         return tmp
@@ -87,12 +91,12 @@ class PyPlayerButton(QPushButton):
     # DROP EVENT
     # ///////////////////////////////////////////////////////////////
     def dropEvent(self, event):
-        mimeData = event.mimeData()
-        if mimeData.hasText():
-            self._lista.append(mimeData.text())
-        elif 'application/x-qabstractitemmodeldatalist' in mimeData.formats():
+        mime_data = event.mimeData()
+        if mime_data.hasText():
+            self._lista.append(mime_data.text())
+        elif 'application/x-qabstractitemmodeldatalist' in mime_data.formats():
             names = []
-            stream = QDataStream(mimeData.data('application/x-qabstractitemmodeldatalist'))
+            stream = QDataStream(mime_data.data('application/x-qabstractitemmodeldatalist'))
             while not stream.atEnd():
                 # All fields must be read, even if we don't use them
                 row = stream.readInt32()
@@ -112,7 +116,7 @@ class PyPlayerButton(QPushButton):
 
     # RETURN IF IS ACTIVE
     # ///////////////////////////////////////////////////////////////
-    def is_active(self, is_active):
+    def is_active(self):
         return self._is_active
 
     # PAINT EVENT
@@ -216,13 +220,13 @@ class PyPlayerButton(QPushButton):
     # ///////////////////////////////////////////////////////////////
     def mouseMoveEvent(self, event):
         if event.buttons() == Qt.RightButton:
-            currPos = self.mapToGlobal(self.pos())
-            globalPos = event.globalPos()
-            diff = globalPos - self.__mouseMovePos
-            newPos = self.mapFromGlobal(currPos + diff)
-            if 31 < newPos.y() < 744 and newPos.x() > 30 and newPos.x() < 476:
-                self.move(newPos)
-                self.__mouseMovePos = globalPos
+            curr_pos = self.mapToGlobal(self.pos())
+            global_pos = event.globalPos()
+            diff = global_pos - self.__mouseMovePos
+            new_pos = self.mapFromGlobal(curr_pos + diff)
+            if 31 < new_pos.y() < 744 and 30 < new_pos.x() < 476:
+                self.move(new_pos)
+                self.__mouseMovePos = global_pos
 
         super(PyPlayerButton, self).mouseMoveEvent(event)
 
@@ -285,7 +289,6 @@ class _ToolTip(QLabel):
         self.setParent(parent)
         self.setText(tooltip)
         self.adjustSize()
-
 
         # SET DROP SHADOW
         self.shadow = QGraphicsDropShadowEffect(self)

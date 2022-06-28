@@ -1,23 +1,25 @@
-# IMPORT QT CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtCore import Qt
+
+from PySide6.QtWidgets import QPushButton
 
 # STYLE
 # ///////////////////////////////////////////////////////////////
 style = '''
 QPushButton {{
-	border: none;
-    padding-left: 10px;
-    padding-right: 5px;
-    color: {_color};
-	border-radius: {_radius};	
-	background-color: {_bg_color};
+border: none;
+padding-left: 10px;
+padding-right: 5px;
+color: {_color};
+border-radius: {_radius};	
+background-color: {_bg_color};
 }}
 QPushButton:hover {{
-	background-color: {_bg_color_hover};
+background-color: {_bg_color_hover};
 }}
 QPushButton:pressed {{	
-	background-color: {_bg_color_pressed};
+background-color: {_bg_color_pressed};
 }}
 '''
 

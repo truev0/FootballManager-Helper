@@ -52,7 +52,9 @@ espanol = {
 
         },
         "p7": {
-
+            "btn_compare_s": "Seleccionar Estadisticas",
+            "btn_compare_a": "Seleccionar Atributos",
+            "btn_compare_d": "Enviar Datos",
         },
         "p8": {
 
@@ -61,26 +63,7 @@ espanol = {
 
         },
         "p10": {
-            "label_top": "AJUSTES",
-            "frame_1": {
-                "label_top": "CARGA ARCHIVO PLANTILLA",
-                "path": "Ruta de archivo",
-                "btn_1": "BUSCAR ARCHIVO",
-                "btn_2": "CARGAR ARCHIVO"
-            },
-            "frame_2": {
-                "label_top": "CARGA ARCHIVO SCOUTING",
-                "path": "Ruta de archivo",
-                "btn_1": "BUSCAR ARCHIVO",
-                "btn_2": "CARGAR ARCHIVO"
-            },
-            "frame_3": {
-                "label_top": "LENGUAJE",
-                "text_1": "INGLES",
-                "text_2": "ESPAÑOL",
-                "btn_text": "GUARDAR"
-            }
-
+            "process_btn": "Procesar Datos"
         },
         "p11": {
 

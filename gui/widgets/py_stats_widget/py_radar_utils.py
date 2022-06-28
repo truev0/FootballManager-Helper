@@ -1,3 +1,5 @@
+# UTILS FOR RADAR CHART
+# ////////////////////////////////////
 def set_visible(ax, spine_bottom=False, spine_top=False, spine_left=False, spine_right=False,
                 grid=False, tick=False, label=False):
     ax.spines['bottom'].set_visible(spine_bottom)

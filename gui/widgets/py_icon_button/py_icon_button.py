@@ -1,34 +1,37 @@
-
-
-# IMPORT QT CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QPushButton, QLabel, QGraphicsDropShadowEffect
+
+from PySide6.QtCore import Qt, QRect, QEvent, QPoint
+
+from PySide6.QtGui import QPainter, QColor, QBrush, QPixmap
+
 
 # PY TITLE BUTTON
 # ///////////////////////////////////////////////////////////////
 class PyIconButton(QPushButton):
     def __init__(
         self,
-        icon_path = None,
-        parent = None,
-        app_parent = None,
-        tooltip_text = "",
-        btn_id = None,
-        width = 30,
-        height = 30,
-        radius = 8,
-        bg_color = "#343b48",
-        bg_color_hover = "#3c4454",
-        bg_color_pressed = "#2c313c",
-        icon_color = "#c3ccdf",
-        icon_color_hover = "#dce1ec",
-        icon_color_pressed = "#edf0f5",
-        icon_color_active = "#f5f6f9",
-        dark_one = "#1b1e23",
-        text_foreground = "#8a95aa",
-        context_color = "#568af2",
-        top_margin = 40,
-        is_active = False
+        icon_path=None,
+        parent=None,
+        app_parent=None,
+        tooltip_text="",
+        btn_id=None,
+        width=30,
+        height=30,
+        radius=8,
+        bg_color="#343b48",
+        bg_color_hover="#3c4454",
+        bg_color_pressed="#2c313c",
+        icon_color="#c3ccdf",
+        icon_color_hover="#dce1ec",
+        icon_color_pressed="#edf0f5",
+        icon_color_active="#f5f6f9",
+        dark_one="#1b1e23",
+        text_foreground="#8a95aa",
+        context_color="#568af2",
+        top_margin=40,
+        is_active=False
     ):
         super().__init__()
         
@@ -126,10 +129,6 @@ class PyIconButton(QPushButton):
             self._set_bg_color = self._bg_color_pressed
             self._set_icon_color = self._icon_color_pressed
             self.repaint()
-        elif event == QEvent.MouseButtonRelease:
-            self._set_bg_color = self._bg_color_hover
-            self._set_icon_color = self._icon_color_hover
-            self.repaint()
 
     # MOUSE OVER
     # Event triggered when the mouse is over the BTN
@@ -209,6 +208,7 @@ class PyIconButton(QPushButton):
         # Move tooltip position
         self._tooltip.move(pos_x, pos_y)
 
+
 # TOOLTIP
 # ///////////////////////////////////////////////////////////////
 class _ToolTip(QLabel):
@@ -224,6 +224,7 @@ class _ToolTip(QLabel):
         font: 800 9pt "Segoe UI";
     }}
     """
+
     def __init__(
         self,
         parent, 
@@ -235,8 +236,8 @@ class _ToolTip(QLabel):
 
         # LABEL SETUP
         style = self.style_tooltip.format(
-            _dark_one = dark_one,
-            _text_foreground = text_foreground
+            _dark_one=dark_one,
+            _text_foreground=text_foreground
         )
         self.setObjectName(u"label_tooltip")
         self.setStyleSheet(style)

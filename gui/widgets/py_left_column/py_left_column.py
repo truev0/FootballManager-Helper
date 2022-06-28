@@ -1,20 +1,22 @@
-
-
-# IMPORT QT CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QWidget, \
+    QVBoxLayout
+
+from PySide6.QtCore import Signal, Qt
 
 # IMPORT CLOSE BUTTON
 # ///////////////////////////////////////////////////////////////
-from . py_left_button import *
+from .py_left_button import PyLeftButton
 
 # IMPORT ICON
 # ///////////////////////////////////////////////////////////////
-from . py_icon import *
+from .py_icon import PyIcon
 
 # IMPORT LEFT COLUMN
 # ///////////////////////////////////////////////////////////////
 from gui.uis.columns.ui_left_column import Ui_LeftColumn
+
 
 class PyLeftColumn(QWidget):
     # SIGNALS
@@ -22,24 +24,24 @@ class PyLeftColumn(QWidget):
     released = Signal(object)
 
     def __init__(
-        self,
-        parent,
-        app_parent,
-        text_title,
-        text_title_size,
-        text_title_color,
-        dark_one,
-        bg_color,
-        btn_color,
-        btn_color_hover,
-        btn_color_pressed,
-        icon_path,
-        icon_color,
-        icon_color_hover,
-        icon_color_pressed,
-        context_color,
-        icon_close_path,
-        radius = 8
+            self,
+            parent,
+            app_parent,
+            text_title,
+            text_title_size,
+            text_title_color,
+            dark_one,
+            bg_color,
+            btn_color,
+            btn_color_hover,
+            btn_color_pressed,
+            icon_path,
+            icon_color,
+            icon_color_hover,
+            icon_color_pressed,
+            context_color,
+            icon_close_path,
+            radius=8
     ):
         super().__init__()
 
@@ -77,7 +79,7 @@ class PyLeftColumn(QWidget):
     # ///////////////////////////////////////////////////////////////
     def btn_clicked(self):
         self.clicked.emit(self.btn_close)
-    
+
     def btn_released(self):
         self.released.emit(self.btn_close)
 
@@ -86,7 +88,7 @@ class PyLeftColumn(QWidget):
     def setup_ui(self):
         # BASE LAYOUT
         self.base_layout = QVBoxLayout(self)
-        self.base_layout.setContentsMargins(0,0,0,0)
+        self.base_layout.setContentsMargins(0, 0, 0, 0)
         self.base_layout.setSpacing(0)
 
         # TITLE FRAME
@@ -97,7 +99,7 @@ class PyLeftColumn(QWidget):
 
         # TITLE BASE LAYOUT 
         self.title_base_layout = QVBoxLayout(self.title_frame)
-        self.title_base_layout.setContentsMargins(5,3,5,3)
+        self.title_base_layout.setContentsMargins(5, 3, 5, 3)
 
         # TITLE BG
         self.title_bg_frame = QFrame()
@@ -111,15 +113,15 @@ class PyLeftColumn(QWidget):
 
         # LAYOUT TITLE BG
         self.title_bg_layout = QHBoxLayout(self.title_bg_frame)
-        self.title_bg_layout.setContentsMargins(5,5,5,5)
+        self.title_bg_layout.setContentsMargins(5, 5, 5, 5)
         self.title_bg_layout.setSpacing(3)
 
         # ICON
         self.icon_frame = QFrame()
-        self.icon_frame.setFixedSize(30,30)
+        self.icon_frame.setFixedSize(30, 30)
         self.icon_frame.setStyleSheet("background: none;")
         self.icon_layout = QVBoxLayout(self.icon_frame)
-        self.icon_layout.setContentsMargins(0,0,0,0)
+        self.icon_layout.setContentsMargins(0, 0, 0, 0)
         self.icon_layout.setSpacing(5)
         self.icon = PyIcon(self._icon_path, self._icon_color)
         self.icon_layout.addWidget(self.icon, Qt.AlignCenter, Qt.AlignCenter)
@@ -138,25 +140,25 @@ class PyLeftColumn(QWidget):
 
         # BTN FRAME
         self.btn_frame = QFrame()
-        self.btn_frame.setFixedSize(30,30)
+        self.btn_frame.setFixedSize(30, 30)
         self.btn_frame.setStyleSheet("background: none;")
         # CLOSE BUTTON
         self.btn_close = PyLeftButton(
             self._parent,
             self._app_parent,
-            tooltip_text = "Hide",
-            dark_one = self._dark_one,
-            bg_color = self._btn_color,
-            bg_color_hover = self._btn_color_hover,
-            bg_color_pressed = self._btn_color_pressed,
-            icon_color = self._icon_color,
-            icon_color_hover = self._icon_color_hover,
-            icon_color_pressed = self._icon_color_pressed,
-            icon_color_active = self._icon_color_pressed,
-            context_color = self._context_color,
-            text_foreground = self._text_title_color,
-            icon_path = self._icon_close_path,
-            radius = 6,
+            tooltip_text="Hide",
+            dark_one=self._dark_one,
+            bg_color=self._btn_color,
+            bg_color_hover=self._btn_color_hover,
+            bg_color_pressed=self._btn_color_pressed,
+            icon_color=self._icon_color,
+            icon_color_hover=self._icon_color_hover,
+            icon_color_pressed=self._icon_color_pressed,
+            icon_color_active=self._icon_color_pressed,
+            context_color=self._context_color,
+            text_foreground=self._text_title_color,
+            icon_path=self._icon_close_path,
+            radius=6,
         )
         self.btn_close.setParent(self.btn_frame)
         self.btn_close.setObjectName("btn_close_left_column")

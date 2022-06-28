@@ -1,8 +1,7 @@
-
-
-# IMPORT QT CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QFrame
+
 
 # CUSTOM LEFT MENU
 # ///////////////////////////////////////////////////////////////
@@ -11,7 +10,7 @@ class PyDiv(QWidget):
         super().__init__()
 
         self.layout = QHBoxLayout(self)
-        self.layout.setContentsMargins(5,0,5,0)
+        self.layout.setContentsMargins(5, 0, 5, 0)
         self.frame_line = QFrame()
         self.frame_line.setStyleSheet(f"background: {color};")
         self.frame_line.setMaximumHeight(1)

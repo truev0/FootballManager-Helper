@@ -38,7 +38,7 @@ stats_list_en = {
 
 stats_list_es = {
     'Min': 'Minutos',
-    'BDs': 'Translate 1',
+    'BDs': 'Balones Despejados',
     'BRe': 'Balones Rechazados',
     'BAt': 'Balones Atajados',
     'Enc': 'Encajados',
@@ -101,7 +101,7 @@ metrics_list = {
     "Creacion de juego corto": ("Pas Clv/90", "Oc C/90"),
     "Creacion de gol": ("Oc C/90", "Asis/90"),
     "Perfil de edad": ("Edad", "Min"),
-    "Perfil de sueldo": ("Sueldo", "Min"),
+    "Perfil de salario": ("Sueldo", "Min"),
     "Habilidad de juego por banda": ("Reg/90", "Asis/90"),
     "Mejores aplacadores": ("Ent Cl", "Ent P"),
     "Ganadores de balones": ("Ent", "Rob/90")

@@ -1,17 +1,15 @@
-
-
-# IMPORT PYSIDE CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *  # lgtm [py/polluting-import]
+from PySide6.QtWidgets import QWidget, QVBoxLayout
 
-# IMPORT MODULES
+# IMPORT PROCESSING, CHART & CLUSTERING MODULES
 # ///////////////////////////////////////////////////////////////
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-# IMPORT MPLSOCCER
+# IMPORT CUSTOM RADAR
 # ///////////////////////////////////////////////////////////////
 from . py_radar_chart import Radar
 
@@ -192,6 +190,9 @@ class _CustomSpyder(FigureCanvas):
                 self.ax['title'].text(0.01, 0.1, var1, fontsize=10, color=self.COLORS[0], ha='left', va='center')
                 self.ax['title'].text(0.99, 0.1, var2, fontsize=10, color=self.COLORS[1], ha='right', va='center')
                 self.fig.canvas.draw()
+
+    def change_language(self, new_lang):
+        self.language = new_lang
 
 
 def radar_mosaic(radar_height=0.915, title_height=0.06, fig_height=14):

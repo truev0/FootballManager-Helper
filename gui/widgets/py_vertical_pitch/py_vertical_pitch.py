@@ -1,10 +1,14 @@
-# IMPORT QT CORE
+# IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from PySide6.QtWidgets import QWidget, QLabel, QSizePolicy, QPushButton
+
+from PySide6.QtCore import Qt, Signal, QRect, QSize
+
+from PySide6.QtGui import QPixmap
 
 # IMPORT FUNCTIONS
 # ///////////////////////////////////////////////////////////////
-from gui.core.functions import *
+from gui.core.functions import set_svg_icon
 
 # IMPORT BUTTONS
 # ///////////////////////////////////////////////////////////////
@@ -45,18 +49,16 @@ class PyVerticalPitch(QWidget):
         self._pitch_image = QLabel(self._parent)
         self._pitch_image.setObjectName(u"pitch_image")
         self._pitch_image.setGeometry(QRect(0, 0, self._minimum_width, self._minimum_height))
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self._pitch_image.sizePolicy().hasHeightForWidth())
-        self._pitch_image.setSizePolicy(sizePolicy)
+        size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        size_policy.setHorizontalStretch(0)
+        size_policy.setVerticalStretch(0)
+        size_policy.setHeightForWidth(self._pitch_image.sizePolicy().hasHeightForWidth())
+        self._pitch_image.setSizePolicy(size_policy)
         self._pitch_image.setMinimumSize(QSize(self._minimum_width, self._minimum_height))
         self._pitch_image.setPixmap(QPixmap(u"gui/images/png_images/vertical_pitch.png"))
         self._pitch_image.setScaledContents(True)
         self._pitch_image.setAlignment(Qt.AlignCenter)
         self._pitch_image.raise_()
-
-
 
     # PITCH EMIT SIGNALS
     # ///////////////////////////////////////////////////////////////
@@ -80,15 +82,13 @@ class PyVerticalPitch(QWidget):
 
                 self.btn = PyPlayerButton(
                     self._parent,
-                    icon_path=Functions.set_svg_icon(self._image_player),
+                    icon_path=set_svg_icon(self._image_player),
                     btn_id=_btn_id,
                     is_active=_is_active
                 )
                 self.btn.setGeometry(QRect(_posX, _posY, _size, _size))
                 self.btn.clicked.connect(self.btn_clicked)
                 self.btn.released.connect(self.btn_released)
-
-
 
     # SELECT ONLY ONE BTN
     # ///////////////////////////////////////////////////////////////
