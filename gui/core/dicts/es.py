@@ -33,64 +33,39 @@ espanol = {
         "g2": "Plantilla Vieja",
     },
     "pages": {
-        "p1": {
-
-        },
-        "p2": {
-
-        },
-        "p3": {
-
-        },
-        "p4": {
-
-        },
-        "p5": {
-
-        },
-        "p6": {
-
-        },
-        "p7": {
-
-        },
-        "p8": {
-
-        },
-        "p9": {
-
-        },
+        "p1": {},
+        "p2": {},
+        "p3": {},
+        "p4": {},
+        "p5": {},
+        "p6": {},
+        "p7": {},
+        "p8": {},
+        "p9": {},
         "p10": {
             "label_top": "AJUSTES",
             "frame_1": {
                 "label_top": "CARGA ARCHIVO PLANTILLA",
                 "path": "Ruta de archivo",
                 "btn_1": "BUSCAR ARCHIVO",
-                "btn_2": "CARGAR ARCHIVO"
+                "btn_2": "CARGAR ARCHIVO",
             },
             "frame_2": {
                 "label_top": "CARGA ARCHIVO SCOUTING",
                 "path": "Ruta de archivo",
                 "btn_1": "BUSCAR ARCHIVO",
-                "btn_2": "CARGAR ARCHIVO"
+                "btn_2": "CARGAR ARCHIVO",
             },
             "frame_3": {
                 "label_top": "LENGUAJE",
                 "text_1": "INGLES",
                 "text_2": "ESPAÑOL",
-                "btn_text": "GUARDAR"
-            }
-
+                "btn_text": "GUARDAR",
+            },
         },
-        "p11": {
-
-        },
-        "p12": {
-
-        },
-        "p13": {
-
-        }
+        "p11": {},
+        "p12": {},
+        "p13": {},
     },
     "left_content": {
         "b1": "Cargar archivo plantilla",
@@ -106,8 +81,8 @@ espanol = {
         "b2": "Filtros de scouting",
         "b3": "Minimizar",
         "b4": "Maximizar",
-        "b5": "Cerrar"
-    }
+        "b5": "Cerrar",
+    },
 }
 
 column_headers = {
@@ -202,7 +177,7 @@ column_headers = {
         "a44": "Ant",
         "a45": "Agi",
         "a46": "Agr",
-        "a47": "Aér"
+        "a47": "Aér",
     },
     "a": {
         "au0": "<- EDITAR",
@@ -215,7 +190,7 @@ column_headers = {
         "au7": "Trol",
         "au8": "Role 3S",
         "au9": "Entrenamiento preferido",
-    }
+    },
 }
 
 positions = {
@@ -301,5 +276,5 @@ positions = {
     "p80": "DLC-At",
     "p81": "ARI-At",
     "p82": "DLA-At",
-    "p83": "F9-Ap"
+    "p83": "F9-Ap",
 }

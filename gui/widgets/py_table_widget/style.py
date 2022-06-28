@@ -1,6 +1,6 @@
 # STYLE
 # ///////////////////////////////////////////////////////////////
-style = '''
+style = """
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
 QTableView */
 
@@ -132,4 +132,4 @@ QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {{
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {{
      background: none;
 }}
-'''
+"""

@@ -1,5 +1,3 @@
-
-
 # PY ICON BUTTON
 # ///////////////////////////////////////////////////////////////
-from . py_icon_button import PyIconButton
+from .py_icon_button import PyIconButton

@@ -1,5 +1,3 @@
-
-
 # IMPORT QT CORE
 # ///////////////////////////////////////////////////////////////
 from pyside_core import *
@@ -12,8 +10,9 @@ from .style import style
 # PY PUSH BUTTON
 # ///////////////////////////////////////////////////////////////
 class PyTableWidget(QTableView):
+
     def __init__(
-        self, 
+        self,
         radius=8,
         color="#FFF",
         bg_color="#444",
@@ -24,11 +23,10 @@ class PyTableWidget(QTableView):
         grid_line_color="#555",
         scroll_bar_bg_color="#FFF",
         scroll_bar_btn_color="#3333",
-        context_color="#00ABE8"
+        context_color="#00ABE8",
     ):
         super().__init__()
         self.setDragEnabled(True)
-
 
         self.set_stylesheet(
             radius,
@@ -41,23 +39,23 @@ class PyTableWidget(QTableView):
             grid_line_color,
             scroll_bar_bg_color,
             scroll_bar_btn_color,
-            context_color
+            context_color,
         )
 
     # SET STYLESHEET
     def set_stylesheet(
-            self,
-            radius,
-            color,
-            bg_color,
-            header_horizontal_color,
-            header_vertical_color,
-            selection_color,
-            bottom_line_color,
-            grid_line_color,
-            scroll_bar_bg_color,
-            scroll_bar_btn_color,
-            context_color
+        self,
+        radius,
+        color,
+        bg_color,
+        header_horizontal_color,
+        header_vertical_color,
+        selection_color,
+        bottom_line_color,
+        grid_line_color,
+        scroll_bar_bg_color,
+        scroll_bar_btn_color,
+        context_color,
     ):
         style_format = style.format(
             _radius=radius,
@@ -70,6 +68,6 @@ class PyTableWidget(QTableView):
             _grid_line_color=grid_line_color,
             _scroll_bar_bg_color=scroll_bar_bg_color,
             _scroll_bar_btn_color=scroll_bar_btn_color,
-            _context_color=context_color
+            _context_color=context_color,
         )
         self.setStyleSheet(style_format)

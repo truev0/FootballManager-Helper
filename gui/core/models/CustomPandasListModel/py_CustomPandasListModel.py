@@ -1,15 +1,18 @@
 # IMPORT PSYIDE CORE
 # ///////////////////////////////////////////
-from pyside_core import *
+import pandas as pd
 
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////
 from past.builtins import unicode
-import pandas as pd
+
+from pyside_core import *
+
 
 # CUSTOM LIST MODEL FOR PANDAS
 # ///////////////////////////////////////////
 class CustomListModel(QAbstractTableModel):
+
     def __init__(self, data: pd.DataFrame, parent=None):
         QAbstractTableModel.__init__(self, parent)
         self._data = data
@@ -20,7 +23,7 @@ class CustomListModel(QAbstractTableModel):
             value = self._data.iloc[index.row(), index.column()]
 
             if isinstance(value, str):
-                return '%s' % value
+                return "%s" % value
 
             return unicode(value)
 

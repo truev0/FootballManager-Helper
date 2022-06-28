@@ -33,64 +33,39 @@ english = {
         "g2": "Old Squad",
     },
     "pages": {
-        "p1": {
-
-        },
-        "p2": {
-
-        },
-        "p3": {
-
-        },
-        "p4": {
-
-        },
-        "p5": {
-
-        },
-        "p6": {
-
-        },
-        "p7": {
-
-        },
-        "p8": {
-
-        },
-        "p9": {
-
-        },
+        "p1": {},
+        "p2": {},
+        "p3": {},
+        "p4": {},
+        "p5": {},
+        "p6": {},
+        "p7": {},
+        "p8": {},
+        "p9": {},
         "p10": {
             "label_top": "SETTINGS",
             "frame_1": {
                 "label_top": "LOAD SQUAD FILE",
                 "path": "... Path file ...",
                 "btn_1": "BROWSE FILE",
-                "btn_2": "LOAD FILE"
+                "btn_2": "LOAD FILE",
             },
             "frame_2": {
                 "label_top": "LOAD SCOUTING FILE",
                 "path": "... Path file ...",
                 "btn_1": "BROWSE FILE",
-                "btn_2": "LOAD FILE"
+                "btn_2": "LOAD FILE",
             },
             "frame_3": {
                 "label_top": "LANGUAGE",
                 "text_1": "ENGLISH",
                 "text_2": "SPANISH",
-                "btn_text": "SAVE"
-            }
-
+                "btn_text": "SAVE",
+            },
         },
-        "p11": {
-
-        },
-        "p12": {
-
-        },
-        "p13": {
-
-        }
+        "p11": {},
+        "p12": {},
+        "p13": {},
     },
     "left_content": {
         "b1": "Load squad file",
@@ -99,15 +74,15 @@ english = {
     "right_content": {
         "b1": "Slide to stats filters",
         "b2": "Slide to attrs filters",
-        "b3": "Filter Data"
+        "b3": "Filter Data",
     },
     "title_buttons_tooltips": {
         "b1": "Refresh",
         "b2": "Scouting filters",
         "b3": "Minimize app",
         "b4": "Maximize app",
-        "b5": "Close app"
-    }
+        "b5": "Close app",
+    },
 }
 
 column_headers = {
@@ -202,7 +177,7 @@ column_headers = {
         "a44": "Ant",
         "a45": "Agi",
         "a46": "Agg",
-        "a47": "Aer"
+        "a47": "Aer",
     },
     "a": {
         "au0": "<- EDIT",
@@ -214,8 +189,8 @@ column_headers = {
         "au6": "Role 2S",
         "au7": "Trol",
         "au8": "Role 3S",
-        "au9": "Preferred training"
-    }
+        "au9": "Preferred training",
+    },
 }
 
 positions = {
@@ -301,5 +276,5 @@ positions = {
     "p80": "CF-At",
     "p81": "P-At",
     "p82": "AF-At",
-    "p83": "F9-Su"
+    "p83": "F9-Su",
 }

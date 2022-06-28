@@ -1,4 +1,3 @@
-
 class Styles(object):
     bg_style = """
     #pod_bg_app {{

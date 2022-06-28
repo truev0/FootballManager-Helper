@@ -1,15 +1,18 @@
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////
-from pyside_core import *
+import pandas as pd
 
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////
 from past.builtins import unicode
-import pandas as pd
+
+from pyside_core import *
+
 
 # CUSTOM TABLE MODEL FOR PANDAS
 # ///////////////////////////////////////////
 class CustomizedPandasModel(QAbstractTableModel):
+
     def __init__(self, data: pd.DataFrame, parent=None):
         QAbstractTableModel.__init__(self, parent)
         self._data = data
@@ -23,7 +26,7 @@ class CustomizedPandasModel(QAbstractTableModel):
                 return "%.2f" % value
 
             if isinstance(value, str):
-                return '%s' % value
+                return "%s" % value
 
             return unicode(value)
 
@@ -54,7 +57,9 @@ class CustomizedPandasModel(QAbstractTableModel):
             if column in based_columns:
                 if column == 6 and tmp in self._data.columns.values.tolist():
                     index_no = self._data.columns.get_loc(tmp)
-                    self._data.iloc[row, column + 1] = self._data.iloc[row, index_no]
+                    self._data.iloc[row,
+                                    column + 1] = self._data.iloc[row,
+                                                                  index_no]
                     self._data.iloc[row, column] = tmp
                 elif column in [8, 10, 12]:
                     for x in range(97, 181):
@@ -63,7 +68,7 @@ class CustomizedPandasModel(QAbstractTableModel):
                             break
 
                     col_name = self._data.columns[index_value]
-                    col_name = col_name.removesuffix('_rank')
+                    col_name = col_name.removesuffix("_rank")
                     self._data.iloc[row, column + 1] = col_name
                     self._data.iloc[row, column] = tmp
                 self.dataChanged.emit(index, index)

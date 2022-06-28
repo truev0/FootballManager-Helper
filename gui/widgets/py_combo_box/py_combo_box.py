@@ -28,18 +28,13 @@ class PyComboBox(QComboBox):
         }}
         """
 
-    def __init__(
-            self,
-            text_foreground,
-            dark_one,
-            combo_border
-    ):
+    def __init__(self, text_foreground, dark_one, combo_border):
         QComboBox.__init__(self)
         # LABEL SETUP
         style = self.style_combobox.format(
             _dark_one=dark_one,
             _text_foreground=text_foreground,
-            _combo_border=combo_border
+            _combo_border=combo_border,
         )
         self.setMaximumWidth(200)
         self.setMinimumHeight(40)

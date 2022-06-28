@@ -1,5 +1,3 @@
-
-
 # PY PUSH BUTTON
 # ///////////////////////////////////////////////////////////////
-from . py_toggle import PyToggle
+from .py_toggle import PyToggle

@@ -1,9 +1,6 @@
-
-
 # PY STATS WIDGET
 # ///////////////////////////////////////////////////////////////
-from . py_stats_widget import PyStatsWidget
-
 # PY SPIDER WIDGET
 # ///////////////////////////////////////////////////////////////
 from .py_spyder_widget import PySpyderWidget
+from .py_stats_widget import PyStatsWidget
