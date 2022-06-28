@@ -1,16 +1,18 @@
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////
-from pyside_core import *
+import numpy as np
 
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////
 from past.builtins import unicode
-import numpy as np
+
+from pyside_core import *
 
 
 # CUSTOM TABLE MODEL FOR PANDAS
 # ///////////////////////////////////////////
 class CustomizedNumpyScoutModel(QAbstractTableModel):
+
     def __init__(self, data, parent=None):
         QAbstractTableModel.__init__(self, parent)
         self._data = np.array(data.values)
@@ -26,7 +28,7 @@ class CustomizedNumpyScoutModel(QAbstractTableModel):
                 return "%.2f" % value
 
             if isinstance(value, str):
-                return '%s' % value
+                return "%s" % value
 
             return unicode(value)
 
@@ -55,7 +57,7 @@ class CustomizedNumpyScoutModel(QAbstractTableModel):
             row = index.row()
             column = index.column()
             tmp = str(value)
-            if tmp != '':
+            if tmp != "":
                 if column in based_columns:
                     if column == 6 and tmp in self._cols:
                         index_no = np.where(self._cols == tmp)[0][0]
@@ -68,7 +70,7 @@ class CustomizedNumpyScoutModel(QAbstractTableModel):
                                 break
 
                         col_name = self._cols[index_value]
-                        col_name = col_name.removesuffix('_rank')
+                        col_name = col_name.removesuffix("_rank")
                         self._data[row, column + 1] = col_name
                         self._data[row, column] = tmp
                     self.dataChanged.emit(index, index)

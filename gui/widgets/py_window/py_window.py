@@ -1,23 +1,23 @@
-
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////////////////////////
-
-# IMPORT PYSIDE CORE
-# ///////////////////////////////////////////////////////////////
-from pyside_core import *
 
 # IMPORT SETTINGS
 # ///////////////////////////////////////////////////////////////
 from gui.core.json_settings import Settings
 
+# IMPORT PYSIDE CORE
+# ///////////////////////////////////////////////////////////////
+from pyside_core import *
+
 # IMPORT STYLES
 # ///////////////////////////////////////////////////////////////
-from . styles import Styles
+from .styles import Styles
 
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
 class PyWindow(QFrame):
+
     def __init__(
         self,
         parent,
@@ -30,7 +30,7 @@ class PyWindow(QFrame):
         border_radius=10,
         border_size=2,
         border_color="#343b48",
-        enable_shadow=True
+        enable_shadow=True,
     ):
         super().__init__()
 
@@ -53,11 +53,11 @@ class PyWindow(QFrame):
         self.enable_shadow = enable_shadow
 
         # OBJECT NAME
-        # ///////////////////////////////////////////////////////////////   
+        # ///////////////////////////////////////////////////////////////
         self.setObjectName("pod_bg_app")
 
         # APPLY STYLESHEET
-        # /////////////////////////////////////////////////////////////// 
+        # ///////////////////////////////////////////////////////////////
         self.set_stylesheet()
 
         # ADD LAYOUT
@@ -91,7 +91,7 @@ class PyWindow(QFrame):
         border_size=None,
         border_color=None,
         text_color=None,
-        text_font=None
+        text_font=None,
     ):
         # CHECK BG COLOR
         if bg_color is not None:
@@ -129,11 +129,12 @@ class PyWindow(QFrame):
         else:
             internal_text_font = self.text_font
 
-        self.setStyleSheet(Styles.bg_style.format(
-            _bg_color=internal_bg_color,
-            _border_radius=internal_border_radius,
-            _border_size=internal_border_size,
-            _border_color=internal_border_color,
-            _text_color=internal_text_color,
-            _text_font=internal_text_font
-        ))
+        self.setStyleSheet(
+            Styles.bg_style.format(
+                _bg_color=internal_bg_color,
+                _border_radius=internal_border_radius,
+                _border_size=internal_border_size,
+                _border_color=internal_border_color,
+                _text_color=internal_text_color,
+                _text_font=internal_text_font,
+            ))
