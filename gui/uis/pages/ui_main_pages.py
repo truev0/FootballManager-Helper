@@ -1,65 +1,74 @@
 # IMPORT PYSIDE MODULES
 # /////////////////////////////////////////////////////
-from PySide6.QtCore import QSize, Qt, QRect, QMetaObject, QCoreApplication
-
-from PySide6.QtWidgets import QVBoxLayout, QStackedWidget, QWidget, QFrame, QScrollArea, \
-    QLabel, QHBoxLayout, QSpacerItem, QSizePolicy
+from PySide6.QtCore import QCoreApplication, QMetaObject, QRect, QSize, Qt
+from PySide6.QtWidgets import (
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QScrollArea,
+    QSizePolicy,
+    QSpacerItem,
+    QStackedWidget,
+    QVBoxLayout,
+    QWidget,
+)
 
 
 class Ui_MainPages(object):
+
     def __init__(self):
         self.clustering_subtop_layout = None
 
     def setupUi(self, MainPages):
         if not MainPages.objectName():
-            MainPages.setObjectName(u"MainPages")
+            MainPages.setObjectName("MainPages")
         MainPages.resize(1051, 858)
         # MAIN WIDGET LAYOUT
         # /////////////////////////////////////////////////////////
         self.main_pages_layout = QVBoxLayout(MainPages)
         self.main_pages_layout.setSpacing(0)
-        self.main_pages_layout.setObjectName(u"main_pages_layout")
+        self.main_pages_layout.setObjectName("main_pages_layout")
         self.main_pages_layout.setContentsMargins(5, 5, 5, 5)
 
         # MAIN PAGES
         # /////////////////////////////////////////////////////////
         self.pages = QStackedWidget(MainPages)
-        self.pages.setObjectName(u"pages")
+        self.pages.setObjectName("pages")
 
         # PAGE 1
         # /////////////////////////////////////////////////////////
         self.page_1 = QWidget()
-        self.page_1.setObjectName(u"page_1")
-        self.page_1.setStyleSheet(u"font-size: 14pt")
+        self.page_1.setObjectName("page_1")
+        self.page_1.setStyleSheet("font-size: 14pt")
         self.page_1_layout = QVBoxLayout(self.page_1)
         self.page_1_layout.setSpacing(5)
-        self.page_1_layout.setObjectName(u"page_1_layout")
+        self.page_1_layout.setObjectName("page_1_layout")
         self.page_1_layout.setContentsMargins(5, 5, 5, 5)
         self.welcome_base = QFrame(self.page_1)
-        self.welcome_base.setObjectName(u"welcome_base")
+        self.welcome_base.setObjectName("welcome_base")
         self.welcome_base.setMinimumSize(QSize(300, 150))
         self.welcome_base.setMaximumSize(QSize(300, 150))
         self.welcome_base.setFrameShape(QFrame.NoFrame)
         self.welcome_base.setFrameShadow(QFrame.Raised)
         self.center_page_layout = QVBoxLayout(self.welcome_base)
         self.center_page_layout.setSpacing(10)
-        self.center_page_layout.setObjectName(u"center_page_layout")
+        self.center_page_layout.setObjectName("center_page_layout")
         self.center_page_layout.setContentsMargins(0, 0, 0, 0)
         self.logo = QFrame(self.welcome_base)
-        self.logo.setObjectName(u"logo")
+        self.logo.setObjectName("logo")
         self.logo.setMinimumSize(QSize(300, 120))
         self.logo.setMaximumSize(QSize(300, 120))
         self.logo.setFrameShape(QFrame.NoFrame)
         self.logo.setFrameShadow(QFrame.Raised)
         self.logo_layout = QVBoxLayout(self.logo)
         self.logo_layout.setSpacing(0)
-        self.logo_layout.setObjectName(u"logo_layout")
+        self.logo_layout.setObjectName("logo_layout")
         self.logo_layout.setContentsMargins(0, 0, 0, 0)
 
         self.center_page_layout.addWidget(self.logo)
 
         self.label = QLabel(self.welcome_base)
-        self.label.setObjectName(u"label")
+        self.label.setObjectName("label")
         self.label.setAlignment(Qt.AlignCenter)
 
         self.center_page_layout.addWidget(self.label)
@@ -71,28 +80,28 @@ class Ui_MainPages(object):
         # PAGE 2
         # /////////////////////////////////////////////////////////
         self.page_2 = QWidget()
-        self.page_2.setObjectName(u"page_2")
+        self.page_2.setObjectName("page_2")
         self.page_2_layout = QVBoxLayout(self.page_2)
         self.page_2_layout.setSpacing(5)
-        self.page_2_layout.setObjectName(u"page_2_layout")
+        self.page_2_layout.setObjectName("page_2_layout")
         self.page_2_layout.setContentsMargins(5, 5, 5, 5)
         self.scroll_area = QScrollArea(self.page_2)
-        self.scroll_area.setObjectName(u"scroll_area")
-        self.scroll_area.setStyleSheet(u"background: transparent;")
+        self.scroll_area.setObjectName("scroll_area")
+        self.scroll_area.setStyleSheet("background: transparent;")
         self.scroll_area.setFrameShape(QFrame.NoFrame)
         self.scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll_area.setWidgetResizable(True)
         self.contents = QWidget()
-        self.contents.setObjectName(u"contents")
+        self.contents.setObjectName("contents")
         self.contents.setGeometry(QRect(0, 0, 840, 580))
-        self.contents.setStyleSheet(u"background: transparent;")
+        self.contents.setStyleSheet("background: transparent;")
         self.verticalLayout = QVBoxLayout(self.contents)
         self.verticalLayout.setSpacing(15)
-        self.verticalLayout.setObjectName(u"vertical_layout_menu_1")
+        self.verticalLayout.setObjectName("vertical_layout_menu_1")
         self.verticalLayout.setContentsMargins(5, 5, 5, 5)
         self.row_1_layout = QHBoxLayout()
-        self.row_1_layout.setObjectName(u"row_1_layout")
+        self.row_1_layout.setObjectName("row_1_layout")
 
         self.verticalLayout.addLayout(self.row_1_layout)
 
@@ -105,45 +114,48 @@ class Ui_MainPages(object):
         # PAGE 3
         # /////////////////////////////////////////////////////////
         self.page_3 = QWidget()
-        self.page_3.setObjectName(u"page_3")
+        self.page_3.setObjectName("page_3")
         self.page_3_layout = QVBoxLayout(self.page_3)
         self.page_3_layout.setSpacing(5)
-        self.page_3_layout.setObjectName(u"page_3_layout")
+        self.page_3_layout.setObjectName("page_3_layout")
         self.page_3_layout.setContentsMargins(5, 5, 5, 5)
         self.scroll_area_tactic = QScrollArea(self.page_3)
-        self.scroll_area_tactic.setObjectName(u"scroll_area_tactic")
-        self.scroll_area_tactic.setStyleSheet(u"background: transparent;")
+        self.scroll_area_tactic.setObjectName("scroll_area_tactic")
+        self.scroll_area_tactic.setStyleSheet("background: transparent;")
         self.scroll_area_tactic.setFrameShape(QFrame.NoFrame)
-        self.scroll_area_tactic.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.scroll_area_tactic.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll_area_tactic.setVerticalScrollBarPolicy(
+            Qt.ScrollBarAlwaysOff)
+        self.scroll_area_tactic.setHorizontalScrollBarPolicy(
+            Qt.ScrollBarAlwaysOff)
         self.scroll_area_tactic.setWidgetResizable(True)
         self.scroll_area_tactic.setAlignment(Qt.AlignCenter)
         self.content_tactic = QWidget()
-        self.content_tactic.setObjectName(u"content_tactic")
+        self.content_tactic.setObjectName("content_tactic")
         self.content_tactic.setGeometry(QRect(0, 0, 1031, 838))
-        self.content_tactic.setStyleSheet(u"background: transparent;")
+        self.content_tactic.setStyleSheet("background: transparent;")
         self.horizontalLayout = QHBoxLayout(self.content_tactic)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setObjectName("horizontalLayout")
         self.vertical_pitch_frame = QFrame(self.content_tactic)
-        self.vertical_pitch_frame.setObjectName(u"vertical_pitch_frame")
+        self.vertical_pitch_frame.setObjectName("vertical_pitch_frame")
         self.vertical_pitch_frame.setMinimumSize(QSize(550, 790))
         self.vertical_pitch_frame.setFrameShape(QFrame.NoFrame)
         self.vertical_pitch_frame.setFrameShadow(QFrame.Raised)
 
         self.horizontalLayout.addWidget(self.vertical_pitch_frame)
 
-        self.horizontalSpacer = QSpacerItem(198, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(198, 20, QSizePolicy.Expanding,
+                                            QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
         self.list_table_frame = QFrame(self.content_tactic)
-        self.list_table_frame.setObjectName(u"list_table_frame")
+        self.list_table_frame.setObjectName("list_table_frame")
         self.list_table_frame.setMinimumSize(QSize(250, 600))
         self.list_table_frame.setFrameShape(QFrame.NoFrame)
         self.list_table_frame.setFrameShadow(QFrame.Raised)
         self.list_table_layout = QHBoxLayout(self.list_table_frame)
         self.list_table_layout.setSpacing(0)
-        self.list_table_layout.setObjectName(u"list_table_layout")
+        self.list_table_layout.setObjectName("list_table_layout")
         self.list_table_layout.setContentsMargins(0, 0, 0, 0)
 
         self.horizontalLayout.addWidget(self.list_table_frame)
@@ -157,24 +169,24 @@ class Ui_MainPages(object):
         # PAGE 5
         # /////////////////////////////////////////////////////////
         self.page_5 = QWidget()
-        self.page_5.setObjectName(u"page_5")
+        self.page_5.setObjectName("page_5")
         self.page_5.setStyleSheet(""
                                   "background: #343b48;"
                                   "border-radius: 8px;")
 
         self.column_1_layout_5 = QHBoxLayout(self.page_5)
-        self.column_1_layout_5.setObjectName(u"column_1_layout_5")
+        self.column_1_layout_5.setObjectName("column_1_layout_5")
 
         self.pages.addWidget(self.page_5)
 
         # PAGE 7
         # /////////////////////////////////////////////////////////
         self.page_7 = QWidget()
-        self.page_7.setObjectName(u"page_7")
+        self.page_7.setObjectName("page_7")
 
         # Main Page 7 Layout
         self.page_7_main_layout = QHBoxLayout(self.page_7)
-        self.page_7_main_layout.setObjectName(u"page_7_main_layout")
+        self.page_7_main_layout.setObjectName("page_7_main_layout")
         self.page_7_main_layout.setContentsMargins(3, 3, 3, 3)
         self.page_7_main_layout.setSpacing(0)
 
@@ -185,29 +197,35 @@ class Ui_MainPages(object):
         # Left Top Frame (Page 7)
         self.compare_top_left_frame = QFrame()
         self.compare_top_left_frame.setStyleSheet(""
-                                  "background: #343b48;"
-                                  "border-radius: 8px;")
+                                                  "background: #343b48;"
+                                                  "border-radius: 8px;")
         self.compare_top_left_frame.setMaximumHeight(150)
-        self.compare_top_left_frame_layout = QVBoxLayout(self.compare_top_left_frame)
+        self.compare_top_left_frame_layout = QVBoxLayout(
+            self.compare_top_left_frame)
 
         # Sub1 Left Top Frame (Page 7)
         self.compare_sub1_top_left_frame = QFrame()
-        self.compare_sub1_top_left_frame_layout = QHBoxLayout(self.compare_sub1_top_left_frame)
+        self.compare_sub1_top_left_frame_layout = QHBoxLayout(
+            self.compare_sub1_top_left_frame)
 
         # Sub2 Left Top Frame (Page 7)
         self.compare_sub2_top_left_frame = QFrame()
-        self.compare_sub2_top_left_frame_layout = QHBoxLayout(self.compare_sub2_top_left_frame)
+        self.compare_sub2_top_left_frame_layout = QHBoxLayout(
+            self.compare_sub2_top_left_frame)
 
-        self.compare_top_left_frame_layout.addWidget(self.compare_sub1_top_left_frame)
-        self.compare_top_left_frame_layout.addWidget(self.compare_sub2_top_left_frame)
+        self.compare_top_left_frame_layout.addWidget(
+            self.compare_sub1_top_left_frame)
+        self.compare_top_left_frame_layout.addWidget(
+            self.compare_sub2_top_left_frame)
 
         # Left Bottom Frame (Page 7)
         self.compare_bottom_left_frame = QFrame()
-        self.compare_bottom_left_frame_layout = QHBoxLayout(self.compare_bottom_left_frame)
-
+        self.compare_bottom_left_frame_layout = QHBoxLayout(
+            self.compare_bottom_left_frame)
 
         self.compare_left_frame_layout.addWidget(self.compare_top_left_frame)
-        self.compare_left_frame_layout.addWidget(self.compare_bottom_left_frame)
+        self.compare_left_frame_layout.addWidget(
+            self.compare_bottom_left_frame)
 
         # Right Frame (Page 7)
         self.compare_right_frame = QFrame()
@@ -283,28 +301,28 @@ class Ui_MainPages(object):
         # PAGE 8
         # /////////////////////////////////////////////////////////
         self.page_8 = QWidget()
-        self.page_8.setObjectName(u"page_8")
+        self.page_8.setObjectName("page_8")
         self.page_8_layout = QVBoxLayout(self.page_8)
         self.page_8_layout.setSpacing(5)
-        self.page_8_layout.setObjectName(u"page_8_layout")
+        self.page_8_layout.setObjectName("page_8_layout")
         self.page_8_layout.setContentsMargins(5, 5, 5, 5)
         self.scroll_area_8 = QScrollArea(self.page_8)
-        self.scroll_area_8.setObjectName(u"scroll_area_8")
-        self.scroll_area_8.setStyleSheet(u"background: transparent;")
+        self.scroll_area_8.setObjectName("scroll_area_8")
+        self.scroll_area_8.setStyleSheet("background: transparent;")
         self.scroll_area_8.setFrameShape(QFrame.NoFrame)
         self.scroll_area_8.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll_area_8.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll_area_8.setWidgetResizable(True)
         self.contents_8 = QWidget()
-        self.contents_8.setObjectName(u"contents_8")
+        self.contents_8.setObjectName("contents_8")
         self.contents_8.setGeometry(QRect(0, 0, 840, 580))
-        self.contents_8.setStyleSheet(u"background: transparent;")
+        self.contents_8.setStyleSheet("background: transparent;")
         self.verticalLayout_8 = QVBoxLayout(self.contents_8)
         self.verticalLayout_8.setSpacing(15)
-        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.verticalLayout_8.setContentsMargins(5, 5, 5, 5)
         self.row_1_layout_8 = QHBoxLayout()
-        self.row_1_layout_8.setObjectName(u"row_1_layout_8")
+        self.row_1_layout_8.setObjectName("row_1_layout_8")
 
         self.verticalLayout_8.addLayout(self.row_1_layout_8)
 
@@ -317,25 +335,26 @@ class Ui_MainPages(object):
         # PAGE 9
         # /////////////////////////////////////////////////////////
         self.page_9 = QWidget()
-        self.page_9.setObjectName(u"page_9")
+        self.page_9.setObjectName("page_9")
 
         self.pages.addWidget(self.page_9)
 
         # PAGE 10
         # /////////////////////////////////////////////////////////
         self.page_10 = QWidget()
-        self.page_10.setObjectName(u"page_10")
+        self.page_10.setObjectName("page_10")
         self.page_10_layout = QVBoxLayout(self.page_10)
 
         self.clustering_top_frame = QFrame()
-        self.clustering_top_frame.setObjectName(u"clustering_top_frame")
+        self.clustering_top_frame.setObjectName("clustering_top_frame")
         self.clustering_top_frame.setMaximumSize(QSize(16777215, 240))
         self.clustering_top_layout = QVBoxLayout(self.clustering_top_frame)
         self.clustering_top_layout.setContentsMargins(0, 0, 0, 0)
 
         self.clustering_subtop_frame = QFrame()
-        self.clustering_subtop_frame.setObjectName(u"clustering_subtop_frame")
-        self.clustering_subtop_layout = QHBoxLayout(self.clustering_subtop_frame)
+        self.clustering_subtop_frame.setObjectName("clustering_subtop_frame")
+        self.clustering_subtop_layout = QHBoxLayout(
+            self.clustering_subtop_frame)
 
         self.clustering_combo_frame = QFrame()
         self.clustering_combo_frame.setMaximumSize(QSize(16777215, 70))
@@ -353,16 +372,17 @@ class Ui_MainPages(object):
 
         self.clustering_filters_frame = QFrame()
         self.clustering_filters_frame.setMaximumSize(QSize(16777215, 160))
-        self.clustering_filters_layout = QHBoxLayout(self.clustering_filters_frame)
+        self.clustering_filters_layout = QHBoxLayout(
+            self.clustering_filters_frame)
 
         self.clustering_top_layout.addWidget(self.clustering_filters_frame)
 
         self.page_10_layout.addWidget(self.clustering_top_frame)
 
         self.clustering_bottom_frame = QFrame()
-        self.clustering_bottom_frame.setObjectName(u"clustering_bottom_frame")
-        self.clustering_bottom_layout = QVBoxLayout(self.clustering_bottom_frame)
-
+        self.clustering_bottom_frame.setObjectName("clustering_bottom_frame")
+        self.clustering_bottom_layout = QVBoxLayout(
+            self.clustering_bottom_frame)
 
         self.page_10_layout.addWidget(self.clustering_bottom_frame)
 
@@ -377,10 +397,14 @@ class Ui_MainPages(object):
         self.pages.setCurrentIndex(2)
 
         QMetaObject.connectSlotsByName(MainPages)
+
     # setupUi
 
     def retranslateUi(self, MainPages):
-        MainPages.setWindowTitle(QCoreApplication.translate("MainPages", u"Form", None))
-        self.label.setText(QCoreApplication.translate("MainPages", u"Welcome To FM Excel Helper", None))
-    # retranslateUi
+        MainPages.setWindowTitle(
+            QCoreApplication.translate("MainPages", "Form", None))
+        self.label.setText(
+            QCoreApplication.translate("MainPages",
+                                       "Welcome To FM Excel Helper", None))
 
+    # retranslateUi
