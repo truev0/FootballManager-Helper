@@ -4,7 +4,7 @@ from pyside_core import *
 
 # STYLE
 # ///////////////////////////////////////////////////////////////
-style = '''
+style = """
 QPushButton {{
 	border: none;
     padding-left: 10px;
@@ -19,22 +19,23 @@ QPushButton:hover {{
 QPushButton:pressed {{	
 	background-color: {_bg_color_pressed};
 }}
-'''
+"""
 
 
 # PY PUSH BUTTON
 # ///////////////////////////////////////////////////////////////
 class PyPushButton(QPushButton):
+
     def __init__(
-            self,
-            text,
-            radius,
-            color,
-            bg_color,
-            bg_color_hover,
-            bg_color_pressed,
-            parent=None,
-            name=None
+        self,
+        text,
+        radius,
+        color,
+        bg_color,
+        bg_color_hover,
+        bg_color_pressed,
+        parent=None,
+        name=None,
     ):
         super().__init__()
 

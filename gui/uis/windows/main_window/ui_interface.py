@@ -1,10 +1,10 @@
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////////////////////////
-from gui.core.functions import Functions
+# IMPORT KHAMISIKIBET WIDGET
+# ///////////////////////////////////////////
+from Custom_Widgets.Widgets import QCustomSlideMenu
 
-# IMPORT PYSIDE CORE
-# ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from gui.core.functions import Functions
 
 # IMPORT SETTINGS
 # ///////////////////////////////////////////////////////////////
@@ -14,32 +14,31 @@ from gui.core.json_settings import Settings
 # ///////////////////////////////////////////////////////////////
 from gui.core.json_themes import Themes
 
-# IMPORT CUSTOM WIDGETS
+# RIGHT COLUMN
 # ///////////////////////////////////////////////////////////////
-from gui.widgets import *
-from gui.widgets.py_title_bar.py_title_button import PyTitleButton
-
-# IMPORT KHAMISIKIBET WIDGET
-# ///////////////////////////////////////////
-from Custom_Widgets.Widgets import QCustomSlideMenu
+from gui.uis.columns.ui_right_column import Ui_RightColumn
 
 # IMPORT MAIN WINDOW PAGES / AND SIDE BOXES FOR APP
 # ///////////////////////////////////////////////////////////////
 from gui.uis.pages.ui_main_pages import Ui_MainPages
 
-# RIGHT COLUMN
+# IMPORT CUSTOM WIDGETS
 # ///////////////////////////////////////////////////////////////
-from gui.uis.columns.ui_right_column import Ui_RightColumn
+from gui.widgets import *
+from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 
+# IMPORT PYSIDE CORE
+# ///////////////////////////////////////////////////////////////
+from pyside_core import *
 
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
 class Ui_MainWindow(object):
+
     def setupUi(self, parent):
         if not parent.objectName():
             parent.setObjectName("MainWindow")
-
 
         # LOAD SETTINGS
         # ///////////////////////////////////////////////////////////////
@@ -53,17 +52,19 @@ class Ui_MainWindow(object):
 
         # SET INITIAL PARAMETERS
         # ///////////////////////////////////////////////////////////////
-        parent.resize(self.settings["startup_size"][0], self.settings["startup_size"][1])
-        parent.setMinimumSize(self.settings["minimum_size"][0], self.settings["minimum_size"][1])
+        parent.resize(self.settings["startup_size"][0],
+                      self.settings["startup_size"][1])
+        parent.setMinimumSize(self.settings["minimum_size"][0],
+                              self.settings["minimum_size"][1])
 
         # SET CENTRAL WIDGET
         # Add central widget to app
         # ///////////////////////////////////////////////////////////////
         self.central_widget = QWidget()
-        self.central_widget.setStyleSheet(f'''
+        self.central_widget.setStyleSheet(f"""
             font: {self.settings["font"]["text_size"]}pt "{self.settings["font"]["family"]}";
             color: {self.themes["app_color"]["text_foreground"]};
-        ''')
+        """)
         self.central_widget_layout = QVBoxLayout(self.central_widget)
 
         if self.settings["custom_title_bar"]:
@@ -78,7 +79,7 @@ class Ui_MainWindow(object):
             parent,
             bg_color=self.themes["app_color"]["bg_one"],
             border_color=self.themes["app_color"]["bg_two"],
-            text_color=self.themes["app_color"]["text_foreground"]
+            text_color=self.themes["app_color"]["text_foreground"],
         )
 
         # If disable custom title bar
@@ -94,18 +95,18 @@ class Ui_MainWindow(object):
         left_menu_margin = self.settings["left_menu_content_margins"]
         left_menu_minimum = self.settings["left_menu_size"]["minimum"]
         self.left_menu_frame = QFrame()
-        self.left_menu_frame.setMaximumSize(left_menu_minimum + (left_menu_margin * 2), 17280)
-        self.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
+        self.left_menu_frame.setMaximumSize(
+            left_menu_minimum + (left_menu_margin * 2), 17280)
+        self.left_menu_frame.setMinimumSize(
+            left_menu_minimum + (left_menu_margin * 2), 0)
 
         # LEFT MENU LAYOUT
         # ///////////////////////////////////////////////////////////////
         self.left_menu_layout = QHBoxLayout(self.left_menu_frame)
-        self.left_menu_layout.setContentsMargins(
-            left_menu_margin,
-            left_menu_margin,
-            left_menu_margin,
-            left_menu_margin
-        )
+        self.left_menu_layout.setContentsMargins(left_menu_margin,
+                                                 left_menu_margin,
+                                                 left_menu_margin,
+                                                 left_menu_margin)
 
         # ADD LEFT MENU
         # Add custom left menu here
@@ -123,7 +124,7 @@ class Ui_MainWindow(object):
             icon_color_active=self.themes["app_color"]["icon_active"],
             context_color=self.themes["app_color"]["context_color"],
             text_foreground=self.themes["app_color"]["text_foreground"],
-            text_active=self.themes["app_color"]["text_active"]
+            text_active=self.themes["app_color"]["text_active"],
         )
 
         self.left_menu_layout.addWidget(self.left_menu)
@@ -132,9 +133,12 @@ class Ui_MainWindow(object):
         # Add here the left column with Stacked Widgets
         # ///////////////////////////////////////////////////////////////
         self.left_column_frame = QFrame()
-        self.left_column_frame.setMaximumWidth(self.settings["left_column_size"]["minimum"])
-        self.left_column_frame.setMinimumWidth(self.settings["left_column_size"]["minimum"])
-        self.left_column_frame.setStyleSheet(f"background: {self.themes['app_color']['bg_two']}")
+        self.left_column_frame.setMaximumWidth(
+            self.settings["left_column_size"]["minimum"])
+        self.left_column_frame.setMinimumWidth(
+            self.settings["left_column_size"]["minimum"])
+        self.left_column_frame.setStyleSheet(
+            f"background: {self.themes['app_color']['bg_two']}")
 
         # ADD LAYOUT TO LEFT COLUMN
         # ///////////////////////////////////////////////////////////////
@@ -159,7 +163,7 @@ class Ui_MainWindow(object):
             icon_color_hover=self.themes["app_color"]["icon_hover"],
             context_color=self.themes["app_color"]["context_color"],
             icon_color_pressed=self.themes["app_color"]["icon_pressed"],
-            icon_close_path=Functions.set_svg_icon("icon_close.svg")
+            icon_close_path=Functions.set_svg_icon("icon_close.svg"),
         )
 
         self.left_column_layout.addWidget(self.left_column)
@@ -205,7 +209,7 @@ class Ui_MainWindow(object):
             radius=8,
             font_family=self.settings["font"]["family"],
             title_size=self.settings["font"]["title_size"],
-            is_custom_title_bar=self.settings["custom_title_bar"]
+            is_custom_title_bar=self.settings["custom_title_bar"],
         )
 
         self.title_bar_layout.addWidget(self.title_bar)
@@ -223,8 +227,10 @@ class Ui_MainWindow(object):
         # RIGHT BAR
         # ///////////////////////////////////////////////////////////////
         self.right_column_frame = QFrame()
-        self.right_column_frame.setMinimumWidth(self.settings["right_column_size"]["minimum"])
-        self.right_column_frame.setMaximumWidth(self.settings["right_column_size"]["minimum"])
+        self.right_column_frame.setMinimumWidth(
+            self.settings["right_column_size"]["minimum"])
+        self.right_column_frame.setMaximumWidth(
+            self.settings["right_column_size"]["minimum"])
 
         # IMPORT RIGHT COLUMN
         # ///////////////////////////////////////////////////////////////
@@ -235,16 +241,18 @@ class Ui_MainWindow(object):
         # RIGHT BG
         # ///////////////////////////////////////////////////////////////
         self.content_area_right_bg_frame = QFrame()
-        self.content_area_right_bg_frame.setObjectName(u"content_area_right_bg_frame")
-        self.content_area_right_bg_frame.setStyleSheet(f'''
+        self.content_area_right_bg_frame.setObjectName(
+            "content_area_right_bg_frame")
+        self.content_area_right_bg_frame.setStyleSheet(f"""
         #content_area_right_bg_frame {{
             border-radius: 8px;
             background-color: {self.themes["app_color"]["bg_two"]};
         }}    
-        ''')
+        """)
 
         # ADD BG
-        self.content_area_right_layout.addWidget(self.content_area_right_bg_frame)
+        self.content_area_right_layout.addWidget(
+            self.content_area_right_bg_frame)
 
         # ADD RIGHT PAGES TO RIGHT COLUMN
         self.right_column = Ui_RightColumn()
@@ -266,8 +274,7 @@ class Ui_MainWindow(object):
         # ADD PITCH WIDGET
         # ///////////////////////////////////////////////////////////////
         self.pitch_widget = PyVerticalPitch(
-            parent=self.load_pages.vertical_pitch_frame
-        )
+            parent=self.load_pages.vertical_pitch_frame)
 
         # CREDITS / BOTTOM APP FRAME
         # ///////////////////////////////////////////////////////////////
@@ -288,7 +295,8 @@ class Ui_MainWindow(object):
             version=self.settings["version"],
             font_family=self.settings["font"]["family"],
             text_size=self.settings["font"]["text_size"],
-            text_description_color=self.themes["app_color"]["text_description"]
+            text_description_color=self.themes["app_color"]
+            ["text_description"],
         )
 
         # ADD TO CREDITS LAYOUT
@@ -299,55 +307,67 @@ class Ui_MainWindow(object):
         # CREATE POPUP NOTIFICATION CONTAINER
         # ///////////////////////////////////////////////////////////////
         # TODO FIX STYLE
-        self.popup_notification_container = QCustomSlideMenu(self.right_app_frame)
-        self.popup_notification_container.setObjectName(u"popup_notification_container")
+        self.popup_notification_container = QCustomSlideMenu(
+            self.right_app_frame)
+        self.popup_notification_container.setObjectName(
+            "popup_notification_container")
 
         # CREATE LAYOUT POPUP NOTIFICATION CONTAINER
         # ///////////////////////////////////////////////////////////////
-        self.popup_notification_container_layout = QVBoxLayout(self.popup_notification_container)
-        self.popup_notification_container_layout.setObjectName(u"popup_notification_container_layout")
+        self.popup_notification_container_layout = QVBoxLayout(
+            self.popup_notification_container)
+        self.popup_notification_container_layout.setObjectName(
+            "popup_notification_container_layout")
         self.popup_notification_container_layout.setContentsMargins(0, 0, 0, 0)
 
         # CREATE POPUP NOTIFICATION SUBCONTAINER
         # ///////////////////////////////////////////////////////////////
         self.popup_notification_subcontainer = QWidget()
-        self.popup_notification_subcontainer.setObjectName(u"popup_notification_subcontainer")
+        self.popup_notification_subcontainer.setObjectName(
+            "popup_notification_subcontainer")
 
         # CREATE LAYOUT POPUP NOTIFICATION SUBCONTAINER
         # ///////////////////////////////////////////////////////////////
-        self.popup_notification_subcontainer_layout = QVBoxLayout(self.popup_notification_subcontainer)
-        self.popup_notification_subcontainer_layout.setObjectName(u"popup_notification_subcontainer_layout")
+        self.popup_notification_subcontainer_layout = QVBoxLayout(
+            self.popup_notification_subcontainer)
+        self.popup_notification_subcontainer_layout.setObjectName(
+            "popup_notification_subcontainer_layout")
 
         # CREATE LIST NOTIFICATION FRAME
         # ///////////////////////////////////////////////////////////////
         self.title_notification_frame = QFrame()
-        self.title_notification_frame.setObjectName(u"list_notification_frame")
+        self.title_notification_frame.setObjectName("list_notification_frame")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.title_notification_frame.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.title_notification_frame.sizePolicy().hasHeightForWidth())
         self.title_notification_frame.setSizePolicy(sizePolicy)
         self.title_notification_frame.setFrameShape(QFrame.StyledPanel)
         self.title_notification_frame.setFrameShadow(QFrame.Raised)
 
         # CREATE LAYOUT LIST NOTIFICATION FRAME
         # ///////////////////////////////////////////////////////////////
-        self.title_notification_frame_layout = QHBoxLayout(self.title_notification_frame)
-        self.title_notification_frame_layout.setObjectName(u"list_notification_frame_layout")
+        self.title_notification_frame_layout = QHBoxLayout(
+            self.title_notification_frame)
+        self.title_notification_frame_layout.setObjectName(
+            "list_notification_frame_layout")
         self.title_notification_frame_layout.setContentsMargins(3, 3, 3, 3)
 
         # Title notification
         self.title_notification = QLabel()
-        self.title_notification.setObjectName(u"title_notification")
+        self.title_notification.setObjectName("title_notification")
         sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.title_notification.sizePolicy().hasHeightForWidth())
+        sizePolicy1.setHeightForWidth(
+            self.title_notification.sizePolicy().hasHeightForWidth())
         self.title_notification.setSizePolicy(sizePolicy1)
         font = QFont()
         font.setBold(True)
         self.title_notification.setFont(font)
-        self.title_notification.setAlignment(Qt.AlignLeading | Qt.AlignLeft | Qt.AlignVCenter)
+        self.title_notification.setAlignment(Qt.AlignLeading | Qt.AlignLeft
+                                             | Qt.AlignVCenter)
         self.title_notification.setText("PLAYER LIST")
 
         # Button close notification
@@ -359,24 +379,28 @@ class Ui_MainWindow(object):
             radius=6,
             tooltip_text="Close popup",
             bg_color="transparent",
-            icon_path=Functions.set_svg_icon("icon_close.svg")
+            icon_path=Functions.set_svg_icon("icon_close.svg"),
         )
 
-        self.btn_close_notification.setObjectName(u"btn_close_notification")
+        self.btn_close_notification.setObjectName("btn_close_notification")
 
         self.title_notification_frame_layout.addWidget(self.title_notification)
-        self.title_notification_frame_layout.addWidget(self.btn_close_notification, 0, Qt.AlignRight)
+        self.title_notification_frame_layout.addWidget(
+            self.btn_close_notification, 0, Qt.AlignRight)
 
         # ADD LIST NOTIFICATION FRAME
-        self.popup_notification_subcontainer_layout.addWidget(self.title_notification_frame)
+        self.popup_notification_subcontainer_layout.addWidget(
+            self.title_notification_frame)
 
         # List label
         self.list_label = QLabel()
-        self.list_label.setObjectName(u"list_label")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.MinimumExpanding)
+        self.list_label.setObjectName("list_label")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred,
+                                  QSizePolicy.MinimumExpanding)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.list_label.sizePolicy().hasHeightForWidth())
+        sizePolicy2.setHeightForWidth(
+            self.list_label.sizePolicy().hasHeightForWidth())
         self.list_label.setSizePolicy(sizePolicy2)
         self.list_label.setFont(font)
         self.list_label.setAlignment(Qt.AlignCenter)
@@ -385,7 +409,8 @@ class Ui_MainWindow(object):
         self.popup_notification_subcontainer_layout.addWidget(self.list_label)
 
         # ADD SUBCONTAINER TO CONTAINER
-        self.popup_notification_container_layout.addWidget(self.popup_notification_subcontainer)
+        self.popup_notification_container_layout.addWidget(
+            self.popup_notification_subcontainer)
 
         ######## END NOTIFICATION SECTION  ########
 
@@ -393,39 +418,41 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
         self.right_app_layout.addWidget(self.title_bar_frame)
         self.right_app_layout.addWidget(self.content_area_frame)
-        self.right_app_layout.addWidget(self.popup_notification_container)  # TEST
+        self.right_app_layout.addWidget(
+            self.popup_notification_container)  # TEST
         self.right_app_layout.addWidget(self.credits_frame)
 
-        self.popup_notification_container.setStyleSheet(u"    #popup_notification_subcontainer{\n"
-                                                        "	border-color: #343b48;\n"
-                                                        "	border-radius:10px;\n"
-                                                        "	border-width: 1px;\n"
-                                                        "	margin: 0px;\n"
-                                                        "	background-color: #343b48;\n"
-                                                        "\n"
-                                                        "}\n"
-                                                        "\n"
-                                                        "#label_list {\n"
-                                                        "   border: 1px;\n"
-                                                        "   border-color: #1b1e23;\n"
-                                                        "   border-style: solid;\n"
-                                                        "	border-bottom-left-radius:10px;\n"
-                                                        "	border-bottom-right-radius:10px;\n"
-                                                        "	background-color: #3c4454;\n"
-                                                        "color: #dce1ec;\n"
-                                                        "\n"
-                                                        "}\n"
-                                                        "\n"
-                                                        "#list_notification_frame {\n"
-                                                        "	background-color:#1b1e23;\n"
-                                                        "border-top-right-radius: 10px;\n"
-                                                        "border-top-left-radius: 10px;\n"
-                                                        "}\n"
-                                                        "\n"
-                                                        "#title_notification {\n"
-                                                        "padding-left: 7px;\n"
-                                                        "color: #dce1ec;\n"
-                                                        "}")
+        self.popup_notification_container.setStyleSheet(
+            "    #popup_notification_subcontainer{\n"
+            "	border-color: #343b48;\n"
+            "	border-radius:10px;\n"
+            "	border-width: 1px;\n"
+            "	margin: 0px;\n"
+            "	background-color: #343b48;\n"
+            "\n"
+            "}\n"
+            "\n"
+            "#label_list {\n"
+            "   border: 1px;\n"
+            "   border-color: #1b1e23;\n"
+            "   border-style: solid;\n"
+            "	border-bottom-left-radius:10px;\n"
+            "	border-bottom-right-radius:10px;\n"
+            "	background-color: #3c4454;\n"
+            "color: #dce1ec;\n"
+            "\n"
+            "}\n"
+            "\n"
+            "#list_notification_frame {\n"
+            "	background-color:#1b1e23;\n"
+            "border-top-right-radius: 10px;\n"
+            "border-top-left-radius: 10px;\n"
+            "}\n"
+            "\n"
+            "#title_notification {\n"
+            "padding-left: 7px;\n"
+            "color: #dce1ec;\n"
+            "}")
 
         # ADD WIDGETS TO "PyWindow"
         # ///////////////////////////////////////////////////////////////
@@ -446,7 +473,7 @@ class Ui_MainWindow(object):
             "btn_text": "Home",
             "btn_tooltip": "Home page",
             "show_top": True,
-            "is_active": True
+            "is_active": True,
         },
         {
             "btn_icon": "icon_squad.svg",
@@ -454,7 +481,7 @@ class Ui_MainWindow(object):
             "btn_text": "Squad",
             "btn_tooltip": "Show your squad",
             "show_top": True,
-            "is_active": False
+            "is_active": False,
         },
         {
             "btn_icon": "icon_tactic.svg",
@@ -462,7 +489,7 @@ class Ui_MainWindow(object):
             "btn_text": "Tactic",
             "btn_tooltip": "Show your tactic",
             "show_top": True,
-            "is_active": False
+            "is_active": False,
         },
         {
             "btn_icon": "icon_stats.svg",
@@ -470,7 +497,7 @@ class Ui_MainWindow(object):
             "btn_text": "Statistics",
             "btn_tooltip": "Show statistics",
             "show_top": True,
-            "is_active": False
+            "is_active": False,
         },
         {
             "btn_icon": "icon_compare.svg",
@@ -478,7 +505,7 @@ class Ui_MainWindow(object):
             "btn_text": "Compare",
             "btn_tooltip": "Comparation between players",
             "show_top": True,
-            "is_active": False
+            "is_active": False,
         },
         {
             "btn_icon": "icon_scouting.svg",
@@ -486,7 +513,7 @@ class Ui_MainWindow(object):
             "btn_text": "Scouting",
             "btn_tooltip": "Show scouted players",
             "show_top": True,
-            "is_active": False
+            "is_active": False,
         },
         {
             "btn_icon": "icon_metrics.svg",
@@ -494,7 +521,7 @@ class Ui_MainWindow(object):
             "btn_text": "PCA & KMeans Clustering",
             "btn_tooltip": "Clustering players",
             "show_top": True,
-            "is_active": False
+            "is_active": False,
         },
         {
             "btn_icon": "icon_settings.svg",
@@ -502,7 +529,7 @@ class Ui_MainWindow(object):
             "btn_text": "Settings",
             "btn_tooltip": "Open settings",
             "show_top": False,
-            "is_active": False
+            "is_active": False,
         },
         {
             "btn_icon": "icon_info.svg",
@@ -510,7 +537,7 @@ class Ui_MainWindow(object):
             "btn_text": "Languages",
             "btn_tooltip": "Open languages",
             "show_top": False,
-            "is_active": False
+            "is_active": False,
         },
         {
             "btn_icon": "icon_help.svg",
@@ -518,8 +545,8 @@ class Ui_MainWindow(object):
             "btn_text": "Help",
             "btn_tooltip": "Open help",
             "show_top": False,
-            "is_active": False
-        }
+            "is_active": False,
+        },
     ]
 
     # ADD TITLE BAR BUTTONS
@@ -529,14 +556,14 @@ class Ui_MainWindow(object):
             "btn_icon": "icon_refresh.svg",
             "btn_id": "btn_refresh",
             "btn_tooltip": "Refresh",
-            "is_active": False
+            "is_active": False,
         },
         {
             "btn_icon": "icon_settings.svg",
             "btn_id": "btn_top_settings",
             "btn_tooltip": "Top settings",
-            "is_active": False
-        }
+            "is_active": False,
+        },
     ]
 
     # ADD PLAYERS BUTTONS
@@ -664,7 +691,7 @@ class Ui_MainWindow(object):
         self.set_left_column_menu(
             menu=self.left_column.menus.menu_1,
             title="Settings Left Column",
-            icon_path=Functions.set_svg_icon("icon_settings.svg")
+            icon_path=Functions.set_svg_icon("icon_settings.svg"),
         )
         self.set_right_column_menu(self.right_column.menu_1)
 
@@ -689,27 +716,26 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
         # Load Squad Btn
         self.load_squad_btn = PyPushButton(
-            name='squad',
+            name="squad",
             text="Load squad file",
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
             bg_color_pressed=self.themes["app_color"]["dark_four"],
-
         )
         self.load_squad_btn.setMaximumHeight(40)
         self.left_column.menus.btn_1_layout.addWidget(self.load_squad_btn)
 
         # Load Scouting Btn
         self.load_scouting_btn = PyPushButton(
-            name='scouting',
+            name="scouting",
             text="Load scouting file",
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
         )
         self.load_scouting_btn.setMaximumHeight(40)
         self.left_column.menus.btn_2_layout.addWidget(self.load_scouting_btn)
@@ -722,7 +748,8 @@ class Ui_MainWindow(object):
         # PAGE 1 - Introduction to App
         self.logo_svg = QSvgWidget(Functions.set_svg_image("logo.svg"))
 
-        self.load_pages.logo_layout.addWidget(self.logo_svg, Qt.AlignCenter, Qt.AlignCenter)
+        self.load_pages.logo_layout.addWidget(self.logo_svg, Qt.AlignCenter,
+                                              Qt.AlignCenter)
 
         # PAGE 2 - Squad view
         # Add table model
@@ -737,7 +764,7 @@ class Ui_MainWindow(object):
             grid_line_color=self.themes["app_color"]["bg_one"],
             scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
-            context_color=self.themes["app_color"]["context_color"]
+            context_color=self.themes["app_color"]["context_color"],
         )
         # ADD WIDGETS TO PAGE 2
         self.load_pages.row_1_layout.addWidget(self.table_squad)
@@ -756,7 +783,7 @@ class Ui_MainWindow(object):
             grid_line_color=self.themes["app_color"]["bg_one"],
             scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
-            context_color=self.themes["app_color"]["context_color"]
+            context_color=self.themes["app_color"]["context_color"],
         )
 
         # ADD WIDGETS TO PAGE 3
@@ -789,28 +816,28 @@ class Ui_MainWindow(object):
         self.first_squad_player_combo = PyComboBox(
             dark_one=self.themes["app_color"]["dark_one"],
             text_foreground=self.themes["app_color"]["text_foreground"],
-            combo_border=self.themes["app_color"]["context_hover"]
+            combo_border=self.themes["app_color"]["context_hover"],
         )
 
         # COMBO BOX TO SELECT THE FIRST PLAYER DEPENDING ON THE SQUAD
         self.first_player_combo = PyComboBox(
             dark_one=self.themes["app_color"]["dark_one"],
             text_foreground=self.themes["app_color"]["text_foreground"],
-            combo_border=self.themes["app_color"]["context_hover"]
+            combo_border=self.themes["app_color"]["context_hover"],
         )
 
         # COMBO BOX TO SELECT SQUAD OF THE SECOND PLAYER TO COMPARE
         self.second_squad_player_combo = PyComboBox(
             dark_one=self.themes["app_color"]["dark_one"],
             text_foreground=self.themes["app_color"]["text_foreground"],
-            combo_border=self.themes["app_color"]["context_hover"]
+            combo_border=self.themes["app_color"]["context_hover"],
         )
 
         # COMBO BOX TO SELECT THE SECOND PLAYER DEPENDING ON THE SQUAD
         self.second_player_combo = PyComboBox(
             dark_one=self.themes["app_color"]["dark_one"],
             text_foreground=self.themes["app_color"]["text_foreground"],
-            combo_border=self.themes["app_color"]["context_hover"]
+            combo_border=self.themes["app_color"]["context_hover"],
         )
 
         # LEFT BOTTOM SIDE
@@ -822,7 +849,7 @@ class Ui_MainWindow(object):
             dark_three=self.themes["app_color"]["dark_three"],
             axis_color=self.themes["app_color"]["icon_active"],
             color_title=self.themes["app_color"]["text_title"],
-            line_color=self.themes["app_color"]["context_pressed"]
+            line_color=self.themes["app_color"]["context_pressed"],
         )
 
         # RIGHT SIDE
@@ -834,7 +861,7 @@ class Ui_MainWindow(object):
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
             bg_color_pressed=self.themes["app_color"]["dark_four"],
-            name='stats'
+            name="stats",
         )
         self.btn_compare_stats.setMaximumHeight(40)
 
@@ -845,7 +872,7 @@ class Ui_MainWindow(object):
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
             bg_color_pressed=self.themes["app_color"]["dark_four"],
-            name="attrs"
+            name="attrs",
         )
         self.btn_compare_attrs.setEnabled(False)
         self.btn_compare_attrs.setMaximumHeight(40)
@@ -864,27 +891,34 @@ class Ui_MainWindow(object):
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
             bg_color_pressed=self.themes["app_color"]["dark_four"],
-            name="send_data"
+            name="send_data",
         )
         self.btn_send.setMaximumHeight(40)
 
         # ADDING WIDGETS TO ITS RESPECTIVE LAYOUT
         # Left Side
-        self.load_pages.compare_sub1_top_left_frame_layout.addWidget(self.first_squad_player_combo)
-        self.load_pages.compare_sub1_top_left_frame_layout.addWidget(self.second_squad_player_combo)
-        self.load_pages.compare_sub2_top_left_frame_layout.addWidget(self.first_player_combo)
-        self.load_pages.compare_sub2_top_left_frame_layout.addWidget(self.second_player_combo)
+        self.load_pages.compare_sub1_top_left_frame_layout.addWidget(
+            self.first_squad_player_combo)
+        self.load_pages.compare_sub1_top_left_frame_layout.addWidget(
+            self.second_squad_player_combo)
+        self.load_pages.compare_sub2_top_left_frame_layout.addWidget(
+            self.first_player_combo)
+        self.load_pages.compare_sub2_top_left_frame_layout.addWidget(
+            self.second_player_combo)
 
         # Left Bottom Side
-        self.load_pages.compare_bottom_left_frame_layout.addWidget(self.spyder_graph_widget)
+        self.load_pages.compare_bottom_left_frame_layout.addWidget(
+            self.spyder_graph_widget)
 
         # Right Side
         self.load_pages.btn_compare_1_layout.addWidget(self.btn_compare_stats)
         self.load_pages.btn_compare_2_layout.addWidget(self.btn_compare_attrs)
 
         # Mid Right Side
-        self.load_pages.menu1_compare_layout.addWidget(self.group_chk_attrs_widget)
-        self.load_pages.menu2_compare_layout.addWidget(self.group_chk_stats_widget)
+        self.load_pages.menu1_compare_layout.addWidget(
+            self.group_chk_attrs_widget)
+        self.load_pages.menu2_compare_layout.addWidget(
+            self.group_chk_stats_widget)
 
         # Bottom Right Side
         self.load_pages.btn_send_layout.addWidget(self.btn_send)
@@ -901,7 +935,7 @@ class Ui_MainWindow(object):
             grid_line_color=self.themes["app_color"]["bg_one"],
             scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
-            context_color=self.themes["app_color"]["context_color"]
+            context_color=self.themes["app_color"]["context_color"],
         )
         # ADD WIDGETS TO PAGE 8
         self.load_pages.row_1_layout_8.addWidget(self.table_scouting)
@@ -911,8 +945,10 @@ class Ui_MainWindow(object):
         self.group_lineedits_stats_widget = PyButtonGroup()
 
         # ADD LINEEDITS FOR FILTER IN PAGE 8
-        self.right_column.scroll_area_1.setWidget(self.group_lineedits_attrs_widget)
-        self.right_column.scroll_area_2.setWidget(self.group_lineedits_stats_widget)
+        self.right_column.scroll_area_1.setWidget(
+            self.group_lineedits_attrs_widget)
+        self.right_column.scroll_area_2.setWidget(
+            self.group_lineedits_stats_widget)
 
         # PAGE 9 - Help view
         # TODO crear layout
@@ -921,9 +957,10 @@ class Ui_MainWindow(object):
         self.clustering_player_combo = PyComboBox(
             dark_one=self.themes["app_color"]["dark_one"],
             text_foreground=self.themes["app_color"]["text_foreground"],
-            combo_border=self.themes["app_color"]["context_hover"]
+            combo_border=self.themes["app_color"]["context_hover"],
         )
-        self.load_pages.clustering_combo_layout.addWidget(self.clustering_player_combo)
+        self.load_pages.clustering_combo_layout.addWidget(
+            self.clustering_player_combo)
 
         self.clustering_btn_send = PyPushButton(
             text="Process data",
@@ -931,26 +968,28 @@ class Ui_MainWindow(object):
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
         )
         self.clustering_btn_send.setMaximumHeight(40)
         self.clustering_btn_send.setMaximumWidth(250)
 
-        self.load_pages.clustering_btn_layout.addWidget(self.clustering_btn_send)
+        self.load_pages.clustering_btn_layout.addWidget(
+            self.clustering_btn_send)
 
         self.group_clustering_filters = PyButtonGroup()
-        self.load_pages.clustering_filters_layout.addWidget(self.group_clustering_filters)
+        self.load_pages.clustering_filters_layout.addWidget(
+            self.group_clustering_filters)
 
         self.clustering_chart = PyClusteringWidget(
             language=self.language,
             bg_two=self.themes["app_color"]["bg_two"],
             dark_three=self.themes["app_color"]["dark_three"],
             axis_color=self.themes["app_color"]["icon_active"],
-            color_title=self.themes["app_color"]["text_title"]
+            color_title=self.themes["app_color"]["text_title"],
         )
 
-        self.load_pages.clustering_bottom_layout.addWidget(self.clustering_chart)
-
+        self.load_pages.clustering_bottom_layout.addWidget(
+            self.clustering_chart)
 
         # RIGHT COLUMN CONFIGURATION
         # ///////////////////////////////////////////////////////////////
@@ -962,7 +1001,7 @@ class Ui_MainWindow(object):
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
         )
         self.icon_right = QIcon(Functions.set_svg_icon("icon_arrow_right.svg"))
         self.right_btn_1.setIcon(self.icon_right)
@@ -976,7 +1015,7 @@ class Ui_MainWindow(object):
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
         )
         self.icon_left = QIcon(Functions.set_svg_icon("icon_arrow_left.svg"))
         self.right_btn_2.setIcon(self.icon_left)
@@ -991,11 +1030,10 @@ class Ui_MainWindow(object):
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
         )
         self.right_btn_3.setMaximumHeight(40)
         self.right_column.filter_data_btn_layout.addWidget(self.right_btn_3)
-
 
         # TODO reubicar los botones de lenguaje a otra seccion en este mismo archivo
         # ENGLISH BUTTON
@@ -1007,13 +1045,14 @@ class Ui_MainWindow(object):
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
         )
         self.icon_english = QIcon(Functions.set_svg_image("us.svg"))
         self.english_language_btn.setIcon(self.icon_english)
         self.english_language_btn.setMaximumHeight(40)
 
-        self.left_column.menus.btn_4_layout.addWidget(self.english_language_btn)
+        self.left_column.menus.btn_4_layout.addWidget(
+            self.english_language_btn)
 
         # SPANISH BUTTON
         # Button to change UI to spanish
@@ -1024,13 +1063,14 @@ class Ui_MainWindow(object):
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
         )
         self.icon_spanish = QIcon(Functions.set_svg_image("es.svg"))
         self.spanish_language_btn.setIcon(self.icon_spanish)
         self.spanish_language_btn.setMaximumHeight(40)
 
-        self.left_column.menus.btn_5_layout.addWidget(self.spanish_language_btn)
+        self.left_column.menus.btn_5_layout.addWidget(
+            self.spanish_language_btn)
 
         # ///////////////////////////////////////////////////////////////
         # END CUSTOM WIDGETS
@@ -1074,7 +1114,7 @@ class Ui_MainWindow(object):
     # ///////////////////////////////////////////////////////////////
     def set_compare_column_menu(self, menu, button):
         self.load_pages.compare_pages.setCurrentWidget(menu)
-        if 'attrs' in button.get_name():
+        if "attrs" in button.get_name():
             self.btn_compare_attrs.setEnabled(False)
             self.btn_compare_stats.setEnabled(True)
         else:
@@ -1129,14 +1169,16 @@ class Ui_MainWindow(object):
             right_width = minimum_right
 
         # ANIMATION LEFT BOX
-        self.left_box = QPropertyAnimation(self.left_column_frame, b"minimumWidth")
+        self.left_box = QPropertyAnimation(self.left_column_frame,
+                                           b"minimumWidth")
         self.left_box.setDuration(time_animation)
         self.left_box.setStartValue(left_box_width)
         self.left_box.setEndValue(left_width)
         self.left_box.setEasingCurve(QEasingCurve.InOutQuart)
 
         # ANIMATION RIGHT BOX
-        self.right_box = QPropertyAnimation(self.right_column_frame, b"minimumWidth")
+        self.right_box = QPropertyAnimation(self.right_column_frame,
+                                            b"minimumWidth")
         self.right_box.setDuration(time_animation)
         self.right_box.setStartValue(right_box_width)
         self.right_box.setEndValue(right_width)
