@@ -280,7 +280,7 @@ class MainWindow(QMainWindow):
         self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
         self.hideAnimation.start()
         self.center_window()
-        self.hideAnimation.finished.connect(lambda: self.ui.title_bar.maximize_restore())
+        self.hideAnimation.finished.connect(self.ui.title_bar.maximize_restore)
 
     # RESIZE NOTIFICATION POPUP
     # ///////////////////////////////////////////
@@ -585,9 +585,9 @@ class MainWindow(QMainWindow):
         self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
         self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
         self.ui.right_btn_3.clicked.connect(lambda: self.collect_scout_data())
-        self.ui.btn_close_notification.clicked.connect(lambda: self.ui.popup_notification_container.collapseMenu())
-        self.ui.btn_send.clicked.connect(lambda: self.process_data_compare_players())
-        self.ui.clustering_btn_send.clicked.connect(lambda: self.clustering_management())
+        self.ui.btn_close_notification.clicked.connect(self.ui.popup_notification_container.collapseMenu)
+        self.ui.btn_send.clicked.connect(self.process_data_compare_players)
+        self.ui.clustering_btn_send.clicked.connect(self.clustering_management)
 
         # SLIDE BETWEEN PAGES
         # ///////////////////////////////////////////

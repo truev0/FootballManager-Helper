@@ -7,6 +7,9 @@ from PySide6.QtWidgets import QVBoxLayout, QStackedWidget, QWidget, QFrame, QScr
 
 
 class Ui_MainPages(object):
+    def __init__(self):
+        self.clustering_subtop_layout = None
+
     def setupUi(self, MainPages):
         if not MainPages.objectName():
             MainPages.setObjectName(u"MainPages")

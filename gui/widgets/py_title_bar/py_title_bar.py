@@ -46,7 +46,6 @@ class PyTitleBar(QWidget):
             app_parent,
             logo_image="logotop_100x22.svg",
             logo_width=100,
-            buttons=None,
             dark_one="#1b1e23",
             bg_color="#343b48",
             div_color="#3c4454",
@@ -142,7 +141,7 @@ class PyTitleBar(QWidget):
         # Functions
         self.minimize_button.released.connect(lambda: parent.minimize_event())
         # self.maximize_restore_button.released.connect(lambda: self.maximize_restore())
-        self.maximize_restore_button.released.connect(lambda: parent.maximize_event())
+        self.maximize_restore_button.released.connect(parent.maximize_event)
         self.close_button.released.connect(lambda: parent.close())
 
         # Extra BTNs layout

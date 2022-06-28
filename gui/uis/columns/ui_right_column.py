@@ -85,7 +85,10 @@ class Ui_RightColumn(object):
         self.scroll_area_1.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.scroll_area_1.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll_area_1.setWidgetResizable(True)
-        self.scroll_area_1.setStyleSheet("background-color: #2c313c; border-style: none; border-top-left-radius: 8px; border-bottom-left-radius: 8px;")
+        self.scroll_area_1.setStyleSheet("background-color: #2c313c;"
+                                         " border-style: none;"
+                                         " border-top-left-radius: 8px;"
+                                         " border-bottom-left-radius: 8px;")
 
         self.verticalLayout.addWidget(self.scroll_area_1)
 
@@ -117,7 +120,10 @@ class Ui_RightColumn(object):
         self.scroll_area_2.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll_area_2.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll_area_2.setWidgetResizable(True)
-        self.scroll_area_2.setStyleSheet("background-color: #2c313c; border-style: none; border-top-right-radius: 8px; border-bottom-right-radius: 8px;")
+        self.scroll_area_2.setStyleSheet("background-color: #2c313c;"
+                                         " border-style: none;"
+                                         " border-top-right-radius: 8px;"
+                                         " border-bottom-right-radius: 8px;")
 
         self.verticalLayout_2.addWidget(self.scroll_area_2)
 
