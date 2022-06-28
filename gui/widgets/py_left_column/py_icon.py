@@ -1,20 +1,15 @@
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
-
-from PySide6.QtGui import QPixmap, QPainter
-
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QPainter, QPixmap
+from PySide6.QtWidgets import QLabel, QVBoxLayout, QWidget
 
 
 # PY ICON WITH CUSTOM COLORS
 # ///////////////////////////////////////////////////////////////
 class PyIcon(QWidget):
-    def __init__(
-        self,
-        icon_path,
-        icon_color
-    ):
+
+    def __init__(self, icon_path, icon_color):
         super().__init__()
 
         # PROPERTIES
@@ -32,7 +27,7 @@ class PyIcon(QWidget):
         # LABEL
         self.icon = QLabel()
         self.icon.setAlignment(Qt.AlignCenter)
-        
+
         # PAINTER
         self.set_icon(self._icon_path, self._icon_color)
 
@@ -50,7 +45,7 @@ class PyIcon(QWidget):
         icon = QPixmap(icon_path)
         painter = QPainter(icon)
         painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
-        painter.fillRect(icon.rect(), color)       
+        painter.fillRect(icon.rect(), color)
         painter.end()
 
         # SET PIXMAP

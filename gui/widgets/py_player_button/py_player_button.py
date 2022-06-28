@@ -1,10 +1,8 @@
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from PySide6.QtWidgets import QPushButton, QLabel, QGraphicsDropShadowEffect
-
-from PySide6.QtCore import Qt, QEvent, QRect, QDataStream
-
-from PySide6.QtGui import QPainter, QColor, QBrush, QPixmap
+from PySide6.QtCore import QDataStream, QEvent, QRect, Qt
+from PySide6.QtGui import QBrush, QColor, QPainter, QPixmap
+from PySide6.QtWidgets import QGraphicsDropShadowEffect, QLabel, QPushButton
 
 # IMPORT FUNCTIONS
 # ///////////////////////////////////////////////////////////////
@@ -14,19 +12,20 @@ from PySide6.QtGui import QPainter, QColor, QBrush, QPixmap
 
 
 class PyPlayerButton(QPushButton):
+
     def __init__(
-            self,
-            app_parent,
-            icon_path=None,
-            btn_id=None,
-            bg_color="#4f973c",
-            bg_color_hover="#dce1ec",
-            bg_color_pressed="#f5f6f9",
-            icon_color="#c3ccdf",
-            icon_color_hover="#343b48",
-            icon_color_pressed="272c36",
-            icon_color_active="#1b1e23",
-            is_active=False,
+        self,
+        app_parent,
+        icon_path=None,
+        btn_id=None,
+        bg_color="#4f973c",
+        bg_color_hover="#dce1ec",
+        bg_color_pressed="#f5f6f9",
+        icon_color="#c3ccdf",
+        icon_color_hover="#343b48",
+        icon_color_pressed="272c36",
+        icon_color_active="#1b1e23",
+        is_active=False,
     ):
         super().__init__()
 
@@ -83,7 +82,8 @@ class PyPlayerButton(QPushButton):
     # DRAG ENTER EVENT VERIFIER
     # ///////////////////////////////////////////////////////////////
     def dragEnterEvent(self, event):
-        if 'application/x-qabstractitemmodeldatalist' in event.mimeData().formats():
+        if "application/x-qabstractitemmodeldatalist" in event.mimeData(
+        ).formats():
             event.accept()
         else:
             event.ignore()
@@ -94,9 +94,10 @@ class PyPlayerButton(QPushButton):
         mime_data = event.mimeData()
         if mime_data.hasText():
             self._lista.append(mime_data.text())
-        elif 'application/x-qabstractitemmodeldatalist' in mime_data.formats():
+        elif "application/x-qabstractitemmodeldatalist" in mime_data.formats():
             names = []
-            stream = QDataStream(mime_data.data('application/x-qabstractitemmodeldatalist'))
+            stream = QDataStream(
+                mime_data.data("application/x-qabstractitemmodeldatalist"))
             while not stream.atEnd():
                 # All fields must be read, even if we don't use them
                 row = stream.readInt32()
@@ -138,11 +139,8 @@ class PyPlayerButton(QPushButton):
         rect = QRect(0, 0, self.width(), self.height())
         paint.setPen(Qt.NoPen)
         paint.setBrush(brush)
-        paint.drawRoundedRect(
-            rect,
-            self._set_border_radius,
-            self._set_border_radius
-        )
+        paint.drawRoundedRect(rect, self._set_border_radius,
+                              self._set_border_radius)
 
         # DRAW ICONS
         self.icon_paint(paint, self._set_icon_path, rect)
@@ -240,11 +238,8 @@ class PyPlayerButton(QPushButton):
             painter.fillRect(icon.rect(), self._icon_color_active)
         else:
             painter.fillRect(icon.rect(), self._set_icon_color)
-        qp.drawPixmap(
-            (rect.width() - icon.width()) / 2,
-            (rect.height() - icon.height()) / 2,
-            icon
-        )
+        qp.drawPixmap((rect.width() - icon.width()) / 2,
+                      (rect.height() - icon.height()) / 2, icon)
         painter.end()
 
     # SET ICON
@@ -269,21 +264,13 @@ class _ToolTip(QLabel):
     }}
     """
 
-    def __init__(
-            self,
-            parent,
-            tooltip,
-            dark_one,
-            text_foreground
-    ):
+    def __init__(self, parent, tooltip, dark_one, text_foreground):
         QLabel.__init__(self)
 
         # LABEL SETUP
-        style = self.style_tooltip.format(
-            _dark_one=dark_one,
-            _text_foreground=text_foreground
-        )
-        self.setObjectName(u"label_tooltip")
+        style = self.style_tooltip.format(_dark_one=dark_one,
+                                          _text_foreground=text_foreground)
+        self.setObjectName("label_tooltip")
         self.setStyleSheet(style)
         self.setMinimumHeight(34)
         self.setParent(parent)

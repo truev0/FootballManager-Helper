@@ -1,16 +1,17 @@
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////
-from PySide6.QtCore import QAbstractTableModel, Qt
+import numpy as np
 
 # IMPORT OTHER PACKAGES AND MODULES
 # ///////////////////////////////////////////
 from past.builtins import unicode
-import numpy as np
+from PySide6.QtCore import QAbstractTableModel, Qt
 
 
 # CUSTOM LIST MODEL FOR PANDAS
 # ///////////////////////////////////////////
 class CustomizedNumpyListModel(QAbstractTableModel):
+
     def __init__(self, data, parent=None):
         QAbstractTableModel.__init__(self, parent)
         self._data = np.array(data.values)
@@ -23,7 +24,7 @@ class CustomizedNumpyListModel(QAbstractTableModel):
             value = self._data[index.row(), index.column()]
 
             if isinstance(value, str):
-                return '%s' % value
+                return "%s" % value
 
             return unicode(value)
 

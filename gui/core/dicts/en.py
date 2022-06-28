@@ -33,47 +33,25 @@ english = {
         "g2": "Old Squad",
     },
     "pages": {
-        "p1": {
-
-        },
-        "p2": {
-
-        },
-        "p3": {
-
-        },
-        "p4": {
-
-        },
-        "p5": {
-
-        },
-        "p6": {
-
-        },
+        "p1": {},
+        "p2": {},
+        "p3": {},
+        "p4": {},
+        "p5": {},
+        "p6": {},
         "p7": {
             "btn_compare_s": "Select Statistics",
             "btn_compare_a": "Select Attributes",
             "btn_compare_d": "Send Data",
         },
-        "p8": {
-
-        },
-        "p9": {
-
-        },
+        "p8": {},
+        "p9": {},
         "p10": {
             "process_btn": "Process Data"
         },
-        "p11": {
-
-        },
-        "p12": {
-
-        },
-        "p13": {
-
-        }
+        "p11": {},
+        "p12": {},
+        "p13": {},
     },
     "left_content": {
         "b1": "Load squad file",
@@ -82,15 +60,15 @@ english = {
     "right_content": {
         "b1": "Slide to stats filters",
         "b2": "Slide to attrs filters",
-        "b3": "Filter Data"
+        "b3": "Filter Data",
     },
     "title_buttons_tooltips": {
         "b1": "Refresh",
         "b2": "Scouting filters",
         "b3": "Minimize app",
         "b4": "Maximize app",
-        "b5": "Close app"
-    }
+        "b5": "Close app",
+    },
 }
 
 column_headers = {
@@ -185,7 +163,7 @@ column_headers = {
         "a44": "Ant",
         "a45": "Agi",
         "a46": "Agg",
-        "a47": "Aer"
+        "a47": "Aer",
     },
     "a": {
         "au0": "<- EDIT",
@@ -197,8 +175,8 @@ column_headers = {
         "au6": "Role 2S",
         "au7": "Trol",
         "au8": "Role 3S",
-        "au9": "Preferred training"
-    }
+        "au9": "Preferred training",
+    },
 }
 
 positions = {
@@ -284,5 +262,5 @@ positions = {
     "p80": "CF-At",
     "p81": "P-At",
     "p82": "AF-At",
-    "p83": "F9-Su"
+    "p83": "F9-Su",
 }

@@ -1,14 +1,20 @@
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QFrame, QLabel, \
-    QSizePolicy, QSpacerItem
-
 from PySide6.QtCore import Qt
+from PySide6.QtWidgets import (
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QSizePolicy,
+    QSpacerItem,
+    QWidget,
+)
 
 
 # PY CREDITS BAR AND VERSION
 # ///////////////////////////////////////////////////////////////
 class PyCredits(QWidget):
+
     def __init__(
         self,
         copyright_text,
@@ -18,7 +24,7 @@ class PyCredits(QWidget):
         text_size,
         text_description_color,
         radius=8,
-        padding=10
+        padding=10,
     ):
         super().__init__()
 
@@ -75,7 +81,8 @@ class PyCredits(QWidget):
         self.version_label.setAlignment(Qt.AlignVCenter)
 
         # SEPARATOR
-        self.separator = QSpacerItem(20, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.separator = QSpacerItem(20, 20, QSizePolicy.Expanding,
+                                     QSizePolicy.Minimum)
 
         # ADD TO LAYOUT
         self.bg_layout.addWidget(self.copyright_label)

@@ -1,21 +1,19 @@
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QWidget, \
-    QVBoxLayout
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QVBoxLayout, QWidget
 
-from PySide6.QtCore import Signal, Qt
-
-# IMPORT CLOSE BUTTON
+# IMPORT LEFT COLUMN
 # ///////////////////////////////////////////////////////////////
-from .py_left_button import PyLeftButton
+from gui.uis.columns.ui_left_column import Ui_LeftColumn
 
 # IMPORT ICON
 # ///////////////////////////////////////////////////////////////
 from .py_icon import PyIcon
 
-# IMPORT LEFT COLUMN
+# IMPORT CLOSE BUTTON
 # ///////////////////////////////////////////////////////////////
-from gui.uis.columns.ui_left_column import Ui_LeftColumn
+from .py_left_button import PyLeftButton
 
 
 class PyLeftColumn(QWidget):
@@ -24,24 +22,24 @@ class PyLeftColumn(QWidget):
     released = Signal(object)
 
     def __init__(
-            self,
-            parent,
-            app_parent,
-            text_title,
-            text_title_size,
-            text_title_color,
-            dark_one,
-            bg_color,
-            btn_color,
-            btn_color_hover,
-            btn_color_pressed,
-            icon_path,
-            icon_color,
-            icon_color_hover,
-            icon_color_pressed,
-            context_color,
-            icon_close_path,
-            radius=8
+        self,
+        parent,
+        app_parent,
+        text_title,
+        text_title_size,
+        text_title_color,
+        dark_one,
+        bg_color,
+        btn_color,
+        btn_color_hover,
+        btn_color_pressed,
+        icon_path,
+        icon_color,
+        icon_color_hover,
+        icon_color_pressed,
+        context_color,
+        icon_close_path,
+        radius=8,
     ):
         super().__init__()
 
@@ -97,19 +95,19 @@ class PyLeftColumn(QWidget):
         self.title_frame.setMaximumHeight(47)
         self.title_frame.setMinimumHeight(47)
 
-        # TITLE BASE LAYOUT 
+        # TITLE BASE LAYOUT
         self.title_base_layout = QVBoxLayout(self.title_frame)
         self.title_base_layout.setContentsMargins(5, 3, 5, 3)
 
         # TITLE BG
         self.title_bg_frame = QFrame()
         self.title_bg_frame.setObjectName("title_bg_frame")
-        self.title_bg_frame.setStyleSheet(f'''
+        self.title_bg_frame.setStyleSheet(f"""
         #title_bg_frame {{
             background-color: {self._bg_color};
             border-radius: {self._radius}px;
         }}
-        ''')
+        """)
 
         # LAYOUT TITLE BG
         self.title_bg_layout = QHBoxLayout(self.title_bg_frame)
@@ -129,14 +127,14 @@ class PyLeftColumn(QWidget):
         # LABEL
         self.title_label = QLabel(self._text_title)
         self.title_label.setObjectName("title_label")
-        self.title_label.setStyleSheet(f'''
+        self.title_label.setStyleSheet(f"""
         #title_label {{
             font-size: {self._text_title_size}pt;
             color: {self._text_title_color};
             padding-bottom: 2px;
             background: none;
         }}
-        ''')
+        """)
 
         # BTN FRAME
         self.btn_frame = QFrame()

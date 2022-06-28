@@ -1,3 +1,3 @@
 # PY PLAYER BUTTON
 # ///////////////////////////////////////////////////////////////
-from . py_player_button import PyPlayerButton
+from .py_player_button import PyPlayerButton

@@ -1,11 +1,12 @@
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QFrame
+from PySide6.QtWidgets import QFrame, QHBoxLayout, QWidget
 
 
 # CUSTOM LEFT MENU
 # ///////////////////////////////////////////////////////////////
 class PyDiv(QWidget):
+
     def __init__(self, color):
         super().__init__()
 
