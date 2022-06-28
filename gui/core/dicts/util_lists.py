@@ -5,7 +5,7 @@ stats_list = {
     'Svh': 'Saves Held',
     'Conc': 'Conceded',
     'Pas %': '% Passes',
-    'Ps C/90': "Completed Passes / 90'",
+    'Ps C/90': "Completed Passes / 90'",  # lgtm [py/duplicate-key-dict-literal]
     'K Tck': 'Key Tackles',
     'Tck R': 'Tackles Ratio',
     'Int/90': 'Interceptions / 90',
@@ -22,7 +22,7 @@ stats_list = {
     'Cr C': 'Crosses Completed',
     'Cr C/A': 'Crosses Completed vs Attempts',
     'ShT/90': 'Shots on Target / 90',
-    'Dist/90': 'Distance Covered / 90',
+    'Dist/90': 'Distance Covered / 90',  # lgtm [py/duplicate-key-dict-literal]
     'Gls': 'Goals',
     'Ast': 'Assits',
     'Tall': 'Team allowed',
@@ -348,7 +348,7 @@ numerical_clustering_en = [
     "Pens S",
     "Av Rat",
     "Tck",
-    "Gl Mst",
+    "Gl Mst"
 ]
 
 numerical_clustering_es = [
@@ -383,5 +383,17 @@ numerical_clustering_es = [
     "Pen M",
     "Media",
     "Ent",
-    "Gl Err",
+    "Gl Err"
+]
+
+filters_en = [
+    'Mins',
+    'Age',
+    'Salary'
+]
+
+filters_es = [
+    'Min',
+    'Edad',
+    'Sueldo'
 ]

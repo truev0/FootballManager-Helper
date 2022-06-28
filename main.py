@@ -21,6 +21,7 @@ import os
 
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////
+import matplotlib.pyplot as plt
 import pandas as pd
 
 from pyside_core import *
@@ -60,6 +61,16 @@ from gui.widgets import *
 # ///////////////////////////////////////////
 from Custom_Widgets.Widgets import loadJsonStyle
 
+# CLUSTERING MODULES
+# ///////////////////////////////////////////
+from sklearn import preprocessing
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.cluster import KMeans
+import seaborn as sns
+import numpy as np
+
+plt.style.use('seaborn-whitegrid')
 
 # IMPORT INTERFACE
 # ///////////////////////////////////////////
@@ -68,6 +79,7 @@ from gui.uis.windows.main_window.ui_interface import Ui_MainWindow
 # ADJUST QT FONT DPI FOR HIGH SCALE
 # ///////////////////////////////////////////
 os.environ["QT_FONT_DPI"] = "96"
+
 
 # MAIN WINDOW
 # ///////////////////////////////////////////
@@ -385,26 +397,19 @@ class MainWindow(QMainWindow):
             # Load page 8
             self.ui.set_page(self.ui.load_pages.page_8)
 
-        # # Employees Btn
-        # if btn.objectName() == "btn_employees":
-        #     self.ui.left_menu.select_only_one(btn.objectName())
-        #
-        #     # Load page 9
-        #     self.ui.set_page(self.ui.load_pages.page_9)
-
         # Help Btn
         if btn.objectName() == "btn_help":
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load page 10
-            # self.ui.set_page(self.ui.load_pages.page_10)
+            # Load page 9
+            # self.ui.set_page(self.ui.load_pages.page_9)
 
         # Clustering Btn
         if btn.objectName() == "btn_clustering":
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load page 11
-            # self.ui.set_page(self.ui.load_pages.page_11)
+            # Load page 10
+            self.ui.set_page(self.ui.load_pages.page_10)
 
         # Languages Btn
         if btn.objectName() == "btn_languages":
@@ -473,17 +478,18 @@ class MainWindow(QMainWindow):
 
         if btn.objectName() == "btn_refresh":
             for line, combo in zip(
-                self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
-                self.ui.right_column.scroll_area_1.findChildren(QComboBox)
+                    self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
+                    self.ui.right_column.scroll_area_1.findChildren(QComboBox)
             ):
                 line.setText("0")
                 combo.setCurrentIndex(0)
             for line, combo in zip(
-                self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
-                self.ui.right_column.scroll_area_2.findChildren(QComboBox)
+                    self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
+                    self.ui.right_column.scroll_area_2.findChildren(QComboBox)
             ):
                 line.setText("0")
                 combo.setCurrentIndex(0)
+
 
         # VERTICAL PITCH
         # ///////////////////////////////////////////
@@ -583,6 +589,7 @@ class MainWindow(QMainWindow):
         self.ui.right_btn_3.clicked.connect(lambda: self.collect_scout_data())
         self.ui.btn_close_notification.clicked.connect(lambda: self.ui.popup_notification_container.collapseMenu())
         self.ui.btn_send.clicked.connect(lambda: self.process_data_compare_players())
+        self.ui.clustering_btn_send.clicked.connect(lambda: self.clustering_management())
 
         # SLIDE BETWEEN PAGES
         # ///////////////////////////////////////////
@@ -647,6 +654,7 @@ class MainWindow(QMainWindow):
 
                 self.create_and_load_checkboxes()
                 tmp_list = self.df_original[self.ui_headers[self.language].h.h1].values.tolist()
+                self.ui.clustering_player_combo.addItems(tmp_list)
                 self.add_squad_names(tmp_list)
                 self.haveSquadInfo = True
             elif 'scouting' in button_object.get_name():
@@ -658,6 +666,7 @@ class MainWindow(QMainWindow):
                 self.tables_helper_scouting(self.df_scout_for_table)
                 tmp_list = self.df_scouting[self.ui_headers[self.language].h.h1].values.tolist()
                 self.create_edits_for_scouting()
+                self.create_lines_for_clustering()
                 self.add_scouting_names(tmp_list)
 
             elif 'old' in button_object.text():
@@ -737,14 +746,211 @@ class MainWindow(QMainWindow):
         for c in column_indexes:
             headers.setSectionResizeMode(c, QHeaderView.ResizeToContents)
 
+    # SET / LOAD DATA FOR STATS AND METRICS GRAPHS
+    # ///////////////////////////////////////////
+    def load_data_for_graphs(self):
+        # SETTING DATAFRAME FOR STATS / METRICS WIDGET
+        self.df_helper = self.df_original.iloc[:, :2]
+        if self.language == 'en':
+            self.df_helper = self.df_helper.join(self.df_original['Salary'])
+            self.df_helper['Salary'] = self.df_helper['Salary'].fillna(0)
+        elif self.language == 'es':
+            self.df_helper = self.df_helper.join(self.df_original['Sueldo'])
+            self.df_helper['Sueldo'] = self.df_helper['Sueldo'].fillna(0)
+        self.df_helper = self.df_helper.join(self.df_original.iloc[:, 11:44])
+
+        # STATS & METRICS DATA
+        if self.ui.graph_statistics.chart.count_actual_list() > 1:
+            self.ui.graph_statistics.type_selector.clear()
+            self.ui.graph_statistics.combo_selector.clear()
+
+        if self.language == 'en':
+            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o5, util_lists.list_en[0])
+            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o6, util_lists.list_en[1])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[0])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[1])
+        elif self.language == 'es':
+            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o5, util_lists.list_es[0])
+            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o6, util_lists.list_es[1])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[0])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[1])
+        self.ui.graph_statistics.chart.set_data(self.df_helper)
+
+    # TRANSLATE UI
+    # ///////////////////////////////////////////
+    def translate_lang(self, lang):
+        self.language = lang
+
+        # Translating side menu buttons
+        self.ui.left_menu.findChild(QPushButton, 'btn_home').setText(self.ui_text[lang].menu.o0)
+        self.ui.left_menu.findChild(QPushButton, 'btn_squad').setText(self.ui_text[lang].menu.o1)
+        self.ui.left_menu.findChild(QPushButton, 'btn_tactic').setText(self.ui_text[lang].menu.o2)
+        self.ui.left_menu.findChild(QPushButton, 'btn_stats').setText(self.ui_text[lang].menu.oaux1)
+        self.ui.left_menu.findChild(QPushButton, 'btn_compare').setText(self.ui_text[lang].menu.o7)
+        self.ui.left_menu.findChild(QPushButton, 'btn_scouting').setText(self.ui_text[lang].menu.o8)
+        self.ui.left_menu.findChild(QPushButton, 'btn_settings').setText(self.ui_text[lang].menu.o10)
+        self.ui.left_menu.findChild(QPushButton, 'btn_languages').setText(self.ui_text[lang].menu.o11)
+        self.ui.left_menu.findChild(QPushButton, 'btn_help').setText(self.ui_text[lang].menu.o12)
+        self.ui.left_menu.toggle_button.setText(self.ui_text[lang].menu.o4)
+
+        # Translating side menu tooltips
+        self.ui.left_menu.findChild(QPushButton, 'btn_home').change_tooltip(self.ui_text[lang].menu.t0)
+        self.ui.left_menu.findChild(QPushButton, 'btn_squad').change_tooltip(self.ui_text[lang].menu.t1)
+        self.ui.left_menu.findChild(QPushButton, 'btn_tactic').change_tooltip(self.ui_text[lang].menu.t2)
+        self.ui.left_menu.findChild(QPushButton, 'btn_stats').change_tooltip(self.ui_text[lang].menu.taux1)
+        self.ui.left_menu.findChild(QPushButton, 'btn_compare').change_tooltip(self.ui_text[lang].menu.t7)
+        self.ui.left_menu.findChild(QPushButton, 'btn_scouting').change_tooltip(self.ui_text[lang].menu.t8)
+        self.ui.left_menu.findChild(QPushButton, 'btn_settings').change_tooltip(self.ui_text[lang].menu.t10)
+        self.ui.left_menu.findChild(QPushButton, 'btn_languages').change_tooltip(self.ui_text[lang].menu.t11)
+        self.ui.left_menu.findChild(QPushButton, 'btn_help').change_tooltip(self.ui_text[lang].menu.t12)
+        self.ui.left_menu.toggle_button.change_tooltip(self.ui_text[lang].menu.t4)
+
+        # Translating tooltip title buttons
+        self.ui.title_bar.findChild(QPushButton,
+                                    'btn_refresh').change_tooltip(self.ui_text[lang].title_buttons_tooltips.b1)
+        self.ui.title_bar.findChild(QPushButton,
+                                    'btn_top_settings').change_tooltip(self.ui_text[lang].title_buttons_tooltips.b2)
+        self.ui.title_bar.minimize_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b3)
+        self.ui.title_bar.maximize_restore_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b4)
+        self.ui.title_bar.close_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b5)
+
+        # Translating left inside menu
+        self.ui.load_squad_btn.setText(self.ui_text[lang].left_content.b1)
+        self.ui.load_scouting_btn.setText(self.ui_text[lang].left_content.b2)
+
+        # Translating right inside menu
+        self.ui.right_btn_1.setText(self.ui_text[lang].right_content.b1)
+        self.ui.right_btn_2.setText(self.ui_text[lang].right_content.b2)
+        self.ui.right_btn_3.setText(self.ui_text[lang].right_content.b3)
+
+    # CREATE AND LOAD CHECHBOXES TO COMPARE
+    # ///////////////////////////////////////////
+    def create_and_load_checkboxes(self):
+        if self.ui.group_chk_stats_widget.get_count() is not None \
+                and self.ui.group_chk_attrs_widget.get_count() is not None:
+            self.ui.group_chk_attrs_widget.remove_all_buttons()
+            self.ui.group_chk_stats_widget.remove_all_buttons()
+        if self.language == 'en':
+            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_en[2], 0)
+            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_en[0], 0)
+        elif self.language == 'es':
+            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_es[2], 0)
+            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_es[0], 0)
+
+        # TEST SECTION
+        self.ui.first_squad_player_combo.currentIndexChanged.connect(
+            self.update_inner_combo
+        )
+        self.update_inner_combo(self.ui.first_squad_player_combo.currentIndex())
+
+        self.ui.second_squad_player_combo.currentIndexChanged.connect(
+            self.second_update_inner_combo
+        )
+        self.second_update_inner_combo(self.ui.second_squad_player_combo.currentIndex())
+
+    def update_inner_combo(self, index):
+        first_dependent_list = self.ui.first_squad_player_combo.itemData(index)
+        if first_dependent_list:
+            self.ui.first_player_combo.clear()
+            self.ui.first_player_combo.addItems(first_dependent_list)
+
+    def second_update_inner_combo(self, index):
+        second_dependent_list = self.ui.second_squad_player_combo.itemData(index)
+        if second_dependent_list:
+            self.ui.second_player_combo.clear()
+            self.ui.second_player_combo.addItems(second_dependent_list)
+
+    def create_edits_for_scouting(self):
+        if self.ui.group_lineedits_attrs_widget.get_lines() is not None and self.ui.group_lineedits_stats_widget.get_lines() is not None:
+            self.ui.group_lineedits_attrs_widget.reset_all_lines()
+            self.ui.group_lineedits_stats_widget.reset_all_lines()
+        if self.language == 'en':
+            self.ui.group_lineedits_attrs_widget.add_buttons(util_lists.list_en[2], 1)
+            self.ui.group_lineedits_stats_widget.add_buttons(util_lists.list_en[0], 1)
+        elif self.language == 'es':
+            self.ui.group_lineedits_attrs_widget.add_buttons(util_lists.list_es[2], 1)
+            self.ui.group_lineedits_stats_widget.add_buttons(util_lists.list_es[0], 1)
+
+    def create_lines_for_clustering(self):
+        if self.ui.group_clustering_filters.get_lines() is not None:
+            self.ui.group_clustering_filters.reset_all_lines()
+        if self.language == 'en':
+            self.ui.group_clustering_filters.add_buttons(util_lists.filters_en, 2)
+        elif self.language == 'es':
+            self.ui.group_clustering_filters.add_buttons(util_lists.filters_es, 2)
+
+    # THREE FUNCTIONS FOR ACTUAL SQUAD, SCOUT, OLD SQUAD
+    # //////////////////////////////////////////////////
+    def add_squad_names(self, tmp_l):
+        if self.ui.first_squad_player_combo.count() == 3:
+            self.ui.first_squad_player_combo.clear()
+            self.ui.first_player_combo.clear()
+            self.ui.second_squad_player_combo.clear()
+            self.ui.second_player_combo.clear()
+        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
+        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
+        self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_squad)
+
+    def add_scouting_names(self, tmp_l):
+        if self.ui.first_squad_player_combo.count() == 3:
+            self.ui.first_squad_player_combo.clear()
+            self.ui.first_player_combo.clear()
+            self.ui.second_squad_player_combo.clear()
+            self.ui.second_player_combo.clear()
+        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, tmp_l)
+        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, tmp_l)
+        self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_scouting)
+
+    def add_old_squad_names(self):
+        # TODO traer la lista
+        if self.ui.first_squad_player_combo.count() == 3:
+            self.ui.first_squad_player_combo.clear()
+            self.ui.first_player_combo.clear()
+            self.ui.second_squad_player_combo.clear()
+            self.ui.second_player_combo.clear()
+        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g2, [])
+        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g2, [])
+
+    # SEND DATA FOR COMPARE GRAPHIC
+    # ///////////////////////////////////////////////////
+    def send_data_compare_graphic(self):
+        checked_buttons = []
+        actual_players = []
+        squad = []
+        if not self.ui.btn_compare_attrs.isEnabled():
+            for i in range(self.ui.group_chk_attrs_widget.get_count()):
+                if self.ui.group_chk_attrs_widget.button_group.button(i).isChecked():
+                    checked_buttons.append(self.ui.group_chk_attrs_widget.button_group.button(i).get_name())
+        elif not self.ui.btn_compare_stats.isEnabled():
+            for i in range(self.ui.group_chk_stats_widget.get_count()):
+                if self.ui.group_chk_stats_widget.button_group.button(i).isChecked():
+                    checked_buttons.append(self.ui.group_chk_stats_widget.button_group.button(i).get_name())
+        actual_players.append(
+            self.ui.first_player_combo.currentText()
+        )
+        actual_players.append(
+            self.ui.second_player_combo.currentText()
+        )
+        squad.append(
+            self.ui.first_squad_player_combo.currentText()
+        )
+        squad.append(
+            self.ui.second_squad_player_combo.currentText(),
+        )
+        return actual_players, squad, checked_buttons
+
+    def process_data_compare_players(self):
+        players_info, squads, options_info = self.send_data_compare_graphic()
+        self.ui.spyder_graph_widget.spyder_chart.set_chart(players_info, squads, options_info)
+
     def collect_scout_data(self):
         attrs_set = []
         stats_set = []
         if self.language == 'en':
             for value_child, operator_child, identifier in zip(
-                self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
-                self.ui.right_column.scroll_area_1.findChildren(QComboBox),
-                util_lists.list_en[2]
+                    self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
+                    self.ui.right_column.scroll_area_1.findChildren(QComboBox),
+                    util_lists.list_en[2]
             ):
                 if value_child.text() == '':
                     tmp_value_child = float(0)
@@ -759,9 +965,9 @@ class MainWindow(QMainWindow):
                     ]
                 )
             for value_child, operator_child, identifier in zip(
-                self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
-                self.ui.right_column.scroll_area_2.findChildren(QComboBox),
-                util_lists.list_en[0]
+                    self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
+                    self.ui.right_column.scroll_area_2.findChildren(QComboBox),
+                    util_lists.list_en[0]
             ):
                 if value_child.text() == '':
                     tmp_value_child = float(0)
@@ -846,196 +1052,145 @@ class MainWindow(QMainWindow):
 
         self.tables_helper_scouting(filtered_df)
 
-    # SET / LOAD DATA FOR STATS AND METRICS GRAPHS
-    # ///////////////////////////////////////////
-    def load_data_for_graphs(self):
-        # SETTING DATAFRAME FOR STATS / METRICS WIDGET
-        self.df_helper = self.df_original.iloc[:, :2]
+    def collect_results_clustering(self):
+        data = []
         if self.language == 'en':
-            self.df_helper = self.df_helper.join(self.df_original['Salary'])
-            self.df_helper['Salary'] = self.df_helper['Salary'].fillna(0)
-        elif self.language == 'es':
-            self.df_helper = self.df_helper.join(self.df_original['Sueldo'])
-            self.df_helper['Sueldo'] = self.df_helper['Sueldo'].fillna(0)
-        self.df_helper = self.df_helper.join(self.df_original.iloc[:, 11:44])
+            for value_child, operator_child, identifier in zip(
+                    self.ui.load_pages.clustering_filters_frame.findChildren(QLineEdit),
+                    self.ui.load_pages.clustering_filters_frame.findChildren(QComboBox),
+                    util_lists.filters_en
+            ):
+                if value_child.text() == '':
+                    tmp_value_child = float(0)
+                else:
+                    tmp_value_child = float(value_child.text().replace(',', '.'))
 
-        # STATS & METRICS DATA
-        if self.ui.graph_statistics.chart.count_actual_list() > 1:
-            self.ui.graph_statistics.type_selector.clear()
-            self.ui.graph_statistics.combo_selector.clear()
+                data.append(
+                    [
+                        identifier,
+                        operator_child.currentText(),
+                        tmp_value_child
+                    ]
+                )
+        if self.language == 'es':
+            for value_child, operator_child, identifier in zip(
+                    self.ui.load_pages.clustering_filters_frame.findChildren(QLineEdit),
+                    self.ui.load_pages.clustering_filters_frame.findChildren(QComboBox),
+                    util_lists.filters_es
+            ):
+                if value_child.text() == '':
+                    tmp_value_child = float(0)
+                else:
+                    tmp_value_child = float(value_child.text().replace(',', '.'))
 
+                data.append(
+                    [
+                        identifier,
+                        operator_child.currentText(),
+                        tmp_value_child
+                    ]
+                )
+
+        return data
+
+    def clustering_management(self):
+        tmp_filters = self.collect_results_clustering()
+        base_columns_plus = None
+        compl_df = None
+        compl_df2 = None
+        df_alone = None
+        tmp_df = None
+        col_name = self.df_scouting.columns[0]
         if self.language == 'en':
-            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o5, util_lists.list_en[0])
-            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o6, util_lists.list_en[1])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[0])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[1])
+            tmp_df = self.df_scouting[util_lists.numerical_clustering_en]
+            compl_df = self.df_scouting[util_lists.list_en[0]]
+            df_alone = self.df_squad[self.df_squad[col_name].str.contains(
+                self.ui.clustering_player_combo.currentText()
+            )]
+            df_alone = df_alone[util_lists.numerical_clustering_en]
         elif self.language == 'es':
-            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o5, util_lists.list_es[0])
-            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o6, util_lists.list_es[1])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[0])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[1])
-        self.ui.graph_statistics.chart.set_data(self.df_helper)
+            tmp_df = self.df_scouting[util_lists.numerical_clustering_es]
+            compl_df = self.df_scouting[util_lists.list_es[0]]
+            df_alone = self.df_squad[self.df_squad[col_name].str.contains(
+                self.ui.clustering_player_combo.currentText()
+            )]
+            df_alone = df_alone[util_lists.numerical_clustering_es]
 
-    # TRANSLATE UI
-    # ///////////////////////////////////////////
-    def translate_lang(self, lang):
-        self.language = lang
+        df_player_clusters = tmp_df.fillna(tmp_df.mean())
 
-        # Translating side menu buttons
-        self.ui.left_menu.findChild(QPushButton, 'btn_home').setText(self.ui_text[lang].menu.o0)
-        self.ui.left_menu.findChild(QPushButton, 'btn_squad').setText(self.ui_text[lang].menu.o1)
-        self.ui.left_menu.findChild(QPushButton, 'btn_tactic').setText(self.ui_text[lang].menu.o2)
-        self.ui.left_menu.findChild(QPushButton, 'btn_stats').setText(self.ui_text[lang].menu.oaux1)
-        self.ui.left_menu.findChild(QPushButton, 'btn_compare').setText(self.ui_text[lang].menu.o7)
-        self.ui.left_menu.findChild(QPushButton, 'btn_scouting').setText(self.ui_text[lang].menu.o8)
-        self.ui.left_menu.findChild(QPushButton, 'btn_employees').setText(self.ui_text[lang].menu.o9)
-        self.ui.left_menu.findChild(QPushButton, 'btn_settings').setText(self.ui_text[lang].menu.o10)
-        self.ui.left_menu.findChild(QPushButton, 'btn_languages').setText(self.ui_text[lang].menu.o11)
-        self.ui.left_menu.findChild(QPushButton, 'btn_help').setText(self.ui_text[lang].menu.o12)
-        self.ui.left_menu.toggle_button.setText(self.ui_text[lang].menu.o4)
+        names = self.df_scouting[col_name].values.tolist()
 
-        # Translating side menu tooltips
-        self.ui.left_menu.findChild(QPushButton, 'btn_home').change_tooltip(self.ui_text[lang].menu.t0)
-        self.ui.left_menu.findChild(QPushButton, 'btn_squad').change_tooltip(self.ui_text[lang].menu.t1)
-        self.ui.left_menu.findChild(QPushButton, 'btn_tactic').change_tooltip(self.ui_text[lang].menu.t2)
-        self.ui.left_menu.findChild(QPushButton, 'btn_stats').change_tooltip(self.ui_text[lang].menu.taux1)
-        self.ui.left_menu.findChild(QPushButton, 'btn_compare').change_tooltip(self.ui_text[lang].menu.t7)
-        self.ui.left_menu.findChild(QPushButton, 'btn_scouting').change_tooltip(self.ui_text[lang].menu.t8)
-        self.ui.left_menu.findChild(QPushButton, 'btn_employees').change_tooltip(self.ui_text[lang].menu.t9)
-        self.ui.left_menu.findChild(QPushButton, 'btn_settings').change_tooltip(self.ui_text[lang].menu.t10)
-        self.ui.left_menu.findChild(QPushButton, 'btn_languages').change_tooltip(self.ui_text[lang].menu.t11)
-        self.ui.left_menu.findChild(QPushButton, 'btn_help').change_tooltip(self.ui_text[lang].menu.t12)
-        self.ui.left_menu.toggle_button.change_tooltip(self.ui_text[lang].menu.t4)
+        names.append(self.ui.clustering_player_combo.currentText())
+        df_player_clusters = pd.concat([df_player_clusters, df_alone], axis=0)
 
-        # Translating tooltip title buttons
-        self.ui.title_bar.findChild(QPushButton,
-                                    'btn_refresh').change_tooltip(self.ui_text[lang].title_buttons_tooltips.b1)
-        self.ui.title_bar.findChild(QPushButton,
-                                    'btn_top_settings').change_tooltip(self.ui_text[lang].title_buttons_tooltips.b2)
-        self.ui.title_bar.minimize_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b3)
-        self.ui.title_bar.maximize_restore_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b4)
-        self.ui.title_bar.close_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b5)
+        x = df_player_clusters.values
+        scaler = preprocessing.MinMaxScaler()
+        x_scaled = scaler.fit_transform(x)
+        X_norm = pd.DataFrame(x_scaled)
 
-        # Translating left inside menu
-        self.ui.load_squad_btn.setText(self.ui_text[lang].left_content.b1)
-        self.ui.load_scouting_btn.setText(self.ui_text[lang].left_content.b2)
+        pca = PCA(n_components=2)
+        reduced = pd.DataFrame(pca.fit_transform(X_norm))
 
-        # Translating right inside menu
-        self.ui.right_btn_1.setText(self.ui_text[lang].right_content.b1)
-        self.ui.right_btn_2.setText(self.ui_text[lang].right_content.b2)
-        self.ui.right_btn_3.setText(self.ui_text[lang].right_content.b3)
+        kmeans = KMeans(n_clusters=5)
+        kmeans = kmeans.fit(reduced)
+        labels = kmeans.predict(reduced)
+        centroid = kmeans.cluster_centers_
+        clusters = kmeans.labels_.tolist()
 
-    # CREATE AND LOAD CHECHBOXES TO COMPARE
-    # ///////////////////////////////////////////
-    def create_and_load_checkboxes(self):
-        if self.ui.group_chk_stats_widget.get_count() is not None\
-                and self.ui.group_chk_attrs_widget.get_count() is not None:
-            self.ui.group_chk_attrs_widget.remove_all_buttons()
-            self.ui.group_chk_stats_widget.remove_all_buttons()
+        reduced['cluster'] = clusters
+        reduced[col_name] = names
+        reduced = pd.concat(
+            [
+                reduced,
+                compl_df
+            ],
+            axis=1
+        )
+
+        base_columns = ['x', 'y', 'cluster', col_name]
         if self.language == 'en':
-            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_en[2], 0)
-            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_en[0], 0)
+            base_columns_plus = base_columns + util_lists.list_en[0]
         elif self.language == 'es':
-            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_es[2], 0)
-            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_es[0], 0)
+            base_columns_plus = base_columns + util_lists.list_es[0]
 
-        # TEST SECTION
-        self.ui.first_squad_player_combo.currentIndexChanged.connect(
-            self.update_inner_combo
-        )
-        self.update_inner_combo(self.ui.first_squad_player_combo.currentIndex())
+        reduced.columns = base_columns_plus
 
-        self.ui.second_squad_player_combo.currentIndexChanged.connect(
-            self.second_update_inner_combo
-        )
-        self.second_update_inner_combo(self.ui.second_squad_player_combo.currentIndex())
+        player_x = float(reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]['x'].tolist()[0])
+        player_y = float(reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]['y'].tolist()[0])
 
-    def update_inner_combo(self, index):
-        first_dependent_list = self.ui.first_squad_player_combo.itemData(index)
-        if first_dependent_list:
-            self.ui.first_player_combo.clear()
-            self.ui.first_player_combo.addItems(first_dependent_list)
+        reduced['dist_to_player'] = np.sqrt((player_x - reduced['x']) ** 2 + (player_y - reduced['y']) ** 2)
 
-    def second_update_inner_combo(self, index):
-        second_dependent_list = self.ui.second_squad_player_combo.itemData(index)
-        if second_dependent_list:
-            self.ui.second_player_combo.clear()
-            self.ui.second_player_combo.addItems(second_dependent_list)
+        player_cluster = int(reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]['cluster'].
+                             tolist()[0])
+        df_player_selected_cluster = reduced[(reduced['cluster'] == player_cluster)]
+        for i in range(len(tmp_filters)):
+            if tmp_filters[i][1] == '>' and tmp_filters[i][2] == 0.0:
+                continue
+            if tmp_filters[i][1] == '>':
+                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[i][0]] >
+                                                                        tmp_filters[i][2]]
+            if tmp_filters[i][1] == '<':
+                if tmp_filters[i][2] > 0.0:
+                    df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[i][0]] < tmp_filters[i][2]]
+                elif tmp_filters[i][2] == 0.0:
+                    continue
 
-    def create_edits_for_scouting(self):
-        if self.ui.group_lineedits_attrs_widget.get_lines() is not None and self.ui.group_lineedits_stats_widget.get_lines() is not None:
-            self.ui.group_lineedits_attrs_widget.reset_all_lines()
-            self.ui.group_lineedits_stats_widget.reset_all_lines()
-        if self.language == 'en':
-            self.ui.group_lineedits_attrs_widget.add_buttons(util_lists.list_en[2], 1)
-            self.ui.group_lineedits_stats_widget.add_buttons(util_lists.list_en[0], 1)
-        elif self.language == 'es':
-            self.ui.group_lineedits_attrs_widget.add_buttons(util_lists.list_es[2], 1)
-            self.ui.group_lineedits_stats_widget.add_buttons(util_lists.list_es[0], 1)
+            if tmp_filters[i][1] == '>=':
+                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[i][0]] >=
+                                                                        tmp_filters[i][2]]
 
-    # THREE FUNCTIONS FOR ACTUAL SQUAD, SCOUT, OLD SQUAD
-    # //////////////////////////////////////////////////
-    def add_squad_names(self, tmp_l):
-        if self.ui.first_squad_player_combo.count() == 3:
-            self.ui.first_squad_player_combo.clear()
-            self.ui.first_player_combo.clear()
-            self.ui.second_squad_player_combo.clear()
-            self.ui.second_player_combo.clear()
-        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
-        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
-        self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_squad)
+            if tmp_filters[i][1] == '<=':
+                df_player_selected_cluster = df_player_selected_cluster[df_player_selected_cluster[tmp_filters[i][0]] <=
+                                                                        tmp_filters[i][2]]
 
-    def add_scouting_names(self, tmp_l):
-        if self.ui.first_squad_player_combo.count() == 3:
-            self.ui.first_squad_player_combo.clear()
-            self.ui.first_player_combo.clear()
-            self.ui.second_squad_player_combo.clear()
-            self.ui.second_player_combo.clear()
-        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, tmp_l)
-        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, tmp_l)
-        self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_scouting)
-
-    def add_old_squad_names(self):
-        # TODO traer la lista
-        if self.ui.first_squad_player_combo.count() == 3:
-            self.ui.first_squad_player_combo.clear()
-            self.ui.first_player_combo.clear()
-            self.ui.second_squad_player_combo.clear()
-            self.ui.second_player_combo.clear()
-        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g2, [])
-        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g2, [])
-
-    # SEND DATA FOR COMPARE GRAPHIC
-    # ///////////////////////////////////////////////////
-    def send_data_compare_graphic(self):
-        checked_buttons = []
-        actual_players = []
-        squad = []
-        if not self.ui.btn_compare_attrs.isEnabled():
-            for i in range(self.ui.group_chk_attrs_widget.get_count()):
-                if self.ui.group_chk_attrs_widget.button_group.button(i).isChecked():
-                    checked_buttons.append(self.ui.group_chk_attrs_widget.button_group.button(i).get_name())
-        elif not self.ui.btn_compare_stats.isEnabled():
-            for i in range(self.ui.group_chk_stats_widget.get_count()):
-                if self.ui.group_chk_stats_widget.button_group.button(i).isChecked():
-                    checked_buttons.append(self.ui.group_chk_stats_widget.button_group.button(i).get_name())
-        actual_players.append(
-            self.ui.first_player_combo.currentText()
-        )
-        actual_players.append(
-            self.ui.second_player_combo.currentText()
-        )
-        squad.append(
-            self.ui.first_squad_player_combo.currentText()
-        )
-        squad.append(
-            self.ui.second_squad_player_combo.currentText(),
-        )
-        return actual_players, squad, checked_buttons
-
-    def process_data_compare_players(self):
-        players_info, squads, options_info = self.send_data_compare_graphic()
-        self.ui.spyder_graph_widget.spyder_chart.set_chart(players_info, squads, options_info)
+        df_player_selected_cluster = df_player_selected_cluster[
+            df_player_selected_cluster[col_name] != self.ui.clustering_player_combo.currentText()
+        ]
+        df_player_selected_cluster = df_player_selected_cluster.sort_values(by='dist_to_player', ascending=True)
+        printable_names = df_player_selected_cluster[col_name].values.tolist()
+        self.ui.clustering_chart.inner_chart.update_chart(reduced, printable_names,
+                                                          self.ui.clustering_player_combo.currentText())
+        self.ui.clustering_chart.add_player_to_list(printable_names)
 
     # ///////////////////////////////////////////
     # END CUSTOM FUNCTIONS FOR FUNCTIONALITY

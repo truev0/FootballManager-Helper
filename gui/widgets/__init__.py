@@ -75,3 +75,7 @@ from . py_stats_widget import PySpyderWidget
 # PY BUTTON GROUP WIDGET
 # ///////////////////////////////////////////////////////////////
 from . py_button_group import PyButtonGroup
+
+# PY CANVAS
+# ///////////////////////////////////////////////////////////////
+from . py_canvas import PyClusteringWidget

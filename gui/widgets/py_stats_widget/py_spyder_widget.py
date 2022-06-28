@@ -2,7 +2,7 @@
 
 # IMPORT PYSIDE CORE
 # ///////////////////////////////////////////////////////////////
-from pyside_core import *
+from pyside_core import *  # lgtm [py/polluting-import]
 
 # IMPORT MODULES
 # ///////////////////////////////////////////////////////////////
@@ -10,7 +10,6 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-from math import pi
 
 # IMPORT MPLSOCCER
 # ///////////////////////////////////////////////////////////////
@@ -61,9 +60,6 @@ class _CustomSpyder(FigureCanvas):
             color_title,
             line_color,
             language='en',
-            width=8,
-            height=6,
-            dpi=100
     ):
 
         self.fig, self.ax = radar_mosaic(radar_height=0.915, title_height=0.06, fig_height=14)
@@ -122,8 +118,6 @@ class _CustomSpyder(FigureCanvas):
             self.ax['title'].clear()
             self.ax['title'].axis('off')
             if self._data is not None and len(players) <= 3:
-                var1 = ''
-                var2 = ''
                 min_ranges = []
                 max_ranges = []
                 column_index_name = self._data.columns[0]
@@ -233,6 +227,7 @@ def radar_mosaic(radar_height=0.915, title_height=0.06, fig_height=14):
     axes['title'].axis('off')
     axes['endnote'].axis('off')
     return figure, axes
+
 
 def change_squad(inner_squad, lang):
     inner_var1 = ''

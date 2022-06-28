@@ -1,14 +1,6 @@
-# -*- coding: utf-8 -*-
 
-################################################################################
-## Form generated from reading UI file 'right_columnIWUfAa.ui'
-##
-## Created by: Qt User Interface Compiler version 6.3.0
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
-import setuptools.command.easy_install
-
+# IMPORT PYSIDE CORE
+# ///////////////////////////////////////////////////////////////
 from pyside_core import *
 
 class Ui_RightColumn(object):

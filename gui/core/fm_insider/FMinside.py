@@ -1,7 +1,6 @@
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////////////////////////
 import pandas as pd
-import plotly.express as px
 import numpy as np
 import json
 import warnings
@@ -90,9 +89,6 @@ def convert_values(df, l):
                    text[l].h.s32]:
         df[column] = pd.to_numeric(df[column], downcast="integer")
 
-    # for column in [text[l].h.s6, text[l].h.s9, text[l].h.s11, text[l].h.s13, text[l].h.s14, text[l].h.s15, text[l].h.s16,
-    #                text[l].h.s18, text[l].h.s19, text[l].h.s22, text[l].h.s27, text[l].h.s28]:
-    #     df[column] = df[column].div(100).round(2)
     return df
 
 

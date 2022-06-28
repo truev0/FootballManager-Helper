@@ -157,7 +157,8 @@ class _CustomCanvas(FigureCanvas):
                         x=custom_df.columns[0],
                         y=custom_df.columns[1],
                         ax=self.ax,
-                        color=self.bar_color
+                        color=self.bar_color,
+                        legend=None
                     )
                     self.fig.subplots_adjust(bottom=0.22)
                     self.ax.set_title(util_lists.stats_list[new_parameter], fontsize=15, color=self.color_title)
@@ -200,19 +201,12 @@ class _CustomCanvas(FigureCanvas):
                     )
                     tmp_x = custom_df.columns[1]
                     tmp_y = custom_df.columns[2]
-                    # a, b = np.polyfit(custom_df[tmp_x], custom_df[tmp_y], deg=1)
-                    # y_est = a * custom_df[tmp_x] + b
-                    # self.ax.plot(
-                    #     custom_df[tmp_x],
-                    #     y_est,
-                    #     '-',
-                    #     color='yellow'
-                    # )
                     custom_df.plot.scatter(
                         x=tmp_x,
                         y=tmp_y,
                         ax=self.ax,
-                        color=self.bar_color
+                        color=self.bar_color,
+                        legend=None
                     )
                     self.fig.subplots_adjust(bottom=0.1)
                     self.ax.set_xlabel(util_lists.stats_list[tmp_x], size=12)
@@ -238,4 +232,5 @@ class _CustomCanvas(FigureCanvas):
                             pass
                 else:
                     self.ax.clear()
+            self.ax.grid(False)
             self.fig.canvas.draw()

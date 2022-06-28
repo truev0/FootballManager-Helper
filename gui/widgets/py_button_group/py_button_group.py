@@ -128,6 +128,33 @@ class PyButtonGroup(QWidget):
                     self.layout.addWidget(label, *pos_l)
                     self.layout.addWidget(custom_widget, *pos_line)
                     self.layout.addWidget(custom_widget2, *pos_c)
+        elif opt == 2:
+            first_label_pos = [(y, x) for y in range(3) for x in range(0, 3, 3)]
+            first_layout_pos = [(y, x) for y in range(3) for x in range(2, 3, 3)]
+            first_combo_pos = [(y, x) for y in range(3) for x in range(1, 3, 3)]
+            for pos_l, name, pos_line, pos_c in zip(
+                first_label_pos,
+                names,
+                first_layout_pos,
+                first_combo_pos
+            ):
+                custom_widget = PyLineEdit(place_holder_text=name)
+                custom_widget.setMinimumHeight(40)
+                custom_widget2 = PyComboBox(
+                    dark_one=self.themes["app_color"]["dark_one"],
+                    text_foreground=self.themes["app_color"]["text_foreground"],
+                    combo_border=self.themes["app_color"]["context_hover"]
+                )
+                custom_widget2.setMinimumWidth(60)
+                custom_widget2.setMaximumWidth(80)
+                for o in operators:
+                    custom_widget2.addItem(o)
+                label = QLabel(name)
+                label.setMinimumWidth(50)
+                label.setAlignment(Qt.AlignCenter)
+                self.layout.addWidget(label, *pos_l)
+                self.layout.addWidget(custom_widget, *pos_line)
+                self.layout.addWidget(custom_widget2, *pos_c)
 
     def remove_all_buttons(self):
         for i in range(self._count):

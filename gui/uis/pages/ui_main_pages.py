@@ -151,6 +151,9 @@ class Ui_MainPages(object):
         # /////////////////////////////////////////////////////////
         self.page_5 = QWidget()
         self.page_5.setObjectName(u"page_5")
+        self.page_5.setStyleSheet(""
+                                  "background: #343b48;"
+                                  "border-radius: 8px;")
 
         self.column_1_layout_5 = QHBoxLayout(self.page_5)
         self.column_1_layout_5.setObjectName(u"column_1_layout_5")
@@ -174,6 +177,9 @@ class Ui_MainPages(object):
 
         # Left Top Frame (Page 7)
         self.compare_top_left_frame = QFrame()
+        self.compare_top_left_frame.setStyleSheet(""
+                                  "background: #343b48;"
+                                  "border-radius: 8px;")
         self.compare_top_left_frame.setMaximumHeight(150)
         self.compare_top_left_frame_layout = QVBoxLayout(self.compare_top_left_frame)
 
@@ -312,15 +318,48 @@ class Ui_MainPages(object):
         # /////////////////////////////////////////////////////////
         self.page_10 = QWidget()
         self.page_10.setObjectName(u"page_10")
+        self.page_10_layout = QVBoxLayout(self.page_10)
+
+        self.clustering_top_frame = QFrame()
+        self.clustering_top_frame.setObjectName(u"clustering_top_frame")
+        self.clustering_top_frame.setMaximumSize(QSize(16777215, 240))
+        self.clustering_top_layout = QVBoxLayout(self.clustering_top_frame)
+        self.clustering_top_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.clustering_subtop_frame = QFrame()
+        self.clustering_subtop_frame.setObjectName(u"clustering_subtop_frame")
+        self.clustering_subtop_layout = QHBoxLayout(self.clustering_subtop_frame)
+
+        self.clustering_combo_frame = QFrame()
+        self.clustering_combo_frame.setMaximumSize(QSize(16777215, 70))
+        self.clustering_combo_layout = QHBoxLayout(self.clustering_combo_frame)
+
+        self.clustering_btn_frame = QFrame()
+        self.clustering_btn_frame.setMaximumSize(QSize(16777215, 70))
+        self.clustering_btn_layout = QHBoxLayout(self.clustering_btn_frame)
+        self.clustering_btn_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.clustering_subtop_layout.addWidget(self.clustering_combo_frame)
+        self.clustering_subtop_layout.addWidget(self.clustering_btn_frame)
+
+        self.clustering_top_layout.addWidget(self.clustering_subtop_frame)
+
+        self.clustering_filters_frame = QFrame()
+        self.clustering_filters_frame.setMaximumSize(QSize(16777215, 160))
+        self.clustering_filters_layout = QHBoxLayout(self.clustering_filters_frame)
+
+        self.clustering_top_layout.addWidget(self.clustering_filters_frame)
+
+        self.page_10_layout.addWidget(self.clustering_top_frame)
+
+        self.clustering_bottom_frame = QFrame()
+        self.clustering_bottom_frame.setObjectName(u"clustering_bottom_frame")
+        self.clustering_bottom_layout = QVBoxLayout(self.clustering_bottom_frame)
+
+
+        self.page_10_layout.addWidget(self.clustering_bottom_frame)
 
         self.pages.addWidget(self.page_10)
-
-        # PAGE 11
-        # /////////////////////////////////////////////////////////
-        self.page_11 = QWidget()
-        self.page_11.setObjectName(u"page_11")
-
-        self.pages.addWidget(self.page_11)
 
         # ADD PAGES TO MAIN LAYOUT
         # /////////////////////////////////////////////////////////

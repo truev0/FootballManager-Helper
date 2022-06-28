@@ -489,14 +489,6 @@ class Ui_MainWindow(object):
             "is_active": False
         },
         {
-            "btn_icon": "icon_employees.svg",
-            "btn_id": "btn_employees",
-            "btn_text": "Employees",
-            "btn_tooltip": "Show your staff",
-            "show_top": True,
-            "is_active": False
-        },
-        {
             "btn_icon": "icon_metrics.svg",
             "btn_id": "btn_clustering",
             "btn_text": "PCA & KMeans Clustering",
@@ -727,7 +719,6 @@ class Ui_MainWindow(object):
         # ///////////////////////////////////////////////////////////////
         # COMMON SECTION FOR ALL PAGES
         # ///////////////////////////////////////////////////////////////
-        common_uc = QPixmap(u"gui/images/png_images/work-in-progress.png")
 
         # PAGE 1 - Introduction to App
         self.logo_svg = QSvgWidget(Functions.set_svg_image("logo.svg"))
@@ -924,11 +915,43 @@ class Ui_MainWindow(object):
         self.right_column.scroll_area_1.setWidget(self.group_lineedits_attrs_widget)
         self.right_column.scroll_area_2.setWidget(self.group_lineedits_stats_widget)
 
-        # PAGE 9 - Employees view
+        # PAGE 9 - Help view
         # TODO crear layout
 
-        # PAGE 10 - Help view
-        # TODO crear layout
+        # PAGE 10 - Clustering view
+        self.clustering_player_combo = PyComboBox(
+            dark_one=self.themes["app_color"]["dark_one"],
+            text_foreground=self.themes["app_color"]["text_foreground"],
+            combo_border=self.themes["app_color"]["context_hover"]
+        )
+        self.load_pages.clustering_combo_layout.addWidget(self.clustering_player_combo)
+
+        self.clustering_btn_send = PyPushButton(
+            text="Process data",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.clustering_btn_send.setMaximumHeight(40)
+        self.clustering_btn_send.setMaximumWidth(250)
+
+        self.load_pages.clustering_btn_layout.addWidget(self.clustering_btn_send)
+
+        self.group_clustering_filters = PyButtonGroup()
+        self.load_pages.clustering_filters_layout.addWidget(self.group_clustering_filters)
+
+        self.clustering_chart = PyClusteringWidget(
+            language=self.language,
+            bg_two=self.themes["app_color"]["bg_two"],
+            dark_three=self.themes["app_color"]["dark_three"],
+            axis_color=self.themes["app_color"]["icon_active"],
+            color_title=self.themes["app_color"]["text_title"]
+        )
+
+        self.load_pages.clustering_bottom_layout.addWidget(self.clustering_chart)
+
 
         # RIGHT COLUMN CONFIGURATION
         # ///////////////////////////////////////////////////////////////
