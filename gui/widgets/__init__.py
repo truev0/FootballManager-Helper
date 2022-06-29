@@ -6,76 +6,76 @@
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
-from . py_window import PyWindow
+from .py_window.py_window import PyWindow
 
 # RESIZE GRIP
 # ///////////////////////////////////////////////////////////////
-from . py_grips import PyGrips
+from .py_grips.py_grips import PyGrips
 
 # LEFT MENU
 # ///////////////////////////////////////////////////////////////
-from . py_left_menu import PyLeftMenu
+from .py_left_menu.py_left_menu import PyLeftMenu
 
 # PY LEFT COLUMN
 # ///////////////////////////////////////////////////////////////
-from . py_left_column import PyLeftColumn
+from .py_left_column.py_left_column import PyLeftColumn
 
 # PY TITLE BAR
 # ///////////////////////////////////////////////////////////////
-from . py_title_bar import PyTitleBar
+from .py_title_bar.py_title_bar import PyTitleBar
 
 # PY CREDITS
 # ///////////////////////////////////////////////////////////////
-from . py_credits_bar import PyCredits
+from .py_credits_bar.py_credits import PyCredits
 
 # PY PUSH BUTTON
 # ///////////////////////////////////////////////////////////////
-from . py_push_button import PyPushButton
+from .py_push_button.py_push_button import PyPushButton
 
 # PY PLAYER BUTTON
 # ///////////////////////////////////////////////////////////////
-from . py_player_button import PyPlayerButton
+from .py_player_button.py_player_button import PyPlayerButton
 
 # PY TOGGLE
 # ///////////////////////////////////////////////////////////////
-from . py_toggle import PyToggle
+from .py_toggle.py_toggle import PyToggle
 
 # PY ICON BUTTON
 # ///////////////////////////////////////////////////////////////
-from . py_icon_button import PyIconButton
+from .py_icon_button.py_icon_button import PyIconButton
 
 # PY LINE EDIT
 # ///////////////////////////////////////////////////////////////
-from . py_line_edit import PyLineEdit
+from .py_line_edit.py_line_edit import PyLineEdit
 
 # PY TABLE WIDGET
 # ///////////////////////////////////////////////////////////////
-from . py_table_widget import PyTableWidget
+from .py_table_widget.py_table_widget import PyTableWidget
 
 
 # PY VERTICAL PITCH
 # ///////////////////////////////////////////////////////////////
-from . py_vertical_pitch import PyVerticalPitch
+from .py_vertical_pitch.py_vertical_pitch import PyVerticalPitch
 
 
 # PY COMBO BOX
 # ///////////////////////////////////////////////////////////////
-from . py_combo_box import PyComboBox
+from.py_combo_box.py_combo_box import PyComboBox
 
 
 # PY STATS WIDGET
 # ///////////////////////////////////////////////////////////////
-from . py_stats_widget import PyStatsWidget
+from .py_stats_widget.py_stats_widget import PyStatsWidget
 
 
 # PY SPYDER WIDGET
 # ///////////////////////////////////////////////////////////////
-from . py_stats_widget import PySpyderWidget
+from .py_stats_widget.py_spyder_widget import PySpyderWidget
 
 # PY BUTTON GROUP WIDGET
 # ///////////////////////////////////////////////////////////////
-from . py_button_group import PyButtonGroup
+from .py_button_group.py_button_group import PyButtonGroup
 
 # PY CANVAS
 # ///////////////////////////////////////////////////////////////
-from . py_canvas import PyClusteringWidget
+from .py_canvas.py_canvas import PyClusteringWidget

@@ -195,7 +195,7 @@ class PyPlayerButton(QPushButton):
             self.setFocus()
             # EMIT SIGNAL
             return self.clicked.emit()
-        elif event.button() == Qt.RightButton:
+        if event.button() == Qt.RightButton:
             self.__mousePressPos = event.globalPos()
             self.__mouseMovePos = event.globalPos()
             super(PyPlayerButton, self).mousePressEvent(event)
@@ -208,7 +208,7 @@ class PyPlayerButton(QPushButton):
             self.change_style(QEvent.MouseButtonRelease)
             # EMIT SIGNAL
             return self.released.emit()
-        elif event.button() == Qt.RightButton:
+        if event.button() == Qt.RightButton:
             if self.__mousePressPos is not None:
                 moved = event.globalPos() - self.__mousePressPos
                 if moved.manhattanLength() > 3:

@@ -129,13 +129,13 @@ Antes de comenzar, verifique si cuenta con los siguientes requisitos:
     - [x] Campo de tactica y gestión por posición
     - [x] Gráficos de estadísticas y métricas
     - [x] Gráfico de comparación de jugadores
-    - [ ] Tabla y filtrado de scouting
+    - [x] Tabla y filtrado de scouting
     - [ ] Gestion de empleados
-    - [ ] Funcionalidad sorpresa
-- [ ] Soporte multi-lenguaje
-    - [ ] Español
+    - [x] Funcionalidad sorpresa
+- [x] Soporte multi-lenguaje
+    - [x] Español
     - [x] Inglés
-- [ ] Interactividad
+- [x] Interactividad
 - [ ] Documentación
 
 Ver [issues](https://github.com/truev0/FootballManager-Helper/issues) para ver un listado de caracteristicas propuestas y errores pendientes por resolver

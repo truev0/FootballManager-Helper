@@ -41,7 +41,7 @@ def setting_up_pandas(path_file, btn_press):
             return None
         return df_p
     # LOADING SCOUTING FILE
-    elif btn_press == "scout_btn":
+    if btn_press == "scout_btn":
         try:
             html_filename = r"{}".format(path_file)
             df_s = pd.read_html(html_filename, encoding="utf-8")[0]

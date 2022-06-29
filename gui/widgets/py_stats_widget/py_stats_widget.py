@@ -14,7 +14,7 @@ from gui.core.dicts import util_lists
 
 # IMPORT PY COMBO BOX
 # ///////////////////////////////////////////////////////////////
-from gui.widgets.py_combo_box import PyComboBox
+from gui.widgets.py_combo_box.py_combo_box import PyComboBox
 
 
 # PY STATS WIDGET
