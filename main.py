@@ -14,77 +14,91 @@
 #
 # ///////////////////////////////////////////////////////////////
 
-# IMPORT INTERFACE
-# ///////////////////////////////////////////
-from gui.uis.windows.main_window.ui_interface import Ui_MainWindow
+import os
 
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////
 import sys
-import os
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# IMPORT KHAMISIKIBET WIDGET
+# ///////////////////////////////////////////
+from Custom_Widgets.Widgets import loadJsonStyle
 
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////
 # from gui.core.pyside_modules import *
-from PySide6.QtCore import Signal, QPoint, Qt, QPropertyAnimation,\
-    QEasingCurve, QRect
+from PySide6.QtCore import QEasingCurve, QPoint, QPropertyAnimation, QRect, Qt, Signal
+from PySide6.QtGui import QCloseEvent, QShowEvent
+from PySide6.QtWidgets import (
+    QApplication,
+    QComboBox,
+    QFileDialog,
+    QHeaderView,
+    QLineEdit,
+    QMainWindow,
+    QPushButton,
+    QTableView,
+)
 
-from PySide6.QtGui import QShowEvent, QCloseEvent
-
-from PySide6.QtWidgets import QMainWindow, QApplication, QLineEdit, \
-    QFileDialog, QComboBox, QTableView, QHeaderView, QPushButton
-
-# IMPORT SETTINGS
+# PROCESSING, CHARTS AND CLUSTERING MODULES
 # ///////////////////////////////////////////
-from gui.core.json_settings import Settings
+from sklearn import preprocessing
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+
+# IMPORT FM INSIDE
+# ///////////////////////////////////////////
+import gui.core.fm_insider.FMinside as FMi
+
+# IMPORT TRANSLATIONS
+# ///////////////////////////////////////////
+from gui.core.dicts import en, es, util_lists
 
 # IMPORT FUNCTIONS
 # ///////////////////////////////////////////
 # from gui.core.functions import Functions
 from gui.core.functions import set_svg_icon
 
+# IMPORT SETTINGS
+# ///////////////////////////////////////////
+from gui.core.json_settings import Settings
+
+# IMPORT CUSTOM CLASSES
+# ///////////////////////////////////////////
+from gui.core.models.CustomNestedNamespace.py_CustomNestedNamespace import (
+    NestedNamespace,
+)
+from gui.core.models.CustomNumpyListModel.py_CustomNumpyListModel import (
+    CustomizedNumpyListModel,
+)
+from gui.core.models.CustomNumpyScoutTableModel.py_CustomNumpyScoutTableModel import (
+    CustomizedNumpyScoutModel,
+)
+from gui.core.models.CustomNumpyTableModel.py_CustomNumpyTableModel import (
+    CustomizedNumpyModel,
+)
+
 # IMPORT UTILS
 # ///////////////////////////////////////////
 from gui.core.util import get_screen_size
 
-# IMPORT FM INSIDE
+# IMPORT INTERFACE
 # ///////////////////////////////////////////
-import gui.core.fm_insider.FMinside as FMi
-
-# IMPORT CUSTOM CLASSES
-# ///////////////////////////////////////////
-from gui.core.models.CustomNestedNamespace.py_CustomNestedNamespace import NestedNamespace
-from gui.core.models.CustomNumpyTableModel.py_CustomNumpyTableModel import CustomizedNumpyModel
-from gui.core.models.CustomNumpyListModel.py_CustomNumpyListModel import CustomizedNumpyListModel
-from gui.core.models.CustomNumpyScoutTableModel.py_CustomNumpyScoutTableModel import CustomizedNumpyScoutModel
-
-# IMPORT TRANSLATIONS
-# ///////////////////////////////////////////
-from gui.core.dicts import en, es, util_lists
+from gui.uis.windows.main_window.ui_interface import Ui_MainWindow
 
 # IMPORT CUSTOM WIDGETS
 # ///////////////////////////////////////////
 from gui.widgets import PyGrips
 
-# IMPORT KHAMISIKIBET WIDGET
-# ///////////////////////////////////////////
-from Custom_Widgets.Widgets import loadJsonStyle
-
-# PROCESSING, CHARTS AND CLUSTERING MODULES
-# ///////////////////////////////////////////
-from sklearn import preprocessing
-from sklearn.decomposition import PCA
-from sklearn.cluster import KMeans
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-
-plt.style.use('seaborn-whitegrid')
+plt.style.use("seaborn-whitegrid")
 
 # ADJUST QT FONT DPI FOR HIGH SCALE
 # ///////////////////////////////////////////
 os.environ["QT_FONT_DPI"] = "96"
-
 
 # MAIN WINDOW
 # ///////////////////////////////////////////
@@ -126,18 +140,18 @@ class MainWindow(QMainWindow):
         self.scoutingCounter = 0
         self.haveOldSquadInfo = False
         self.ui_text = {}
-        self.ui_text.update({'en': NestedNamespace(en.english)})
-        self.ui_text.update({'es': NestedNamespace(es.espanol)})
+        self.ui_text.update({"en": NestedNamespace(en.english)})
+        self.ui_text.update({"es": NestedNamespace(es.espanol)})
         self.ui_headers = {}
-        self.ui_headers.update({'en': NestedNamespace(en.column_headers)})
-        self.ui_headers.update({'es': NestedNamespace(es.column_headers)})
+        self.ui_headers.update({"en": NestedNamespace(en.column_headers)})
+        self.ui_headers.update({"es": NestedNamespace(es.column_headers)})
         self.default_size_notification_container = None
 
         # LOAD SETTINGS
         # ///////////////////////////////////////////
         settings = Settings()
         self.settings = settings.items
-        self.language = 'en'
+        self.language = "en"
 
         # SETUP MAIN WINDOW
         # ///////////////////////////////////////////
@@ -175,8 +189,8 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def showEvent(self, event: QShowEvent) -> None:
         self.showAnimation.setStartValue(
-            QPoint(self.x(), get_screen_size().height())
-        )
+            QPoint(self.x(),
+                   get_screen_size().height()))
         self.showAnimation.setEndValue(self.oldPos)
         self.showAnimation.setEasingCurve(QEasingCurve.OutCubic)
         self.showAnimation.start()
@@ -190,10 +204,8 @@ class MainWindow(QMainWindow):
             self.oldPos = self.pos()
             self.hideAnimation.setStartValue(self.oldPos)
             self.hideAnimation.setEndValue(
-                QPoint(
-                    self.x(), get_screen_size().height()
-                )
-            )
+                QPoint(self.x(),
+                       get_screen_size().height()))
             self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
             self.hideAnimation.start()
             self._is_started = True
@@ -209,12 +221,16 @@ class MainWindow(QMainWindow):
         # RESIZE GRIPS AND CHANGE POSITION
         if self.settings["custom_title_bar"]:
             self.left_grip.setGeometry(5, 10, 10, self.height())
-            self.right_grip.setGeometry(self.width() - 15, 10, 10, self.height())
+            self.right_grip.setGeometry(self.width() - 15, 10, 10,
+                                        self.height())
             self.top_grip.setGeometry(5, 5, self.width() - 10, 10)
-            self.bottom_grip.setGeometry(5, self.height() - 15, self.width() - 10, 10)
+            self.bottom_grip.setGeometry(5,
+                                         self.height() - 15,
+                                         self.width() - 10, 10)
             self.top_right_grip.setGeometry(self.width() - 20, 5, 15, 15)
             self.bottom_left_grip.setGeometry(5, self.height() - 20, 15, 15)
-            self.bottom_right_grip.setGeometry(self.width() - 20, self.height() - 20, 15, 15)
+            self.bottom_right_grip.setGeometry(self.width() - 20,
+                                               self.height() - 20, 15, 15)
 
     # MOUSE CLICK EVENTS
     # ///////////////////////////////////////////
@@ -254,10 +270,8 @@ class MainWindow(QMainWindow):
         self.oldPos = self.pos()
         self.hideAnimation.setStartValue(self.oldPos)
         self.hideAnimation.setEndValue(
-            QPoint(
-                self.x(), get_screen_size().height()
-            )
-        )
+            QPoint(self.x(),
+                   get_screen_size().height()))
         self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
         self.hideAnimation.setDuration(400)
         self.hideAnimation.start()
@@ -273,9 +287,8 @@ class MainWindow(QMainWindow):
                 self.x(),
                 self.y(),
                 get_screen_size().width(),
-                get_screen_size().height()
-            )
-        )
+                get_screen_size().height(),
+            ))
         self.hideAnimation.setDuration(200)
         self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
         self.hideAnimation.start()
@@ -286,11 +299,13 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def adjust_notification_container(self, btn):
         # RESET CONTAINER HEIGHT
-        self.ui.popup_notification_container.expandedHeight = self.default_size_notification_container
+        self.ui.popup_notification_container.expandedHeight = (
+            self.default_size_notification_container)
         if btn.get_len_lista() > 5:
             diff = btn.get_len_lista() - 5
             # SET + HEIGHT IF HAVE A LOT OF PLAYERS
-            self.ui.popup_notification_container.expandedHeight = self.default_size_notification_container + (12 * diff)
+            self.ui.popup_notification_container.expandedHeight = (
+                self.default_size_notification_container + (12 * diff))
         # FORMAT TEXT TO BE DISPLAYED
         tmp = btn.text_formatter()
         # DISPLAY PLAYERS
@@ -327,8 +342,10 @@ class MainWindow(QMainWindow):
             self.bottom_grip = PyGrips(self, "bottom", self.hide_grips)
             self.top_left_grip = PyGrips(self, "top_left", self.hide_grips)
             self.top_right_grip = PyGrips(self, "top_right", self.hide_grips)
-            self.bottom_left_grip = PyGrips(self, "bottom_left", self.hide_grips)
-            self.bottom_right_grip = PyGrips(self, "bottom_right", self.hide_grips)
+            self.bottom_left_grip = PyGrips(self, "bottom_left",
+                                            self.hide_grips)
+            self.bottom_right_grip = PyGrips(self, "bottom_right",
+                                             self.hide_grips)
 
     # ///////////////////////////////////////////
     # END CUSTOM FUNCTIONS FOR SETTINGS
@@ -434,11 +451,12 @@ class MainWindow(QMainWindow):
                 self.ui.set_left_column_menu(
                     menu=self.ui.left_column.menus.menu_2,
                     title="Language tab",
-                    icon_path=set_svg_icon("icon_info.svg")
+                    icon_path=set_svg_icon("icon_info.svg"),
                 )
 
         # Settings left
-        if btn.objectName() == "btn_settings" or btn.objectName() == "btn_close_left_column":
+        if (btn.objectName() == "btn_settings"
+                or btn.objectName() == "btn_close_left_column"):
             # Check if left column is visible
             if not self.ui.left_column_is_visible():
                 # Show / Hide
@@ -455,7 +473,7 @@ class MainWindow(QMainWindow):
                 self.ui.set_left_column_menu(
                     menu=self.ui.left_column.menus.menu_1,
                     title="Settings left column",
-                    icon_path=set_svg_icon("icon_settings.svg")
+                    icon_path=set_svg_icon("icon_settings.svg"),
                 )
 
         # TITLE BAR MENU
@@ -481,13 +499,13 @@ class MainWindow(QMainWindow):
         if btn.objectName() == "btn_refresh":
             for line, combo in zip(
                     self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
-                    self.ui.right_column.scroll_area_1.findChildren(QComboBox)
+                    self.ui.right_column.scroll_area_1.findChildren(QComboBox),
             ):
                 line.setText("0")
                 combo.setCurrentIndex(0)
             for line, combo in zip(
                     self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
-                    self.ui.right_column.scroll_area_2.findChildren(QComboBox)
+                    self.ui.right_column.scroll_area_2.findChildren(QComboBox),
             ):
                 line.setText("0")
                 combo.setCurrentIndex(0)
@@ -496,7 +514,8 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////
         # Button 1
         # SET DEFAULT SIZE
-        self.default_size_notification_container = self.ui.popup_notification_container.getDefaultHeight()
+        self.default_size_notification_container = (
+            self.ui.popup_notification_container.getDefaultHeight())
         if btn.objectName() == "btn_pos_1":
             self.adjust_notification_container(btn)
 
@@ -579,13 +598,18 @@ class MainWindow(QMainWindow):
     def connect_events(self):
         # CLICK EVENTS
         # ///////////////////////////////////////////
-        self.ui.load_squad_btn.clicked.connect(lambda: self.load_all_data(self.ui.load_squad_btn))
-        self.ui.load_scouting_btn.clicked.connect(lambda: self.load_all_data(self.ui.load_scouting_btn))
+        self.ui.load_squad_btn.clicked.connect(
+            lambda: self.load_all_data(self.ui.load_squad_btn))
+        self.ui.load_scouting_btn.clicked.connect(
+            lambda: self.load_all_data(self.ui.load_scouting_btn))
         # TODO ADD OLD SQUAD BUTTON
-        self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
-        self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
+        self.ui.english_language_btn.clicked.connect(
+            lambda: self.translate_lang("en"))
+        self.ui.spanish_language_btn.clicked.connect(
+            lambda: self.translate_lang("es"))
         self.ui.right_btn_3.clicked.connect(self.collect_scout_data)
-        self.ui.btn_close_notification.clicked.connect(self.ui.popup_notification_container.collapseMenu)
+        self.ui.btn_close_notification.clicked.connect(
+            self.ui.popup_notification_container.collapseMenu)
         self.ui.btn_send.clicked.connect(self.process_data_compare_players)
         self.ui.clustering_btn_send.clicked.connect(self.clustering_management)
 
@@ -593,31 +617,19 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////
         # Change to pages in right column
         self.ui.right_btn_1.clicked.connect(
-            lambda: self.ui.set_right_column_menu(
-                self.ui.right_column.menu_2
-            )
-        )
+            lambda: self.ui.set_right_column_menu(self.ui.right_column.menu_2))
 
         self.ui.right_btn_2.clicked.connect(
-            lambda: self.ui.set_right_column_menu(
-                self.ui.right_column.menu_1
-            )
-        )
+            lambda: self.ui.set_right_column_menu(self.ui.right_column.menu_1))
 
         # Change to checkbox list of stats in compare page
         self.ui.btn_compare_stats.clicked.connect(
             lambda: self.ui.set_compare_column_menu(
-                self.ui.load_pages.menu2_compare,
-                self.ui.btn_compare_stats
-            )
-        )
+                self.ui.load_pages.menu2_compare, self.ui.btn_compare_stats))
         # Change to checkbox list of metrics in compare page
         self.ui.btn_compare_attrs.clicked.connect(
             lambda: self.ui.set_compare_column_menu(
-                self.ui.load_pages.menu1_compare,
-                self.ui.btn_compare_attrs
-            )
-        )
+                self.ui.load_pages.menu1_compare, self.ui.btn_compare_attrs))
         # CHANGE EVENTS
         # ///////////////////////////////////////////
 
@@ -633,17 +645,16 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def load_all_data(self, button_object):
         # FILE DIALOG
-        dlg_file = QFileDialog.getOpenFileName(
-            self,
-            caption="Select a file",
-            filter="HTML Files (*.html)"
-        )
+        dlg_file = QFileDialog.getOpenFileName(self,
+                                               caption="Select a file",
+                                               filter="HTML Files (*.html)")
 
         # READ FILE
         if dlg_file:
-            if 'squad' in button_object.get_name():
+            if "squad" in button_object.get_name():
                 # SETTING ORIGINAL DATAFRAME
-                self.df_original = FMi.setting_up_pandas(dlg_file[0], 'squad_btn')
+                self.df_original = FMi.setting_up_pandas(
+                    dlg_file[0], "squad_btn")
                 self.process_squad_info()
 
                 self.tables_helper_squad()
@@ -651,32 +662,39 @@ class MainWindow(QMainWindow):
                 self.load_data_for_graphs()
 
                 self.create_and_load_checkboxes()
-                tmp_list = self.df_original[self.ui_headers[self.language].h.h1].values.tolist()
+                tmp_list = self.df_original[self.ui_headers[
+                    self.language].h.h1].values.tolist()
                 self.ui.clustering_player_combo.addItems(tmp_list)
                 self.add_squad_names(tmp_list)
                 self.haveSquadInfo = True
-            elif 'scouting' in button_object.get_name():
+            elif "scouting" in button_object.get_name():
                 if self.df_scouting is None:
-                    self.df_scouting = FMi.setting_up_pandas(dlg_file[0], 'scout_btn')
+                    self.df_scouting = FMi.setting_up_pandas(
+                        dlg_file[0], "scout_btn")
                 else:
-                    self.df_scouting = pd.concat([self.df_scouting, FMi.setting_up_pandas(dlg_file[0], 'scout_btn')])
+                    self.df_scouting = pd.concat([
+                        self.df_scouting,
+                        FMi.setting_up_pandas(dlg_file[0], "scout_btn"),
+                    ])
                 self.process_scouting_info()
                 self.tables_helper_scouting(self.df_scout_for_table)
-                tmp_list = self.df_scouting[self.ui_headers[self.language].h.h1].values.tolist()
+                tmp_list = self.df_scouting[self.ui_headers[
+                    self.language].h.h1].values.tolist()
                 self.create_edits_for_scouting()
                 self.create_lines_for_clustering()
                 self.add_scouting_names(tmp_list)
 
-            elif 'old' in button_object.text():
-                '''
+            elif "old" in button_object.text():
+                """
                 No implementado aun por que no se que hacer aqui
-                '''
+                """
 
     # PROCESS ACTUAL SQUAD INFO
     # ///////////////////////////////////////////
     def process_squad_info(self):
         self.df_original = FMi.convert_values(self.df_original, self.language)
-        self.df_original = FMi.create_metrics_for_gk(self.df_original, self.language)
+        self.df_original = FMi.create_metrics_for_gk(self.df_original,
+                                                     self.language)
 
         # SETTING MODIFIED DATAFRAME
         self.df_squad = FMi.data_for_rankings(self.df_original, self.language)
@@ -684,7 +702,8 @@ class MainWindow(QMainWindow):
         self.df_squad = FMi.ranking_values(self.df_squad)
 
         # SETTING DATAFRAME FOR SQUAD TABLE
-        self.df_for_table = FMi.create_df_for_squad(self.df_squad, self.language)
+        self.df_for_table = FMi.create_df_for_squad(self.df_squad,
+                                                    self.language)
         # SETTING DATAFRAME FOR SQUAD TABLE
         self.df_tactic = self.df_for_table.iloc[:, :1]
         self.df_tactic = self.df_tactic.join(self.df_for_table.iloc[:, 2:3])
@@ -693,16 +712,20 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def process_scouting_info(self):
         if self.scoutingCounter < 4:
-            self.df_scouting = FMi.convert_values(self.df_scouting, self.language)
+            self.df_scouting = FMi.convert_values(self.df_scouting,
+                                                  self.language)
             self.df_scouting = FMi.convert_values_scout(self.df_scouting)
-            self.df_scouting = FMi.create_metrics_for_gk(self.df_scouting, self.language)
+            self.df_scouting = FMi.create_metrics_for_gk(
+                self.df_scouting, self.language)
 
             # SETTING MODIFIED DATAFRAME
-            self.df_scouting = FMi.data_for_rankings(self.df_scouting, self.language)
+            self.df_scouting = FMi.data_for_rankings(self.df_scouting,
+                                                     self.language)
             self.df_scouting = FMi.round_data(self.df_scouting)
             self.df_scouting = FMi.ranking_values(self.df_scouting)
 
-            self.df_scout_for_table = FMi.create_df_for_scouting_team(self.df_scouting, self.language)
+            self.df_scout_for_table = FMi.create_df_for_scouting_team(
+                self.df_scouting, self.language)
             self.df_scout_for_table.fillna(0, inplace=True)
             self.scoutingCounter += 1
 
@@ -749,12 +772,12 @@ class MainWindow(QMainWindow):
     def load_data_for_graphs(self):
         # SETTING DATAFRAME FOR STATS / METRICS WIDGET
         self.df_helper = self.df_original.iloc[:, :2]
-        if self.language == 'en':
-            self.df_helper = self.df_helper.join(self.df_original['Salary'])
-            self.df_helper['Salary'] = self.df_helper['Salary'].fillna(0)
-        elif self.language == 'es':
-            self.df_helper = self.df_helper.join(self.df_original['Sueldo'])
-            self.df_helper['Sueldo'] = self.df_helper['Sueldo'].fillna(0)
+        if self.language == "en":
+            self.df_helper = self.df_helper.join(self.df_original["Salary"])
+            self.df_helper["Salary"] = self.df_helper["Salary"].fillna(0)
+        elif self.language == "es":
+            self.df_helper = self.df_helper.join(self.df_original["Sueldo"])
+            self.df_helper["Sueldo"] = self.df_helper["Sueldo"].fillna(0)
         self.df_helper = self.df_helper.join(self.df_original.iloc[:, 11:44])
 
         # STATS & METRICS DATA
@@ -762,14 +785,18 @@ class MainWindow(QMainWindow):
             self.ui.graph_statistics.type_selector.clear()
             self.ui.graph_statistics.combo_selector.clear()
 
-        if self.language == 'en':
-            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o5, util_lists.list_en[0])
-            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o6, util_lists.list_en[1])
+        if self.language == "en":
+            self.ui.graph_statistics.type_selector.addItem(
+                self.ui_text[self.language].menu.o5, util_lists.list_en[0])
+            self.ui.graph_statistics.type_selector.addItem(
+                self.ui_text[self.language].menu.o6, util_lists.list_en[1])
             self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[0])
             self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[1])
-        elif self.language == 'es':
-            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o5, util_lists.list_es[0])
-            self.ui.graph_statistics.type_selector.addItem(self.ui_text[self.language].menu.o6, util_lists.list_es[1])
+        elif self.language == "es":
+            self.ui.graph_statistics.type_selector.addItem(
+                self.ui_text[self.language].menu.o5, util_lists.list_es[0])
+            self.ui.graph_statistics.type_selector.addItem(
+                self.ui_text[self.language].menu.o6, util_lists.list_es[1])
             self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[0])
             self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[1])
         self.ui.graph_statistics.chart.set_data(self.df_helper)
@@ -780,37 +807,63 @@ class MainWindow(QMainWindow):
         self.language = lang
 
         # Translating side menu buttons
-        self.ui.left_menu.findChild(QPushButton, 'btn_home').setText(self.ui_text[lang].menu.o0)
-        self.ui.left_menu.findChild(QPushButton, 'btn_squad').setText(self.ui_text[lang].menu.o1)
-        self.ui.left_menu.findChild(QPushButton, 'btn_tactic').setText(self.ui_text[lang].menu.o2)
-        self.ui.left_menu.findChild(QPushButton, 'btn_stats').setText(self.ui_text[lang].menu.oaux1)
-        self.ui.left_menu.findChild(QPushButton, 'btn_compare').setText(self.ui_text[lang].menu.o7)
-        self.ui.left_menu.findChild(QPushButton, 'btn_scouting').setText(self.ui_text[lang].menu.o8)
-        self.ui.left_menu.findChild(QPushButton, 'btn_settings').setText(self.ui_text[lang].menu.o10)
-        self.ui.left_menu.findChild(QPushButton, 'btn_languages').setText(self.ui_text[lang].menu.o11)
-        self.ui.left_menu.findChild(QPushButton, 'btn_help').setText(self.ui_text[lang].menu.o12)
+        self.ui.left_menu.findChild(QPushButton, "btn_home").setText(
+            self.ui_text[lang].menu.o0)
+        self.ui.left_menu.findChild(QPushButton, "btn_squad").setText(
+            self.ui_text[lang].menu.o1)
+        self.ui.left_menu.findChild(QPushButton, "btn_tactic").setText(
+            self.ui_text[lang].menu.o2)
+        self.ui.left_menu.findChild(QPushButton, "btn_stats").setText(
+            self.ui_text[lang].menu.oaux1)
+        self.ui.left_menu.findChild(QPushButton, "btn_compare").setText(
+            self.ui_text[lang].menu.o7)
+        self.ui.left_menu.findChild(QPushButton, "btn_scouting").setText(
+            self.ui_text[lang].menu.o8)
+        self.ui.left_menu.findChild(QPushButton, "btn_settings").setText(
+            self.ui_text[lang].menu.o10)
+        self.ui.left_menu.findChild(QPushButton, "btn_languages").setText(
+            self.ui_text[lang].menu.o11)
+        self.ui.left_menu.findChild(QPushButton, "btn_help").setText(
+            self.ui_text[lang].menu.o12)
         self.ui.left_menu.toggle_button.setText(self.ui_text[lang].menu.o4)
 
         # Translating side menu tooltips
-        self.ui.left_menu.findChild(QPushButton, 'btn_home').change_tooltip(self.ui_text[lang].menu.t0)
-        self.ui.left_menu.findChild(QPushButton, 'btn_squad').change_tooltip(self.ui_text[lang].menu.t1)
-        self.ui.left_menu.findChild(QPushButton, 'btn_tactic').change_tooltip(self.ui_text[lang].menu.t2)
-        self.ui.left_menu.findChild(QPushButton, 'btn_stats').change_tooltip(self.ui_text[lang].menu.taux1)
-        self.ui.left_menu.findChild(QPushButton, 'btn_compare').change_tooltip(self.ui_text[lang].menu.t7)
-        self.ui.left_menu.findChild(QPushButton, 'btn_scouting').change_tooltip(self.ui_text[lang].menu.t8)
-        self.ui.left_menu.findChild(QPushButton, 'btn_settings').change_tooltip(self.ui_text[lang].menu.t10)
-        self.ui.left_menu.findChild(QPushButton, 'btn_languages').change_tooltip(self.ui_text[lang].menu.t11)
-        self.ui.left_menu.findChild(QPushButton, 'btn_help').change_tooltip(self.ui_text[lang].menu.t12)
-        self.ui.left_menu.toggle_button.change_tooltip(self.ui_text[lang].menu.t4)
+        self.ui.left_menu.findChild(QPushButton, "btn_home").change_tooltip(
+            self.ui_text[lang].menu.t0)
+        self.ui.left_menu.findChild(QPushButton, "btn_squad").change_tooltip(
+            self.ui_text[lang].menu.t1)
+        self.ui.left_menu.findChild(QPushButton, "btn_tactic").change_tooltip(
+            self.ui_text[lang].menu.t2)
+        self.ui.left_menu.findChild(QPushButton, "btn_stats").change_tooltip(
+            self.ui_text[lang].menu.taux1)
+        self.ui.left_menu.findChild(QPushButton, "btn_compare").change_tooltip(
+            self.ui_text[lang].menu.t7)
+        self.ui.left_menu.findChild(QPushButton,
+                                    "btn_scouting").change_tooltip(
+                                        self.ui_text[lang].menu.t8)
+        self.ui.left_menu.findChild(QPushButton,
+                                    "btn_settings").change_tooltip(
+                                        self.ui_text[lang].menu.t10)
+        self.ui.left_menu.findChild(QPushButton,
+                                    "btn_languages").change_tooltip(
+                                        self.ui_text[lang].menu.t11)
+        self.ui.left_menu.findChild(QPushButton, "btn_help").change_tooltip(
+            self.ui_text[lang].menu.t12)
+        self.ui.left_menu.toggle_button.change_tooltip(
+            self.ui_text[lang].menu.t4)
 
         # Translating tooltip title buttons
-        self.ui.title_bar.findChild(QPushButton,
-                                    'btn_refresh').change_tooltip(self.ui_text[lang].title_buttons_tooltips.b1)
-        self.ui.title_bar.findChild(QPushButton,
-                                    'btn_top_settings').change_tooltip(self.ui_text[lang].title_buttons_tooltips.b2)
-        self.ui.title_bar.minimize_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b3)
-        self.ui.title_bar.maximize_restore_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b4)
-        self.ui.title_bar.close_button.change_tooltip(self.ui_text[lang].title_buttons_tooltips.b5)
+        self.ui.title_bar.findChild(QPushButton, "btn_refresh").change_tooltip(
+            self.ui_text[lang].title_buttons_tooltips.b1)
+        self.ui.title_bar.findChild(
+            QPushButton, "btn_top_settings").change_tooltip(
+                self.ui_text[lang].title_buttons_tooltips.b2)
+        self.ui.title_bar.minimize_button.change_tooltip(
+            self.ui_text[lang].title_buttons_tooltips.b3)
+        self.ui.title_bar.maximize_restore_button.change_tooltip(
+            self.ui_text[lang].title_buttons_tooltips.b4)
+        self.ui.title_bar.close_button.change_tooltip(
+            self.ui_text[lang].title_buttons_tooltips.b5)
 
         # Translating left inside menu
         self.ui.load_squad_btn.setText(self.ui_text[lang].left_content.b1)
@@ -822,12 +875,15 @@ class MainWindow(QMainWindow):
         self.ui.right_btn_3.setText(self.ui_text[lang].right_content.b3)
 
         # Translate page 7
-        self.ui.btn_compare_stats.setText(self.ui_text[lang].pages.p7.btn_compare_s)
-        self.ui.btn_compare_attrs.setText(self.ui_text[lang].pages.p7.btn_compare_a)
+        self.ui.btn_compare_stats.setText(
+            self.ui_text[lang].pages.p7.btn_compare_s)
+        self.ui.btn_compare_attrs.setText(
+            self.ui_text[lang].pages.p7.btn_compare_a)
         self.ui.btn_send.setText(self.ui_text[lang].pages.p7.btn_compare_d)
 
         # Translating page 10
-        self.ui.clustering_btn_send.setText(self.ui_text[lang].pages.p10.process_btn)
+        self.ui.clustering_btn_send.setText(
+            self.ui_text[lang].pages.p10.process_btn)
 
         # Translate charts
         self.ui.graph_statistics.chart.change_language(lang)
@@ -837,27 +893,31 @@ class MainWindow(QMainWindow):
     # CREATE AND LOAD CHECHBOXES TO COMPARE
     # ///////////////////////////////////////////
     def create_and_load_checkboxes(self):
-        if self.ui.group_chk_stats_widget.get_count() is not None \
-                and self.ui.group_chk_attrs_widget.get_count() is not None:
+        if (self.ui.group_chk_stats_widget.get_count() is not None
+                and self.ui.group_chk_attrs_widget.get_count() is not None):
             self.ui.group_chk_attrs_widget.remove_all_buttons()
             self.ui.group_chk_stats_widget.remove_all_buttons()
-        if self.language == 'en':
-            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_en[2], 0)
-            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_en[0], 0)
-        elif self.language == 'es':
-            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_es[2], 0)
-            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_es[0], 0)
+        if self.language == "en":
+            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_en[2],
+                                                       0)
+            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_en[0],
+                                                       0)
+        elif self.language == "es":
+            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_es[2],
+                                                       0)
+            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_es[0],
+                                                       0)
 
         # TEST SECTION
         self.ui.first_squad_player_combo.currentIndexChanged.connect(
-            self.update_inner_combo
-        )
-        self.update_inner_combo(self.ui.first_squad_player_combo.currentIndex())
+            self.update_inner_combo)
+        self.update_inner_combo(
+            self.ui.first_squad_player_combo.currentIndex())
 
         self.ui.second_squad_player_combo.currentIndexChanged.connect(
-            self.second_update_inner_combo
-        )
-        self.second_update_inner_combo(self.ui.second_squad_player_combo.currentIndex())
+            self.second_update_inner_combo)
+        self.second_update_inner_combo(
+            self.ui.second_squad_player_combo.currentIndex())
 
     def update_inner_combo(self, index):
         first_dependent_list = self.ui.first_squad_player_combo.itemData(index)
@@ -866,30 +926,37 @@ class MainWindow(QMainWindow):
             self.ui.first_player_combo.addItems(first_dependent_list)
 
     def second_update_inner_combo(self, index):
-        second_dependent_list = self.ui.second_squad_player_combo.itemData(index)
+        second_dependent_list = self.ui.second_squad_player_combo.itemData(
+            index)
         if second_dependent_list:
             self.ui.second_player_combo.clear()
             self.ui.second_player_combo.addItems(second_dependent_list)
 
     def create_edits_for_scouting(self):
-        if self.ui.group_lineedits_attrs_widget.get_lines() is not None and \
-                self.ui.group_lineedits_stats_widget.get_lines() is not None:
+        if (self.ui.group_lineedits_attrs_widget.get_lines() is not None and
+                self.ui.group_lineedits_stats_widget.get_lines() is not None):
             self.ui.group_lineedits_attrs_widget.reset_all_lines()
             self.ui.group_lineedits_stats_widget.reset_all_lines()
-        if self.language == 'en':
-            self.ui.group_lineedits_attrs_widget.add_buttons(util_lists.list_en[2], 1)
-            self.ui.group_lineedits_stats_widget.add_buttons(util_lists.list_en[0], 1)
-        elif self.language == 'es':
-            self.ui.group_lineedits_attrs_widget.add_buttons(util_lists.list_es[2], 1)
-            self.ui.group_lineedits_stats_widget.add_buttons(util_lists.list_es[0], 1)
+        if self.language == "en":
+            self.ui.group_lineedits_attrs_widget.add_buttons(
+                util_lists.list_en[2], 1)
+            self.ui.group_lineedits_stats_widget.add_buttons(
+                util_lists.list_en[0], 1)
+        elif self.language == "es":
+            self.ui.group_lineedits_attrs_widget.add_buttons(
+                util_lists.list_es[2], 1)
+            self.ui.group_lineedits_stats_widget.add_buttons(
+                util_lists.list_es[0], 1)
 
     def create_lines_for_clustering(self):
         if self.ui.group_clustering_filters.get_lines() is not None:
             self.ui.group_clustering_filters.reset_all_lines()
-        if self.language == 'en':
-            self.ui.group_clustering_filters.add_buttons(util_lists.filters_en, 2)
-        elif self.language == 'es':
-            self.ui.group_clustering_filters.add_buttons(util_lists.filters_es, 2)
+        if self.language == "en":
+            self.ui.group_clustering_filters.add_buttons(
+                util_lists.filters_en, 2)
+        elif self.language == "es":
+            self.ui.group_clustering_filters.add_buttons(
+                util_lists.filters_es, 2)
 
     # THREE FUNCTIONS FOR ACTUAL SQUAD, SCOUT, OLD SQUAD
     # //////////////////////////////////////////////////
@@ -899,8 +966,10 @@ class MainWindow(QMainWindow):
             self.ui.first_player_combo.clear()
             self.ui.second_squad_player_combo.clear()
             self.ui.second_player_combo.clear()
-        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
-        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g0, tmp_l)
+        self.ui.first_squad_player_combo.addItem(
+            self.ui_text[self.language].menu.g0, tmp_l)
+        self.ui.second_squad_player_combo.addItem(
+            self.ui_text[self.language].menu.g0, tmp_l)
         self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_squad)
 
     def add_scouting_names(self, tmp_l):
@@ -909,8 +978,10 @@ class MainWindow(QMainWindow):
             self.ui.first_player_combo.clear()
             self.ui.second_squad_player_combo.clear()
             self.ui.second_player_combo.clear()
-        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, tmp_l)
-        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g1, tmp_l)
+        self.ui.first_squad_player_combo.addItem(
+            self.ui_text[self.language].menu.g1, tmp_l)
+        self.ui.second_squad_player_combo.addItem(
+            self.ui_text[self.language].menu.g1, tmp_l)
         self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_scouting)
 
     def add_old_squad_names(self):
@@ -920,8 +991,10 @@ class MainWindow(QMainWindow):
             self.ui.first_player_combo.clear()
             self.ui.second_squad_player_combo.clear()
             self.ui.second_player_combo.clear()
-        self.ui.first_squad_player_combo.addItem(self.ui_text[self.language].menu.g2, [])
-        self.ui.second_squad_player_combo.addItem(self.ui_text[self.language].menu.g2, [])
+        self.ui.first_squad_player_combo.addItem(
+            self.ui_text[self.language].menu.g2, [])
+        self.ui.second_squad_player_combo.addItem(
+            self.ui_text[self.language].menu.g2, [])
 
     # SEND DATA FOR COMPARE GRAPHIC
     # ///////////////////////////////////////////////////
@@ -931,177 +1004,176 @@ class MainWindow(QMainWindow):
         squad = []
         if not self.ui.btn_compare_attrs.isEnabled():
             for i in range(self.ui.group_chk_attrs_widget.get_count()):
-                if self.ui.group_chk_attrs_widget.button_group.button(i).isChecked():
-                    checked_buttons.append(self.ui.group_chk_attrs_widget.button_group.button(i).get_name())
+                if self.ui.group_chk_attrs_widget.button_group.button(
+                        i).isChecked():
+                    checked_buttons.append(
+                        self.ui.group_chk_attrs_widget.button_group.button(
+                            i).get_name())
         elif not self.ui.btn_compare_stats.isEnabled():
             for i in range(self.ui.group_chk_stats_widget.get_count()):
-                if self.ui.group_chk_stats_widget.button_group.button(i).isChecked():
-                    checked_buttons.append(self.ui.group_chk_stats_widget.button_group.button(i).get_name())
-        actual_players.append(
-            self.ui.first_player_combo.currentText()
-        )
-        actual_players.append(
-            self.ui.second_player_combo.currentText()
-        )
-        squad.append(
-            self.ui.first_squad_player_combo.currentText()
-        )
-        squad.append(
-            self.ui.second_squad_player_combo.currentText(),
-        )
+                if self.ui.group_chk_stats_widget.button_group.button(
+                        i).isChecked():
+                    checked_buttons.append(
+                        self.ui.group_chk_stats_widget.button_group.button(
+                            i).get_name())
+        actual_players.append(self.ui.first_player_combo.currentText())
+        actual_players.append(self.ui.second_player_combo.currentText())
+        squad.append(self.ui.first_squad_player_combo.currentText())
+        squad.append(self.ui.second_squad_player_combo.currentText(), )
         return actual_players, squad, checked_buttons
 
     def process_data_compare_players(self):
         players_info, squads, options_info = self.send_data_compare_graphic()
-        self.ui.spyder_graph_widget.spyder_chart.set_chart(players_info, squads, options_info)
+        self.ui.spyder_graph_widget.spyder_chart.set_chart(
+            players_info, squads, options_info)
 
     def collect_scout_data(self):
         attrs_set = []
         stats_set = []
-        if self.language == 'en':
+        if self.language == "en":
             for value_child, operator_child, identifier in zip(
                     self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
                     self.ui.right_column.scroll_area_1.findChildren(QComboBox),
-                    util_lists.list_en[2]
+                    util_lists.list_en[2],
             ):
-                if value_child.text() == '':
+                if value_child.text() == "":
                     tmp_value_child = float(0)
                 else:
-                    tmp_value_child = float(value_child.text().replace(',', '.'))
+                    tmp_value_child = float(value_child.text().replace(
+                        ",", "."))
 
-                attrs_set.append(
-                    [
-                        identifier,
-                        operator_child.currentText(),
-                        tmp_value_child
-                    ]
-                )
+                attrs_set.append([
+                    identifier,
+                    operator_child.currentText(), tmp_value_child
+                ])
             for value_child, operator_child, identifier in zip(
                     self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
                     self.ui.right_column.scroll_area_2.findChildren(QComboBox),
-                    util_lists.list_en[0]
+                    util_lists.list_en[0],
             ):
-                if value_child.text() == '':
+                if value_child.text() == "":
                     tmp_value_child = float(0)
                 else:
-                    tmp_value_child = float(value_child.text().replace(',', '.'))
+                    tmp_value_child = float(value_child.text().replace(
+                        ",", "."))
 
-                stats_set.append(
-                    [
-                        identifier,
-                        operator_child.currentText(),
-                        tmp_value_child
-                    ]
-                )
-        if self.language == 'es':
+                stats_set.append([
+                    identifier,
+                    operator_child.currentText(), tmp_value_child
+                ])
+        if self.language == "es":
             for value_child, operator_child, identifier in zip(
                     self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
                     self.ui.right_column.scroll_area_1.findChildren(QComboBox),
-                    util_lists.list_es[2]
+                    util_lists.list_es[2],
             ):
-                if value_child.text() == '':
+                if value_child.text() == "":
                     tmp_value_child = float(0)
                 else:
-                    tmp_value_child = float(value_child.text().replace(',', '.'))
+                    tmp_value_child = float(value_child.text().replace(
+                        ",", "."))
 
-                attrs_set.append(
-                    [
-                        identifier,
-                        operator_child.currentText(),
-                        tmp_value_child
-                    ]
-                )
+                attrs_set.append([
+                    identifier,
+                    operator_child.currentText(), tmp_value_child
+                ])
             for value_child, operator_child, identifier in zip(
                     self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
                     self.ui.right_column.scroll_area_2.findChildren(QComboBox),
-                    util_lists.list_es[0]
+                    util_lists.list_es[0],
             ):
-                if value_child.text() == '':
+                if value_child.text() == "":
                     tmp_value_child = float(0)
                 else:
-                    tmp_value_child = float(value_child.text().replace(',', '.'))
+                    tmp_value_child = float(value_child.text().replace(
+                        ",", "."))
 
-                stats_set.append(
-                    [
-                        identifier,
-                        operator_child.currentText(),
-                        tmp_value_child
-                    ]
-                )
+                stats_set.append([
+                    identifier,
+                    operator_child.currentText(), tmp_value_child
+                ])
         self.filter_scout_data(stats_set, attrs_set)
 
     def filter_scout_data(self, stats, attrs):
         filtered_df = self.df_scout_for_table.copy()
         for i in range(len(attrs)):
-            if attrs[i][1] == '>' and attrs[i][2] == 0.0:
+            if attrs[i][1] == ">" and attrs[i][2] == 0.0:
                 continue
-            if attrs[i][1] == '>':
-                filtered_df = filtered_df[filtered_df[attrs[i][0]] > attrs[i][2]]
-            if attrs[i][1] == '<':
+            if attrs[i][1] == ">":
+                filtered_df = filtered_df[
+                    filtered_df[attrs[i][0]] > attrs[i][2]]
+            if attrs[i][1] == "<":
                 if attrs[i][2] > 0.0:
-                    filtered_df = filtered_df[filtered_df[attrs[i][0]] < attrs[i][2]]
+                    filtered_df = filtered_df[
+                        filtered_df[attrs[i][0]] < attrs[i][2]]
                 elif attrs[i][2] == 0.0:
                     continue
-            if attrs[i][1] == '>=':
-                filtered_df = filtered_df[filtered_df[attrs[i][0]] >= attrs[i][2]]
-            if attrs[i][1] == '<=':
-                filtered_df = filtered_df[filtered_df[attrs[i][0]] <= attrs[i][2]]
+            if attrs[i][1] == ">=":
+                filtered_df = filtered_df[
+                    filtered_df[attrs[i][0]] >= attrs[i][2]]
+            if attrs[i][1] == "<=":
+                filtered_df = filtered_df[
+                    filtered_df[attrs[i][0]] <= attrs[i][2]]
 
         for j in range(len(stats)):
-            if stats[j][1] == '>' and stats[j][2] == 0.0:
+            if stats[j][1] == ">" and stats[j][2] == 0.0:
                 continue
-            if stats[j][1] == '>':
-                filtered_df = filtered_df[filtered_df[stats[j][0]] > stats[j][2]]
-            if stats[j][1] == '<':
+            if stats[j][1] == ">":
+                filtered_df = filtered_df[
+                    filtered_df[stats[j][0]] > stats[j][2]]
+            if stats[j][1] == "<":
                 if stats[j][2] > 0.0:
-                    filtered_df = filtered_df[filtered_df[stats[j][0]] < stats[j][2]]
+                    filtered_df = filtered_df[
+                        filtered_df[stats[j][0]] < stats[j][2]]
                 elif stats[j][2] == 0.0:
                     continue
-            if stats[j][1] == '>=':
-                filtered_df = filtered_df[filtered_df[stats[j][0]] >= stats[j][2]]
-            if stats[j][1] == '<=':
-                filtered_df = filtered_df[filtered_df[stats[j][0]] <= stats[j][2]]
+            if stats[j][1] == ">=":
+                filtered_df = filtered_df[
+                    filtered_df[stats[j][0]] >= stats[j][2]]
+            if stats[j][1] == "<=":
+                filtered_df = filtered_df[
+                    filtered_df[stats[j][0]] <= stats[j][2]]
 
         self.tables_helper_scouting(filtered_df)
 
     def collect_results_clustering(self):
         data = []
-        if self.language == 'en':
+        if self.language == "en":
             for value_child, operator_child, identifier in zip(
-                    self.ui.load_pages.clustering_filters_frame.findChildren(QLineEdit),
-                    self.ui.load_pages.clustering_filters_frame.findChildren(QComboBox),
-                    util_lists.filters_en
+                    self.ui.load_pages.clustering_filters_frame.findChildren(
+                        QLineEdit),
+                    self.ui.load_pages.clustering_filters_frame.findChildren(
+                        QComboBox),
+                    util_lists.filters_en,
             ):
-                if value_child.text() == '':
+                if value_child.text() == "":
                     tmp_value_child = float(0)
                 else:
-                    tmp_value_child = float(value_child.text().replace(',', '.'))
+                    tmp_value_child = float(value_child.text().replace(
+                        ",", "."))
 
-                data.append(
-                    [
-                        identifier,
-                        operator_child.currentText(),
-                        tmp_value_child
-                    ]
-                )
-        if self.language == 'es':
+                data.append([
+                    identifier,
+                    operator_child.currentText(), tmp_value_child
+                ])
+        if self.language == "es":
             for value_child, operator_child, identifier in zip(
-                    self.ui.load_pages.clustering_filters_frame.findChildren(QLineEdit),
-                    self.ui.load_pages.clustering_filters_frame.findChildren(QComboBox),
-                    util_lists.filters_es
+                    self.ui.load_pages.clustering_filters_frame.findChildren(
+                        QLineEdit),
+                    self.ui.load_pages.clustering_filters_frame.findChildren(
+                        QComboBox),
+                    util_lists.filters_es,
             ):
-                if value_child.text() == '':
+                if value_child.text() == "":
                     tmp_value_child = float(0)
                 else:
-                    tmp_value_child = float(value_child.text().replace(',', '.'))
+                    tmp_value_child = float(value_child.text().replace(
+                        ",", "."))
 
-                data.append(
-                    [
-                        identifier,
-                        operator_child.currentText(),
-                        tmp_value_child
-                    ]
-                )
+                data.append([
+                    identifier,
+                    operator_child.currentText(), tmp_value_child
+                ])
 
         return data
 
@@ -1112,19 +1184,17 @@ class MainWindow(QMainWindow):
         df_alone = None
         tmp_df = None
         col_name = self.df_scouting.columns[0]
-        if self.language == 'en':
+        if self.language == "en":
             tmp_df = self.df_scouting[util_lists.numerical_clustering_en]
             complementary_df = self.df_scouting[util_lists.list_en[0]]
             df_alone = self.df_squad[self.df_squad[col_name].str.contains(
-                self.ui.clustering_player_combo.currentText()
-            )]
+                self.ui.clustering_player_combo.currentText())]
             df_alone = df_alone[util_lists.numerical_clustering_en]
-        elif self.language == 'es':
+        elif self.language == "es":
             tmp_df = self.df_scouting[util_lists.numerical_clustering_es]
             complementary_df = self.df_scouting[util_lists.list_es[0]]
             df_alone = self.df_squad[self.df_squad[col_name].str.contains(
-                self.ui.clustering_player_combo.currentText()
-            )]
+                self.ui.clustering_player_combo.currentText())]
             df_alone = df_alone[util_lists.numerical_clustering_es]
 
         df_player_clusters = tmp_df.fillna(tmp_df.mean())
@@ -1148,56 +1218,60 @@ class MainWindow(QMainWindow):
         centroid = kmeans.cluster_centers_
         clusters = kmeans.labels_.tolist()
 
-        reduced['cluster'] = clusters
+        reduced["cluster"] = clusters
         reduced[col_name] = names
-        reduced = pd.concat(
-            [
-                reduced,
-                complementary_df
-            ],
-            axis=1
-        )
+        reduced = pd.concat([reduced, complementary_df], axis=1)
 
-        base_columns = ['x', 'y', 'cluster', col_name]
-        if self.language == 'en':
+        base_columns = ["x", "y", "cluster", col_name]
+        if self.language == "en":
             base_columns_plus = base_columns + util_lists.list_en[0]
-        elif self.language == 'es':
+        elif self.language == "es":
             base_columns_plus = base_columns + util_lists.list_es[0]
 
         reduced.columns = base_columns_plus
 
-        player_x = float(reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]['x'].tolist()[0])
-        player_y = float(reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]['y'].tolist()[0])
+        player_x = float(
+            reduced[reduced[col_name] == self.ui.clustering_player_combo.
+                    currentText()]["x"].tolist()[0])
+        player_y = float(
+            reduced[reduced[col_name] == self.ui.clustering_player_combo.
+                    currentText()]["y"].tolist()[0])
 
-        reduced['dist_to_player'] = np.sqrt((player_x - reduced['x']) ** 2 + (player_y - reduced['y']) ** 2)
+        reduced["dist_to_player"] = np.sqrt((player_x - reduced["x"])**2 +
+                                            (player_y - reduced["y"])**2)
 
-        player_cluster = int(reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]['cluster'].
-                             tolist()[0])
-        df_p_s_c = reduced[(reduced['cluster'] == player_cluster)]
+        player_cluster = int(
+            reduced[reduced[col_name] == self.ui.clustering_player_combo.
+                    currentText()]["cluster"].tolist()[0])
+        df_p_s_c = reduced[(reduced["cluster"] == player_cluster)]
         for index, element in enumerate(tmp_filters):
-            if tmp_filters[index][1] == '>' and tmp_filters[index][2] == 0.0:
+            if tmp_filters[index][1] == ">" and tmp_filters[index][2] == 0.0:
                 continue
-            if tmp_filters[index][1] == '>':
-                df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] > tmp_filters[index][2]]
-            if tmp_filters[index][1] == '<':
+            if tmp_filters[index][1] == ">":
+                df_p_s_c = df_p_s_c[
+                    df_p_s_c[tmp_filters[index][0]] > tmp_filters[index][2]]
+            if tmp_filters[index][1] == "<":
                 if tmp_filters[index][2] > 0.0:
-                    df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] < tmp_filters[index][2]]
+                    df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] <
+                                        tmp_filters[index][2]]
                 elif tmp_filters[index][2] == 0.0:
                     continue
 
-            if tmp_filters[index][1] == '>=':
-                df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] >= tmp_filters[index][2]]
+            if tmp_filters[index][1] == ">=":
+                df_p_s_c = df_p_s_c[
+                    df_p_s_c[tmp_filters[index][0]] >= tmp_filters[index][2]]
 
-            if tmp_filters[index][1] == '<=':
-                df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] <= tmp_filters[index][2]]
+            if tmp_filters[index][1] == "<=":
+                df_p_s_c = df_p_s_c[
+                    df_p_s_c[tmp_filters[index][0]] <= tmp_filters[index][2]]
 
-        df_p_s_c = df_p_s_c[
-            df_p_s_c[col_name] != self.ui.clustering_player_combo.currentText()
-            ]
-        df_p_s_c = df_p_s_c.sort_values(by='dist_to_player', ascending=True)
+        df_p_s_c = df_p_s_c[df_p_s_c[col_name] !=
+                            self.ui.clustering_player_combo.currentText()]
+        df_p_s_c = df_p_s_c.sort_values(by="dist_to_player", ascending=True)
         printable_names = df_p_s_c[col_name].values.tolist()
-        self.ui.clustering_chart.inner_chart.update_chart(reduced, printable_names,
-                                                          self.ui.clustering_player_combo.currentText())
+        self.ui.clustering_chart.inner_chart.update_chart(
+            reduced, printable_names,
+            self.ui.clustering_player_combo.currentText())
         self.ui.clustering_chart.add_player_to_list(printable_names)
 
     # ///////////////////////////////////////////
