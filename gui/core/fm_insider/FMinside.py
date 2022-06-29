@@ -129,21 +129,22 @@ def round_data(df):
 # Load data to make metrics for rankings
 # ///////////////////////////////////////////////////////////////
 def data_for_rankings(df, lang):
-    file = None
+    c = None
     if lang == 'en':
-        file = open("gui/core/fm_insider/data_ranking_values_en.json", mode="r", encoding="utf-8")
+        with open("gui/core/fm_insider/data_ranking_values_en.json", mode="r", encoding="utf-8") as f:
+            c = f.read()
     elif lang == 'es':
-        file = open("gui/core/fm_insider/data_ranking_values_es.json", mode="r", encoding="utf-8")
-    c = file.read()
-    file.close()
+        with open("gui/core/fm_insider/data_ranking_values_es.json", mode="r", encoding="utf-8") as f:
+            c = f.read()
+
     js_positions = json.loads(c)
     for p in range(len(js_positions["positionEvaluation"]) - 1):
         aux_string = js_positions["positionEvaluation"][p]["position"]
         aux_coef1 = js_positions["positionEvaluation"][p]["coef1"]
         aux_coef2 = js_positions["positionEvaluation"][p]["coef2"]
         df[aux_string] = 0
-        for e in range(len(js_positions["positionEvaluation"][p]["sumElements"])):
-            tmp_value = js_positions["positionEvaluation"][p]["sumElements"][e]
+        for index, element in enumerate(js_positions["positionEvaluation"][p]["sumElements"]):
+            tmp_value = js_positions["positionEvaluation"][p]["sumElements"][index]
             df[aux_string] = df[aux_string] + df[tmp_value]
         df[aux_string] = (df[aux_string] / aux_coef1) + aux_coef2
 
