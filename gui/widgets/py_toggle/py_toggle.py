@@ -51,7 +51,7 @@ class PyToggle(QCheckBox):
         else:
             self.animation.setEndValue(4)
         self.animation.start()
-    
+
     def hitButton(self, pos: QPoint):
         return self.contentsRect().contains(pos)
 

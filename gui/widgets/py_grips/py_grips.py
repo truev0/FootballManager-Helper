@@ -27,7 +27,7 @@ class PyGrips(QWidget):
             grip = QSizeGrip(self.wi.top_left_grip)
             grip.setFixedSize(self.wi.top_left_grip.size())
             self.setGeometry(5, 5, 15, 15)
-            
+
             # ENABLE COLOR
             if disable_color:
                 self.wi.top_left_grip.setStyleSheet(self.common_background)
@@ -39,7 +39,7 @@ class PyGrips(QWidget):
             grip = QSizeGrip(self.wi.top_right_grip)
             grip.setFixedSize(self.wi.top_right_grip.size())
             self.setGeometry(self.parent.width() - 20, 5, 15, 15)
-            
+
             # ENABLE COLOR
             if disable_color:
                 self.wi.top_right_grip.setStyleSheet(self.common_background)
@@ -51,7 +51,7 @@ class PyGrips(QWidget):
             grip = QSizeGrip(self.wi.bottom_left_grip)
             grip.setFixedSize(self.wi.bottom_left_grip.size())
             self.setGeometry(5, self.parent.height() - 20, 15, 15)
-            
+
             # ENABLE COLOR
             if disable_color:
                 self.wi.bottom_left_grip.setStyleSheet(self.common_background)
@@ -63,7 +63,7 @@ class PyGrips(QWidget):
             grip = QSizeGrip(self.wi.bottom_right_grip)
             grip.setFixedSize(self.wi.bottom_right_grip.size())
             self.setGeometry(self.parent.width() - 20, self.parent.height() - 20, 15, 15)
-            
+
             # ENABLE COLOR
             if disable_color:
                 self.wi.bottom_right_grip.setStyleSheet(self.common_background)

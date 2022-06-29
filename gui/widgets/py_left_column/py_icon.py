@@ -32,7 +32,7 @@ class PyIcon(QWidget):
         # LABEL
         self.icon = QLabel()
         self.icon.setAlignment(Qt.AlignCenter)
-        
+
         # PAINTER
         self.set_icon(self._icon_path, self._icon_color)
 
