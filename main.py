@@ -261,7 +261,7 @@ class MainWindow(QMainWindow):
         self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
         self.hideAnimation.setDuration(400)
         self.hideAnimation.start()
-        self.hideAnimation.finished.connect(lambda: self.showMinimized())
+        self.hideAnimation.finished.connect(self.showMinimized)
 
     # CREATE MAXIMIZE EVENT
     # ///////////////////////////////////////////
@@ -584,7 +584,7 @@ class MainWindow(QMainWindow):
         # TODO ADD OLD SQUAD BUTTON
         self.ui.english_language_btn.clicked.connect(lambda: self.translate_lang('en'))
         self.ui.spanish_language_btn.clicked.connect(lambda: self.translate_lang('es'))
-        self.ui.right_btn_3.clicked.connect(lambda: self.collect_scout_data())
+        self.ui.right_btn_3.clicked.connect(self.collect_scout_data)
         self.ui.btn_close_notification.clicked.connect(self.ui.popup_notification_container.collapseMenu)
         self.ui.btn_send.clicked.connect(self.process_data_compare_players)
         self.ui.clustering_btn_send.clicked.connect(self.clustering_management)
