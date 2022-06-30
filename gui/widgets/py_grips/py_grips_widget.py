@@ -7,9 +7,18 @@ from PySide6.QtWidgets import QFrame, QSizeGrip, QWidget
 
 # PY GRIPS
 # ///////////////////////////////////////////////////////////////
+# This class is a QWidget that contains Grips for application
 class PyGrips(QWidget):
 
     def __init__(self, parent, position, disable_color=False):
+        """
+        It creates a QSizeGrip object and attaches it to the parent widget
+
+        :param parent: The parent widget
+        :param position: This is the position of the grip. It can be top_left, top_right, bottom_left, bottom_right, top,
+        bottom, left, or right
+        :param disable_color: If set to True, the grip will be transparent, defaults to False (optional)
+        """
 
         # SETUP UI
         # ///////////////////////////////////////////////////////////////
@@ -161,11 +170,23 @@ class PyGrips(QWidget):
     # MOUSE RELEASE
     # ///////////////////////////////////////////////////////////////
     def mouseReleaseEvent(self, event):  # skipcq: PYL-W0613
+        """
+        > The function `mouseReleaseEvent` is a member of the class `QtGui.QWidget` and is called when the mouse button is
+        released
+
+        :param event: the event that triggered the method
+        """
         self.mousePos = None
 
     # RESIZE EVENT
     # ///////////////////////////////////////////////////////////////
     def resizeEvent(self, event):  # skipcq: PYL-W0613
+        """
+        It checks if the widget has a top_grip, bottom_grip, left_grip, right_grip, top_right_grip, bottom_left_grip, or
+        bottom_right_grip attribute, and if it does, it sets the geometry of that attribute to the appropriate size
+
+        :param event: The event object that was passed to the event handler
+        """
         if hasattr(self.wi, "top_grip"):
             self.wi.top_grip.setGeometry(0, 0, self.width(), 10)
 
@@ -191,9 +212,15 @@ class PyGrips(QWidget):
 
 # GRIP WIDGTES
 # ///////////////////////////////////////////////////////////////
+# Widgets are objects for grips
 class Widgets(object):
 
     def top_left(self, form):
+        """
+        It creates a frame in the top left corner of the window.
+
+        :param form: The form that the grip is being added to
+        """
         self.top_left_grip = QFrame(form)
         self.top_left_grip.setObjectName("top_left_grip")
         self.top_left_grip.setFixedSize(15, 15)
@@ -201,6 +228,11 @@ class Widgets(object):
             "background-color: #333; border: 2px solid #55FF00;")
 
     def top_right(self, form):
+        """
+        It creates a frame in the top right corner of the window.
+
+        :param form: The form that the grip is being added to
+        """
         self.top_right_grip = QFrame(form)
         self.top_right_grip.setObjectName("top_right_grip")
         self.top_right_grip.setFixedSize(15, 15)
@@ -208,6 +240,11 @@ class Widgets(object):
             "background-color: #333; border: 2px solid #55FF00;")
 
     def bottom_left(self, form):
+        """
+        It creates a frame in the bottom left corner of the window.
+
+        :param form: The form that the grip is being added to
+        """
         self.bottom_left_grip = QFrame(form)
         self.bottom_left_grip.setObjectName("bottom_left_grip")
         self.bottom_left_grip.setFixedSize(15, 15)
@@ -215,6 +252,12 @@ class Widgets(object):
             "background-color: #333; border: 2px solid #55FF00;")
 
     def bottom_right(self, form):
+        """
+        It creates a frame that is 15x15 pixels in size and sets the background color to #333 and the border to 2px solid
+        #55FF00.
+
+        :param form: The form that the grip is being added to
+        """
         self.bottom_right_grip = QFrame(form)
         self.bottom_right_grip.setObjectName("bottom_right_grip")
         self.bottom_right_grip.setFixedSize(15, 15)
@@ -222,6 +265,11 @@ class Widgets(object):
             "background-color: #333; border: 2px solid #55FF00;")
 
     def top(self, form):
+        """
+        It creates a QFrame object, sets its geometry, style, and cursor, and then adds it to the form
+
+        :param form: the form that the grip is being added to
+        """
         self.top_grip = QFrame(form)
         self.top_grip.setObjectName("top_grip")
         self.top_grip.setGeometry(QRect(0, 0, 500, 10))
@@ -229,6 +277,11 @@ class Widgets(object):
         self.top_grip.setCursor(QCursor(Qt.SizeVerCursor))
 
     def bottom(self, form):
+        """
+        It creates a QFrame object, sets its geometry, style, and cursor, and then adds it to the form
+
+        :param form: the form that the grip is being added to
+        """
         self.bottom_grip = QFrame(form)
         self.bottom_grip.setObjectName("bottom_grip")
         self.bottom_grip.setGeometry(QRect(0, 0, 500, 10))
@@ -236,6 +289,11 @@ class Widgets(object):
         self.bottom_grip.setCursor(QCursor(Qt.SizeVerCursor))
 
     def left(self, form):
+        """
+        It creates a frame that is 10 pixels wide and 480 pixels high, and sets the cursor to a horizontal resize cursor
+
+        :param form: the form that the grip is being added to
+        """
         self.left_grip = QFrame(form)
         self.left_grip.setObjectName("left")
         self.left_grip.setGeometry(QRect(0, 10, 10, 480))
@@ -244,6 +302,11 @@ class Widgets(object):
         self.left_grip.setStyleSheet("background-color: rgb(255, 121, 198);")
 
     def right(self, form):
+        """
+        It creates a QFrame object, sets its geometry, minimum size, cursor, and style sheet
+
+        :param form: the parent widget
+        """
         self.right_grip = QFrame(form)
         self.right_grip.setObjectName("right")
         self.right_grip.setGeometry(QRect(0, 0, 10, 500))

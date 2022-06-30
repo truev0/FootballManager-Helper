@@ -18,10 +18,12 @@ from gui.widgets import PyToggle, PyLineEdit, PyComboBox
 
 # PY BUTTON GROUP
 # ////////////////////////////////////////////////////////////////
+# It's a widget that contains a group of buttons
 class PyButtonGroup(QWidget):
-    def __init__(
-            self
-    ):
+    def __init__(self):
+        """
+        I'm trying to create a button group that will allow me to select multiple buttons
+        """
         super().__init__()
         # LOAD THEME COLOR
         # ///////////////////////////////////////////////////////////////
@@ -39,6 +41,12 @@ class PyButtonGroup(QWidget):
         self.button_group.setExclusive(False)
 
     def add_buttons(self, names, opt):
+        """
+        It adds buttons to a layout
+
+        :param names: list of strings
+        :param opt: 0 for checkboxes, 1 for line edits, 2 for line edits and combo boxes
+        """
         operators = ['>', '<', '<=', '>=']
         i = 0
         if opt == 0:
@@ -162,15 +170,29 @@ class PyButtonGroup(QWidget):
                 self.layout.addWidget(custom_widget2, *pos_c)
 
     def remove_all_buttons(self):
+        """
+        It removes all buttons from the button group
+        """
         for i in range(self._count):
             self.button_group.removeButton(self.button_group.button(i))
 
     def reset_all_lines(self):
+        """
+        It finds all the QLineEdit objects in the current window and clears them
+        """
         for child in self.findChildren(QLineEdit):
             child.clear()
 
     def get_count(self):
+        """
+        It returns the value of the private variable _count
+        :return: The count of the number of times the object has been incremented.
+        """
         return self._count
 
     def get_lines(self):
+        """
+        It returns the lines of the file.
+        :return: The lines of the file.
+        """
         return self._lines

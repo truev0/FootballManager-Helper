@@ -6,8 +6,14 @@ from PySide6.QtWidgets import QVBoxLayout, QFrame, QStackedWidget, QWidget, QHBo
 from PySide6.QtCore import QSize, Qt, QMetaObject, QCoreApplication
 
 
+# This class is used to create the right column of the main window
 class Ui_RightColumn(object):
     def setupUi(self, RightColumn):
+        """
+        Set interface for left column widget
+
+        :param RightColumn: The name of the widget that will be created
+        """
         if not RightColumn.objectName():
             RightColumn.setObjectName(u"RightColumn")
         RightColumn.resize(240, 600)

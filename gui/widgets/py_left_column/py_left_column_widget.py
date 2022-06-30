@@ -18,6 +18,7 @@ from .py_icon import PyIcon
 from gui.uis.columns.ui_left_column import Ui_LeftColumn
 
 
+# This class is a subclass of QWidget that creates a left column of buttons for the Python tab.
 class PyLeftColumn(QWidget):
     # SIGNALS
     clicked = Signal(object)
@@ -43,6 +44,27 @@ class PyLeftColumn(QWidget):
             icon_close_path,
             radius=8
     ):
+        """
+              This function is the constructor for the class LeftColumn
+
+              :param parent: The parent widget of the window
+              :param app_parent: The parent of the application
+              :param text_title: The text that will be displayed on the title bar
+              :param text_title_size: The size of the text in the title bar
+              :param text_title_color: The color of the text in the title bar
+              :param dark_one: This is a boolean value that determines whether the window is dark or light
+              :param bg_color: The background color of the menu
+              :param btn_color: The color of the button when it's not being hovered over or pressed
+              :param btn_color_hover: The color of the button when the mouse is hovering over it
+              :param btn_color_pressed: The color of the button when it's pressed
+              :param icon_path: The path to the icon you want to use for the button
+              :param icon_color: The color of the icon when the button is not being hovered over or pressed
+              :param icon_color_hover: The color of the icon when the mouse is hovering over it
+              :param icon_color_pressed: The color of the icon when the button is pressed
+              :param context_color: The color of the context menu
+              :param icon_close_path: The path to the icon you want to use for the close button
+              :param radius: The radius of the rounded corners of the window, defaults to 8 (optional)
+              """
         super().__init__()
 
         # PARAMETERS
@@ -78,14 +100,23 @@ class PyLeftColumn(QWidget):
     # TITLE LEFT COLUMN EMIT SIGNALS
     # ///////////////////////////////////////////////////////////////
     def btn_clicked(self):
+        """
+        The function is called when the button is clicked
+        """
         self.clicked.emit(self.btn_close)
 
     def btn_released(self):
+        """
+        The function is called when the button is released
+        """
         self.released.emit(self.btn_close)
 
     # WIDGETS
     # ///////////////////////////////////////////////////////////////
     def setup_ui(self):
+        """
+        It sets the interface for left column
+        """
         # BASE LAYOUT
         self.base_layout = QVBoxLayout(self)
         self.base_layout.setContentsMargins(0, 0, 0, 0)
@@ -97,7 +128,7 @@ class PyLeftColumn(QWidget):
         self.title_frame.setMaximumHeight(47)
         self.title_frame.setMinimumHeight(47)
 
-        # TITLE BASE LAYOUT 
+        # TITLE BASE LAYOUT
         self.title_base_layout = QVBoxLayout(self.title_frame)
         self.title_base_layout.setContentsMargins(5, 3, 5, 3)
 

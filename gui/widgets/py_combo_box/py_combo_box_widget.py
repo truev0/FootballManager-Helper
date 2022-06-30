@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QComboBox
 
 # PY COMBO BOX
 # ///////////////////////////////////////////////////////////
+# It's a QComboBox that can be used in a QTableWidget
 class PyComboBox(QComboBox):
     style_combobox = """ 
         QComboBox {{		
@@ -34,6 +35,13 @@ class PyComboBox(QComboBox):
             dark_one,
             combo_border
     ):
+        """
+        I'm trying to set the style of a custom QComboBox using a style sheet
+
+        :param text_foreground: The color of the text in the combobox
+        :param dark_one: the background color of the combobox
+        :param combo_border: The border color of the combobox
+        """
         QComboBox.__init__(self)
         # LABEL SETUP
         style = self.style_combobox.format(

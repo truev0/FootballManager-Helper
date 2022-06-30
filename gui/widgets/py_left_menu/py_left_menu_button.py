@@ -17,6 +17,8 @@ from gui.core.functions import set_svg_icon
 
 # CUSTOM LEFT MENU
 # ///////////////////////////////////////////////////////////////
+# This class is a subclass of QPushButton that has a custom paintEvent() method that draws a triangle on the left side of
+# the button
 class PyLeftMenuButton(QPushButton):
     def __init__(
             self,
@@ -42,6 +44,34 @@ class PyLeftMenuButton(QPushButton):
             is_active_tab=False,
             is_toggle_active=False
     ):
+        """
+        The function is a class that inherits from QPushButton and sets the properties of the button
+
+        :param app_parent: The parent widget
+        :param text: The text that will be displayed on the button
+        :param btn_id: The name of the button
+        :param tooltip_text: The text that will be displayed when the mouse hovers over the button
+        :param margin: The margin of the button, defaults to 4 (optional)
+        :param dark_one: The background color of the button, defaults to #1b1e23 (optional)
+        :param dark_three: The background color of the button when it's not active, defaults to #21252d (optional)
+        :param dark_four: The background color of the button, defaults to #272c36 (optional)
+        :param bg_one: The background color of the button, defaults to #2c313c (optional)
+        :param icon_color: The color of the icon when the button is not active, defaults to #c3ccdf (optional)
+        :param icon_color_hover: The color of the icon when the mouse is hovering over the button, defaults to #dce1ec
+        (optional)
+        :param icon_color_pressed: The color of the icon when the button is pressed, defaults to #edf0f5 (optional)
+        :param icon_color_active: The color of the icon when the button is active, defaults to #f5f6f9 (optional)
+        :param context_color: The color of the context menu, defaults to #568af2 (optional)
+        :param text_foreground: The color of the text, defaults to #8a95aa (optional)
+        :param text_active: The color of the text when the button is active, defaults to #dce1ec (optional)
+        :param icon_path: The path to the icon you want to use, defaults to icon_add_user.svg (optional)
+        :param icon_active_menu: This is the icon that will be displayed when the button is active, defaults to
+        active_menu.svg (optional)
+        :param is_active: If the button is active, it will have a different background color, defaults to False (optional)
+        :param is_active_tab: This is used to set the active tab in the sidebar, defaults to False (optional)
+        :param is_toggle_active: This is a boolean value that determines whether the button is active or not, defaults to
+        False (optional)
+        """
         super().__init__()
         self.setText(text)
         self.setCursor(Qt.PointingHandCursor)
@@ -87,6 +117,11 @@ class PyLeftMenuButton(QPushButton):
     # SETTER FOR TRANSLATE
     # ///////////////////////////////////////////////////////////////
     def change_tooltip(self, new_tooltip):
+        """
+        It changes the tooltip text of a widget
+
+        :param new_tooltip: The new tooltip text
+        """
         self._tooltip_text = new_tooltip
         self.tooltip = _ToolTip(
             self._parent,
@@ -100,6 +135,11 @@ class PyLeftMenuButton(QPushButton):
     # PAINT EVENT
     # ///////////////////////////////////////////////////////////////
     def paintEvent(self, event):  # skipcq: PYL-W0613
+        """
+        The function is called when the widget is painted. It draws the background, the text, and the icon
+
+        :param event: The event that was triggered
+        """
         # PAINTER
         p = QPainter()
         p.begin(self)
@@ -194,6 +234,12 @@ class PyLeftMenuButton(QPushButton):
     # SET ACTIVE MENU
     # ///////////////////////////////////////////////////////////////
     def set_active(self, is_active):
+        """
+        If the button is active, set the icon color to the default color, and the background color to the default color. If
+        the button is not active, set the icon color to the default color, and the background color to the dark color
+
+        :param is_active: Boolean value to set the button to active or inactive
+        """
         self._is_active = is_active
         if not is_active:
             self._set_icon_color = self._icon_color
@@ -204,6 +250,11 @@ class PyLeftMenuButton(QPushButton):
     # SET ACTIVE TAB MENU
     # ///////////////////////////////////////////////////////////////
     def set_active_tab(self, is_active):
+        """
+        If the tab is not active, set the icon color to the icon color and the background color to the dark one
+
+        :param is_active: Boolean value that determines whether the tab is active or not
+        """
         self._is_active_tab = is_active
         if not is_active:
             self._set_icon_color = self._icon_color
@@ -214,21 +265,39 @@ class PyLeftMenuButton(QPushButton):
     # RETURN IF IS ACTIVE MENU
     # ///////////////////////////////////////////////////////////////
     def is_active(self):
+        """
+        It returns the value of the variable _is_active.
+        :return: The value of the variable _is_active
+        """
         return self._is_active
 
     # RETURN IF IS ACTIVE TAB MENU
     # ///////////////////////////////////////////////////////////////
     def is_active_tab(self):
+        """
+        It returns the value of the variable _is_active_tab.
+        :return: The value of the _is_active_tab attribute.
+        """
         return self._is_active_tab
 
     # SET ACTIVE TOGGLE
     # ///////////////////////////////////////////////////////////////
     def set_active_toggle(self, is_active):
+        """
+        This function sets the toggle button to active or inactive
+
+        :param is_active: This is a boolean value that determines whether the toggle is active or not
+        """
         self._is_toggle_active = is_active
 
     # SET ICON
     # ///////////////////////////////////////////////////////////////
     def set_icon(self, icon_path):
+        """
+        It sets the icon path and then repaints the widget
+
+        :param icon_path: The path to the icon you want to use
+        """
         self._icon_path = icon_path
         self.repaint()
 
@@ -236,6 +305,15 @@ class PyLeftMenuButton(QPushButton):
     # ///////////////////////////////////////////////////////////////
     @staticmethod
     def icon_paint(qp, image, rect, color):
+        """
+        It takes a QPainter, a QPixmap, a QRect, and a QColor, and it draws the QPixmap in the center of the QRect, with the
+        QColor as the color of the QPixmap
+
+        :param qp: the QPainter object
+        :param image: The image to be painted
+        :param rect: The rectangle to draw the icon in
+        :param color: The color to paint the icon with
+        """
         icon = QPixmap(image)
         painter = QPainter(icon)
         painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
@@ -250,6 +328,15 @@ class PyLeftMenuButton(QPushButton):
     # DRAW ACTIVE ICON / RIGHT SIDE
     # ///////////////////////////////////////////////////////////////
     def icon_active(self, qp, image, width):
+        """
+        It takes a QPainter object, a QPixmap object, and an integer as arguments. It then creates a new QPainter object,
+        sets the composition mode to SourceIn, fills the QPixmap object with the background color, draws the QPixmap object,
+        and ends the painter
+
+        :param qp: the QPainter object
+        :param image: The image to be drawn
+        :param width: the width of the widget
+        """
         icon = QPixmap(image)
         painter = QPainter(icon)
         painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
@@ -261,6 +348,14 @@ class PyLeftMenuButton(QPushButton):
     # Functions with custom styles
     # ///////////////////////////////////////////////////////////////
     def change_style(self, event):
+        """
+        If the mouse enters the button, change the background color to a darker shade of the original color. If the mouse
+        leaves the button, change the background color back to the original color. If the mouse is pressed, change the
+        background color to an even darker shade of the original color. If the mouse is released, change the background
+        color back to the darker shade of the original color
+
+        :param event: The event that is being processed
+        """
         if event == QEvent.Enter:
             if not self._is_active:
                 self._set_icon_color = self._icon_color_hover
@@ -286,6 +381,11 @@ class PyLeftMenuButton(QPushButton):
     # Event triggered when the mouse is over the BTN
     # ///////////////////////////////////////////////////////////////
     def enterEvent(self, event):  # skipcq: PYL-W0613
+        """
+        Show tooltip when the mouse leave button
+
+        :param event: The event that triggered the enterEvent
+        """
         self.change_style(QEvent.Enter)
         if self.width() == 50 and self._tooltip_text:
             self.move_tooltip()
@@ -295,6 +395,11 @@ class PyLeftMenuButton(QPushButton):
     # Event fired when the mouse leaves the BTN
     # ///////////////////////////////////////////////////////////////
     def leaveEvent(self, event):  # skipcq: PYL-W0613
+        """
+        Hide tooltip when the mouse leave button
+
+        :param event: The event that triggered the leave event
+        """
         self.change_style(QEvent.Leave)
         self.tooltip.hide()
 
@@ -302,6 +407,12 @@ class PyLeftMenuButton(QPushButton):
     # Event triggered when the left button is pressed
     # ///////////////////////////////////////////////////////////////
     def mousePressEvent(self, event):
+        """
+        If the left mouse button is pressed, change the style of the button, hide the tooltip, and emit a signal
+
+        :param event: The event that was triggered
+        :return: The clicked signal is being emitted.
+        """
         if event.button() == Qt.LeftButton:
             self.change_style(QEvent.MouseButtonPress)
             self.tooltip.hide()
@@ -311,6 +422,12 @@ class PyLeftMenuButton(QPushButton):
     # Event triggered after the mouse button is released
     # ///////////////////////////////////////////////////////////////
     def mouseReleaseEvent(self, event):
+        """
+        If the left mouse button is released, change the style of the button and emit the released signal
+
+        :param event: The event object that was passed to the event handler
+        :return: The signal is being returned.
+        """
         if event.button() == Qt.LeftButton:
             self.change_style(QEvent.MouseButtonRelease)
             return self.released.emit()
@@ -318,10 +435,13 @@ class PyLeftMenuButton(QPushButton):
     # MOVE TOOLTIP
     # ///////////////////////////////////////////////////////////////
     def move_tooltip(self):
+        """
+        The function moves the tooltip to the right of the widget, and centers it vertically
+        """
         # GET MAIN WINDOW PARENT
         gp = self.mapToGlobal(QPoint(0, 0))
 
-        # SET WIDGET TO GET POSTION
+        # SET WIDGET TO GET POSITION
         # Return absolute position of widget inside app
         pos = self._parent.mapFromGlobal(gp)
 
@@ -335,6 +455,7 @@ class PyLeftMenuButton(QPushButton):
         self.tooltip.move(pos_x, pos_y)
 
 
+# This class is a QLabel that displays a tooltip when the mouse hovers over it
 class _ToolTip(QLabel):
     # TOOLTIP / LABEL StyleSheet
     style_tooltip = """ 
@@ -358,6 +479,15 @@ class _ToolTip(QLabel):
             context_color,
             text_foreground
     ):
+        """
+        It creates a QLabel with a drop shadow and a custom style sheet
+
+        :param parent: The parent widget of the tooltip
+        :param tooltip: The text to be displayed in the tooltip
+        :param dark_one: the background color of the parent widget
+        :param context_color: The color of the tooltip's background
+        :param text_foreground: The color of the text in the tooltip
+        """
         QLabel.__init__(self)
 
         # LABEL SETUP

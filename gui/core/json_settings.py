@@ -6,6 +6,7 @@ import os
 
 # APP SETTINGS
 # ///////////////////////////////////////////////////////////////
+# > The Settings class is a container for all the settings that are used in the game
 class Settings(object):
     # APP PATH
     # ///////////////////////////////////////////////////////////////
@@ -18,6 +19,9 @@ class Settings(object):
     # INIT SETTINGS
     # ///////////////////////////////////////////////////////////////
     def __init__(self):
+        """
+        The function __init__() is a constructor that initializes the class Settings
+        """
         super(Settings, self).__init__()
 
         # DICTIONARY WITH SETTINGS
@@ -30,6 +34,9 @@ class Settings(object):
     # SERIALIZE JSON
     # ///////////////////////////////////////////////////////////////
     def serialize(self):
+        """
+        It opens a file, writes a json file, and then closes the file
+        """
         # WRITE JSON FILE
         with open(self.settings_path, "w", encoding='utf-8') as write:
             json.dump(self.items, write, indent=4)
@@ -37,6 +44,9 @@ class Settings(object):
     # DESERIALIZE JSON
     # ///////////////////////////////////////////////////////////////
     def deserialize(self):
+        """
+        > Reads a JSON file and loads it into a dictionary
+        """
         # READ JSON FILE
         with open(self.settings_path, "r", encoding='utf-8') as reader:
             settings = json.loads(reader.read())  # skipcq: PY-W0078

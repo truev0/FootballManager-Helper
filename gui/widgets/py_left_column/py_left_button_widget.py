@@ -9,6 +9,7 @@ from PySide6.QtCore import Qt, QEvent, QRect, QPoint
 
 # PY TITLE BUTTON
 # ///////////////////////////////////////////////////////////////
+# It's a QPushButton that has a custom paintEvent() method
 class PyLeftButton(QPushButton):
     def __init__(
             self,
@@ -32,6 +33,32 @@ class PyLeftButton(QPushButton):
             text_foreground="#8a95aa",
             is_active=False
     ):
+        """
+        It's a function that creates a button with a tooltip
+
+        :param parent: The parent widget of the button
+        :param app_parent: The parent of the application
+        :param tooltip_text: The text that will be displayed in the tooltip
+        :param btn_id: The name of the button
+        :param width: The width of the button, defaults to 30 (optional)
+        :param height: The height of the button, defaults to 30 (optional)
+        :param radius: The radius of the button's corners, defaults to 8 (optional)
+        :param bg_color: The background color of the button, defaults to #343b48 (optional)
+        :param bg_color_hover: The background color of the button when the mouse is hovering over it, defaults to #3c4454
+        (optional)
+        :param bg_color_pressed: The background color of the button when it's pressed, defaults to #2c313c (optional)
+        :param icon_color: The color of the icon when the button is not being hovered over or pressed, defaults to #c3ccdf
+        (optional)
+        :param icon_color_hover: The color of the icon when the mouse is hovering over the button, defaults to #dce1ec
+        (optional)
+        :param icon_color_pressed: The color of the icon when the button is pressed, defaults to #edf0f5 (optional)
+        :param icon_color_active: The color of the icon when the button is active, defaults to #f5f6f9 (optional)
+        :param icon_path: The path to the icon you want to use, defaults to no_icon.svg (optional)
+        :param dark_one: The background color of the tooltip, defaults to #1b1e23 (optional)
+        :param context_color: The color of the tooltip's background, defaults to #568af2 (optional)
+        :param text_foreground: The color of the text in the tooltip, defaults to #8a95aa (optional)
+        :param is_active: If the button is active or not, defaults to False (optional)
+        """
         super().__init__()
 
         # SET DEFAULT PARAMETERS
@@ -73,18 +100,32 @@ class PyLeftButton(QPushButton):
     # SET ACTIVE MENU
     # ///////////////////////////////////////////////////////////////
     def set_active(self, is_active):
+        """
+        It sets the active state of the button and repaints it
+
+        :param is_active: A boolean value that indicates whether the button is active or not
+        """
         self._is_active = is_active
         self.repaint()
 
     # RETURN IF IS ACTIVE MENU
     # ///////////////////////////////////////////////////////////////
     def is_active(self):
+        """
+        It returns the value of the variable _is_active.
+        :return: The value of the variable _is_active
+        """
         return self._is_active
 
     # PAINT EVENT
     # painting the button and the icon
     # ///////////////////////////////////////////////////////////////
     def paintEvent(self, event):  # skipcq: PYL-W0613
+        """
+        > The function draws a rounded rectangle with a background color and an icon
+
+        :param event: The event that triggered the paintEvent
+        """
         # PAINTER
         paint = QPainter()
         paint.begin(self)
@@ -117,6 +158,15 @@ class PyLeftButton(QPushButton):
     # Functions with custom styles
     # ///////////////////////////////////////////////////////////////
     def change_style(self, event):
+        """
+        If the mouse enters the button, change the background color to the hover color and the icon color to the hover
+        color. If the mouse leaves the button, change the background color to the normal color and the icon color to the
+        normal color. If the mouse is pressed, change the background color to the pressed color and the icon color to the
+        pressed color. If the mouse is released, change the background color to the hover color and the icon color to the
+        hover color
+
+        :param event: The event that triggered the change
+        """
         if event == QEvent.Enter:
             self._set_bg_color = self._bg_color_hover
             self._set_icon_color = self._icon_color_hover
@@ -138,6 +188,11 @@ class PyLeftButton(QPushButton):
     # Event triggered when the mouse is over the BTN
     # ///////////////////////////////////////////////////////////////
     def enterEvent(self, event):  # skipcq: PYL-W0613
+        """
+        > When the mouse enter the button, change the style of the button and show the tooltip
+
+        :param event: The event that triggered this method
+        """
         self.change_style(QEvent.Enter)
         self.move_tooltip()
         self._tooltip.show()
@@ -146,6 +201,11 @@ class PyLeftButton(QPushButton):
     # Event fired when the mouse leaves the BTN
     # ///////////////////////////////////////////////////////////////
     def leaveEvent(self, event):  # skipcq: PYL-W0613
+        """
+        > When the mouse leaves the button, change the style of the button and hide the tooltip
+
+        :param event: The event that triggered the leave event
+        """
         self.change_style(QEvent.Leave)
         self.move_tooltip()
         self._tooltip.hide()
@@ -154,6 +214,13 @@ class PyLeftButton(QPushButton):
     # Event triggered when the left button is pressed
     # ///////////////////////////////////////////////////////////////
     def mousePressEvent(self, event):
+        """
+        If the left mouse button is pressed, change the style of the button, set focus to the button, and emit the clicked
+        signal.
+
+        :param event: The event that was triggered
+        :return: The clicked signal is being emitted.
+        """
         if event.button() == Qt.LeftButton:
             self.change_style(QEvent.MouseButtonPress)
             # SET FOCUS
@@ -165,6 +232,12 @@ class PyLeftButton(QPushButton):
     # Event triggered after the mouse button is released
     # ///////////////////////////////////////////////////////////////
     def mouseReleaseEvent(self, event):
+        """
+        If the left mouse button is released, change the style of the button and emit a signal.
+
+        :param event: The event object that was passed to the event handler
+        :return: The signal is being returned.
+        """
         if event.button() == Qt.LeftButton:
             self.change_style(QEvent.MouseButtonRelease)
             # EMIT SIGNAL
@@ -173,6 +246,13 @@ class PyLeftButton(QPushButton):
     # DRAW ICON WITH COLORS
     # ///////////////////////////////////////////////////////////////
     def icon_paint(self, qp, image, rect):
+        """
+        It takes a QPixmap, paints it with a color, and then draws it on the screen
+
+        :param qp: QPainter object
+        :param image: The image to be painted
+        :param rect: The rectangle that the icon is being drawn in
+        """
         icon = QPixmap(image)
         painter = QPainter(icon)
         painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
@@ -190,12 +270,20 @@ class PyLeftButton(QPushButton):
     # SET ICON
     # ///////////////////////////////////////////////////////////////
     def set_icon(self, icon_path):
+        """
+        It sets the icon path to the icon_path argument, and then repaints the window
+
+        :param icon_path: The path to the icon you want to use
+        """
         self._set_icon_path = icon_path
         self.repaint()
 
     # MOVE TOOLTIP
     # ///////////////////////////////////////////////////////////////
     def move_tooltip(self):
+        """
+        It moves the tooltip to the right of the widget, and down by the height of the top margin
+        """
         # GET MAIN WINDOW PARENT
         gp = self.mapToGlobal(QPoint(0, 0))
 
@@ -215,6 +303,7 @@ class PyLeftButton(QPushButton):
 
 # TOOLTIP
 # ///////////////////////////////////////////////////////////////
+# This class is a QLabel that displays a tooltip when the mouse hovers over it
 class _ToolTip(QLabel):
     # TOOLTIP / LABEL StyleSheet
     style_tooltip = """ 
@@ -238,6 +327,15 @@ class _ToolTip(QLabel):
             context_color,
             text_foreground
     ):
+        """
+        It creates a QLabel with a drop shadow and a custom style sheet
+
+        :param parent: The parent widget of the tooltip
+        :param tooltip: The text to be displayed in the tooltip
+        :param dark_one: the background color of the parent widget
+        :param context_color: The color of the tooltip's background
+        :param text_foreground: The color of the text in the tooltip
+        """
         QLabel.__init__(self)
 
         # LABEL SETUP

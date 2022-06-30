@@ -8,6 +8,7 @@ from PySide6.QtCore import Qt
 
 # PY CREDITS BAR AND VERSION
 # ///////////////////////////////////////////////////////////////
+# This class is a widget that displays the credits for the Python version of the game.
 class PyCredits(QWidget):
     def __init__(
         self,
@@ -20,6 +21,18 @@ class PyCredits(QWidget):
         radius=8,
         padding=10
     ):
+        """
+        The `__init__` function is a special function that is called when an object is created
+
+        :param copyright_text: The text to display in the copyright section
+        :param version: The version of the software
+        :param bg_two: The background color of the second row of the footer
+        :param font_family: The font family to use for the text
+        :param text_size: The size of the text
+        :param text_description_color: The color of the text
+        :param radius: The radius of the rounded corners of the widget, defaults to 8 (optional)
+        :param padding: The padding around the text, defaults to 10 (optional)
+        """
         super().__init__()
 
         # PROPERTIES
@@ -36,6 +49,9 @@ class PyCredits(QWidget):
         self.setup_ui()
 
     def setup_ui(self):
+        """
+        It sets up the UI of the widget
+        """
         # ADD LAYOUT
         self.widget_layout = QHBoxLayout(self)
         self.widget_layout.setContentsMargins(0, 0, 0, 0)

@@ -21,8 +21,14 @@ from PySide6.QtCore import QSize, QCoreApplication, QMetaObject
 from PySide6.QtWidgets import QVBoxLayout, QWidget, QStackedWidget
 
 
+# This class is used to create the left column of the main window
 class Ui_LeftColumn(object):
     def setupUi(self, LeftColumn):
+        """
+        Set interface for left column widget
+
+        :param LeftColumn: The name of the widget that will be created
+        """
         if not LeftColumn.objectName():
             LeftColumn.setObjectName(u"LeftColumn")
         LeftColumn.resize(240, 600)

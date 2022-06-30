@@ -6,11 +6,20 @@ from PySide6.QtWidgets import QVBoxLayout, QStackedWidget, QWidget, QFrame, QScr
     QLabel, QHBoxLayout, QSpacerItem, QSizePolicy
 
 
+# This class is a template for the main pages of the GUI.
 class Ui_MainPages(object):
     def __init__(self):
+        """
+        This function is called when the user open the application.
+        """
         self.clustering_subtop_layout = None
 
     def setupUi(self, MainPages):
+        """
+        Set interface for main pages widget
+
+        :param MainPages: The name of the widget that will be created
+        """
         if not MainPages.objectName():
             MainPages.setObjectName(u"MainPages")
         MainPages.resize(1051, 858)

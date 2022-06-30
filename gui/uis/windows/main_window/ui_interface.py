@@ -59,9 +59,15 @@ from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
+# This class is used to create all interface of the application
 class Ui_MainWindow(object):
 
     def setupUi(self, parent):
+        """
+        Initialize interface of the main window
+
+        :param parent: The parent widget of the window
+        """
         if not parent.objectName():
             parent.setObjectName("MainWindow")
 
@@ -678,6 +684,10 @@ class Ui_MainWindow(object):
     # Get sender() function when button is clicked
     # ///////////////////////////////////////////////////////////////
     def setup_btns(self):
+        """
+        If the sender is not None, return the sender of the button
+        :return: The sender() method returns the object that emitted the signal.
+        """
         if self.title_bar.sender() is not None:
             return self.title_bar.sender()
         if self.left_menu.sender() is not None:
@@ -690,6 +700,10 @@ class Ui_MainWindow(object):
     # SETUP MAIN WINDOW WITH CUSTOM PARAMETER
     # ///////////////////////////////////////////////////////////////
     def setup_gui(self):
+        """
+        The function `setup_gui` is called when the application is started. It sets up the GUI by adding buttons to
+        the left menu, title bar, and pitch widget. It also sets the initial page and left and right menus
+        """
         # LEFT MENUS / GET SIGNALS WHEN LEFT MENU BTN IS CLICKED / RELEASED
         # ///////////////////////////////////////////////////////////////
         # ADD BUTTONS
@@ -1104,11 +1118,23 @@ class Ui_MainWindow(object):
     # SET MAIN WINDOW PAGES
     # ///////////////////////////////////////////////////////////////
     def set_page(self, page):
+        """
+        It sets the current page of the QStackedWidget to the page that is passed in
+
+        :param page: The page to set the current page to
+        """
         self.load_pages.pages.setCurrentWidget(page)
 
     # SET LEFT COLUMN PAGES
     # ///////////////////////////////////////////////////////////////
     def set_left_column_menu(self, menu, title, icon_path):
+        """
+        It sets the current widget of the menus QStackedWidget of left menu
+
+        :param menu: The menu to be displayed
+        :param title: The title of the menu
+        :param icon_path: The path to the icon you want to use
+        """
         self.left_column.menus.menus.setCurrentWidget(menu)
         self.left_column.title_label.setText(title)
         self.left_column.icon.set_icon(icon_path)
@@ -1116,6 +1142,10 @@ class Ui_MainWindow(object):
     # RETURN IF LEFT COLUMN IS VISIBLE
     # ///////////////////////////////////////////////////////////////
     def left_column_is_visible(self):
+        """
+        If the width of the left column frame is 0, then the left column is not visible.
+        :return: The if its True or False.
+        """
         width = self.left_column_frame.width()
         if width == 0:
             return False
@@ -1124,6 +1154,10 @@ class Ui_MainWindow(object):
     # RETURN IF RIGHT COLUMN IS VISIBLE
     # ///////////////////////////////////////////////////////////////
     def right_column_is_visible(self):
+        """
+        If the width of the right column frame is 0, then the right column is not visible.
+        :return: The if its True or False.
+        """
         width = self.right_column_frame.width()
         if width == 0:
             return False
@@ -1132,11 +1166,23 @@ class Ui_MainWindow(object):
     # SET RIGHT COLUMN PAGES
     # ///////////////////////////////////////////////////////////////
     def set_right_column_menu(self, menu):
+        """
+        It sets the current widget of the right column to the menu passed in
+
+        :param menu: The menu to set
+        """
         self.right_column.menus.setCurrentWidget(menu)
 
     # SET COMPARE COLUMN PAGES
     # ///////////////////////////////////////////////////////////////
     def set_compare_column_menu(self, menu, button):
+        """
+        It sets the current widget of the compare_pages QStackedWidget to the menu QWidget, and then disables the button
+        that was clicked and enables the other button
+
+        :param menu: the menu to be displayed
+        :param button: The button that was clicked
+        """
         self.load_pages.compare_pages.setCurrentWidget(menu)
         if "attrs" in button.get_name():
             self.btn_compare_attrs.setEnabled(False)
@@ -1148,16 +1194,33 @@ class Ui_MainWindow(object):
     # GET TITLE BUTTON BY OBJECT NAME
     # ///////////////////////////////////////////////////////////////
     def get_title_bar_btn(self, object_name):
+        """
+        It returns a QPushButton object from the title_bar_frame to know which button was clicked
+
+        :param object_name: The name of the object you want to find
+        :return: The title bar button with the object name passed in.
+        """
         return self.title_bar_frame.findChild(QPushButton, object_name)
 
     # GET TITLE BUTTON BY OBJECT NAME
     # ///////////////////////////////////////////////////////////////
     def get_left_menu_btn(self, object_name):
+        """
+        It returns a QPushButton object from the left_menu QWidget object
+
+        :param object_name: The name of the object you want to find
+        :return: The left_menu object is being returned.
+        """
         return self.left_menu.findChild(QPushButton, object_name)
 
     # LEFT AND RIGHT COLUMNS / SHOW / HIDE
     # ///////////////////////////////////////////////////////////////
     def toggle_left_column(self):
+        """
+        It gets the width of the left column and the right column, and then it starts an animation that will change the
+        width of the left column to 0 and the width of the right column to the sum of the widths of the left and right
+        columns
+        """
         # GET ACTUAL COLUMN SIZE
         width = self.left_column_frame.width()
         right_column_width = self.right_column_frame.width()
@@ -1165,6 +1228,10 @@ class Ui_MainWindow(object):
         self.start_box_animation(width, right_column_width, "left")
 
     def toggle_right_column(self):
+        """
+        It gets the width of the left column, gets the width of the right column, and then calls a function that
+        animates the width of the right column to 0
+        """
         # GET ACTUAL COLUMNS SIZE
         left_column_width = self.left_column_frame.width()
         width = self.right_column_frame.width()
@@ -1172,6 +1239,13 @@ class Ui_MainWindow(object):
         self.start_box_animation(left_column_width, width, "right")
 
     def start_box_animation(self, left_box_width, right_box_width, direction):
+        """
+        It animates the left and right columns of the main window
+
+        :param left_box_width: The current width of the left box
+        :param right_box_width: The current width of the right box
+        :param direction: left or right
+        """
         right_width = 0
         left_width = 0
         time_animation = self.settings["time_animation"]

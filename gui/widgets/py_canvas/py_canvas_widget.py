@@ -18,6 +18,7 @@ from PySide6.QtWidgets import (
 
 # CLUSTERING WIDGET
 # ///////////////////////////////////////////////////////////////
+# This class is a widget that contains a Graphic of clustering
 class PyClusteringWidget(QWidget):
 
     def __init__(
@@ -29,6 +30,16 @@ class PyClusteringWidget(QWidget):
         axis_color="f5f6f9",
         color_title="dce1ec",
     ):
+        """
+        It creates a scrollable area on the right side of the chart, and the chart is on the left side
+
+        :param language: The language of the chart
+        :param parent: The parent widget
+        :param bg_two: background color of the chart, defaults to #343b48 (optional)
+        :param dark_three: background color of the chart, defaults to 21252d (optional)
+        :param axis_color: color of the axis, defaults to f5f6f9 (optional)
+        :param color_title: The color of the title of the chart, defaults to dce1ec (optional)
+        """
         super().__init__(parent)
         self.language = language
         self.setStyleSheet("""
@@ -114,6 +125,12 @@ class PyClusteringWidget(QWidget):
         self.inner_layout.addWidget(self.right_frame)
 
     def add_player_to_list(self, players):
+        """
+        It removes all the QLabels from the scroller_area_widget_content and then adds new ones based on the
+        players list
+
+        :param players: list of strings
+        """
         if self.scroller_area_widget_content.findChildren(QLabel):
             for i in range(len(self.scroller_area_widget_content.children())):
                 item = self.scroller_area_widget_content.children()[i]
@@ -132,8 +149,9 @@ class PyClusteringWidget(QWidget):
 
 # PY CANVAS
 # ///////////////////////////////////////////////////////////////
+# It's a FigureCanvas that
+# can be embedded in a wxPython application
 class _PyCanvas(FigureCanvas):
-
     def __init__(
         self,
         language,
@@ -142,6 +160,15 @@ class _PyCanvas(FigureCanvas):
         axis_color,
         color_title,
     ):
+        """
+        Initialize Figure Canvas for the chart
+
+        :param language: The language of the plot
+        :param bg_two: background color
+        :param dark_three: the background color of the graph
+        :param axis_color: The color of the axis labels and ticks
+        :param color_title: The color of the title
+        """
         self.fig, self.ax = plt.subplots(1, dpi=100, figsize=(6, 5))
         super().__init__(self.fig)
         # COLORS
@@ -169,6 +196,14 @@ class _PyCanvas(FigureCanvas):
         self.ax.title.set_color(self.color_title)
 
     def update_chart(self, data, printable_names, player):
+        """
+        It takes a dataframe, a list of names to print, and a player name, and it plots the dataframe with the names
+        in the list printed on the chart
+
+        :param data: the dataframe with the data to plot
+        :param printable_names: list of names to be printed on the chart
+        :param player: The name of the player to be clustered
+        """
         self.ax.clear()
         texts = []
         if self._language == "en":
@@ -198,5 +233,10 @@ class _PyCanvas(FigureCanvas):
         self.ax.grid(False)
         self.fig.canvas.draw()
 
-    def change_language(self, new_lang):
-        self._language = new_lang
+    def change_language(self, new_language):
+        """
+        This function changes the language of the user to the new language.
+
+        :param new_language: The new language to change to
+        """
+        self._language = new_language

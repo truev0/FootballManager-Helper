@@ -10,15 +10,29 @@ import numpy as np
 
 # CUSTOM TABLE MODEL FOR PANDAS
 # ///////////////////////////////////////////
+# It's a customized QAbstractTableModel that uses a numpy array as its data source
 class CustomizedNumpyModel(QAbstractTableModel):
     def __init__(self, data, parent=None):
+        """
+        The function takes a pandas dataframe as input, converts it to a numpy array, and stores the array and the
+        column names as class attributes
+
+        :param data: This is the data that will be displayed in the table
+        :param parent: The parent of the model
+        """
         QAbstractTableModel.__init__(self, parent)
         self._data = np.array(data.values)
         self._cols = data.columns
         self.r, self.c = np.shape(self._data)
 
     def data(self, index, role=Qt.DisplayRole):
+        """
+        If the role is DisplayRole, then return the value of the data at the given index, formatted as a string
 
+        :param index: The index of the item to return data for
+        :param role: The role of the data to be displayed
+        :return: The data is being returned.
+        """
         if role == Qt.DisplayRole:
             value = self._data[index.row(), index.column()]
 
@@ -31,12 +45,33 @@ class CustomizedNumpyModel(QAbstractTableModel):
             return unicode(value)
 
     def rowCount(self, parent=None):  # skipcq: PYL-W0613
+        """
+        `rowCount` returns the number of rows in the model
+
+        :param parent: The parent of the item
+        :return: The number of rows in the table.
+        """
         return self.r
 
     def columnCount(self, parent=None):  # skipcq: PYL-W0613
+        """
+        `columnCount` returns the number of columns in the model
+
+        :param parent: The parent of the model index
+        :return: The number of columns in the table.
+        """
         return self.c
 
     def headerData(self, p_int, orientation, role):
+        """
+        If the role is DisplayRole and the orientation is Horizontal, return the column name. If the orientation is
+        Vertical, return the row number
+
+        :param p_int: The index of the column or row
+        :param orientation: Qt.Horizontal or Qt.Vertical
+        :param role: The role is used to indicate what kind of data is being requested
+        :return: The data is being returned.
+        """
         if role == Qt.DisplayRole:
             if orientation == Qt.Horizontal:
                 return str(self._cols[p_int])
@@ -46,9 +81,27 @@ class CustomizedNumpyModel(QAbstractTableModel):
         return None
 
     def flags(self, index):  # skipcq: PYL-W0613
+        """
+        "Return a set of flags that indicate how the user can interact with the item."
+
+        The flags() function is called by the view whenever it needs to determine how the user can interact with an item in
+        the model. The view uses the information to enable or disable user interaction
+
+        :param index: The index of the item to return the flags for
+        :return: The flags method returns the item flags for the given index.
+        """
         return Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsEditable
 
     def setData(self, index, value, role=Qt.EditRole):
+        """
+        If the user enters a value in the column, then the value in the next column is updated to the column name
+        of the value entered
+
+        :param index: The index of the item being changed
+        :param value: The value to be set
+        :param role: The role of the data being set
+        :return: The data is being returned.
+        """
         index_value = None
         based_columns = [6, 8, 10, 12]
         if role == Qt.EditRole:

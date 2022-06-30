@@ -17,6 +17,7 @@ from gui.core.functions import set_svg_icon
 
 # PY LEFT MENU
 # ///////////////////////////////////////////////////////////////
+# This class is a widget that contains a QVBoxLayout that contains a QPushButton and a QListWidget
 class PyLeftMenu(QWidget):
     # SIGNALS
     clicked = Signal(object)
@@ -46,6 +47,33 @@ class PyLeftMenu(QWidget):
             toggle_text="Hide Menu",
             toggle_tooltip="Show menu"
     ):
+        """
+        This function sets up the widget and its properties
+
+        :param parent: The parent widget
+        :param app_parent: The parent of the widget
+        :param dark_one: The background color of the menu, defaults to #1b1e23 (optional)
+        :param dark_three: The color of the menu's background, defaults to #21252d (optional)
+        :param dark_four: The background color of the menu, defaults to #272c36 (optional)
+        :param bg_one: The background color of the menu, defaults to #2c313c (optional)
+        :param icon_color: The color of the icon when the menu is hidden, defaults to #c3ccdf (optional)
+        :param icon_color_hover: The color of the icon when the mouse is hovering over it, defaults to #dce1ec (optional)
+        :param icon_color_pressed: The color of the icon when the button is pressed, defaults to #edf0f5 (optional)
+        :param icon_color_active: The color of the icon when the button is active, defaults to #f5f6f9 (optional)
+        :param context_color: The color of the context menu, defaults to #568af2 (optional)
+        :param text_foreground: The color of the text in the menu, defaults to #8a95aa (optional)
+        :param text_active: The color of the text when the button is active, defaults to #dce1ec (optional)
+        :param duration_time: The time it takes for the animation to complete, defaults to 500 (optional)
+        :param radius: The radius of the rounded corners, defaults to 8 (optional)
+        :param minimum_width: The minimum width of the menu, defaults to 50 (optional)
+        :param maximum_width: The maximum width of the menu, defaults to 240 (optional)
+        :param icon_path: The path to the icon that will be used for the toggle button, defaults to icon_menu.svg (optional)
+        :param icon_path_close: The icon that will be displayed when the menu is open, defaults to icon_menu_close.svg
+        (optional)
+        :param toggle_text: The text that will be displayed on the toggle button, defaults to Hide Menu (optional)
+        :param toggle_tooltip: The tooltip text that appears when you hover over the toggle button, defaults to Show menu
+        (optional)
+        """
         super().__init__()
 
         # PROPERTIES
@@ -115,6 +143,11 @@ class PyLeftMenu(QWidget):
     # Add btns and emit signals
     # ///////////////////////////////////////////////////////////////
     def add_menus(self, parameters):
+        """
+        It adds a menu button to the left menu bar
+
+        :param parameters: [
+        """
         if parameters is not None:
             for parameter in parameters:
                 _btn_icon = parameter['btn_icon']
@@ -156,14 +189,25 @@ class PyLeftMenu(QWidget):
     # LEFT MENU EMIT SIGNALS
     # ///////////////////////////////////////////////////////////////
     def btn_clicked(self):
+        """
+        The function is called when the button is clicked. It emits a signal that is connected to a slot. The slot is a
+        function that is called when the signal is emitted
+        """
         self.clicked.emit(self.menu)
 
     def btn_released(self):
+        """
+        The function emits a signal that is connected to a slot that opens a menu
+        """
         self.released.emit(self.menu)
 
     # EXPAND / RETRACT LEF MENU
     # ///////////////////////////////////////////////////////////////
     def toggle_animation(self):
+        """
+        It creates an animation object, stops it, sets the start and end values, sets the easing curve, sets the duration,
+        and starts the animation
+        """
         # CREATE ANIMATION
         self.animation = QPropertyAnimation(self._parent, b"minimumWidth")
         self.animation.stop()
@@ -184,6 +228,14 @@ class PyLeftMenu(QWidget):
     # SELECT ONLY ONE BTN
     # ///////////////////////////////////////////////////////////////
     def select_only_one(self, widget: str):
+        """
+        It takes a string as an argument, and then finds all the QPushButtons in the current window, and if the button's
+        object name matches the string passed to the function, it sets that button to active, and all the other buttons to
+        inactive
+
+        :param widget: str
+        :type widget: str
+        """
         for btn in self.findChildren(QPushButton):
             if btn.objectName() == widget:
                 btn.set_active(True)
@@ -193,6 +245,13 @@ class PyLeftMenu(QWidget):
     # SELECT ONLY ONE TAB BTN
     # ///////////////////////////////////////////////////////////////
     def select_only_one_tab(self, widget: str):
+        """
+        It loops through all the buttons in the window, and if the button's name matches the name of the button that was
+        clicked, it sets the button's active_tab property to True, otherwise it sets it to False
+
+        :param widget: str - the name of the widget that you want to be active
+        :type widget: str
+        """
         for btn in self.findChildren(QPushButton):
             if btn.objectName() == widget:
                 btn.set_active_tab(True)
@@ -202,18 +261,27 @@ class PyLeftMenu(QWidget):
     # DESELECT ALL BTNs
     # ///////////////////////////////////////////////////////////////
     def deselect_all(self):
+        """
+        It finds all the QPushButtons in the current widget and sets their active state to False
+        """
         for btn in self.findChildren(QPushButton):
             btn.set_active(False)
 
     # DESELECT ALL TAB BTNs
     # ///////////////////////////////////////////////////////////////
     def deselect_all_tab(self):
+        """
+        It finds all the QPushButtons in the current widget and sets their active_tab property to False
+        """
         for btn in self.findChildren(QPushButton):
             btn.set_active_tab(False)
 
     # SETUP APP
     # ///////////////////////////////////////////////////////////////
     def setup_ui(self):
+        """
+        It sets up the UI of the left menu
+        """
         # ADD MENU LAYOUT
         self.left_menu_layout = QVBoxLayout(self)
         self.left_menu_layout.setContentsMargins(0, 0, 0, 0)
