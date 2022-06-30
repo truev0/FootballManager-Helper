@@ -173,9 +173,9 @@ def convert_values_scout(df):
     :param df: the dataframe you want to convert
     :return: A dataframe with the values converted to numeric.
     """
-    for i in range(len(df.columns)):
+    for i, item in enumerate(df.columns):
         if df.dtypes[i] == "object":
-            df[df.columns[i]] = df[df.columns[i]].str.replace("-", "0")
+            df[item] = df[item].str.replace("-", "0")
     return df
 
 
