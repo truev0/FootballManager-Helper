@@ -4,7 +4,7 @@ style = """
 /* ///////////////////////////////////////////////////
 QTableView */
 
-QTableView {{	
+QTableView {{
 background-color: {_bg_color};
 padding: 5px;
 border-radius: {_radius}px;
@@ -29,7 +29,7 @@ border-style: none;
 border-bottom: 1px solid rgb(44, 49, 60);
 border-right: 1px solid rgb(44, 49, 60);
 }}
-QTableView::horizontalHeader {{	
+QTableView::horizontalHeader {{
 background-color: rgb(33, 37, 43);
 }}
 QTableView QTableCornerButton::section {{
@@ -102,7 +102,7 @@ width: 8px;
 margin: 21px 0 21px 0;
 border-radius: 0px;
 }}
-QScrollBar::handle:vertical {{	
+QScrollBar::handle:vertical {{
 background: {_context_color};
 min-height: 25px;
 border-radius: 4px

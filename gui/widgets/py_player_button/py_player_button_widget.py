@@ -168,13 +168,13 @@ class PyPlayerButton(QPushButton):
 
     # PAINT EVENT
     # ///////////////////////////////////////////////////////////////
-    def paintEvent(self, event):
+    def paintEvent(self, _event):
         """
         The function is called when the widget is updated. It creates a painter object, sets the render hint to
         antialiasing, sets the brush color to the background color, creates a rectangle, sets the pen to no pen, sets the
         brush to the brush color, draws a rounded rectangle, and ends the painter
 
-        :param event: The event that triggered the paintEvent
+        :param _event: The event that triggered the paintEvent
         """
         # PAINTER
         paint = QPainter()
@@ -276,6 +276,7 @@ class PyPlayerButton(QPushButton):
             self.__mousePressPos = event.globalPos()
             self.__mouseMovePos = event.globalPos()
             super(PyPlayerButton, self).mousePressEvent(event)
+        return None
 
     # MOUSE RELEASED
     # Event triggered after the mouse button is released
@@ -298,6 +299,7 @@ class PyPlayerButton(QPushButton):
                     event.ignore()
                     return
             super(PyPlayerButton, self).mouseReleaseEvent(event)
+        return None
 
     # MOUSE MOVE EVENT
     # ///////////////////////////////////////////////////////////////
@@ -356,8 +358,8 @@ class _ToolTip(QLabel):
     # TOOLTIP / LABEL StyleSheet
     # ///////////////////////////////////////////////////////////////
     style_tooltip = """
-        QLabel {{		
-        background-color: {_dark_one};	
+        QLabel {{
+        background-color: {_dark_one};
         color: {_text_foreground};
         padding-left: 10px;
         padding-right: 10px;

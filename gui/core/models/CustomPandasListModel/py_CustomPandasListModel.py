@@ -16,7 +16,6 @@ class CustomListModel(QAbstractTableModel):
         self._data = data
 
     def data(self, index, role=Qt.DisplayRole):
-
         if role == Qt.DisplayRole:
             value = self._data.iloc[index.row(), index.column()]
 
@@ -24,6 +23,7 @@ class CustomListModel(QAbstractTableModel):
                 return '%s' % value
 
             return unicode(value)
+        return None
 
     def rowCount(self, parent=None):  # skipcq: PYL-W0613
         return self._data.shape[0]
@@ -38,6 +38,7 @@ class CustomListModel(QAbstractTableModel):
 
             if orientation == Qt.Vertical:
                 return str(self._data.index[section])
+        return None
 
     def flags(self, index):  # skipcq: PYL-W0613
         return Qt.ItemIsEnabled | Qt.ItemIsSelectable

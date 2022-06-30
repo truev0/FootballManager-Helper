@@ -16,7 +16,6 @@ class CustomizedPandasModel(QAbstractTableModel):
         self._data = data
 
     def data(self, index, role=Qt.DisplayRole):
-
         if role == Qt.DisplayRole:
             value = self._data.iloc[index.row(), index.column()]
 
@@ -27,6 +26,7 @@ class CustomizedPandasModel(QAbstractTableModel):
                 return '%s' % value
 
             return unicode(value)
+        return None
 
     def rowCount(self, parent=None):  # skipcq: PYL-W0613
         return len(self._data.index)
@@ -41,6 +41,7 @@ class CustomizedPandasModel(QAbstractTableModel):
 
             if orientation == Qt.Vertical:
                 return str(self._data.index[section])
+        return None
 
     def flags(self, index):  # skipcq: PYL-W0613
         return Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsEditable
@@ -69,3 +70,4 @@ class CustomizedPandasModel(QAbstractTableModel):
                     self._data.iloc[row, column] = tmp
                 self.dataChanged.emit(index, index)
             return True
+        return False

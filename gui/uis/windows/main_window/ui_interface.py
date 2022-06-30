@@ -278,7 +278,7 @@ class Ui_MainWindow(object):
         #content_area_right_bg_frame {{
             border-radius: 8px;
             background-color: {self.themes["app_color"]["bg_two"]};
-        }}    
+        }}
         """)
 
         # ADD BG
@@ -333,7 +333,7 @@ class Ui_MainWindow(object):
         # ADD TO CREDITS LAYOUT
         self.credits_layout.addWidget(self.credits)
 
-        ######## START NOTIFICATION SECTION ########
+        # START NOTIFICATION SECTION
 
         # CREATE POPUP NOTIFICATION CONTAINER
         # ///////////////////////////////////////////////////////////////
@@ -444,7 +444,7 @@ class Ui_MainWindow(object):
         self.popup_notification_container_layout.addWidget(
             self.popup_notification_subcontainer)
 
-        ######## END NOTIFICATION SECTION  ########
+        # END NOTIFICATION SECTION
 
         # ADD WIDGETS TO RIGHT LAYOUT
         # ///////////////////////////////////////////////////////////////
@@ -696,6 +696,7 @@ class Ui_MainWindow(object):
             return self.left_column.sender()
         if self.pitch_widget.sender() is not None:
             return self.pitch_widget.sender()
+        return None
 
     # SETUP MAIN WINDOW WITH CUSTOM PARAMETER
     # ///////////////////////////////////////////////////////////////

@@ -417,6 +417,7 @@ class PyLeftMenuButton(QPushButton):
             self.change_style(QEvent.MouseButtonPress)
             self.tooltip.hide()
             return self.clicked.emit()
+        return None
 
     # MOUSE RELEASED
     # Event triggered after the mouse button is released
@@ -431,6 +432,7 @@ class PyLeftMenuButton(QPushButton):
         if event.button() == Qt.LeftButton:
             self.change_style(QEvent.MouseButtonRelease)
             return self.released.emit()
+        return None
 
     # MOVE TOOLTIP
     # ///////////////////////////////////////////////////////////////
@@ -458,9 +460,9 @@ class PyLeftMenuButton(QPushButton):
 # This class is a QLabel that displays a tooltip when the mouse hovers over it
 class _ToolTip(QLabel):
     # TOOLTIP / LABEL StyleSheet
-    style_tooltip = """ 
-    QLabel {{		
-        background-color: {_dark_one};	
+    style_tooltip = """
+    QLabel {{
+        background-color: {_dark_one};
         color: {_text_foreground};
         padding-left: 10px;
         padding-right: 10px;

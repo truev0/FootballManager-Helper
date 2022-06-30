@@ -110,11 +110,9 @@ class Ui_LeftColumn(object):
 
         self.main_pages_layout.addWidget(self.menus)
 
-
         self.retranslateUi(LeftColumn)
 
         self.menus.setCurrentIndex(0)
-
 
         QMetaObject.connectSlotsByName(LeftColumn)
     # setupUi
@@ -122,4 +120,3 @@ class Ui_LeftColumn(object):
     def retranslateUi(self, LeftColumn):
         LeftColumn.setWindowTitle(QCoreApplication.translate("LeftColumn", u"Form", None))
     # retranslateUi
-

@@ -56,6 +56,7 @@ def setting_up_pandas(path_file, btn_press):
         except FileNotFoundError:
             return None
         return df_s
+    return None
 
 
 # CONVERT VALUES TO ITS RESPECTIVE TYPE
@@ -356,16 +357,16 @@ def create_df_for_squad(df, language):
 # DATAFRAME FOR TACTIC VIEW
 # Cut original dataframe to make readable for tactic view
 # ///////////////////////////////////////////////////////////////
-def create_df_for_tactic(df, l):
+def create_df_for_tactic(df, language):
     """
     This function takes in a dataframe and a list of integers and returns a dataframe with only the columns that correspond
     to the integers in the list.
 
     :param df: the dataframe you want to create a new dataframe from
-    :param l: the index of the tactic you want to create a dataframe for
+    :param language: the index of the tactic you want to create a dataframe for
     :return: A dataframe with only the column of the tactic being used.
     """
-    df_for_tactic = df.loc[:, [text[l].h.h1]]
+    df_for_tactic = df.loc[:, [text[language].h.h1]]
     return df_for_tactic
 
 

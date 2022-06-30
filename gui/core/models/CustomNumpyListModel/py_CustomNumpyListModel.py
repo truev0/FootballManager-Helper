@@ -40,6 +40,7 @@ class CustomizedNumpyListModel(QAbstractTableModel):
                 return '%s' % value
 
             return unicode(value)
+        return None
 
     def rowCount(self, parent=None):  # skipcq: PYL-W0613
         """

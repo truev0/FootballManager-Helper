@@ -236,11 +236,11 @@ class MainWindow(QMainWindow):
 
     # RESIZE EVENT
     # ///////////////////////////////////////////
-    def resizeEvent(self, event):
+    def resizeEvent(self, _event):
         """
         It resizes the grips and changes their position
 
-        :param event: The event that triggered the resize
+        :param _event: The event that triggered the resize
         """
         # RESIZE GRIPS AND CHANGE POSITION
         if self.settings["custom_title_bar"]:
@@ -624,7 +624,6 @@ class MainWindow(QMainWindow):
         """
         # GET BTN CLICKED
         # btn = self.ui.setup_btns()
-        pass
 
     # SET ALL SIGNALS
     # ///////////////////////////////////////////
@@ -1242,7 +1241,7 @@ class MainWindow(QMainWindow):
         :param attrs: a list of lists, each list containing the attribute name, the operator, and the value
         """
         filtered_df = self.df_scout_for_table.copy()
-        for i, item in enumerate(attrs):
+        for _, item in enumerate(attrs):
             if item[1] == ">" and item[2] == 0.0:
                 continue
             if item[1] == ">":
@@ -1261,7 +1260,7 @@ class MainWindow(QMainWindow):
                 filtered_df = filtered_df[
                     filtered_df[item[0]] <= item[2]]
 
-        for j, item in enumerate(stats):
+        for _, item in enumerate(stats):
             if item[1] == ">" and item[2] == 0.0:
                 continue
             if item[1] == ">":

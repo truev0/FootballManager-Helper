@@ -193,9 +193,7 @@ class Ui_MainPages(object):
 
         # Left Top Frame (Page 7)
         self.compare_top_left_frame = QFrame()
-        self.compare_top_left_frame.setStyleSheet(""
-                                  "background: #343b48;"
-                                  "border-radius: 8px;")
+        self.compare_top_left_frame.setStyleSheet("background: #343b48;border-radius: 8px;")
         self.compare_top_left_frame.setMaximumHeight(150)
         self.compare_top_left_frame_layout = QVBoxLayout(self.compare_top_left_frame)
 
@@ -213,7 +211,6 @@ class Ui_MainPages(object):
         # Left Bottom Frame (Page 7)
         self.compare_bottom_left_frame = QFrame()
         self.compare_bottom_left_frame_layout = QHBoxLayout(self.compare_bottom_left_frame)
-
 
         self.compare_left_frame_layout.addWidget(self.compare_top_left_frame)
         self.compare_left_frame_layout.addWidget(self.compare_bottom_left_frame)
@@ -372,7 +369,6 @@ class Ui_MainPages(object):
         self.clustering_bottom_frame.setObjectName(u"clustering_bottom_frame")
         self.clustering_bottom_layout = QVBoxLayout(self.clustering_bottom_frame)
 
-
         self.page_10_layout.addWidget(self.clustering_bottom_frame)
 
         self.pages.addWidget(self.page_10)
@@ -392,4 +388,3 @@ class Ui_MainPages(object):
         MainPages.setWindowTitle(QCoreApplication.translate("MainPages", u"Form", None))
         self.label.setText(QCoreApplication.translate("MainPages", u"Welcome To FM Excel Helper", None))
     # retranslateUi
-
