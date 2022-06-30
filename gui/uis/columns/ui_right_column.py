@@ -154,5 +154,12 @@ class Ui_RightColumn(object):
 
         QMetaObject.connectSlotsByName(RightColumn)
 
-    def retranslateUi(self, RightColumn):
+    @staticmethod
+    def retranslateUi(RightColumn):
+        """
+        It sets the window title of the RightColumn object to the translation of the string "Form" in the context
+        "RightColumn".
+
+        :param RightColumn: The name of the class that is being created
+        """
         RightColumn.setWindowTitle(QCoreApplication.translate("RightColumn", u"Form", None))

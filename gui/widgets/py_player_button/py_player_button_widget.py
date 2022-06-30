@@ -137,8 +137,8 @@ class PyPlayerButton(QPushButton):
                 mime_data.data("application/x-qabstractitemmodeldatalist"))
             while not stream.atEnd():
                 # All fields must be read, even if we don't use them
-                row = stream.readInt32()  # skipcq: PYL-W0612
-                col = stream.readInt32()  # skipcq: PYL-W0612
+                _row = stream.readInt32()  # skipcq: PYL-W0612
+                _col = stream.readInt32()  # skipcq: PYL-W0612
                 for _ in range(stream.readInt32()):
                     role = stream.readInt32()
                     value = stream.readQVariant()

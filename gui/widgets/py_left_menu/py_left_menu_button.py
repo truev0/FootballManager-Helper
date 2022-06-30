@@ -148,7 +148,7 @@ class PyLeftMenuButton(QPushButton):
         p.setFont(self.font())
 
         # RECTANGLES
-        rect = QRect(4, 5, self.width(), self.height() - 10)  # skipcq: PYL-W0612
+        _rect = QRect(4, 5, self.width(), self.height() - 10)  # skipcq: PYL-W0612
         rect_inside = QRect(4, 5, self.width() - 8, self.height() - 10)
         rect_icon = QRect(0, 0, 50, self.height())
         rect_blue = QRect(4, 5, 20, self.height() - 10)

@@ -1366,8 +1366,8 @@ class MainWindow(QMainWindow):
 
         kmeans = KMeans(n_clusters=5)
         kmeans = kmeans.fit(reduced)
-        labels = kmeans.predict(reduced)  # skipcq: PYL-W0612
-        centroid = kmeans.cluster_centers_  # skipcq: PYL-W0612
+        _labels = kmeans.predict(reduced)  # skipcq: PYL-W0612
+        _centroid = kmeans.cluster_centers_  # skipcq: PYL-W0612
         clusters = kmeans.labels_.tolist()
 
         reduced["cluster"] = clusters
