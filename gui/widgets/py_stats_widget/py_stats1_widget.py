@@ -19,6 +19,7 @@ from gui.widgets.py_combo_box.py_combo_box_widget import PyComboBox
 
 # PY STATS WIDGET
 # ///////////////////////////////////////////////////////////////
+# It's a widget that displays a list of statistics
 class PyStatsWidget(QWidget):
 
     def __init__(
@@ -35,6 +36,41 @@ class PyStatsWidget(QWidget):
         color_title="dce1ec",
         bar_color="3f6fd1",
     ):
+        """
+        It creates a custom widget that contains a combo box and a canvas.
+
+        The combo box is used to select the type of chart to be displayed.
+
+        The canvas is used to display the chart.
+
+        The canvas is updated when the combo box is changed.
+
+        The canvas is also updated when the type of chart is changed.
+
+        The canvas is updated by calling the update_chart function.
+
+        The update_chart function is defined in the _CustomCanvas class.
+
+        The update_chart function is called by the currentTextChanged signal of the combo box.
+
+        The update_chart function is also called by the currentIndexChanged signal of the type selector.
+
+        The update_chart function is also called by the update_dependent_combo function.
+
+        The update_dependent_combo function is called by the currentIndexChanged signal of the type selector.
+
+        :param name: The name of the chart
+        :param language: The language of the chart
+        :param parent: The parent widget of the chart
+        :param dark_one: background color of the widget, defaults to #1b1e23 (optional)
+        :param text_foreground: The color of the text in the combo boxes, defaults to #8a95aa (optional)
+        :param combo_border: The border color of the combo boxes, defaults to #6c99f4 (optional)
+        :param bg_two: background color of the chart, defaults to #343b48 (optional)
+        :param dark_three: background color of the chart, defaults to 21252d (optional)
+        :param axis_color: color of the axis, defaults to f5f6f9 (optional)
+        :param color_title: The color of the title of the chart, defaults to dce1ec (optional)
+        :param bar_color: The color of the bars in the chart, defaults to 3f6fd1 (optional)
+        """
         super().__init__(parent)
         self.name = name
         self.language = language
@@ -74,12 +110,18 @@ class PyStatsWidget(QWidget):
         self.combo_selector.currentTextChanged.connect(self.chart.update_chart)
 
     def update_dependent_combo(self, index):
+        """
+        The function clears the dependent combo box, then adds the items from the dependent list to the dependent combo box
+
+        :param index: The index of the item that was selected
+        """
         self.combo_selector.clear()
         dependent_list = self.type_selector.itemData(index)
         if dependent_list:
             self.combo_selector.addItems(dependent_list)
 
 
+# It's a class to place graph
 class _CustomCanvas(FigureCanvas):
 
     def __init__(
@@ -93,6 +135,19 @@ class _CustomCanvas(FigureCanvas):
         color_title,
         bar_color,
     ):
+        """
+        It's a function that creates a graph with a title, a background color, a color for the axis, a color for the title,
+        and a color for the bars
+
+        :param parent: The parent widget
+        :param language: "en" or "es"
+        :param name: The name of the graph
+        :param bg_two: background color of the graph
+        :param dark_three: dark background color
+        :param axis_color: color of the axis
+        :param color_title: color of the title
+        :param bar_color: color of the bars
+        """
         self.fig, self.ax = plt.subplots(1,
                                          dpi=100,
                                          figsize=(6, 5),
@@ -137,12 +192,27 @@ class _CustomCanvas(FigureCanvas):
         self.ax.title.set_color(self.color_title)
 
     def count_actual_list(self):
+        """
+        It returns the length of the list of actual values
+        :return: The length of the list.
+        """
         return len(self._actual_list)
 
     def set_data(self, data):
+        """
+        Set the data attribute of the object to the value of the data parameter.
+
+        :param data: The data to be plotted
+        """
         self._data = data
 
     def add_to_list(self, e_list):
+        """
+        If the list is empty, add the first element of the list to be added. If the list is not empty, add all the elements
+        of the list to be added
+
+        :param e_list: a list of elements to be added to the list
+        """
         if len(self._actual_list) == 1:
             self._actual_list[0] = e_list[0]
             if len(e_list) > 1:
@@ -153,9 +223,19 @@ class _CustomCanvas(FigureCanvas):
                 self._actual_list.append(e)
 
     def change_language(self, new_lang):
+        """
+        Change_language() changes the language of the user to the new_lang argument.
+
+        :param new_lang: The new language to change to
+        """
         self._language = new_lang
 
     def update_chart(self, new_parameter):
+        """
+        It updates the chart with the new parameter selected by the user
+
+        :param new_parameter: The parameter that is selected in the combobox
+        """
         if self._data is not None:
             self.ax.clear()
             curr = self._parent.type_selector.currentText()

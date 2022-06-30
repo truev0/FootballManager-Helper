@@ -16,6 +16,7 @@ from . py_radar_chart import Radar
 
 # PY SPYDER WIDGET
 # ///////////////////////////////////////////////////////////////
+# This class is a widget that contains Radar Chart
 class PySpyderWidget(QWidget):
     def __init__(
             self,
@@ -28,6 +29,18 @@ class PySpyderWidget(QWidget):
             color_title="#dce1ec",
             line_color="#3f6fd1"
     ):
+        """
+        The function __init__() is a constructor that initializes the attributes of the class
+
+        :param language: The language of the chart, defaults to en (optional)
+        :param parent: The parent widget
+        :param bg_two: background color of the chart, defaults to #343b48 (optional)
+        :param bg_one: background color of the chart, defaults to #343b48 (optional)
+        :param dark_three: background color of the chart, defaults to #21252d (optional)
+        :param axis_color: color of the axis, defaults to #f5f6f9 (optional)
+        :param color_title: The color of the title, defaults to #dce1ec (optional)
+        :param line_color: The color of the lines that connect the points, defaults to #3f6fd1 (optional)
+        """
         super().__init__(parent)
 
         self.language = language
@@ -47,6 +60,7 @@ class PySpyderWidget(QWidget):
         self.principal_layout.addWidget(self.spyder_chart)
 
 
+# It's a class to place radar chart
 class _CustomSpyder(FigureCanvas):
     def __init__(
             self,
@@ -59,6 +73,18 @@ class _CustomSpyder(FigureCanvas):
             line_color,
             language='en',
     ):
+        """
+        It creates a radar chart with a title and a background color
+
+        :param parent: The parent widget
+        :param bg_two: background color of the plot
+        :param bg_one: background color of the radar plot
+        :param dark_three: The color of the radar's background
+        :param axis_color: The color of the axis lines
+        :param color_title: The color of the title
+        :param line_color: The color of the lines that connect the points on the radar chart
+        :param language: The language of the labels, defaults to en (optional)
+        """
 
         self.fig, self.ax = radar_mosaic(radar_height=0.915, title_height=0.06, fig_height=14)
         super(_CustomSpyder, self).__init__(self.fig)
@@ -92,6 +118,12 @@ class _CustomSpyder(FigureCanvas):
         self.setParent(parent)
 
     def set_data(self, data):
+        """
+        If the dataframe is empty, set the dataframe to the data. If the dataframe is not empty, concatenate the dataframe
+        with the data
+
+        :param data: the dataframe that you want to add to the class
+        """
         if self._data is None and self._inner_squad is None:
             self._data = data
             self._inner_squad = data
@@ -111,6 +143,14 @@ class _CustomSpyder(FigureCanvas):
             self._data.reset_index(drop=True, inplace=True)
 
     def set_chart(self, players, squads, opts):
+        """
+        The function takes in a list of players, a list of squads, and a list of options. It then creates a radar chart
+        comparing the players' stats
+
+        :param players: list of players
+        :param squads: list of squads
+        :param opts: list of strings, the labels for each axis
+        """
         if opts:
             self.ax['radar'].clear()
             self.ax['title'].clear()
@@ -192,10 +232,26 @@ class _CustomSpyder(FigureCanvas):
                 self.fig.canvas.draw()
 
     def change_language(self, new_lang):
+        """
+        This function changes the language of the user to the new language.
+
+        :param new_lang: The new language to change to
+        """
         self.language = new_lang
 
 
 def radar_mosaic(radar_height=0.915, title_height=0.06, fig_height=14):
+    """
+    It creates a figure with three axes, one for the title, one for the radar, and one for the endnote. The axes are
+    arranged vertically, with the title at the top, the radar in the middle, and the endnote at the bottom. The height of
+    the title and radar axes are specified by the user, and the height of the endnote is calculated to fill the rest of the
+    figure
+
+    :param radar_height: The height of the radar plot in the figure
+    :param title_height: The height of the title, in inches
+    :param fig_height: The height of the figure in inches, defaults to 14 (optional)
+    :return: A tuple of the figure and axes objects.
+    """
 
     if title_height + radar_height > 1:
         error_msg = 'Reduce one of the radar_height or title_height so the total is <= 1.'
@@ -231,6 +287,13 @@ def radar_mosaic(radar_height=0.915, title_height=0.06, fig_height=14):
 
 
 def change_squad(inner_squad, lang):
+    """
+    It takes a list of two strings and a language code, and returns two strings
+
+    :param inner_squad: This is the list of the two squad lists that are being compared
+    :param lang: The language of the wiki
+    :return: the inner_var1 and inner_var2 variables.
+    """
     inner_var1 = ''
     inner_var2 = ''
     if lang == 'en':

@@ -26,6 +26,7 @@ background-color: {_bg_color_pressed};
 
 # PY PUSH BUTTON
 # ///////////////////////////////////////////////////////////////
+# It's a QPushButton that can be connected to a Python function
 class PyPushButton(QPushButton):
     def __init__(
             self,
@@ -38,6 +39,18 @@ class PyPushButton(QPushButton):
             parent=None,
             name=None
     ):
+        """
+        The function takes in a bunch of parameters, sets them, and then sets the style sheet
+
+        :param text: The text that will be displayed on the button
+        :param radius: The radius of the button's corners
+        :param color: the color of the text
+        :param bg_color: The background color of the button when it's not being hovered over or pressed
+        :param bg_color_hover: The background color of the button when the mouse is hovering over it
+        :param bg_color_pressed: The background color of the button when it is pressed
+        :param parent: The parent widget of the button
+        :param name: The name of the button
+        """
         super().__init__()
 
         # SET PARAMETRES
@@ -58,4 +71,8 @@ class PyPushButton(QPushButton):
         self.setStyleSheet(custom_style)
 
     def get_name(self):
+        """
+        The function get_name() returns the value of the private variable _name
+        :return: The name of the person.
+        """
         return self._name

@@ -1,4 +1,5 @@
 
+# It's a container for all the styles that are used in the document
 class Styles(object):
     bg_style = """
     #pod_bg_app {{

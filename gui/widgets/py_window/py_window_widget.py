@@ -20,6 +20,7 @@ from . styles import Styles
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
+# It's a QFrame for the Windows
 class PyWindow(QFrame):
     def __init__(
         self,
@@ -35,6 +36,21 @@ class PyWindow(QFrame):
         border_color="#343b48",
         enable_shadow=True
     ):
+        """
+        It's a function that creates a widget that can be used as a container for other widgets
+
+        :param parent: The parent widget
+        :param layout: The layout of the widget. Can be either Qt.Vertical or Qt.Horizontal
+        :param margin: The margin around the widget, defaults to 0 (optional)
+        :param spacing: The spacing between the widgets in the layout, defaults to 2 (optional)
+        :param bg_color: The background color of the widget, defaults to #2c313c (optional)
+        :param text_color: The color of the text, defaults to #fff (optional)
+        :param text_font: The font of the text, defaults to 9pt 'Segoe UI' (optional)
+        :param border_radius: The radius of the border, defaults to 10 (optional)
+        :param border_size: The size of the border, defaults to 2 (optional)
+        :param border_color: The color of the border, defaults to #343b48 (optional)
+        :param enable_shadow: If True, a drop shadow will be added to the widget, defaults to True (optional)
+        """
         super().__init__()
 
         # LOAD SETTINGS
@@ -96,6 +112,16 @@ class PyWindow(QFrame):
         text_color=None,
         text_font=None
     ):
+        """
+        It sets the stylesheet for the widget.
+
+        :param bg_color: The background color of the button
+        :param border_radius: The radius of the border
+        :param border_size: The size of the border
+        :param border_color: The color of the border
+        :param text_color: The color of the text
+        :param text_font: The font of the text
+        """
         # CHECK BG COLOR
         if bg_color is not None:
             internal_bg_color = bg_color

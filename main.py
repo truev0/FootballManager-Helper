@@ -104,10 +104,15 @@ os.environ["QT_FONT_DPI"] = "96"
 # ///////////////////////////////////////////
 
 
+# The class MainWindow inherits from the class QMainWindow
 class MainWindow(QMainWindow):
     closing = Signal()
 
     def __init__(self):
+        """
+        The function is called when the program starts. It sets up the main window, loads settings, sets up the GUI, sets
+        signals, connects events, loads the style, creates animations, and saves the old position
+        """
         super(MainWindow, self).__init__()
 
         # SETUP MAIN WINDOW
@@ -188,6 +193,13 @@ class MainWindow(QMainWindow):
     # RE-IMPLEMENT SHOW EVENT
     # ///////////////////////////////////////////
     def showEvent(self, event: QShowEvent) -> None:
+        """
+        The function is called when the window is shown. It sets the start value of the animation to the current position of
+        the window, and the end value to the position of the window before it was hidden
+
+        :param event: QShowEvent
+        :type event: QShowEvent
+        """
         self.showAnimation.setStartValue(
             QPoint(self.x(),
                    get_screen_size().height()))
@@ -200,6 +212,13 @@ class MainWindow(QMainWindow):
     # RE-IMPLEMENT CLOSE EVENT
     # ///////////////////////////////////////////
     def closeEvent(self, event: QCloseEvent) -> None:
+        """
+        The function is called when the user clicks the close button on the window. If the window is not started, the window
+        is hidden and the animation is started. If the window is started, the window is closed
+
+        :param event: QCloseEvent
+        :type event: QCloseEvent
+        """
         if not self._is_started:
             self.oldPos = self.pos()
             self.hideAnimation.setStartValue(self.oldPos)
@@ -218,6 +237,11 @@ class MainWindow(QMainWindow):
     # RESIZE EVENT
     # ///////////////////////////////////////////
     def resizeEvent(self, event):
+        """
+        It resizes the grips and changes their position
+
+        :param event: The event that triggered the resize
+        """
         # RESIZE GRIPS AND CHANGE POSITION
         if self.settings["custom_title_bar"]:
             self.left_grip.setGeometry(5, 10, 10, self.height())
@@ -235,6 +259,11 @@ class MainWindow(QMainWindow):
     # MOUSE CLICK EVENTS
     # ///////////////////////////////////////////
     def mousePressEvent(self, event):
+        """
+        The function sets the global position of the mouse to the variable dragPos
+
+        :param event: The event that was triggered
+        """
         # SET DRAG POS WINDOW
         p = event.globalPosition()
         global_pos = p.toPoint()
@@ -251,6 +280,9 @@ class MainWindow(QMainWindow):
     # CENTRE WINDOW
     # ///////////////////////////////////////////
     def center_window(self):
+        """
+        The function takes a window object and centers it on the screen
+        """
         frame_geo = self.frameGeometry()
         screen = self.window().windowHandle().screen()
         center_loc = screen.geometry().center()
@@ -260,6 +292,11 @@ class MainWindow(QMainWindow):
     # GET CENTER OF THE SCREEN
     # ///////////////////////////////////////////
     def get_center(self):
+        """
+        It returns the top left corner of the window, which is the same as the center of the window, but only if the window
+        is centered on the screen
+        :return: The top left corner of the window.
+        """
         geometry = self.frameGeometry()
         geometry.moveCenter(get_screen_size().center())
         return geometry.topLeft()
@@ -267,6 +304,9 @@ class MainWindow(QMainWindow):
     # CREATE MINIMIZE EVENT
     # ///////////////////////////////////////////
     def minimize_event(self):
+        """
+        It moves the window to the bottom of the screen, then minimizes it
+        """
         self.oldPos = self.pos()
         self.hideAnimation.setStartValue(self.oldPos)
         self.hideAnimation.setEndValue(
@@ -280,6 +320,10 @@ class MainWindow(QMainWindow):
     # CREATE MAXIMIZE EVENT
     # ///////////////////////////////////////////
     def maximize_event(self):
+        """
+        It hides the window, moves it to the top left corner of the screen, resizes it to the size of the screen, and then
+        centers it
+        """
         self.oldPos = self.pos()
         self.hideAnimation.setStartValue(self.oldPos)
         self.hideAnimation.setEndValue(
@@ -298,6 +342,13 @@ class MainWindow(QMainWindow):
     # RESIZE NOTIFICATION POPUP
     # ///////////////////////////////////////////
     def adjust_notification_container(self, btn):
+        """
+        It takes a button as an argument, resets the height of the container, checks if the button has more than 5 players,
+        if it does, it adds 12 pixels to the height of the container for each player over 5, formats the text to be
+        displayed, displays the text, and then toggles the menu
+
+        :param btn: the button that was clicked
+        """
         # RESET CONTAINER HEIGHT
         self.ui.popup_notification_container.expandedHeight = (
             self.default_size_notification_container)
@@ -324,6 +375,9 @@ class MainWindow(QMainWindow):
     # CUSTOM PARAMETERS FOR WINDOW
     # ///////////////////////////////////////////
     def custom_settings(self):
+        """
+        It sets the title of the window, removes the title bar, and adds grips to the window
+        """
         # APP TITLE
         # ///////////////////////////////////////////////////////////////
         self.setWindowTitle(self.settings["app_name"])
@@ -358,6 +412,9 @@ class MainWindow(QMainWindow):
     # BUTTONS WITH SIGNALS CLICKED
     # ///////////////////////////////////////////
     def btn_clicked(self):
+        """
+        It's a function that handles all the button clicks in the application
+        """
         # GET BTN CLICKED
         btn = self.ui.setup_btns()
 
@@ -562,6 +619,9 @@ class MainWindow(QMainWindow):
     # BUTTONS WITH SIGNALS RELEASED
     # ///////////////////////////////////////////
     def btn_released(self):
+        """
+        The function is called when a button is released
+        """
         # GET BTN CLICKED
         # btn = self.ui.setup_btns()
         pass
@@ -569,6 +629,9 @@ class MainWindow(QMainWindow):
     # SET ALL SIGNALS
     # ///////////////////////////////////////////
     def set_signals(self):
+        """
+        It connects the clicked and released signals of the buttons to the btn_clicked and btn_released functions
+        """
         # LEFT MENU SIGNALS
         self.ui.left_menu.clicked.connect(self.btn_clicked)
         self.ui.left_menu.released.connect(self.btn_released)
@@ -596,6 +659,9 @@ class MainWindow(QMainWindow):
     # CONNECT EVENTS
     # ///////////////////////////////////////////
     def connect_events(self):
+        """
+        The function connects the buttons to the functions that will be executed when the buttons are clicked
+        """
         # CLICK EVENTS
         # ///////////////////////////////////////////
         self.ui.load_squad_btn.clicked.connect(
@@ -644,6 +710,11 @@ class MainWindow(QMainWindow):
     # LOAD FILE
     # ///////////////////////////////////////////
     def load_all_data(self, button_object):
+        """
+        It reads a file, processes the data, and then creates a table and a graph
+
+        :param button_object: The button that was clicked
+        """
         # FILE DIALOG
         dlg_file = QFileDialog.getOpenFileName(self,
                                                caption="Select a file",
@@ -692,6 +763,11 @@ class MainWindow(QMainWindow):
     # PROCESS ACTUAL SQUAD INFO
     # ///////////////////////////////////////////
     def process_squad_info(self):
+        """
+        It takes a dataframe, converts the values to the language of the user, creates metrics for goalkeepers, creates a
+        dataframe for the rankings, rounds the data, creates a dataframe for the squad table, and creates a dataframe for
+        the tactic table
+        """
         self.df_original = FMi.convert_values(self.df_original, self.language)
         self.df_original = FMi.create_metrics_for_gk(self.df_original,
                                                      self.language)
@@ -711,6 +787,11 @@ class MainWindow(QMainWindow):
     # PROCESS SCOUTING SQUAD INFO
     # ///////////////////////////////////////////
     def process_scouting_info(self):
+        """
+        It takes a dataframe, converts the values to the language of the user, converts the values to the scouting values,
+        creates metrics for goalkeepers, creates a dataframe for the scouting team, fills the NaN values with 0, and
+        increments the scouting counter
+        """
         if self.scoutingCounter < 4:
             self.df_scouting = FMi.convert_values(self.df_scouting,
                                                   self.language)
@@ -741,6 +822,9 @@ class MainWindow(QMainWindow):
     # SQUAD HELPER FUNCTION
     # ///////////////////////////////////////////
     def tables_helper_squad(self):
+        """
+        It takes a dataframe, converts it to a numpy array, and then uses a custom model to display it in a table
+        """
         model = CustomizedNumpyModel(self.df_for_table)
         column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
         self.ui.table_squad.setSelectionBehavior(QTableView.SelectItems)
@@ -758,6 +842,11 @@ class MainWindow(QMainWindow):
     # SCOUTING HELPER FUNCTION
     # ///////////////////////////////////////////
     def tables_helper_scouting(self, df_to_set=None):
+        """
+        It takes a dataframe, converts it to a numpy array, and then sets the tableview to display the dataframe
+
+        :param df_to_set: The dataframe to be set as the model
+        """
         tmp_model = CustomizedNumpyScoutModel(df_to_set)
         column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
         self.ui.table_scouting.setSelectionBehavior(QTableView.SelectItems)
@@ -770,6 +859,9 @@ class MainWindow(QMainWindow):
     # SET / LOAD DATA FOR STATS AND METRICS GRAPHS
     # ///////////////////////////////////////////
     def load_data_for_graphs(self):
+        """
+        It loads data from pandas dataframe, and then it loads that dataframe into a Chart object.
+        """
         # SETTING DATAFRAME FOR STATS / METRICS WIDGET
         self.df_helper = self.df_original.iloc[:, :2]
         if self.language == "en":
@@ -804,6 +896,11 @@ class MainWindow(QMainWindow):
     # TRANSLATE UI
     # ///////////////////////////////////////////
     def translate_lang(self, lang):
+        """
+        It translates the UI
+
+        :param lang: the language to translate to
+        """
         self.language = lang
 
         # Translating side menu buttons
@@ -893,6 +990,9 @@ class MainWindow(QMainWindow):
     # CREATE AND LOAD CHECHBOXES TO COMPARE
     # ///////////////////////////////////////////
     def create_and_load_checkboxes(self):
+        """
+        It creates and loads checkboxes to compare players
+        """
         if (self.ui.group_chk_stats_widget.get_count() is not None
                 and self.ui.group_chk_attrs_widget.get_count() is not None):
             self.ui.group_chk_attrs_widget.remove_all_buttons()
@@ -920,12 +1020,25 @@ class MainWindow(QMainWindow):
             self.ui.second_squad_player_combo.currentIndex())
 
     def update_inner_combo(self, index):
+        """
+        The function takes the index of the selected item in the first combo box and uses it to find the corresponding list
+        of items in the second combo box
+
+        :param index: The index of the item that was selected
+        """
         first_dependent_list = self.ui.first_squad_player_combo.itemData(index)
         if first_dependent_list:
             self.ui.first_player_combo.clear()
             self.ui.first_player_combo.addItems(first_dependent_list)
 
     def second_update_inner_combo(self, index):
+        """
+        The function takes the index of the selected item in the second squad player combo box and uses that index to get
+        the list of players associated with that squad. It then clears the second player combo box and adds the list of
+        players to the second player combo box
+
+        :param index: The index of the item that was selected
+        """
         second_dependent_list = self.ui.second_squad_player_combo.itemData(
             index)
         if second_dependent_list:
@@ -933,6 +1046,10 @@ class MainWindow(QMainWindow):
             self.ui.second_player_combo.addItems(second_dependent_list)
 
     def create_edits_for_scouting(self):
+        """
+        It creates a list of buttons for the user to click on, and then it creates a list of line edits for the user to type
+        in
+        """
         if (self.ui.group_lineedits_attrs_widget.get_lines() is not None and
                 self.ui.group_lineedits_stats_widget.get_lines() is not None):
             self.ui.group_lineedits_attrs_widget.reset_all_lines()
@@ -949,6 +1066,9 @@ class MainWindow(QMainWindow):
                 util_lists.list_es[0], 1)
 
     def create_lines_for_clustering(self):
+        """
+        It creates a list of buttons for the user to select from
+        """
         if self.ui.group_clustering_filters.get_lines() is not None:
             self.ui.group_clustering_filters.reset_all_lines()
         if self.language == "en":
@@ -961,6 +1081,11 @@ class MainWindow(QMainWindow):
     # THREE FUNCTIONS FOR ACTUAL SQUAD, SCOUT, OLD SQUAD
     # //////////////////////////////////////////////////
     def add_squad_names(self, tmp_l):
+        """
+        It takes a list of strings, and adds them to two combo boxes
+
+        :param tmp_l: list of strings
+        """
         if self.ui.first_squad_player_combo.count() == 3:
             self.ui.first_squad_player_combo.clear()
             self.ui.first_player_combo.clear()
@@ -973,6 +1098,11 @@ class MainWindow(QMainWindow):
         self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_squad)
 
     def add_scouting_names(self, tmp_l):
+        """
+        It takes a list of strings, and adds them to two combo boxes
+
+        :param tmp_l: list of strings
+        """
         if self.ui.first_squad_player_combo.count() == 3:
             self.ui.first_squad_player_combo.clear()
             self.ui.first_player_combo.clear()
@@ -999,6 +1129,10 @@ class MainWindow(QMainWindow):
     # SEND DATA FOR COMPARE GRAPHIC
     # ///////////////////////////////////////////////////
     def send_data_compare_graphic(self):
+        """
+        It takes the data from the GUI and returns it to the main program to procces the comparative graph
+        :return: the actual players, the squad, and the checked buttons.
+        """
         checked_buttons = []
         actual_players = []
         squad = []
@@ -1023,11 +1157,17 @@ class MainWindow(QMainWindow):
         return actual_players, squad, checked_buttons
 
     def process_data_compare_players(self):
+        """
+        It takes the data from the database and sends it to the chart widget to be displayed
+        """
         players_info, squads, options_info = self.send_data_compare_graphic()
         self.ui.spyder_graph_widget.spyder_chart.set_chart(
             players_info, squads, options_info)
 
     def collect_scout_data(self):
+        """
+        It takes the values from the GUI and puts them into a list
+        """
         attrs_set = []
         stats_set = []
         if self.language == "en":
@@ -1095,6 +1235,12 @@ class MainWindow(QMainWindow):
         self.filter_scout_data(stats_set, attrs_set)
 
     def filter_scout_data(self, stats, attrs):
+        """
+        This function filters the dataframe based on the attributes and stats that the user has selected
+
+        :param stats: A list of lists, where each list is a stat and the operator and value to filter by
+        :param attrs: a list of lists, each list containing the attribute name, the operator, and the value
+        """
         filtered_df = self.df_scout_for_table.copy()
         for i in range(len(attrs)):
             if attrs[i][1] == ">" and attrs[i][2] == 0.0:
@@ -1137,6 +1283,10 @@ class MainWindow(QMainWindow):
         self.tables_helper_scouting(filtered_df)
 
     def collect_results_clustering(self):
+        """
+        It collects the values of the filters and returns them as a list
+        :return: A list of lists.
+        """
         data = []
         if self.language == "en":
             for value_child, operator_child, identifier in zip(
@@ -1178,6 +1328,9 @@ class MainWindow(QMainWindow):
         return data
 
     def clustering_management(self):
+        """
+        It takes a dataframe, performs some clustering, and then plots the results
+        """
         tmp_filters = self.collect_results_clustering()
         base_columns_plus = None
         complementary_df = None
@@ -1283,6 +1436,11 @@ class MainWindow(QMainWindow):
 # Set initial class and also additional parameter of the "QApplication" class
 # ///////////////////////////////////////////
 def main():
+    """
+    `main()` is the entry point of the application. It creates an instance of the `QApplication` class, which is the main
+    class of the Qt framework. It also creates an instance of the `MainWindow` class, which is the main window of the
+    application
+    """
     # APPLICATION
     # ///////////////////////////////////////////
     app = QApplication(sys.argv)

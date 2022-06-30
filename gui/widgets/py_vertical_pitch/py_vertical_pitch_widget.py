@@ -15,6 +15,7 @@ from gui.widgets.py_player_button.py_player_button_widget import PyPlayerButton
 # PY VERTICAL PITCH
 
 
+# This class is a widget that displays a vertical pitch
 class PyVerticalPitch(QWidget):
     # SIGNALS
     clicked = Signal(object)
@@ -27,6 +28,16 @@ class PyVerticalPitch(QWidget):
         minimum_width=550,
         minimum_height=820,
     ):
+        """
+        The function `__init__` is a special function that is called when an object is created. It is used to initialize the
+        object
+
+        :param parent: The parent widget of the dialog
+        :param image_path: The path to the image that will be displayed in the window, defaults to
+        icon_player_identifier.svg (optional)
+        :param minimum_width: The minimum width of the window, defaults to 550 (optional)
+        :param minimum_height: The minimum height of the window, defaults to 820 (optional)
+        """
         super().__init__()
 
         # PROPERTIES
@@ -44,6 +55,9 @@ class PyVerticalPitch(QWidget):
     # SETUP UI
     # ///////////////////////////////////////////////////////////////
     def setup_ui(self):
+        """
+        The function sets up the interface for the pitch
+        """
         self._pitch_image = QLabel(self._parent)
         self._pitch_image.setObjectName("pitch_image")
         self._pitch_image.setGeometry(
@@ -65,15 +79,26 @@ class PyVerticalPitch(QWidget):
     # PITCH EMIT SIGNALS
     # ///////////////////////////////////////////////////////////////
     def btn_clicked(self):
+        """
+        The function btn_clicked is called when the button is clicked
+        """
         self.clicked.emit(self.btn)
 
     def btn_released(self):
+        """
+        The function btn_released is a function that emits a signal when a button is released
+        """
         self.released.emit(self.btn)
 
     # ADD BUTTON TO PITCH
     # Add btns and emit signals
     # ///////////////////////////////////////////////////////////////
     def add_btns(self, parameters):
+        """
+        It creates a button, sets its geometry, connects it to a function, and then adds it to a list
+
+        :param parameters: [
+        """
         if parameters is not None:
             for parameter in parameters:
                 _btn_id = parameter["btn_id"]
@@ -95,6 +120,14 @@ class PyVerticalPitch(QWidget):
     # SELECT ONLY ONE BTN
     # ///////////////////////////////////////////////////////////////
     def select_only_one(self, widget: str):
+        """
+        It takes a string as an argument, and then finds all the QPushButtons in the current window, and if the button's
+        object name matches the string passed to the function, it sets that button to active, and all the other buttons to
+        inactive
+
+        :param widget: str
+        :type widget: str
+        """
         for btn in self.findChildren(QPushButton):
             if btn.objectName() == widget:
                 btn.set_active(True)
@@ -104,5 +137,8 @@ class PyVerticalPitch(QWidget):
     # DESELECT ALL BTNs
     # ///////////////////////////////////////////////////////////////
     def deselect_all(self):
+        """
+        It finds all the QPushButtons in the current widget and sets their active state to False
+        """
         for btn in self.findChildren(QPushButton):
             btn.set_active(False)

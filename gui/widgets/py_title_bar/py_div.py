@@ -5,8 +5,14 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QFrame
 
 # CUSTOM LEFT MENU
 # ///////////////////////////////////////////////////////////////
+# It's a widget that displays a division in title bar
 class PyDiv(QWidget):
     def __init__(self, color):
+        """
+        It creates a QFrame with a line in it, and then adds it to a QHBoxLayout
+
+        :param color: The color of the line
+        """
         super().__init__()
 
         self.layout = QHBoxLayout(self)

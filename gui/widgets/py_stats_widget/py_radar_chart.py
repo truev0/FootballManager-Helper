@@ -16,6 +16,8 @@ from . py_radar_utils import set_visible
 __all__ = ['Radar']
 
 
+# A radar object can be created with a name, a maximum range, and a maximum bearing, and it can be asked to scan for a
+# target.
 class Radar:
     def __init__(
             self,
@@ -27,6 +29,26 @@ class Radar:
             ring_width=1,
             center_circle_radius=1,
     ):
+        """
+        It takes in a list of parameters, a list of minimum values, a list of maximum values, and a list of booleans
+        indicating whether the parameter should be rounded to the nearest integer.
+
+        It then calculates the number of rings, the width of each ring, the radius of the center circle, and the number of
+        labels.
+
+        It then calculates the rotation angles for each label, and flips the rotation if the label is in the lower half of
+        the plot.
+
+        It also calculates the sine and cosine of the rotation angles.
+
+        :param params: the list of parameters to be plotted
+        :param min_range: The minimum value for each parameter
+        :param max_range: The maximum value of the parameter
+        :param round_int: If True, the parameter will be rounded to the nearest integer
+        :param num_rings: The number of rings in the radar chart, defaults to 4 (optional)
+        :param ring_width: The width of each ring, defaults to 1 (optional)
+        :param center_circle_radius: The radius of the center circle, defaults to 1 (optional)
+        """
 
         self.params = np.asarray(params)
         self.min_range = np.asarray(min_range)
@@ -66,6 +88,11 @@ class Radar:
         self.rotation_degrees = -np.rad2deg(self.rotation)
 
     def __repr__(self):
+        """
+        The __repr__ function returns a string representation of the object
+        :return: The class name, the ring width, the center circle radius, the number of rings, the params, the min range,
+        the max range, and the round int.
+        """
         return (
             f'{self.__class__.__name__}('
             f'ring_width={self.ring_width!r}, '
@@ -78,6 +105,14 @@ class Radar:
         )
 
     def _setup_axis(self, facecolor='#FFFFFF', ax=None):
+        """
+        It sets the face color of the axis to white, sets the aspect ratio to equal, sets the x and y limits to the radius
+        of the center circle plus the width of the rings times the number of rings plus 1.5, and sets the axis to visible
+        for radar chart.
+
+        :param facecolor: the background color of the plot, defaults to #FFFFFF (optional)
+        :param ax: the matplotlib axes object to draw on
+        """
         ax.set_facecolor(facecolor)
         ax.set_aspect('equal')
         lim = self.center_circle_radius + self.ring_width * (self.num_rings + 1.5)
@@ -85,6 +120,14 @@ class Radar:
         set_visible(ax)
 
     def setup_axis(self, facecolor='#FFFFFF', figsize=(12, 12), ax=None, **kwargs):
+        """
+        If you pass in an axis, it will set it up with the facecolor and return None. If you don't pass in an axis, it will
+        create a new figure and axis, set it up, and return the figure and axis
+
+        :param facecolor: the background color of the plot, defaults to #FFFFFF (optional)
+        :param figsize: The size of the figure in inches
+        :param ax: The axis to plot on. If None, a new figure and axis will be created
+        """
         if ax is None:
             fig, ax = plt.subplots(figsize=figsize, **kwargs)
             self._setup_axis(facecolor=facecolor, ax=ax)
@@ -94,6 +137,14 @@ class Radar:
         return None
 
     def draw_circles(self, ax=None, inner=True, **kwargs):
+        """
+        It creates a list of wedge objects, each with a radius equal to the cumulative sum of the ring widths and center
+        circle radius, and a width equal to the ring width
+
+        :param ax: the matplotlib axes object to draw on
+        :param inner: If True, draw the inner circles. If False, draw the outer circles, defaults to True (optional)
+        :return: A collection of patches.
+        """
         radius = np.tile(self.ring_width, self.num_rings + 1)
         radius = np.insert(radius, 0, self.center_circle_radius)
         radius = radius.cumsum()
@@ -116,6 +167,14 @@ class Radar:
         return rings
 
     def _draw_radar(self, values, ax=None, **kwargs):
+        """
+        It takes the values you want to plot, clips them to the range of the radar, scales them to the number of rings and
+        ring width, and then rotates them to the correct angle.
+
+        :param values: the values to be plotted on the radar chart
+        :param ax: the matplotlib axes to draw the radar chart on
+        :return: The radar patch and the vertices.
+        """
         label_range = np.abs(self.max_range - self.min_range)
         range_min = np.minimum(self.min_range, self.max_range)
         range_max = np.maximum(self.min_range, self.max_range)
@@ -129,6 +188,15 @@ class Radar:
         return radar, vertices
 
     def draw_radar(self, values, ax=None, kwargs_radar=None, kwargs_rings=None):
+        """
+        It takes in a list of values, and returns a radar plot with the values plotted on it
+
+        :param values: the values to be plotted on the radar chart
+        :param ax: The matplotlib axes to draw the radar chart on
+        :param kwargs_radar: keyword arguments for the radar plot
+        :param kwargs_rings: keyword arguments for the rings
+        :return: The radar, rings, and vertices.
+        """
         if kwargs_radar is None:
             kwargs_radar = {}
         if kwargs_rings is None:
@@ -144,6 +212,32 @@ class Radar:
 
     def draw_radar_compare(self, values, compare_values, ax=None,
                            kwargs_radar=None, kwargs_compare=None):
+        """
+        It takes in two sets of values, and draws two radar charts on the same axis.
+
+        The first set of values is drawn using the kwargs_radar dictionary, and the second set of values is drawn using the
+        kwargs_compare dictionary.
+
+        The function returns the two radar charts, and the two sets of vertices.
+
+        The vertices are the points that make up the radar chart.
+
+        The vertices are returned so that you can use them to draw lines between the two radar charts.
+
+        The vertices are returned in the same order as the values.
+
+        For example, if you want to draw a line between the first point on the first radar chart and the first point on the
+        second radar chart, you would use the first two vertices.
+
+        If you want to draw a line between the second point on the first radar chart and the second point on the second
+
+        :param values: the values to be plotted
+        :param compare_values: The values to compare to
+        :param ax: The axis to plot on. If None, the current axis will be used
+        :param kwargs_radar: keyword arguments for the radar plot
+        :param kwargs_compare: keyword arguments for the compare radar
+        :return: radar, radar2, vertices, vertices2
+        """
         if kwargs_radar is None:
             kwargs_radar = {}
         if kwargs_compare is None:
@@ -163,6 +257,13 @@ class Radar:
         return radar, radar2, vertices, vertices2
 
     def draw_range_labels(self, ax=None, offset=0, **kwargs):
+        """
+        We're going to create a list of labels, one for each ring, and then place them on the plot.
+
+        :param ax: the axis to draw the labels on
+        :param offset: how far from the center of the radar chart to place the labels, defaults to 0 (optional)
+        :return: A list of text objects.
+        """
         label_values = np.linspace(self.min_range.reshape(-1, 1), self.max_range.reshape(-1, 1),
                                    num=self.num_rings + 1, axis=1).ravel()
         # remove the first entry so we do not label the inner circle
@@ -196,6 +297,14 @@ class Radar:
         return label_list
 
     def draw_param_labels(self, ax=None, wrap=15, offset=1, **kwargs):
+        """
+        It takes the list of parameters, and places them around the outside of the radar chart
+
+        :param ax: the axis to draw the labels on
+        :param wrap: The number of characters to wrap the label at, defaults to 15 (optional)
+        :param offset: The distance from the outer ring to the parameter labels, defaults to 1 (optional)
+        :return: A list of text objects.
+        """
         outer_ring = self.center_circle_radius + (self.ring_width * self.num_rings)
         param_radius = outer_ring + offset
         param_xs = param_radius * self.rotation_sin

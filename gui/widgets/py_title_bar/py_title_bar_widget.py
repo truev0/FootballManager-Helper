@@ -31,6 +31,7 @@ _old_size = QSize()
 # Top bar with move application, maximize, restore, minimize,
 # close buttons and extra buttons
 # ///////////////////////////////////////////////////////////////
+# It's a widget that contains a title bar with a title, a close button, and a minimize button
 class PyTitleBar(QWidget):
     # SIGNALS
     clicked = Signal(object)
@@ -59,6 +60,33 @@ class PyTitleBar(QWidget):
         title_size=10,
         is_custom_title_bar=True,
     ):
+        """
+        The function takes in a bunch of parameters, sets up the UI, adds a background color, sets the logo and width, and
+        then adds widgets to the title bar
+
+        :param parent: The parent widget of the title bar
+        :param app_parent: The parent of the window
+        :param logo_image: The image to be used as the logo, defaults to logotop_100x22.svg (optional)
+        :param logo_width: The width of the logo, defaults to 100 (optional)
+        :param dark_one: The color of the title bar when the window is active, defaults to #1b1e23 (optional)
+        :param bg_color: The background color of the title bar, defaults to #343b48 (optional)
+        :param div_color: The color of the divider between the title and the buttons, defaults to #3c4454 (optional)
+        :param btn_bg_color: The background color of the buttons, defaults to #343b48 (optional)
+        :param btn_bg_color_hover: The background color of the button when the mouse is over it, defaults to #3c4454
+        (optional)
+        :param btn_bg_color_pressed: The color of the button when it is pressed, defaults to #2c313c (optional)
+        :param icon_color: The color of the icon when the button is not pressed, defaults to #c3ccdf (optional)
+        :param icon_color_hover: The color of the icon when the mouse is over it, defaults to #dce1ec (optional)
+        :param icon_color_pressed: The color of the icon when the button is pressed, defaults to #edf0f5 (optional)
+        :param icon_color_active: The color of the icon when the button is active, defaults to #f5f6f9 (optional)
+        :param context_color: The color of the context menu, defaults to #6c99f4 (optional)
+        :param text_foreground: The color of the text in the title bar, defaults to #8a95aa (optional)
+        :param radius: The radius of the title bar's corners, defaults to 8 (optional)
+        :param font_family: The font family of the title bar, defaults to Segoe UI (optional)
+        :param title_size: The size of the title text, defaults to 10 (optional)
+        :param is_custom_title_bar: If True, the title bar will be customized. If False, the title bar will be the default
+        one, defaults to True (optional)
+        """
         super().__init__()
 
         settings = Settings()
@@ -98,6 +126,11 @@ class PyTitleBar(QWidget):
         # MOVE WINDOW / MAXIMIZE / RESTORE
         # ///////////////////////////////////////////////////////////////
         def move_window(event):
+            """
+            If the window is maximized, change it to normal and move it to the cursor position.
+
+            :param event: The event that triggered the function
+            """
             # IF MAXIMIZED CHANGE TO NORMAL
             if parent.isMaximized():
                 self.maximize_restore()
@@ -154,6 +187,11 @@ class PyTitleBar(QWidget):
     # Add btns and emit signals
     # ///////////////////////////////////////////////////////////////
     def add_menus(self, parameters):
+        """
+        It adds a button to the title bar
+
+        :param parameters: list of dicts
+        """
         if parameters is not None and len(parameters) > 0:
             for parameter in parameters:
                 _btn_icon = set_svg_icon(parameter["btn_icon"])
@@ -192,25 +230,50 @@ class PyTitleBar(QWidget):
     # TITLE BAR MENU EMIT SIGNALS
     # ///////////////////////////////////////////////////////////////
     def btn_clicked(self):
+        """
+        The function is called when the button is clicked. It emits a signal that is connected to a slot. The slot is a
+        function that is called when the signal is emitted
+        """
         self.clicked.emit(self.menu)
 
     def btn_released(self):
+        """
+        The function emits a signal that is connected to a slot that opens a menu
+        """
         self.released.emit(self.menu)
 
     # SET TITLE BAR TEXT
     # ///////////////////////////////////////////////////////////////
     def set_title(self, title):
+        """
+        It sets the text of the title label to the title passed in
+
+        :param title: The title of the window
+        """
         self.title_label.setText(title)
 
     # MAXIMIZE / RESTORE
     # maximize and restore parent window
     # ///////////////////////////////////////////////////////////////
     def maximize_restore(self, e=None):  # skipcq: PYL-W0613
+        """
+        It checks if the window is maximized, if it is, it sets the window to normal, and if it isn't, it sets the window to
+        maximized
+
+        :param e: The event that triggered the function
+        """
         global _is_maximized
         global _old_size
 
         # CHANGE UI AND RESIZE GRIP
         def change_ui():
+            """
+            If the window is maximized, set the margins to 0, set the border radius to 0, and set the icon to the restore
+            icon.
+
+            If the window is not maximized, set the margins to 10, set the border radius to 10, and set the icon to the
+            maximize icon.
+            """
             if _is_maximized:
                 self._parent.ui.central_widget_layout.setContentsMargins(
                     0, 0, 0, 0)
@@ -240,6 +303,10 @@ class PyTitleBar(QWidget):
     # SETUP APP
     # ///////////////////////////////////////////////////////////////
     def setup_ui(self):
+        """
+        The function sets up the layout of the title bar, adds a background, adds a logo, adds a title label, adds a
+        minimize button, adds a maximize/restore button, and adds a close button
+        """
         # ADD MENU LAYOUT
         self.title_bar_layout = QVBoxLayout(self)
         self.title_bar_layout.setContentsMargins(0, 0, 0, 0)
