@@ -214,7 +214,6 @@ class Ui_MainPages(object):
 
         self.compare_left_frame_layout.addWidget(self.compare_top_left_frame)
         self.compare_left_frame_layout.addWidget(self.compare_bottom_left_frame)
-
         # Right Frame (Page 7)
         self.compare_right_frame = QFrame()
         self.compare_right_frame.setMinimumWidth(450)
@@ -372,7 +371,6 @@ class Ui_MainPages(object):
         self.page_10_layout.addWidget(self.clustering_bottom_frame)
 
         self.pages.addWidget(self.page_10)
-
         # ADD PAGES TO MAIN LAYOUT
         # /////////////////////////////////////////////////////////
         self.main_pages_layout.addWidget(self.pages)
@@ -382,9 +380,7 @@ class Ui_MainPages(object):
         self.pages.setCurrentIndex(2)
 
         QMetaObject.connectSlotsByName(MainPages)
-    # setupUi
 
     def retranslateUi(self, MainPages):
         MainPages.setWindowTitle(QCoreApplication.translate("MainPages", u"Form", None))
         self.label.setText(QCoreApplication.translate("MainPages", u"Welcome To FM Excel Helper", None))
-    # retranslateUi

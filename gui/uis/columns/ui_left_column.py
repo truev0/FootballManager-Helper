@@ -115,8 +115,6 @@ class Ui_LeftColumn(object):
         self.menus.setCurrentIndex(0)
 
         QMetaObject.connectSlotsByName(LeftColumn)
-    # setupUi
 
     def retranslateUi(self, LeftColumn):
         LeftColumn.setWindowTitle(QCoreApplication.translate("LeftColumn", u"Form", None))
-    # retranslateUi

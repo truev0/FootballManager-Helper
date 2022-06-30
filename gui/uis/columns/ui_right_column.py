@@ -148,14 +148,11 @@ class Ui_RightColumn(object):
 
         self.main_pages_layout.addWidget(self.filter_data_btn_frame)
 
-
         self.retranslateUi(RightColumn)
 
         self.menus.setCurrentIndex(0)
 
         QMetaObject.connectSlotsByName(RightColumn)
-    # setupUi
 
     def retranslateUi(self, RightColumn):
         RightColumn.setWindowTitle(QCoreApplication.translate("RightColumn", u"Form", None))
-    # retranslateUi
