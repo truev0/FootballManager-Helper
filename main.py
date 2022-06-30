@@ -1242,43 +1242,43 @@ class MainWindow(QMainWindow):
         :param attrs: a list of lists, each list containing the attribute name, the operator, and the value
         """
         filtered_df = self.df_scout_for_table.copy()
-        for i in range(len(attrs)):
-            if attrs[i][1] == ">" and attrs[i][2] == 0.0:
+        for i, item in enumerate(attrs):
+            if item[1] == ">" and item[2] == 0.0:
                 continue
-            if attrs[i][1] == ">":
+            if item[1] == ">":
                 filtered_df = filtered_df[
-                    filtered_df[attrs[i][0]] > attrs[i][2]]
-            if attrs[i][1] == "<":
-                if attrs[i][2] > 0.0:
+                    filtered_df[item[0]] > item[2]]
+            if item[1] == "<":
+                if item[2] > 0.0:
                     filtered_df = filtered_df[
-                        filtered_df[attrs[i][0]] < attrs[i][2]]
-                elif attrs[i][2] == 0.0:
+                        filtered_df[item[0]] < item[2]]
+                elif item[2] == 0.0:
                     continue
-            if attrs[i][1] == ">=":
+            if item[1] == ">=":
                 filtered_df = filtered_df[
-                    filtered_df[attrs[i][0]] >= attrs[i][2]]
-            if attrs[i][1] == "<=":
+                    filtered_df[item[0]] >= item[2]]
+            if item[1] == "<=":
                 filtered_df = filtered_df[
-                    filtered_df[attrs[i][0]] <= attrs[i][2]]
+                    filtered_df[item[0]] <= item[2]]
 
-        for j in range(len(stats)):
-            if stats[j][1] == ">" and stats[j][2] == 0.0:
+        for j, item in enumerate(stats):
+            if item[1] == ">" and item[2] == 0.0:
                 continue
-            if stats[j][1] == ">":
+            if item[1] == ">":
                 filtered_df = filtered_df[
-                    filtered_df[stats[j][0]] > stats[j][2]]
-            if stats[j][1] == "<":
-                if stats[j][2] > 0.0:
+                    filtered_df[item[0]] > item[2]]
+            if item[1] == "<":
+                if item[2] > 0.0:
                     filtered_df = filtered_df[
-                        filtered_df[stats[j][0]] < stats[j][2]]
-                elif stats[j][2] == 0.0:
+                        filtered_df[item[0]] < item[2]]
+                elif item[2] == 0.0:
                     continue
-            if stats[j][1] == ">=":
+            if item[1] == ">=":
                 filtered_df = filtered_df[
-                    filtered_df[stats[j][0]] >= stats[j][2]]
-            if stats[j][1] == "<=":
+                    filtered_df[item[0]] >= item[2]]
+            if item[1] == "<=":
                 filtered_df = filtered_df[
-                    filtered_df[stats[j][0]] <= stats[j][2]]
+                    filtered_df[item[0]] <= item[2]]
 
         self.tables_helper_scouting(filtered_df)
 

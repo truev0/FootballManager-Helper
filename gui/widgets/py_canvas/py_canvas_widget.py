@@ -138,8 +138,8 @@ class PyClusteringWidget(QWidget):
                     self.scroller_content_layout.removeWidget(item)
                     item.deleteLater()
 
-        for i in range(len(players)):
-            label = QLabel(players[i],
+        for i, item in enumerate(players):
+            label = QLabel(item,
                            parent=self.scroller_area_widget_content)
             label.setMinimumHeight(50)
             label.setMaximumHeight(50)
