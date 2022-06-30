@@ -53,7 +53,7 @@ class PyToggle(QCheckBox):
     def hitButton(self, pos: QPoint):
         return self.contentsRect().contains(pos)
 
-    def paintEvent(self, e):
+    def paintEvent(self, e):  # skipcq: PYL-W0613
         p = QPainter(self)
         p.setRenderHint(QPainter.Antialiasing)
         p.setFont(QFont("Segoe UI", 9))

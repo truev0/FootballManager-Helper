@@ -39,5 +39,5 @@ class Settings(object):
     def deserialize(self):
         # READ JSON FILE
         with open(self.settings_path, "r", encoding='utf-8') as reader:
-            settings = json.loads(reader.read())
+            settings = json.loads(reader.read())  # skipcq: PY-W0078
             self.items = settings

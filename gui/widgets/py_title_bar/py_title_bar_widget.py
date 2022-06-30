@@ -205,7 +205,7 @@ class PyTitleBar(QWidget):
     # MAXIMIZE / RESTORE
     # maximize and restore parent window
     # ///////////////////////////////////////////////////////////////
-    def maximize_restore(self, e=None):
+    def maximize_restore(self, e=None):  # skipcq: PYL-W0613
         global _is_maximized
         global _old_size
 

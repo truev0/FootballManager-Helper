@@ -1214,8 +1214,8 @@ class MainWindow(QMainWindow):
 
         kmeans = KMeans(n_clusters=5)
         kmeans = kmeans.fit(reduced)
-        labels = kmeans.predict(reduced)
-        centroid = kmeans.cluster_centers_
+        labels = kmeans.predict(reduced)  # skipcq: PYL-W0612
+        centroid = kmeans.cluster_centers_  # skipcq: PYL-W0612
         clusters = kmeans.labels_.tolist()
 
         reduced["cluster"] = clusters
@@ -1244,7 +1244,7 @@ class MainWindow(QMainWindow):
             reduced[reduced[col_name] == self.ui.clustering_player_combo.
                     currentText()]["cluster"].tolist()[0])
         df_p_s_c = reduced[(reduced["cluster"] == player_cluster)]
-        for index, element in enumerate(tmp_filters):
+        for index, element in enumerate(tmp_filters):  # skipcq: PYL-W0612
             if tmp_filters[index][1] == ">" and tmp_filters[index][2] == 0.0:
                 continue
             if tmp_filters[index][1] == ">":

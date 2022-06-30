@@ -99,7 +99,7 @@ class PyLeftMenuButton(QPushButton):
 
     # PAINT EVENT
     # ///////////////////////////////////////////////////////////////
-    def paintEvent(self, event):
+    def paintEvent(self, event):  # skipcq: PYL-W0613
         # PAINTER
         p = QPainter()
         p.begin(self)
@@ -108,7 +108,7 @@ class PyLeftMenuButton(QPushButton):
         p.setFont(self.font())
 
         # RECTANGLES
-        rect = QRect(4, 5, self.width(), self.height() - 10)
+        rect = QRect(4, 5, self.width(), self.height() - 10)  # skipcq: PYL-W0612
         rect_inside = QRect(4, 5, self.width() - 8, self.height() - 10)
         rect_icon = QRect(0, 0, 50, self.height())
         rect_blue = QRect(4, 5, 20, self.height() - 10)
@@ -285,7 +285,7 @@ class PyLeftMenuButton(QPushButton):
     # MOUSE OVER
     # Event triggered when the mouse is over the BTN
     # ///////////////////////////////////////////////////////////////
-    def enterEvent(self, event):
+    def enterEvent(self, event):  # skipcq: PYL-W0613
         self.change_style(QEvent.Enter)
         if self.width() == 50 and self._tooltip_text:
             self.move_tooltip()
@@ -294,7 +294,7 @@ class PyLeftMenuButton(QPushButton):
     # MOUSE LEAVE
     # Event fired when the mouse leaves the BTN
     # ///////////////////////////////////////////////////////////////
-    def leaveEvent(self, event):
+    def leaveEvent(self, event):  # skipcq: PYL-W0613
         self.change_style(QEvent.Leave)
         self.tooltip.hide()
 

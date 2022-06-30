@@ -25,10 +25,10 @@ class CustomListModel(QAbstractTableModel):
 
             return unicode(value)
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent=None):  # skipcq: PYL-W0613
         return self._data.shape[0]
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent=None):  # skipcq: PYL-W0613
         return self._data.shape[1]
 
     def headerData(self, section, orientation, role=Qt.DisplayRole):
@@ -39,5 +39,5 @@ class CustomListModel(QAbstractTableModel):
             if orientation == Qt.Vertical:
                 return str(self._data.index[section])
 
-    def flags(self, index):
+    def flags(self, index):  # skipcq: PYL-W0613
         return Qt.ItemIsEnabled | Qt.ItemIsSelectable

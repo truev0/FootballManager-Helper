@@ -28,10 +28,10 @@ class CustomizedPandasModel(QAbstractTableModel):
 
             return unicode(value)
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent=None):  # skipcq: PYL-W0613
         return len(self._data.index)
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent=None):  # skipcq: PYL-W0613
         return self._data.columns.size
 
     def headerData(self, section, orientation, role=Qt.DisplayRole):
@@ -42,7 +42,7 @@ class CustomizedPandasModel(QAbstractTableModel):
             if orientation == Qt.Vertical:
                 return str(self._data.index[section])
 
-    def flags(self, index):
+    def flags(self, index):  # skipcq: PYL-W0613
         return Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsEditable
 
     def setData(self, index, value, role=Qt.EditRole):

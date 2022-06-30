@@ -84,7 +84,7 @@ class PyLeftButton(QPushButton):
     # PAINT EVENT
     # painting the button and the icon
     # ///////////////////////////////////////////////////////////////
-    def paintEvent(self, event):
+    def paintEvent(self, event):  # skipcq: PYL-W0613
         # PAINTER
         paint = QPainter()
         paint.begin(self)
@@ -137,7 +137,7 @@ class PyLeftButton(QPushButton):
     # MOUSE OVER
     # Event triggered when the mouse is over the BTN
     # ///////////////////////////////////////////////////////////////
-    def enterEvent(self, event):
+    def enterEvent(self, event):  # skipcq: PYL-W0613
         self.change_style(QEvent.Enter)
         self.move_tooltip()
         self._tooltip.show()
@@ -145,7 +145,7 @@ class PyLeftButton(QPushButton):
     # MOUSE LEAVE
     # Event fired when the mouse leaves the BTN
     # ///////////////////////////////////////////////////////////////
-    def leaveEvent(self, event):
+    def leaveEvent(self, event):  # skipcq: PYL-W0613
         self.change_style(QEvent.Leave)
         self.move_tooltip()
         self._tooltip.hide()

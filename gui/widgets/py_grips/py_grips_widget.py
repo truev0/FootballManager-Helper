@@ -160,12 +160,12 @@ class PyGrips(QWidget):
 
     # MOUSE RELEASE
     # ///////////////////////////////////////////////////////////////
-    def mouseReleaseEvent(self, event):
+    def mouseReleaseEvent(self, event):  # skipcq: PYL-W0613
         self.mousePos = None
 
     # RESIZE EVENT
     # ///////////////////////////////////////////////////////////////
-    def resizeEvent(self, event):
+    def resizeEvent(self, event):  # skipcq: PYL-W0613
         if hasattr(self.wi, "top_grip"):
             self.wi.top_grip.setGeometry(0, 0, self.width(), 10)
 

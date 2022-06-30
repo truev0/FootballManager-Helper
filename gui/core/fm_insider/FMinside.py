@@ -208,7 +208,7 @@ def data_for_rankings(df, lang):
         aux_coef1 = js_positions["positionEvaluation"][p]["coef1"]
         aux_coef2 = js_positions["positionEvaluation"][p]["coef2"]
         df[aux_string] = 0
-        for index, element in enumerate(
+        for index, element in enumerate(  # skipcq: PYL-W0612
                 js_positions["positionEvaluation"][p]["sumElements"]):
             tmp_value = js_positions["positionEvaluation"][p]["sumElements"][
                 index]

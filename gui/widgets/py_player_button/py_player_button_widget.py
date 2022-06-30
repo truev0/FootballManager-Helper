@@ -100,8 +100,8 @@ class PyPlayerButton(QPushButton):
                 mime_data.data("application/x-qabstractitemmodeldatalist"))
             while not stream.atEnd():
                 # All fields must be read, even if we don't use them
-                row = stream.readInt32()
-                col = stream.readInt32()
+                row = stream.readInt32()  # skipcq: PYL-W0612
+                col = stream.readInt32()  # skipcq: PYL-W0612
                 for _ in range(stream.readInt32()):
                     role = stream.readInt32()
                     value = stream.readQVariant()
@@ -172,13 +172,13 @@ class PyPlayerButton(QPushButton):
     # MOUSE OVER
     # Event triggered when the mouse is over the BTN
     # ///////////////////////////////////////////////////////////////
-    def enterEvent(self, event):
+    def enterEvent(self, event):  # skipcq: PYL-W0613
         self.change_style(QEvent.Enter)
 
     # MOUSE LEAVE
     # Event fired when the mouse leaves the BTN
     # ///////////////////////////////////////////////////////////////
-    def leaveEvent(self, event):
+    def leaveEvent(self, event):  # skipcq: PYL-W0613
         self.change_style(QEvent.Leave)
 
     # MOUSE PRESS

@@ -158,7 +158,7 @@ class _CustomSpyder(FigureCanvas):
                     kwargs_radar={'facecolor': self.COLORS[0], 'alpha': 0.15},
                     kwargs_compare={'facecolor': self.COLORS[1], 'alpha': 0.15},
                 )
-                radar_poly, radar_poly2, vertices1, vertices2 = radar_output
+                radar_poly, radar_poly2, vertices1, vertices2 = radar_output  # skipcq: PYL-W0612
 
                 radar.draw_range_labels(
                     ax=self.ax['radar'],

@@ -30,10 +30,10 @@ class CustomizedNumpyModel(QAbstractTableModel):
 
             return unicode(value)
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent=None):  # skipcq: PYL-W0613
         return self.r
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent=None):  # skipcq: PYL-W0613
         return self.c
 
     def headerData(self, p_int, orientation, role):
@@ -45,7 +45,7 @@ class CustomizedNumpyModel(QAbstractTableModel):
                 return p_int
         return None
 
-    def flags(self, index):
+    def flags(self, index):  # skipcq: PYL-W0613
         return Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsEditable
 
     def setData(self, index, value, role=Qt.EditRole):
