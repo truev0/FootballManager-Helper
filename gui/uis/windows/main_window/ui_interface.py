@@ -40,7 +40,6 @@ from gui.uis.pages.ui_main_pages import Ui_MainPages
 # IMPORT CUSTOM WIDGETS
 # ///////////////////////////////////////////////////////////////
 from gui.widgets import (
-    PyButtonGroup,
     PyClusteringWidget,
     PyComboBox,
     PyCredits,
@@ -53,6 +52,7 @@ from gui.widgets import (
     PyTitleBar,
     PyVerticalPitch,
     PyWindow,
+    PyButtonGroup,
 )
 from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 

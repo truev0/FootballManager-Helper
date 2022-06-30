@@ -2,29 +2,25 @@
 # ADD here all custom widgets
 # ///////////////////////////////////////////////////////////////
 
-# PY BUTTON GROUP WIDGET
-# ///////////////////////////////////////////////////////////////
-from .py_button_group.py_button_group import PyButtonGroup
-
 # PY CANVAS
 # ///////////////////////////////////////////////////////////////
-from .py_canvas.py_canvas import PyClusteringWidget
+from .py_canvas.py_canvas_widget import PyClusteringWidget
 
 # PY COMBO BOX
 # ///////////////////////////////////////////////////////////////
-from .py_combo_box.py_combo_box import PyComboBox
+from .py_combo_box.py_combo_box_widget import PyComboBox
 
 # PY CREDITS
 # ///////////////////////////////////////////////////////////////
-from .py_credits_bar.py_credits import PyCredits
+from .py_credits_bar.py_credits_widget import PyCredits
 
 # RESIZE GRIP
 # ///////////////////////////////////////////////////////////////
-from .py_grips.py_grips import PyGrips
+from .py_grips.py_grips_widget import PyGrips
 
 # PY ICON BUTTON
 # ///////////////////////////////////////////////////////////////
-from .py_icon_button.py_icon_button import PyIconButton
+from .py_icon_button.py_icon_button_widget import PyIconButton
 
 # PY LEFT COLUMN
 # ///////////////////////////////////////////////////////////////
@@ -32,19 +28,19 @@ from .py_left_column.py_left_column import PyLeftColumn
 
 # LEFT MENU
 # ///////////////////////////////////////////////////////////////
-from .py_left_menu.py_left_menu import PyLeftMenu
+from .py_left_menu.py_left_menu_widget import PyLeftMenu
 
 # PY LINE EDIT
 # ///////////////////////////////////////////////////////////////
-from .py_line_edit.py_line_edit import PyLineEdit
+from .py_line_edit.py_line_edit_widget import PyLineEdit
 
 # PY PLAYER BUTTON
 # ///////////////////////////////////////////////////////////////
-from .py_player_button.py_player_button import PyPlayerButton
+from .py_player_button.py_player_button_widget import PyPlayerButton
 
 # PY PUSH BUTTON
 # ///////////////////////////////////////////////////////////////
-from .py_push_button.py_push_button import PyPushButton
+from .py_push_button.py_push_button_widget import PyPushButton
 
 # PY SPYDER WIDGET
 # ///////////////////////////////////////////////////////////////
@@ -52,24 +48,28 @@ from .py_stats_widget.py_spyder_widget import PySpyderWidget
 
 # PY STATS WIDGET
 # ///////////////////////////////////////////////////////////////
-from .py_stats_widget.py_stats_widget import PyStatsWidget
+from .py_stats_widget.py_stats1_widget import PyStatsWidget
 
 # PY TABLE WIDGET
 # ///////////////////////////////////////////////////////////////
-from .py_table_widget.py_table_widget import PyTableWidget
+from .py_table.py_table_widget import PyTableWidget
 
 # PY TITLE BAR
 # ///////////////////////////////////////////////////////////////
-from .py_title_bar.py_title_bar import PyTitleBar
+from .py_title_bar.py_title_bar_widget import PyTitleBar
 
 # PY TOGGLE
 # ///////////////////////////////////////////////////////////////
-from .py_toggle.py_toggle import PyToggle
+from .py_toggle.py_toggle_widget import PyToggle
 
 # PY VERTICAL PITCH
 # ///////////////////////////////////////////////////////////////
-from .py_vertical_pitch.py_vertical_pitch import PyVerticalPitch
+from .py_vertical_pitch.py_vertical_pitch_widget import PyVerticalPitch
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
-from .py_window.py_window import PyWindow
+from .py_window.py_window_widget import PyWindow
+
+# PY BUTTON GROUP WIDGET
+# ///////////////////////////////////////////////////////////////
+from .py_button_group.py_button_group_widget import PyButtonGroup

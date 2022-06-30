@@ -7,7 +7,7 @@ from PySide6.QtCore import Signal, Qt
 
 # IMPORT CLOSE BUTTON
 # ///////////////////////////////////////////////////////////////
-from .py_left_button import PyLeftButton
+from .py_left_button_widget import PyLeftButton
 
 # IMPORT ICON
 # ///////////////////////////////////////////////////////////////

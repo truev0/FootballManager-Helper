@@ -14,7 +14,7 @@ from gui.core.dicts import util_lists
 
 # IMPORT PY COMBO BOX
 # ///////////////////////////////////////////////////////////////
-from gui.widgets.py_combo_box.py_combo_box import PyComboBox
+from gui.widgets.py_combo_box.py_combo_box_widget import PyComboBox
 
 
 # PY STATS WIDGET
@@ -200,13 +200,15 @@ class _CustomCanvas(FigureCanvas):
                                 sel.artist[sel.index].get_bbox().bounds)
                             if ((x + width / 2) + 4) > len(custom_df):
                                 sel.annotation.set(
-                                    text=f"{custom_df[custom_df.columns[0]][sel.index]}: {height:g}",
+                                    text=f"{custom_df[custom_df.columns[0]][sel.index]}"
+                                         f": {height:g}",
                                     position=(-10, 0),
                                     anncoords="offset points",
                                 )
                             else:
                                 sel.annotation.set(
-                                    text=f"{custom_df[custom_df.columns[0]][sel.index]}: {height:g}",
+                                    text=f"{custom_df[custom_df.columns[0]][sel.index]}"
+                                         f": {height:g}",
                                     position=(10, 0),
                                     anncoords="offset points",
                                 )

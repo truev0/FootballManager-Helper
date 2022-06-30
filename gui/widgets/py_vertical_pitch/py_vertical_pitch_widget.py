@@ -10,7 +10,7 @@ from gui.core.functions import set_svg_icon
 
 # IMPORT BUTTONS
 # ///////////////////////////////////////////////////////////////
-from gui.widgets.py_player_button.py_player_button import PyPlayerButton
+from gui.widgets.py_player_button.py_player_button_widget import PyPlayerButton
 
 # PY VERTICAL PITCH
 
