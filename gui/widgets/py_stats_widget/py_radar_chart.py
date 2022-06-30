@@ -49,7 +49,6 @@ class Radar:
         :param ring_width: The width of each ring, defaults to 1 (optional)
         :param center_circle_radius: The radius of the center circle, defaults to 1 (optional)
         """
-
         self.params = np.asarray(params)
         self.min_range = np.asarray(min_range)
         self.max_range = np.asarray(max_range)

@@ -85,7 +85,6 @@ class _CustomSpyder(FigureCanvas):
         :param line_color: The color of the lines that connect the points on the radar chart
         :param language: The language of the labels, defaults to en (optional)
         """
-
         self.fig, self.ax = radar_mosaic(radar_height=0.915, title_height=0.06, fig_height=14)
         super(_CustomSpyder, self).__init__(self.fig)
         # COLORS
@@ -252,7 +251,6 @@ def radar_mosaic(radar_height=0.915, title_height=0.06, fig_height=14):
     :param fig_height: The height of the figure in inches, defaults to 14 (optional)
     :return: A tuple of the figure and axes objects.
     """
-
     if title_height + radar_height > 1:
         error_msg = 'Reduce one of the radar_height or title_height so the total is <= 1.'
         raise ValueError(error_msg)

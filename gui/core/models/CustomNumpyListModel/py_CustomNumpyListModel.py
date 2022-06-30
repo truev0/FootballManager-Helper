@@ -33,7 +33,6 @@ class CustomizedNumpyListModel(QAbstractTableModel):
         :param role: The role being requested
         :return: The value of the cell.
         """
-
         if role == Qt.DisplayRole:
             value = self._data[index.row(), index.column()]
 

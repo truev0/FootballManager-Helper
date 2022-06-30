@@ -19,7 +19,6 @@ class PyGrips(QWidget):
         bottom, left, or right
         :param disable_color: If set to True, the grip will be transparent, defaults to False (optional)
         """
-
         # SETUP UI
         # ///////////////////////////////////////////////////////////////
         super().__init__()
