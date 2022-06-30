@@ -1443,7 +1443,6 @@ def main():
     # APPLICATION
     # ///////////////////////////////////////////
     app = QApplication(sys.argv)
-    # app.setWindowIcon()
     window = MainWindow()
     window.show()
 
