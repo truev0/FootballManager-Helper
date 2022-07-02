@@ -77,7 +77,8 @@ espanol = {
     },
     "left_content": {
         "b1": "Cargar archivo plantilla",
-        "b2": "Cargar archivo scouting"
+        "b2": "Cargar archivo scouting",
+        "b3": "Cargar archivo plantilla vieja"
     },
     "right_content": {
         "b1": "Filtros de estadisticas",

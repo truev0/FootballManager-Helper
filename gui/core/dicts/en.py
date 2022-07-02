@@ -77,7 +77,8 @@ english = {
     },
     "left_content": {
         "b1": "Load squad file",
-        "b2": "Load scouting file"
+        "b2": "Load scouting file",
+        "b3": "Load old squad file"
     },
     "right_content": {
         "b1": "Slide to stats filters",

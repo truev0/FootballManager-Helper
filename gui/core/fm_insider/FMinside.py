@@ -25,7 +25,7 @@ poss.update({"es": NestedNamespace(es.positions)})
 # SETTING PANDAS
 # Load file to create the dataframe
 # ///////////////////////////////////////////////////////////////
-def setting_up_pandas(path_file, btn_press):
+def setting_up_pandas(path_file):
     """
     This function sets up the pandas dataframe for the squad and scouting files
 
@@ -36,27 +36,15 @@ def setting_up_pandas(path_file, btn_press):
     pd.set_option("styler.render.max_columns", 100)
     pd.set_option("styler.render.max_rows", 100)
     pd.set_option("styler.format.precision", 0)
-    # LOADING SQUAD FILE
-    if btn_press == "squad_btn":
-        try:
-            html_filename = r"{}".format(path_file)
-            df_p = pd.read_html(html_filename, encoding="utf-8")[0]
-        except ValueError:
-            return None
-        except FileNotFoundError:
-            return None
-        return df_p
-    # LOADING SCOUTING FILE
-    if btn_press == "scout_btn":
-        try:
-            html_filename = r"{}".format(path_file)
-            df_s = pd.read_html(html_filename, encoding="utf-8")[0]
-        except ValueError:
-            return None
-        except FileNotFoundError:
-            return None
-        return df_s
-    return None
+    # LOADING FILE
+    try:
+        html_filename = r"{}".format(path_file)
+        df_fmi = pd.read_html(html_filename, encoding="utf-8")[0]
+    except ValueError:
+        return None
+    except FileNotFoundError:
+        return None
+    return df_fmi
 
 
 # CONVERT VALUES TO ITS RESPECTIVE TYPE

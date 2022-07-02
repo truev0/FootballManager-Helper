@@ -667,7 +667,8 @@ class MainWindow(QMainWindow):
             lambda: self.load_all_data(self.ui.load_squad_btn))
         self.ui.load_scouting_btn.clicked.connect(
             lambda: self.load_all_data(self.ui.load_scouting_btn))
-        # TODO ADD OLD SQUAD BUTTON
+        self.ui.load_old_btn.clicked.connect(
+            lambda: self.load_all_data(self.ui.load_old_btn))
         self.ui.english_language_btn.clicked.connect(
             lambda: self.translate_lang("en"))
         self.ui.spanish_language_btn.clicked.connect(
@@ -720,44 +721,52 @@ class MainWindow(QMainWindow):
                                                filter="HTML Files (*.html)")
 
         # READ FILE
-        if dlg_file:
+        if dlg_file[0] != "":
             if "squad" in button_object.get_name():
                 # SETTING ORIGINAL DATAFRAME
                 self.df_original = FMi.setting_up_pandas(
-                    dlg_file[0], "squad_btn")
-                self.process_squad_info()
+                    dlg_file[0])
+                if self.df_original is not None:
+                    self.process_squad_info()
 
-                self.tables_helper_squad()
+                    self.tables_helper_squad()
 
-                self.load_data_for_graphs()
+                    self.load_data_for_graphs()
 
-                self.create_and_load_checkboxes()
-                tmp_list = self.df_original[self.ui_headers[
-                    self.language].h.h1].values.tolist()
-                self.ui.clustering_player_combo.addItems(tmp_list)
-                self.add_squad_names(tmp_list)
-                self.haveSquadInfo = True
+                    self.create_and_load_checkboxes()
+                    tmp_list = self.df_original[self.ui_headers[
+                        self.language].h.h1].values.tolist()
+                    self.ui.clustering_player_combo.addItems(tmp_list)
+                    self.add_squad_names(tmp_list)
+                    self.haveSquadInfo = True
             elif "scouting" in button_object.get_name():
                 if self.df_scouting is None:
                     self.df_scouting = FMi.setting_up_pandas(
-                        dlg_file[0], "scout_btn")
+                        dlg_file[0])
                 else:
                     self.df_scouting = pd.concat([
                         self.df_scouting,
-                        FMi.setting_up_pandas(dlg_file[0], "scout_btn"),
+                        FMi.setting_up_pandas(dlg_file[0]),
                     ])
-                self.process_scouting_info()
-                self.tables_helper_scouting(self.df_scout_for_table)
-                tmp_list = self.df_scouting[self.ui_headers[
-                    self.language].h.h1].values.tolist()
-                self.create_edits_for_scouting()
-                self.create_lines_for_clustering()
-                self.add_scouting_names(tmp_list)
-
+                if self.df_scouting is not None:
+                    self.process_scouting_info()
+                    if self.df_scouting is not None:
+                        self.tables_helper_scouting(self.df_scout_for_table)
+                        tmp_list = self.df_scouting[self.ui_headers[
+                            self.language].h.h1].values.tolist()
+                        self.create_edits_for_scouting()
+                        self.create_lines_for_clustering()
+                        self.add_scouting_names(tmp_list)
             elif "old" in button_object.text():
-                """
-                No implementado aun por que no se que hacer aqui
-                """
+                # SETTING ORIGINAL DATAFRAME
+                self.df_old_squad = FMi.setting_up_pandas(
+                    dlg_file[0])
+                if self.df_old_squad is not None:
+                    self.process_old_squad_info()
+                    tmp_list = self.df_old_squad[self.ui_headers[
+                        self.language].h.h1].values.tolist()
+                    self.add_old_squad_names(tmp_list)
+                    self.haveSquadInfo = True
 
     # PROCESS ACTUAL SQUAD INFO
     # ///////////////////////////////////////////
@@ -808,14 +817,23 @@ class MainWindow(QMainWindow):
                 self.df_scouting, self.language)
             self.df_scout_for_table.fillna(0, inplace=True)
             self.scoutingCounter += 1
-
-        if self.scoutingCounter == 3:
-            self.haveScoutingInfo = True
+        else:
+            self.df_scouting = None
+            self.scoutingCounter = 0
 
     # PROCESS OLD SQUAD INFO
     # ///////////////////////////////////////////
     def process_old_squad_info(self):
-        # TODO implement
+        self.df_old_squad = FMi.convert_values(self.df_old_squad, self.language)
+        self.df_old_squad = FMi.convert_values_scout(self.df_old_squad)
+        self.df_old_squad = FMi.create_metrics_for_gk(self.df_old_squad, self.language)
+
+        # SETTING MODIFIED DATAFRAME
+        self.df_old_squad = FMi.data_for_rankings(self.df_old_squad, self.language)
+        self.df_old_squad = FMi.round_data(self.df_old_squad)
+        self.df_old_squad = FMi.ranking_values(self.df_old_squad)
+        self.df_old_squad.fillna(0, inplace=True)
+
         self.haveOldSquadInfo = True
 
     # SQUAD HELPER FUNCTION
@@ -964,6 +982,7 @@ class MainWindow(QMainWindow):
         # Translating left inside menu
         self.ui.load_squad_btn.setText(self.ui_text[lang].left_content.b1)
         self.ui.load_scouting_btn.setText(self.ui_text[lang].left_content.b2)
+        self.ui.load_old_btn.setText(self.ui_text[lang].left_content.b3)
 
         # Translating right inside menu
         self.ui.right_btn_1.setText(self.ui_text[lang].right_content.b1)
@@ -1113,17 +1132,16 @@ class MainWindow(QMainWindow):
             self.ui_text[self.language].menu.g1, tmp_l)
         self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_scouting)
 
-    def add_old_squad_names(self):
-        # TODO traer la lista
+    def add_old_squad_names(self, tmp_l):
         if self.ui.first_squad_player_combo.count() == 3:
             self.ui.first_squad_player_combo.clear()
             self.ui.first_player_combo.clear()
             self.ui.second_squad_player_combo.clear()
             self.ui.second_player_combo.clear()
         self.ui.first_squad_player_combo.addItem(
-            self.ui_text[self.language].menu.g2, [])
+            self.ui_text[self.language].menu.g2, tmp_l)
         self.ui.second_squad_player_combo.addItem(
-            self.ui_text[self.language].menu.g2, [])
+            self.ui_text[self.language].menu.g2, tmp_l)
 
     # SEND DATA FOR COMPARE GRAPHIC
     # ///////////////////////////////////////////////////

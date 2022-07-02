@@ -781,6 +781,19 @@ class Ui_MainWindow(object):
         self.load_scouting_btn.setMaximumHeight(40)
         self.left_column.menus.btn_2_layout.addWidget(self.load_scouting_btn)
 
+        # Load Old Btn
+        self.load_old_btn = PyPushButton(
+            name="old",
+            text="Load old squad file",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
+        )
+        self.load_old_btn.setMaximumHeight(40)
+        self.left_column.menus.btn_3_layout.addWidget(self.load_old_btn)
+
         # PAGES CONFIGURATION
         # ///////////////////////////////////////////////////////////////
         # COMMON SECTION FOR ALL PAGES
