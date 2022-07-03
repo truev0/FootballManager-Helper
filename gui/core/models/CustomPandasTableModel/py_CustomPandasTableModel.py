@@ -43,7 +43,7 @@ class CustomizedPandasModel(QAbstractTableModel):
                 return str(self._data.index[section])
         return None
 
-    def flags(self, index):  # skipcq: PYL-W0613
+    def flags(self, index):  # skipcq: PYL-W0613 PYL-R0201
         return Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsEditable
 
     def setData(self, index, value, role=Qt.EditRole):

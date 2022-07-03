@@ -32,7 +32,7 @@ from Custom_Widgets.Widgets import loadJsonStyle
 # ///////////////////////////////////////////
 # from gui.core.pyside_modules import *
 from PySide6.QtCore import QEasingCurve, QPoint, QPropertyAnimation, QRect, Qt, Signal
-from PySide6.QtGui import QCloseEvent, QShowEvent, QFont
+from PySide6.QtGui import QCloseEvent, QShowEvent
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
@@ -113,8 +113,8 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         """
-        The function is called when the program starts. It sets up the main window, loads settings, sets up the GUI, sets
-        signals, connects events, loads the style, creates animations, and saves the old position
+        The function is called when the program starts. It sets up the main window, loads settings,
+        sets up the GUI, sets signals, connects events, loads the style, creates animations, and saves the old position
         """
         super(MainWindow, self).__init__()
 
@@ -164,7 +164,6 @@ class MainWindow(QMainWindow):
         self.ninth_collapsable = None
         self.text_ninth_collapsable = None
         self.vertical_collapsable = None
-
 
         self.bottom_right_grip = None
         self.bottom_left_grip = None
@@ -229,8 +228,8 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def showEvent(self, event: QShowEvent) -> None:
         """
-        The function is called when the window is shown. It sets the start value of the animation to the current position of
-        the window, and the end value to the position of the window before it was hidden
+        The function is called when the window is shown. It sets the start value of the animation to the current
+        position of the window, and the end value to the position of the window before it was hidden
 
         :param event: QShowEvent
         :type event: QShowEvent
@@ -248,8 +247,8 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def closeEvent(self, event: QCloseEvent) -> None:
         """
-        The function is called when the user clicks the close button on the window. If the window is not started, the window
-        is hidden and the animation is started. If the window is started, the window is closed
+        The function is called when the user clicks the close button on the window. If the window is not started,
+        the window is hidden and the animation is started. If the window is started, the window is closed
 
         :param event: QCloseEvent
         :type event: QCloseEvent
@@ -328,8 +327,8 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def get_center(self):
         """
-        It returns the top left corner of the window, which is the same as the center of the window, but only if the window
-        is centered on the screen
+        It returns the top left corner of the window, which is the same as the center of the window, but only if the
+        window is centered on the screen
         :return: The top left corner of the window.
         """
         geometry = self.frameGeometry()
@@ -356,8 +355,8 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def maximize_event(self):
         """
-        It hides the window, moves it to the top left corner of the screen, resizes it to the size of the screen, and then
-        centers it
+        It hides the window, moves it to the top left corner of the screen, resizes it to the size of the screen,
+        and then centers it
         """
         self.oldPos = self.pos()
         self.hideAnimation.setStartValue(self.oldPos)
@@ -378,9 +377,9 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def adjust_notification_container(self, btn):
         """
-        It takes a button as an argument, resets the height of the container, checks if the button has more than 5 players,
-        if it does, it adds 12 pixels to the height of the container for each player over 5, formats the text to be
-        displayed, displays the text, and then toggles the menu
+        It takes a button as an argument, resets the height of the container, checks if the button has more than 5
+        players, if it does, it adds 12 pixels to the height of the container for each player over 5, formats the text
+        to be displayed, displays the text, and then toggles the menu
 
         :param btn: the button that was clicked
         """
@@ -988,9 +987,9 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def process_squad_info(self):
         """
-        It takes a dataframe, converts the values to the language of the user, creates metrics for goalkeepers, creates a
-        dataframe for the rankings, rounds the data, creates a dataframe for the squad table, and creates a dataframe for
-        the tactic table
+        It takes a dataframe, converts the values to the language of the user, creates metrics for goalkeepers, creates
+        a dataframe for the rankings, rounds the data, creates a dataframe for the squad table, and creates a dataframe
+        for the tactic table
         """
         self.df_original = FMi.convert_values(self.df_original, self.language)
         self.df_original = FMi.create_metrics_for_gk(self.df_original,
@@ -1012,9 +1011,9 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def process_scouting_info(self):
         """
-        It takes a dataframe, converts the values to the language of the user, converts the values to the scouting values,
-        creates metrics for goalkeepers, creates a dataframe for the scouting team, fills the NaN values with 0, and
-        increments the scouting counter
+        It takes a dataframe, converts the values to the language of the user, converts the values to the scouting
+        values, creates metrics for goalkeepers, creates a dataframe for the scouting team, fills the NaN values with
+        0, and increments the scouting counter
         """
         if self.scoutingCounter < 4:
             self.df_scouting = FMi.convert_values(self.df_scouting,
@@ -1282,8 +1281,8 @@ class MainWindow(QMainWindow):
 
     def update_inner_combo(self, index):
         """
-        The function takes the index of the selected item in the first combo box and uses it to find the corresponding list
-        of items in the second combo box
+        The function takes the index of the selected item in the first combo box and uses it to find the corresponding
+        list of items in the second combo box
 
         :param index: The index of the item that was selected
         """
@@ -1294,9 +1293,9 @@ class MainWindow(QMainWindow):
 
     def second_update_inner_combo(self, index):
         """
-        The function takes the index of the selected item in the second squad player combo box and uses that index to get
-        the list of players associated with that squad. It then clears the second player combo box and adds the list of
-        players to the second player combo box
+        The function takes the index of the selected item in the second squad player combo box and uses that index to
+        get the list of players associated with that squad. It then clears the second player combo box and adds the
+        list of players to the second player combo box
 
         :param index: The index of the item that was selected
         """
@@ -1308,8 +1307,8 @@ class MainWindow(QMainWindow):
 
     def create_edits_for_scouting(self):
         """
-        It creates a list of buttons for the user to click on, and then it creates a list of line edits for the user to type
-        in
+        It creates a list of buttons for the user to click on, and then it creates a list of line edits for the user
+        to type in
         """
         if (self.ui.group_lineedits_attrs_widget.get_lines() is not None and
                 self.ui.group_lineedits_stats_widget.get_lines() is not None):
@@ -1697,9 +1696,9 @@ class MainWindow(QMainWindow):
 # ///////////////////////////////////////////
 def main():
     """
-    `main()` is the entry point of the application. It creates an instance of the `QApplication` class, which is the main
-    class of the Qt framework. It also creates an instance of the `MainWindow` class, which is the main window of the
-    application
+    `main()` is the entry point of the application. It creates an instance of the `QApplication` class, which is the
+    main class of the Qt framework. It also creates an instance of the `MainWindow` class, which is the main window
+    of the application
     """
     # APPLICATION
     # ///////////////////////////////////////////

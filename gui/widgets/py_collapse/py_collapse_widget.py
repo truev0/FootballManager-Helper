@@ -1,8 +1,7 @@
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel, \
-    QApplication, QMainWindow, QPushButton, QTableWidget, QTableWidgetItem
-from PySide6.QtCore import Signal, QPoint, QPointF, Qt
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QFrame, QHBoxLayout, QLabel
+from PySide6.QtCore import Signal, QPoint, QPointF
 from PySide6.QtGui import QPainter, QColor
 
 
@@ -43,7 +42,7 @@ class FrameLayout(QWidget):
     def toggleCollapsed(self):
         self._content.setVisible(self._is_collasped)
         self._is_collasped = not self._is_collasped
-        self.title_frame._arrow.setArrow(int(self._is_collasped))
+        self.title_frame.arrow.setArrow(int(self._is_collasped))
 
     class TitleFrame(QFrame):
         clicked = Signal(str)
@@ -60,17 +59,17 @@ class FrameLayout(QWidget):
             self._hlayout.setContentsMargins(0, 0, 0, 0)
             self._hlayout.setSpacing(0)
 
-            self._arrow = None
+            self.arrow = None
             self._title = None
 
             self._hlayout.addWidget(self.initArrow(collapsed))
             self._hlayout.addWidget(self.initTitle(title))
 
         def initArrow(self, collapsed):
-            self._arrow = FrameLayout.Arrow(collapsed=collapsed)
-            self._arrow.setStyleSheet("border:0px")
+            self.arrow = FrameLayout.Arrow(collapsed=collapsed)
+            self.arrow.setStyleSheet("border:0px")
 
-            return self._arrow
+            return self.arrow
 
         def initTitle(self, title=None):
             self._title = QLabel(title)
@@ -99,19 +98,19 @@ class FrameLayout(QWidget):
             # vertical == 1
             self._arrow_vertical = (QPointF(8.0, 7.0), QPointF(13.0, 12.0), QPointF(8.0, 17.0))
             # arrow
-            self._arrow = None
+            self.arrow = None
             self.setArrow(int(collapsed))
 
         def setArrow(self, arrow_dir):
             if arrow_dir:
-                self._arrow = self._arrow_vertical
+                self.arrow = self._arrow_vertical
             else:
-                self._arrow = self._arrow_horizontal
+                self.arrow = self._arrow_horizontal
 
-        def paintEvent(self, event):
+        def paintEvent(self, event):  # skipcq: PYL-W0613
             painter = QPainter()
             painter.begin(self)
             painter.setBrush(QColor(192, 192, 192))
             painter.setPen(QColor(64, 64, 64))
-            painter.drawPolygon(self._arrow)
+            painter.drawPolygon(self.arrow)
             painter.end()

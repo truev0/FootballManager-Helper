@@ -8,6 +8,24 @@ from PySide6.QtCore import QSize, Qt, QMetaObject, QCoreApplication
 
 # This class is used to create the right column of the main window
 class Ui_RightColumn(object):
+    def __init__(self):
+        self.filter_data_btn_layout = None
+        self.filter_data_btn_frame = None
+        self.scroll_area_2 = None
+        self.verticalSpacer_2 = None
+        self.btn_1_menu_2_layout = None
+        self.btn_2_frame = None
+        self.verticalLayout_2 = None
+        self.menu_2 = None
+        self.scroll_area_1 = None
+        self.verticalSpacer = None
+        self.btn_1_menu_1_layout = None
+        self.btn_1_frame = None
+        self.verticalLayout = None
+        self.menu_1 = None
+        self.menus = None
+        self.main_pages_layout = None
+
     def setupUi(self, RightColumn):
         """
         Set interface for left column widget

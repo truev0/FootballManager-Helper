@@ -13,8 +13,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QSizePolicy,
     QVBoxLayout,
-    QWidget,
-    QSpacerItem
+    QWidget
 )
 from PySide6.QtCore import QEasingCurve, QParallelAnimationGroup, QPropertyAnimation, Qt
 from PySide6.QtGui import QFont, QIcon
@@ -53,8 +52,7 @@ from gui.widgets import (
     PyTitleBar,
     PyVerticalPitch,
     PyWindow,
-    PyButtonGroup,
-    FrameLayout
+    PyButtonGroup
 )
 from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 
@@ -63,6 +61,82 @@ from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 # ///////////////////////////////////////////////////////////////
 # This class is used to create all interface of the application
 class Ui_MainWindow(object):
+
+    def __init__(self):
+        self.group = None
+        self.right_box = None
+        self.left_box = None
+        self.icon_spanish = None
+        self.spanish_language_btn = None
+        self.icon_english = None
+        self.english_language_btn = None
+        self.right_btn_3 = None
+        self.icon_left = None
+        self.right_btn_2 = None
+        self.icon_right = None
+        self.right_btn_1 = None
+        self.clustering_chart = None
+        self.group_clustering_filters = None
+        self.clustering_btn_send = None
+        self.clustering_player_combo = None
+        self.group_lineedits_stats_widget = None
+        self.group_lineedits_attrs_widget = None
+        self.table_scouting = None
+        self.btn_send = None
+        self.group_chk_stats_widget = None
+        self.group_chk_attrs_widget = None
+        self.btn_compare_attrs = None
+        self.btn_compare_stats = None
+        self.spyder_graph_widget = None
+        self.second_player_combo = None
+        self.second_squad_player_combo = None
+        self.first_player_combo = None
+        self.first_squad_player_combo = None
+        self.graph_statistics = None
+        self.table_tactic = None
+        self.table_squad = None
+        self.logo_svg = None
+        self.load_old_btn = None
+        self.load_scouting_btn = None
+        self.load_squad_btn = None
+        self.language = None
+        self.list_label = None
+        self.btn_close_notification = None
+        self.title_notification = None
+        self.title_notification_frame_layout = None
+        self.title_notification_frame = None
+        self.popup_notification_subcontainer_layout = None
+        self.popup_notification_subcontainer = None
+        self.popup_notification_container_layout = None
+        self.popup_notification_container = None
+        self.credits = None
+        self.credits_layout = None
+        self.credits_frame = None
+        self.pitch_widget = None
+        self.load_pages = None
+        self.content_area_left_frame = None
+        self.right_column = None
+        self.content_area_right_bg_frame = None
+        self.content_area_right_layout = None
+        self.right_column_frame = None
+        self.content_area_layout = None
+        self.content_area_frame = None
+        self.title_bar = None
+        self.title_bar_layout = None
+        self.title_bar_frame = None
+        self.right_app_layout = None
+        self.right_app_frame = None
+        self.left_column = None
+        self.left_column_layout = None
+        self.left_column_frame = None
+        self.left_menu = None
+        self.left_menu_layout = None
+        self.left_menu_frame = None
+        self.window = None
+        self.central_widget_layout = None
+        self.central_widget = None
+        self.themes = None
+        self.settings = None
 
     def setupUi(self, parent):
         """
@@ -861,9 +935,6 @@ class Ui_MainWindow(object):
         )
         self.load_pages.column_1_layout_5.addWidget(self.graph_statistics)
 
-        # PAGE 6 - Metrics view
-        # TODO crear layout later
-
         # PAGE 7 - Compare view
         # LEFT TOP SIDE OF PAGE
         # ///////////////////////////////////////////////////////////////
@@ -1089,8 +1160,9 @@ class Ui_MainWindow(object):
         )
         self.right_btn_3.setMaximumHeight(40)
         self.right_column.filter_data_btn_layout.addWidget(self.right_btn_3)
-
-        # TODO reubicar los botones de lenguaje a otra seccion en este mismo archivo
+        
+        # LEFT COLUMN CONFIGURATION
+        # ///////////////////////////////////////////////////////////////
         # ENGLISH BUTTON
         # Button to change UI to english
         # ///////////////////////////////////////////////////////////////
@@ -1261,8 +1333,8 @@ class Ui_MainWindow(object):
         :param right_box_width: The current width of the right box
         :param direction: left or right
         """
-        right_width = 0
-        left_width = 0
+        _right_width = 0
+        _left_width = 0
         time_animation = self.settings["time_animation"]
         minimum_left = self.settings["left_column_size"]["minimum"]
         maximum_left = self.settings["left_column_size"]["maximum"]
@@ -1271,22 +1343,22 @@ class Ui_MainWindow(object):
 
         # Check left Values
         if left_box_width == minimum_left and direction == "left":
-            left_width = maximum_left
+            _left_width = maximum_left
         else:
-            left_width = minimum_left
+            _left_width = minimum_left
 
         # Check right values
         if right_box_width == minimum_right and direction == "right":
-            right_width = maximum_right
+            _right_width = maximum_right
         else:
-            right_width = minimum_right
+            _right_width = minimum_right
 
         # ANIMATION LEFT BOX
         self.left_box = QPropertyAnimation(self.left_column_frame,
                                            b"minimumWidth")
         self.left_box.setDuration(time_animation)
         self.left_box.setStartValue(left_box_width)
-        self.left_box.setEndValue(left_width)
+        self.left_box.setEndValue(_left_width)
         self.left_box.setEasingCurve(QEasingCurve.InOutQuart)
 
         # ANIMATION RIGHT BOX
@@ -1294,7 +1366,7 @@ class Ui_MainWindow(object):
                                             b"minimumWidth")
         self.right_box.setDuration(time_animation)
         self.right_box.setStartValue(right_box_width)
-        self.right_box.setEndValue(right_width)
+        self.right_box.setEndValue(_right_width)
         self.right_box.setEasingCurve(QEasingCurve.InOutQuart)
 
         # GROUP ANIMATION

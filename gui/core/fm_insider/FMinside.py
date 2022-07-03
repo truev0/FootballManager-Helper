@@ -30,7 +30,6 @@ def setting_up_pandas(path_file):
     This function sets up the pandas dataframe for the squad and scouting files
 
     :param path_file: This is the path to the file you want to load
-    :param btn_press: This is the button that was pressed
     :return: The dataframe is being returned.
     """
     pd.set_option("styler.render.max_columns", 100)
@@ -38,7 +37,7 @@ def setting_up_pandas(path_file):
     pd.set_option("styler.format.precision", 0)
     # LOADING FILE
     try:
-        html_filename = r"{}".format(path_file)
+        html_filename = f"{path_file}"
         df_fmi = pd.read_html(html_filename, encoding="utf-8")[0]
     except ValueError:
         return None
@@ -217,8 +216,8 @@ def round_data(df):
 # ///////////////////////////////////////////////////////////////
 def data_for_rankings(df, language):
     """
-    It takes a dataframe and a language, and returns a dataframe with the same columns, but with the addition of a column
-    for each position, and a column for the global score
+    It takes a dataframe and a language, and returns a dataframe with the same columns,
+    but with the addition of a column for each position, and a column for the global score
 
     :param df: the dataframe that contains the data
     :param language: The language of the dataframe
@@ -347,8 +346,8 @@ def create_df_for_squad(df, language):
 # ///////////////////////////////////////////////////////////////
 def create_df_for_tactic(df, language):
     """
-    This function takes in a dataframe and a list of integers and returns a dataframe with only the columns that correspond
-    to the integers in the list.
+    This function takes in a dataframe and a list of integers and returns a dataframe with only
+    the columns that correspond to the integers in the list.
 
     :param df: the dataframe you want to create a new dataframe from
     :param language: the index of the tactic you want to create a dataframe for

@@ -40,5 +40,5 @@ class CustomListModel(QAbstractTableModel):
                 return str(self._data.index[section])
         return None
 
-    def flags(self, index):  # skipcq: PYL-W0613
+    def flags(self, index):  # skipcq: PYL-W0613 PYL-R0201
         return Qt.ItemIsEnabled | Qt.ItemIsSelectable

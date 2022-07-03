@@ -108,7 +108,7 @@ class PyPlayerButton(QPushButton):
 
     # DRAG ENTER EVENT VERIFIER
     # ///////////////////////////////////////////////////////////////
-    def dragEnterEvent(self, event):
+    def dragEnterEvent(self, event):  # skipcq: PYL-R0201
         """
         If the data being dragged is a list of items, accept the drag event
 
@@ -297,7 +297,7 @@ class PyPlayerButton(QPushButton):
                 moved = event.globalPos() - self.__mousePressPos
                 if moved.manhattanLength() > 3:
                     event.ignore()
-                    return
+                    return None
             super(PyPlayerButton, self).mouseReleaseEvent(event)
         return None
 
