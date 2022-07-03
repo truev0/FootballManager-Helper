@@ -158,11 +158,25 @@ english = {
 
         },
         "p9_aux": {
-            "step_one": ("Step 1 - Select your language", "Go to the languages tab which is located in the second"
+            "step_one": ("Step 1 - Export your FM files", "The first thing to do is to export your Football Manager "
+                                                          "files as you always have, simply download our custom view, "
+                                                          "import it into the game and export your current squad and "
+                                                          "scouting list."),
+            "step_two": ("Step 2 - Select your language", "Go to the languages tab which is located in the second"
                                                           " position from bottom to top in the left panel and properly"
                                                           " select your language. This is because the reading of"
                                                           " attributes and statistics is perfectly detailed for the"
-                                                          " language you select and prevents any errors. *IMPORTANT*.")
+                                                          " language you select and prevents any errors. *IMPORTANT*."),
+            "step_three": ("Step 3 - Load your files in FM-Helper", "After you have selected your language in the "
+                                                                    "previous step, you can proceed to load your "
+                                                                    "files. The ideal and unchangeable order is as "
+                                                                    "follows:\n\n1st - Load current template "
+                                                                    "file.\n\n2nd - Load scouting file.\n\n3rd - Load "
+                                                                    "old template file (Optional)\n\nAll these options"
+                                                                    " appear when you click on the gear-shaped button"
+                                                                    " at the bottom left."),
+            "step_four": ("Step 4 - Enjoy the tool", "From here on you will have to start exploring the tools with "
+                                                     "the helpers below.")
         },
         "p10": {
             "process_btn": "Process Data"

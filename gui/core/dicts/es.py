@@ -158,13 +158,31 @@ espanol = {
 
         },
         "p9_aux": {
-            "step_one": ("Paso 1 - Seleccionar lenguaje", "Ir a la pestaña de lenguajes que esta ubicada en la segunda"
+            "step_one": ("Paso 1 - Exportar tus archivos de Football Manager", "Lo primero que debes hacer es exportar"
+                                                                               " los archivos de Football Manager como"
+                                                                               " siempre lo has hecho, simplemente "
+                                                                               "descarga nuestra vista personalizada, "
+                                                                               "impórtala en el juego y exporta tu "
+                                                                               "plantilla actual y tu lista de "
+                                                                               "scouting."),
+            "step_two": ("Paso 2 - Seleccionar lenguaje", "Ir a la pestaña de lenguajes que esta ubicada en la segunda"
                                                           " posición de abajo hacia arriba en el panel izquierdo y"
                                                           " seleccionar apropiadamente tu lenguaje. Esto debido a que"
                                                           " la lectura de atributos y estadísticas esta perfectamente"
                                                           " detallada para el lenguaje que selecciones y previene que"
                                                           " haya algún error. *IMPORTANTE*"),
-            "step_two": ("Paso 2 - Seleccionar plantilla", "")
+            "step_three": ("Paso 3 - Carga tus archivos en FM-Helper", "Después de haber seleccionado tu lenguaje en "
+                                                                       "el paso anterior, puedes proceder a cargar "
+                                                                       "tus archivos el orden ideal e impermutable es"
+                                                                       " el siguiente:\n\n1ro - Cargar archivo de "
+                                                                       "plantilla actual.\n\n2do - Cargar archivo de "
+                                                                       "scouting.\n\n3ro - Cargar archivo de plantilla"
+                                                                       " vieja (Opcional)\n\nTodas estas opciones "
+                                                                       "aparecen al darle click al botón con forma de "
+                                                                       "engranaje de la parte inferior izquierda."),
+            "step_four": ("Paso 4 - Disfrutar la herramienta", "De aquí en adelante deberás empezar a explorar la "
+                                                               "herramientas con las ayudas que están a continuación.")
+
         },
         "p10": {
             "process_btn": "Procesar Datos"

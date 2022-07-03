@@ -127,6 +127,7 @@ class MainWindow(QMainWindow):
         # CLASS VARIABLES
         # ///////////////////////////////////////////
         self.dragPos = None
+        # Main dataframes
         self.df_original = None
         self.df_squad = None
         self.df_tactic = None
@@ -134,7 +135,37 @@ class MainWindow(QMainWindow):
         self.df_scouting = None
         self.df_scout_for_table = None
         self.filtered_df = None
+        self.df_old_squad = None
         self.df_helper = None
+        # Others vars needed in init
+        self.first_collapsable = None
+        self.text_first_collapsable = None
+        self.second_collapsable = None
+        self.second_collapsable_1 = None
+        self.second_collapsable_2 = None
+        self.second_collapsable_3 = None
+        self.second_collapsable_4 = None
+        self.text_sc1 = None
+        self.text_sc2 = None
+        self.text_sc3 = None
+        self.text_sc4 = None
+        self.third_collapsable = None
+        self.text_third_collapsable = None
+        self.fourth_collapsable = None
+        self.text_fourth_collapsable = None
+        self.fifth_collapsable = None
+        self.text_fifth_collapsable = None
+        self.sixth_collapsable = None
+        self.text_sixth_collapsable = None
+        self.seventh_collapsable = None
+        self.text_seventh_collapsable = None
+        self.eighth_collapsable = None
+        self.text_eighth_collapsable = None
+        self.ninth_collapsable = None
+        self.text_ninth_collapsable = None
+        self.vertical_collapsable = None
+
+
         self.bottom_right_grip = None
         self.bottom_left_grip = None
         self.top_right_grip = None
@@ -716,6 +747,7 @@ class MainWindow(QMainWindow):
     def load_qa_questions(self):
 
         new_font = "color: #dce1ec; text-align: justify; text-justify: inter-word; font-size: 16px; font-weight: bold;"
+        # Start First collapsable tab
         self.first_collapsable = FrameLayout(
             title=self.ui_text[self.language].pages.p9.first_collapse[0]
         )
@@ -726,11 +758,63 @@ class MainWindow(QMainWindow):
         self.text_first_collapsable.setWordWrap(True)
         self.first_collapsable.addWidget(self.text_first_collapsable)
 
+        # End First collapsable tab
 
+        # Start Second collapsable tab
         self.second_collapsable = FrameLayout(
             title=self.ui_text[self.language].pages.p9.second_collapse[0]
         )
-        self.second_collapsable.addWidget(FrameLayout(title="First Step"))
+        self.second_collapsable_1 = FrameLayout(
+            title=self.ui_text[self.language].pages.p9_aux.step_one[0]
+        )
+        self.text_sc1 = QLabel(
+            self.ui_text[self.language].pages.p9_aux.step_one[1]
+        )
+        self.text_sc1.setStyleSheet(new_font)
+        self.text_sc1.setWordWrap(True)
+        self.second_collapsable_1.addWidget(self.text_sc1)
+
+        self.second_collapsable.addWidget(self.second_collapsable_1)
+
+        self.second_collapsable_2 = FrameLayout(
+            title=self.ui_text[self.language].pages.p9_aux.step_two[0]
+        )
+        self.text_sc2 = QLabel(
+            self.ui_text[self.language].pages.p9_aux.step_two[1]
+        )
+        self.text_sc2.setStyleSheet(new_font)
+        self.text_sc2.setWordWrap(True)
+        self.second_collapsable_2.addWidget(self.text_sc2)
+
+        self.second_collapsable.addWidget(self.second_collapsable_2)
+
+        self.second_collapsable_3 = FrameLayout(
+            title=self.ui_text[self.language].pages.p9_aux.step_three[0]
+        )
+        self.text_sc3 = QLabel(
+            self.ui_text[self.language].pages.p9_aux.step_three[1]
+        )
+        self.text_sc3.setStyleSheet(new_font)
+        self.text_sc3.setWordWrap(True)
+        self.second_collapsable_3.addWidget(self.text_sc3)
+
+        self.second_collapsable.addWidget(self.second_collapsable_3)
+
+        self.second_collapsable_4 = FrameLayout(
+            title=self.ui_text[self.language].pages.p9_aux.step_four[0]
+        )
+        self.text_sc4 = QLabel(
+            self.ui_text[self.language].pages.p9_aux.step_four[1]
+        )
+        self.text_sc4.setStyleSheet(new_font)
+        self.text_sc4.setWordWrap(True)
+        self.second_collapsable_4.addWidget(self.text_sc4)
+
+        self.second_collapsable.addWidget(self.second_collapsable_4)
+
+        # End Second collapsable tab
+
+        # Start Third collapsable tab
 
         self.third_collapsable = FrameLayout(
             title=self.ui_text[self.language].pages.p9.third_collapse[0]
@@ -742,6 +826,10 @@ class MainWindow(QMainWindow):
         self.text_third_collapsable.setWordWrap(True)
         self.third_collapsable.addWidget(self.text_third_collapsable)
 
+        # End Third collapsable tab
+
+        # Start Fourth collapsable tab
+
         self.fourth_collapsable = FrameLayout(
             title=self.ui_text[self.language].pages.p9.fourth_collapse[0]
         )
@@ -751,6 +839,10 @@ class MainWindow(QMainWindow):
         self.text_fourth_collapsable.setStyleSheet(new_font)
         self.text_fourth_collapsable.setWordWrap(True)
         self.fourth_collapsable.addWidget(self.text_fourth_collapsable)
+
+        # End Fourth collapsable tab
+
+        # Start Fifth collapsable tab
 
         self.fifth_collapsable = FrameLayout(
             title=self.ui_text[self.language].pages.p9.fifth_collapse[0]
@@ -762,6 +854,10 @@ class MainWindow(QMainWindow):
         self.text_fifth_collapsable.setWordWrap(True)
         self.fifth_collapsable.addWidget(self.text_fifth_collapsable)
 
+        # End Fifth collapsable tab
+
+        # Start Sixth collapsable tab
+
         self.sixth_collapsable = FrameLayout(
             title=self.ui_text[self.language].pages.p9.sixth_collapse[0]
         )
@@ -771,6 +867,10 @@ class MainWindow(QMainWindow):
         self.text_sixth_collapsable.setStyleSheet(new_font)
         self.text_sixth_collapsable.setWordWrap(True)
         self.sixth_collapsable.addWidget(self.text_sixth_collapsable)
+
+        # End Sixth collapsable tab
+
+        # Start Seventh collapsable tab
 
         self.seventh_collapsable = FrameLayout(
             title=self.ui_text[self.language].pages.p9.seventh_collapse[0]
@@ -782,6 +882,10 @@ class MainWindow(QMainWindow):
         self.text_seventh_collapsable.setWordWrap(True)
         self.seventh_collapsable.addWidget(self.text_seventh_collapsable)
 
+        # End Seventh collapsable tab
+
+        # Start Eighth collapsable tab
+
         self.eighth_collapsable = FrameLayout(
             title=self.ui_text[self.language].pages.p9.eighth_collapse[0]
         )
@@ -791,6 +895,10 @@ class MainWindow(QMainWindow):
         self.text_eighth_collapsable.setStyleSheet(new_font)
         self.text_eighth_collapsable.setWordWrap(True)
         self.eighth_collapsable.addWidget(self.text_eighth_collapsable)
+
+        # End Eighth collapsable tab
+
+        # Start Ninth collapsable tab
 
         self.ninth_collapsable = FrameLayout(
             title=self.ui_text[self.language].pages.p9.ninth_collapse[0]
@@ -802,6 +910,9 @@ class MainWindow(QMainWindow):
         self.text_ninth_collapsable.setWordWrap(True)
         self.ninth_collapsable.addWidget(self.text_ninth_collapsable)
 
+        # End Ninth collapsable tab
+
+        # Add to main page layout
         self.ui.load_pages.vertical_layout_9.addWidget(self.first_collapsable)
         self.ui.load_pages.vertical_layout_9.addWidget(self.second_collapsable)
         self.ui.load_pages.vertical_layout_9.addWidget(self.third_collapsable)
@@ -813,7 +924,6 @@ class MainWindow(QMainWindow):
         self.ui.load_pages.vertical_layout_9.addWidget(self.ninth_collapsable)
         self.vertical_collapsable = QSpacerItem(10, 50, QSizePolicy.Minimum, QSizePolicy.Expanding)
         self.ui.load_pages.vertical_layout_9.addItem(self.vertical_collapsable)
-        pass
 
     def load_all_data(self, button_object):
         """
@@ -1517,8 +1627,8 @@ class MainWindow(QMainWindow):
 
         kmeans = KMeans(n_clusters=5)
         kmeans = kmeans.fit(reduced)
-        _labels = kmeans.predict(reduced)  # skipcq: PYL-W0612
-        _centroid = kmeans.cluster_centers_  # skipcq: PYL-W0612
+        _labels = kmeans.predict(reduced)  # skipcq: PYL-W0612 lgtm [py/unused-local-variable]
+        _centroid = kmeans.cluster_centers_  # skipcq: PYL-W0612 lgtm [py/unused-local-variable]
         clusters = kmeans.labels_.tolist()
 
         reduced["cluster"] = clusters
