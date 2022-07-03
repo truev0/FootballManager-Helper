@@ -323,6 +323,28 @@ class Ui_MainPages(object):
         # /////////////////////////////////////////////////////////
         self.page_9 = QWidget()
         self.page_9.setObjectName(u"page_9")
+        self.page_9_layout = QVBoxLayout(self.page_9)
+        self.page_9_layout.setContentsMargins(0, 0, 0, 0)
+        self.page_9_layout.setObjectName(u"page_9_layout")
+
+        self.scroll_area_9 = QScrollArea(self.page_9)
+        self.scroll_area_9.setObjectName(u"scroll_area_9")
+        self.scroll_area_9.setStyleSheet(u"background: transparent;")
+        self.scroll_area_9.setFrameShape(QFrame.NoFrame)
+        self.scroll_area_9.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.scroll_area_9.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll_area_9.setWidgetResizable(True)
+        self.contents_9 = QWidget()
+        self.contents_9.setObjectName(u"contents_9")
+        self.contents_9.setGeometry(QRect(0, 0, 840, 580))
+        self.contents_9.setStyleSheet(u"background: transparent;")
+        self.vertical_layout_9 = QVBoxLayout(self.contents_9)
+        self.vertical_layout_9.setObjectName(u"vertical_layout_9")
+        self.vertical_layout_9.setContentsMargins(5, 5, 5, 5)
+
+        self.scroll_area_9.setWidget(self.contents_9)
+
+        self.page_9_layout.addWidget(self.scroll_area_9)
 
         self.pages.addWidget(self.page_9)
 

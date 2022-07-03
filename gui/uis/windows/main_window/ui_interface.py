@@ -3,9 +3,6 @@
 # IMPORT KHAMISIKIBET WIDGET
 # ///////////////////////////////////////////
 from Custom_Widgets.Widgets import QCustomSlideMenu
-from PySide6.QtCore import QEasingCurve, QParallelAnimationGroup, QPropertyAnimation, Qt
-from PySide6.QtGui import QFont, QIcon
-from PySide6.QtSvgWidgets import QSvgWidget
 
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
@@ -17,7 +14,11 @@ from PySide6.QtWidgets import (
     QSizePolicy,
     QVBoxLayout,
     QWidget,
+    QSpacerItem
 )
+from PySide6.QtCore import QEasingCurve, QParallelAnimationGroup, QPropertyAnimation, Qt
+from PySide6.QtGui import QFont, QIcon
+from PySide6.QtSvgWidgets import QSvgWidget
 
 from gui.core.functions import set_svg_icon, set_svg_image
 
@@ -53,6 +54,7 @@ from gui.widgets import (
     PyVerticalPitch,
     PyWindow,
     PyButtonGroup,
+    FrameLayout
 )
 from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 
@@ -1005,7 +1007,6 @@ class Ui_MainWindow(object):
             self.group_lineedits_stats_widget)
 
         # PAGE 9 - Help view
-        # TODO crear layout
 
         # PAGE 10 - Clustering view
         self.clustering_player_combo = PyComboBox(

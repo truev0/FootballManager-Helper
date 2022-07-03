@@ -60,19 +60,112 @@ english = {
 
         },
         "p9": {
+            "first_collapse": ("What is FM-Helper?", "FM-Helper is a tool developed in Python, which is responsible for"
+                                                     "recreating the functions seen in the 'Organizador de plantillas "
+                                                     "para Football Manager' of @f_mpanda.\n\nIn a nutshell it is a "
+                                                     "wizard that allows you to manage your squads in a deeper way "
+                                                     "creating a game immersion that allows you to have even more "
+                                                     "control over your savegame, in turn allows you to have control "
+                                                     "over statistics and attributes of your players as well as "
+                                                     "management of the scouting list and search for prospect to "
+                                                     "replace your players."),
+            "second_collapse": ("Instructions - How to use FM-Helper?", ""),
+            "third_collapse": ("Uses", ""),
+            "fourth_collapse": ("In squad page", "You will be able to manage your players by knowing which are their"
+                                                 " best roles on the court and also see all their attributes. The best"
+                                                 " role or the role in which you think he can perform better can be"
+                                                 " designated in a special box for this role.\n\nThe role ranking per"
+                                                 " player can be viewed and edited in the columns to the left of the"
+                                                 " text '<- EDIT'."),
+            "fifth_collapse": ("In tactic page", "You will be able to predefine a list of players for each position"
+                                                 " individually, having buttons that when clicked will display the"
+                                                 " list of players for that position and these same buttons can be"
+                                                 " moved within the simulated playing field.\n\nIn order to assign"
+                                                 " players to a position, you must drag the NAME from the table on the"
+                                                 " right side of the simulated field."),
+            "sixth_collapse": ("In statistics page", "After you have loaded your current squad, in this tab you will "
+                                                     "be able to select between two options (Statistics / Metrics) in "
+                                                     "the first drop down field, depending on which of the two you "
+                                                     "select, in the second field you will have a list of options to "
+                                                     "display, once you select one the graph at the bottom will update "
+                                                     "according to your needs.\n\nNote that these statistics are based"
+                                                     " on your current squad.\n\nYou will find two types of graphs, the"
+                                                     " first is the bar graph, which will show in a simple way the"
+                                                     " value of each attribute for each player, for this graph you "
+                                                     "will always find a horizontal line that demarcates the first in "
+                                                     "terms of the values of all players, and the second is the "
+                                                     "scatter graph that analyzes a particular metric based on two "
+                                                     "statistics, for this you will find two lines, one vertical and "
+                                                     "one horizontal that demarcate the average of both statistics, "
+                                                     "dividing the graph into 4 planes that can be identified as "
+                                                     "subgroups."),
+            "seventh_collapse": ("In comparative page", "Here you can compare attributes or statistics between players"
+                                                        " from the same or different squads.\n\nThis tab is displayed "
+                                                        "after you have loaded your current template, and you can also"
+                                                        " have loaded your scouting file and the old squad to have"
+                                                        " more options to compare, but the first one is primary."
+                                                        "\n\nAfter you have loaded them, there will be two top drop "
+                                                        "down fields, depending on which squads you have loaded and "
+                                                        "which option you select will show you the players of that "
+                                                        "squad in the fields at the bottom.\n\nYou will find two "
+                                                        "buttons to choose between the attributes or statistics you "
+                                                        "want to compare. Once you have decided you will have to select at "
+                                                        "least 3 options from the switches to validate your selection "
+                                                        "and press the 'Submit data' button. Once pressed, a radar "
+                                                        "graph will be generated showing the comparison between the "
+                                                        "selected options for those players.\n\nYou can always select "
+                                                        "more than 3 options but only either Attributes or Statistics "
+                                                        "will be plotted, but never together."),
+            "eighth_collapse": ("In scouted page", "Here you will be able to see the list of players you have scouted, "
+                                                   "the table has the same role editing functionality as your main "
+                                                   "squad table.\n\nTo complete the functionality experience at the top "
+                                                   "you will find a gear-shaped button that will slide a panel which "
+                                                   "consists of 2 sliding 'sheets', inside these 'sheets' you will "
+                                                   "find ALL the attributes and ALL the stats by which you can filter "
+                                                   "players.\n\nIn each line you will find a drop-down field to select "
+                                                   "between (greater than, greater than, less than, less than) and "
+                                                   "next to it a text field to enter the numerical value to filter "
+                                                   "by. In this section, the filters are commutative, that is, if you "
+                                                   "define values for both attributes and statistics, it will filter "
+                                                   "by those criteria.\n\nAt the bottom of this panel you will find the "
+                                                   "'Filter data' button that will update the table with the players "
+                                                   "that meet the criteria.\n\nNote: The fields in which there are no "
+                                                   "values will be taken as 0.\n\nNote 2: To reset all the drop-down "
+                                                   "fields and text lines just click on the 'Refresh' button next to "
+                                                   "the gear."),
+            "ninth_collapse": ("In clustering page", "This tab will work if and only if you have loaded your current "
+                                                     "squad file and scouting file.\n\nIn the drop down box at the top "
+                                                     "you will find the list of your current players and just selecting"
+                                                     " one and pressing the 'Process data' button will generate a "
+                                                     "scatter graph, which will be distinguished by several colors "
+                                                     "and on the right side of the graph you will see a list of "
+                                                     "names.\n\nJust by doing this you will get in that list the most"
+                                                     " similar player or players within your scouting list to the "
+                                                     "player you selected in the drop down box.\n\nThe selection process"
+                                                     " is based on the PCA - KMeans clustering method, which based on"
+                                                     " the statistics to be analyzed makes decisions under the "
+                                                     "reduction of the analyzed dimensions. The number of clusters or"
+                                                     " subgroups is defined by me (the creator of the software) in a "
+                                                     "value of 5 because it is a realistic number if the list of "
+                                                     "players is too small.\n\nIn the graph you will find the "
+                                                     "distribution of the clusters.\n\nAt the top of the graph you will"
+                                                     " find a section very similar to the scouting table but this is "
+                                                     "only for a more superficial filtering since the advanced "
+                                                     "filtering will be done by the method mentioned above.\n\nTo get "
+                                                     "the final value just select the player, add the values in the "
+                                                     "fields (if there is nothing it will be taken as 0) and press "
+                                                     "the button."),
 
+        },
+        "p9_aux": {
+            "step_one": ("Step 1 - Select your language", "Go to the languages tab which is located in the second"
+                                                          " position from bottom to top in the left panel and properly"
+                                                          " select your language. This is because the reading of"
+                                                          " attributes and statistics is perfectly detailed for the"
+                                                          " language you select and prevents any errors. *IMPORTANT*.")
         },
         "p10": {
             "process_btn": "Process Data"
-        },
-        "p11": {
-
-        },
-        "p12": {
-
-        },
-        "p13": {
-
         }
     },
     "left_content": {

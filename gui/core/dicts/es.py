@@ -60,19 +60,114 @@ espanol = {
 
         },
         "p9": {
+            "first_collapse": ("¿Que es FM-Helper", "FM-Helper es una herramienta desarrollada en Python, que se encarga"
+                                                    "de recrear las funciones vistas en el archivo 'Organizador de "
+                                                    "plantillas para Football Manager' de @f_mpanda.\n\nEn resumen, es un"
+                                                    "asistente que te permite gestionar tus plantillas de una manera"
+                                                    "mas profunda, creando una inmersión de juego que permite tener aun"
+                                                    "mas control sobre tus partidas. A su vez permite tener el control"
+                                                    "sobre las estadísticas y atributos de tus jugadores asi como "
+                                                    "también la gestión de la lista de scouting y búsqueda de "
+                                                    "prospectos para reemplazar tus jugadores."),
+            "second_collapse": ("Instrucciones - ¿Como usar FM-Helper", ""),
+            "third_collapse": ("Usos", ""),
+            "fourth_collapse": ("En plantilla", "Podrás gestionar tus jugadores sabiendo cuales son sus mejores roles"
+                                                " dentro de la cancha y así mismo ver todos sus atributos.\n\nEl mejor"
+                                                " rol o el rol en el que crees que pueda funcionar mejor lo puedes "
+                                                "designar en una casilla especial para este.\n\nEl ranking de rol por"
+                                                " jugador lo podrás ver y editar en las columnas que se encuentran a"
+                                                " la izquierda del texto '<- EDITA'."),
+            "fifth_collapse": ("En tactica", "Podrás predefinir una lista de jugadores para cada posición"
+                                             " individualmente, teniendo botones que al dar click despliega la lista"
+                                             " de jugadores para esa posición y estos mismos botones se pueden mover"
+                                             " dentro del campo de juego simulado.\n\nPara poder asignar jugadores a una"
+                                             " posición, deberás arrastrar el NOMBRE desde la tabla que se encuentra"
+                                             " en la parte derecha del campo simulado."),
+            "sixth_collapse": ("En estadísticas", "Después de haber cargado tu lista de jugadores actual, en esta"
+                                                  " pestaña podrás seleccionar entre dos opciones (Estadísticas /"
+                                                  " Métricas ) en el primer campo desplegable, dependiendo de cual de"
+                                                  " las dos selecciones, en el segundo campo tendrás una lista de"
+                                                  " opciones para visualizar, una vez seleccionada alguna el grafico "
+                                                  "en la parte inferior se actualizara según tus necesidades.\\nnCabe "
+                                                  "destacar que estas estadísticas son basadas en tu plantilla"
+                                                  " actual.\n\nEncontraras dos tipos de gráficos, el primero es el "
+                                                  "grafico de barras, que mostrara de forma simple el valor de cada "
+                                                  "atributo para cada jugador, para este grafico encontraras siempre "
+                                                  "una línea horizontal que demarca el primero en cuanto los valores "
+                                                  "de todos los jugadores , y el segundo es el grafico de dispersión "
+                                                  "que analiza una métrica en concreto basado en dos estadísticas, "
+                                                  "para este encontraras dos líneas, una vertical y otra horizontal "
+                                                  "que demarcaran el promedio de ambas estadísticas, dividiendo el "
+                                                  "grafico en 4 planos que pueden ser identificados como subgrupos."),
+            "seventh_collapse": ("En comparativa", "Aquí podrás comparar atributos o estadísticas puntuales entre"
+                                                   " jugadores de la misma o diferentes plantillas.\n\nEsta pestaña se"
+                                                   " muestra después de haber cargado tu plantilla actual, y también"
+                                                   " puedes haber cargado tu archivo de scouting y de la plantilla"
+                                                   " vieja para tener mas opciones para comparar, pero es "
+                                                   " la primera.\n\nDespués de haberlas cargado, habrán dos campos "
+                                                   "superiores desplegables, que dependiendo que plantillas hayas "
+                                                   "cargado y que opción selecciones te mostrara los jugadores de esa"
+                                                   " plantilla en los campos de la parte inferior.\n\nEncontraras dos "
+                                                   "botones para elegir entre los atributos o estadísticas que quieres"
+                                                   " comparar. Una vez decidido por lo menos tendrás que seleccionar 3"
+                                                   " opciones de los switches para que sea valida la selección y "
+                                                   "presionar el botón 'Enviar datos'. Una vez presionado se generara"
+                                                   " un grafico de radar que mostrara la comparación entre las opciones"
+                                                   " seleccionadas para aquellos jugadores.\n\nPuedes elegir siempre mas"
+                                                   " de 3 opciones pero solo se graficaran o Atributos o Estadísticas,"
+                                                   " pero nunca juntas."),
+            "eighth_collapse": ("En scouting", "Aquí podrás ver el listado de jugadores a los que les has hecho "
+                                               "scouting, la tabla tiene las mismas funcionalidades para editar los"
+                                               " roles que la tabla de tu plantilla principal.\n\nPara completar la "
+                                               "experiencia de funcionalidad en la parte superior encontraras un botón "
+                                               "con forma de engranaje que deslizara un panel el cual consta de "
+                                               "2 'hojas' deslizables, dentro de estas 'hojas' se encontraran TODOS "
+                                               "los atributos y TODAS las estadísticas por las cuales puedes filtrar "
+                                               "jugadores.\n\nEn cada línea encontraras un campo desplegable para "
+                                               "seleccionar entre (mayor, mayor que, menor, menor que) y a su lado un "
+                                               "campo de texto para ingresar el valor numérico por el cual filtrar. "
+                                               "En esta sección, los filtros si son conmutativos, es decir, si defines "
+                                               "valores tanto para atributos como estadísticas, se filtrara por esos "
+                                               "criterios.\n\nEn la parte inferior de este panel encontraras el botón "
+                                               "'Filtrar datos' que lo que hará será actualizar la tabla con los "
+                                               "jugadores que cumplan los criterios.\n\nNota: Los campos en los que no "
+                                               "haya valores serán tomados como 0.\n\nNota 2: Para re-establecer todos "
+                                               "los campos desplegables y las líneas de texto basta con dar click en "
+                                               "el botón 'Refresh' que se encuentra al lado del engranaje."),
+            "ninth_collapse": ("En clustering", "Esta pestaña funcionara si y solo si, tienes cargador tu archivo de"
+                                                " plantilla actual y el de scouting.\n\nEn el cuadro desplegable de la "
+                                                "parte superior encontraras el listado de tus jugadores actuales y tan "
+                                                "solo seleccionando uno y presionando el botón 'Procesar datos' se "
+                                                "generara un grafico de dispersión, que se distinguirá por varios "
+                                                "colores y al lado derecho del grafico visualizaras una lista de "
+                                                "nombres.\n\nTan solo con esto obtendrás en esa lista el jugador o los "
+                                                "jugadores mas parecidos dentro de tu lista scouting al jugador que "
+                                                "seleccionaste en el cuadro desplegable.\n\nEl proceso de selección se "
+                                                "encuentra basado en el método de agrupamiento PCA - KMeans "
+                                                "clustering, que basado en las estadísticas a analizar toma decisiones"
+                                                " bajo la reducción de las dimensiones analizadas. El numero de "
+                                                "clusters o subgrupos esta definido por mi(el creador del software) "
+                                                "en un valor de 5 por ser un numero bastante realista si es que la "
+                                                "lista de jugadores fuera muy pequeña.\n\nEn el grafico encontraras la "
+                                                "distribución de los clusters.\n\nArriba del grafico encontraras una "
+                                                "sección muy parecida a la de la tabla de scouting pero esta es solo "
+                                                "para hacer un filtrado mas superficial puesto que el filtrado avanzado"
+                                                " será hecho por el método antes mencionado.\n\nPara tener el valor "
+                                                "final basta con seleccionar el jugador, añadir los valores en los "
+                                                "campos(si no hay nada se tomara como 0) y presionar el botón."),
 
+        },
+        "p9_aux": {
+            "step_one": ("Paso 1 - Seleccionar lenguaje", "Ir a la pestaña de lenguajes que esta ubicada en la segunda"
+                                                          " posición de abajo hacia arriba en el panel izquierdo y"
+                                                          " seleccionar apropiadamente tu lenguaje. Esto debido a que"
+                                                          " la lectura de atributos y estadísticas esta perfectamente"
+                                                          " detallada para el lenguaje que selecciones y previene que"
+                                                          " haya algún error. *IMPORTANTE*"),
+            "step_two": ("Paso 2 - Seleccionar plantilla", "")
         },
         "p10": {
             "process_btn": "Procesar Datos"
-        },
-        "p11": {
-
-        },
-        "p12": {
-
-        },
-        "p13": {
-
         }
     },
     "left_content": {

@@ -32,7 +32,7 @@ from Custom_Widgets.Widgets import loadJsonStyle
 # ///////////////////////////////////////////
 # from gui.core.pyside_modules import *
 from PySide6.QtCore import QEasingCurve, QPoint, QPropertyAnimation, QRect, Qt, Signal
-from PySide6.QtGui import QCloseEvent, QShowEvent
+from PySide6.QtGui import QCloseEvent, QShowEvent, QFont
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
@@ -42,6 +42,9 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QPushButton,
     QTableView,
+    QLabel,
+    QSpacerItem,
+    QSizePolicy
 )
 
 # PROCESSING, CHARTS AND CLUSTERING MODULES
@@ -92,7 +95,7 @@ from gui.uis.windows.main_window.ui_interface import Ui_MainWindow
 
 # IMPORT CUSTOM WIDGETS
 # ///////////////////////////////////////////
-from gui.widgets import PyGrips
+from gui.widgets import PyGrips, FrameLayout
 
 plt.style.use("seaborn-whitegrid")
 
@@ -165,6 +168,7 @@ class MainWindow(QMainWindow):
         self.ui.setup_gui()
         self.set_signals()
         self.connect_events()
+        self.load_qa_questions()
         loadJsonStyle(self, self.ui)
 
         # CUSTOM MAIN ANIMATIONS
@@ -478,7 +482,7 @@ class MainWindow(QMainWindow):
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load page 9
-            # self.ui.set_page(self.ui.load_pages.page_9)
+            self.ui.set_page(self.ui.load_pages.page_9)
 
         # Clustering Btn
         if btn.objectName() == "btn_clustering":
@@ -709,6 +713,108 @@ class MainWindow(QMainWindow):
 
     # LOAD FILE
     # ///////////////////////////////////////////
+    def load_qa_questions(self):
+
+        new_font = "color: #dce1ec; text-align: justify; text-justify: inter-word; font-size: 16px; font-weight: bold;"
+        self.first_collapsable = FrameLayout(
+            title=self.ui_text[self.language].pages.p9.first_collapse[0]
+        )
+        self.text_first_collapsable = QLabel(
+            self.ui_text[self.language].pages.p9.first_collapse[1]
+        )
+        self.text_first_collapsable.setStyleSheet(new_font)
+        self.text_first_collapsable.setWordWrap(True)
+        self.first_collapsable.addWidget(self.text_first_collapsable)
+
+
+        self.second_collapsable = FrameLayout(
+            title=self.ui_text[self.language].pages.p9.second_collapse[0]
+        )
+        self.second_collapsable.addWidget(FrameLayout(title="First Step"))
+
+        self.third_collapsable = FrameLayout(
+            title=self.ui_text[self.language].pages.p9.third_collapse[0]
+        )
+        self.text_third_collapsable = QLabel(
+            self.ui_text[self.language].pages.p9.third_collapse[1]
+        )
+        self.text_third_collapsable.setStyleSheet(new_font)
+        self.text_third_collapsable.setWordWrap(True)
+        self.third_collapsable.addWidget(self.text_third_collapsable)
+
+        self.fourth_collapsable = FrameLayout(
+            title=self.ui_text[self.language].pages.p9.fourth_collapse[0]
+        )
+        self.text_fourth_collapsable = QLabel(
+            self.ui_text[self.language].pages.p9.fourth_collapse[1]
+        )
+        self.text_fourth_collapsable.setStyleSheet(new_font)
+        self.text_fourth_collapsable.setWordWrap(True)
+        self.fourth_collapsable.addWidget(self.text_fourth_collapsable)
+
+        self.fifth_collapsable = FrameLayout(
+            title=self.ui_text[self.language].pages.p9.fifth_collapse[0]
+        )
+        self.text_fifth_collapsable = QLabel(
+            self.ui_text[self.language].pages.p9.fifth_collapse[1]
+        )
+        self.text_fifth_collapsable.setStyleSheet(new_font)
+        self.text_fifth_collapsable.setWordWrap(True)
+        self.fifth_collapsable.addWidget(self.text_fifth_collapsable)
+
+        self.sixth_collapsable = FrameLayout(
+            title=self.ui_text[self.language].pages.p9.sixth_collapse[0]
+        )
+        self.text_sixth_collapsable = QLabel(
+            self.ui_text[self.language].pages.p9.sixth_collapse[1]
+        )
+        self.text_sixth_collapsable.setStyleSheet(new_font)
+        self.text_sixth_collapsable.setWordWrap(True)
+        self.sixth_collapsable.addWidget(self.text_sixth_collapsable)
+
+        self.seventh_collapsable = FrameLayout(
+            title=self.ui_text[self.language].pages.p9.seventh_collapse[0]
+        )
+        self.text_seventh_collapsable = QLabel(
+            self.ui_text[self.language].pages.p9.seventh_collapse[1]
+        )
+        self.text_seventh_collapsable.setStyleSheet(new_font)
+        self.text_seventh_collapsable.setWordWrap(True)
+        self.seventh_collapsable.addWidget(self.text_seventh_collapsable)
+
+        self.eighth_collapsable = FrameLayout(
+            title=self.ui_text[self.language].pages.p9.eighth_collapse[0]
+        )
+        self.text_eighth_collapsable = QLabel(
+            self.ui_text[self.language].pages.p9.eighth_collapse[1]
+        )
+        self.text_eighth_collapsable.setStyleSheet(new_font)
+        self.text_eighth_collapsable.setWordWrap(True)
+        self.eighth_collapsable.addWidget(self.text_eighth_collapsable)
+
+        self.ninth_collapsable = FrameLayout(
+            title=self.ui_text[self.language].pages.p9.ninth_collapse[0]
+        )
+        self.text_ninth_collapsable = QLabel(
+            self.ui_text[self.language].pages.p9.ninth_collapse[1]
+        )
+        self.text_ninth_collapsable.setStyleSheet(new_font)
+        self.text_ninth_collapsable.setWordWrap(True)
+        self.ninth_collapsable.addWidget(self.text_ninth_collapsable)
+
+        self.ui.load_pages.vertical_layout_9.addWidget(self.first_collapsable)
+        self.ui.load_pages.vertical_layout_9.addWidget(self.second_collapsable)
+        self.ui.load_pages.vertical_layout_9.addWidget(self.third_collapsable)
+        self.ui.load_pages.vertical_layout_9.addWidget(self.fourth_collapsable)
+        self.ui.load_pages.vertical_layout_9.addWidget(self.fifth_collapsable)
+        self.ui.load_pages.vertical_layout_9.addWidget(self.sixth_collapsable)
+        self.ui.load_pages.vertical_layout_9.addWidget(self.seventh_collapsable)
+        self.ui.load_pages.vertical_layout_9.addWidget(self.eighth_collapsable)
+        self.ui.load_pages.vertical_layout_9.addWidget(self.ninth_collapsable)
+        self.vertical_collapsable = QSpacerItem(10, 50, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.ui.load_pages.vertical_layout_9.addItem(self.vertical_collapsable)
+        pass
+
     def load_all_data(self, button_object):
         """
         It reads a file, processes the data, and then creates a table and a graph
@@ -1004,6 +1110,33 @@ class MainWindow(QMainWindow):
         self.ui.graph_statistics.chart.change_language(lang)
         self.ui.spyder_graph_widget.spyder_chart.change_language(lang)
         self.ui.clustering_chart.inner_chart.change_language(lang)
+
+        # Translate help tab
+        self.first_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.first_collapse[0])
+        self.text_first_collapsable.setText(self.ui_text[self.language].pages.p9.first_collapse[1])
+
+        self.second_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.second_collapse[0])
+
+        self.third_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.third_collapse[0])
+        self.text_third_collapsable.setText(self.ui_text[self.language].pages.p9.third_collapse[1])
+
+        self.fourth_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.fourth_collapse[0])
+        self.text_fourth_collapsable.setText(self.ui_text[self.language].pages.p9.fourth_collapse[1])
+
+        self.fifth_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.fifth_collapse[0])
+        self.text_fifth_collapsable.setText(self.ui_text[self.language].pages.p9.fifth_collapse[1])
+
+        self.sixth_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.sixth_collapse[0])
+        self.text_sixth_collapsable.setText(self.ui_text[self.language].pages.p9.sixth_collapse[1])
+
+        self.seventh_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.seventh_collapse[0])
+        self.text_seventh_collapsable.setText(self.ui_text[self.language].pages.p9.seventh_collapse[1])
+
+        self.eighth_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.eighth_collapse[0])
+        self.text_eighth_collapsable.setText(self.ui_text[self.language].pages.p9.eighth_collapse[1])
+
+        self.ninth_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.ninth_collapse[0])
+        self.text_ninth_collapsable.setText(self.ui_text[self.language].pages.p9.ninth_collapse[1])
 
     # CREATE AND LOAD CHECHBOXES TO COMPARE
     # ///////////////////////////////////////////

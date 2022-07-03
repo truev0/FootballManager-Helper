@@ -73,3 +73,7 @@ from .py_window.py_window_widget import PyWindow  # skipcq: PY-W2000
 # PY BUTTON GROUP WIDGET
 # ///////////////////////////////////////////////////////////////
 from .py_button_group.py_button_group_widget import PyButtonGroup  # skipcq: PY-W2000
+
+# PY COLLAPSE WIDGET
+# ///////////////////////////////////////////////////////////////
+from .py_collapse.py_collapse_widget import FrameLayout  # skipcq: PY-W2000
