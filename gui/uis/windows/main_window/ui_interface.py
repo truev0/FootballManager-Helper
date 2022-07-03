@@ -1160,7 +1160,6 @@ class Ui_MainWindow(object):
         )
         self.right_btn_3.setMaximumHeight(40)
         self.right_column.filter_data_btn_layout.addWidget(self.right_btn_3)
-        
         # LEFT COLUMN CONFIGURATION
         # ///////////////////////////////////////////////////////////////
         # ENGLISH BUTTON

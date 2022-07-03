@@ -20,10 +20,10 @@ class CustomizedPandasModel(QAbstractTableModel):
             value = self._data.iloc[index.row(), index.column()]
 
             if isinstance(value, float):
-                return "%.2f" % value
+                return f'{value:.2f}'
 
             if isinstance(value, str):
-                return '%s' % value
+                return f'{value}'
 
             return unicode(value)
         return None

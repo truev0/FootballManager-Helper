@@ -37,7 +37,7 @@ class CustomizedNumpyListModel(QAbstractTableModel):
             value = self._data[index.row(), index.column()]
 
             if isinstance(value, str):
-                return '%s' % value
+                return f'{value}'
 
             return unicode(value)
         return None

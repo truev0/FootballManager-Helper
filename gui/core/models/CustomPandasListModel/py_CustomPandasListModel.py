@@ -20,7 +20,7 @@ class CustomListModel(QAbstractTableModel):
             value = self._data.iloc[index.row(), index.column()]
 
             if isinstance(value, str):
-                return '%s' % value
+                return f'{value}'
 
             return unicode(value)
         return None

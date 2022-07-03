@@ -98,19 +98,19 @@ class FrameLayout(QWidget):
             # vertical == 1
             self._arrow_vertical = (QPointF(8.0, 7.0), QPointF(13.0, 12.0), QPointF(8.0, 17.0))
             # arrow
-            self.arrow = None
+            self.m_arrow = None
             self.setArrow(int(collapsed))
 
         def setArrow(self, arrow_dir):
             if arrow_dir:
-                self.arrow = self._arrow_vertical
+                self.m_arrow = self._arrow_vertical
             else:
-                self.arrow = self._arrow_horizontal
+                self.m_arrow = self._arrow_horizontal
 
         def paintEvent(self, event):  # skipcq: PYL-W0613
             painter = QPainter()
             painter.begin(self)
             painter.setBrush(QColor(192, 192, 192))
             painter.setPen(QColor(64, 64, 64))
-            painter.drawPolygon(self.arrow)
+            painter.drawPolygon(self.m_arrow)
             painter.end()
