@@ -100,23 +100,17 @@ class PyLeftColumn(QWidget):
     # TITLE LEFT COLUMN EMIT SIGNALS
     # ///////////////////////////////////////////////////////////////
     def btn_clicked(self):
-        """
-        The function is called when the button is clicked
-        """
+        """The function is called when the button is clicked"""
         self.clicked.emit(self.btn_close)
 
     def btn_released(self):
-        """
-        The function is called when the button is released
-        """
+        """The function is called when the button is released"""
         self.released.emit(self.btn_close)
 
     # WIDGETS
     # ///////////////////////////////////////////////////////////////
     def setup_ui(self):
-        """
-        It sets the interface for left column
-        """
+        """It sets the interface for left column"""
         # BASE LAYOUT
         self.base_layout = QVBoxLayout(self)
         self.base_layout.setContentsMargins(0, 0, 0, 0)

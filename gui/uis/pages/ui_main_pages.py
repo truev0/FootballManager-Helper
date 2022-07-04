@@ -9,9 +9,7 @@ from PySide6.QtWidgets import QVBoxLayout, QStackedWidget, QWidget, QFrame, QScr
 # This class is a template for the main pages of the GUI.
 class Ui_MainPages(object):
     def __init__(self):
-        """
-        This function is called when the user open the application.
-        """
+        """This function is called when the user open the application."""
         self.clustering_bottom_layout = None
         self.clustering_bottom_frame = None
         self.clustering_filters_layout = None
