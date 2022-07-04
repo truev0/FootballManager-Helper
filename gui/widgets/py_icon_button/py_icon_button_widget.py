@@ -273,9 +273,7 @@ class PyIconButton(QPushButton):
     # MOVE TOOLTIP
     # ///////////////////////////////////////////////////////////////
     def move_tooltip(self):
-        """
-        The function moves the tooltip to the center of the widget
-        """
+        """The function moves the tooltip to the center of the widget"""
         # GET MAIN WINDOW PARENT
         gp = self.mapToGlobal(QPoint(0, 0))
 

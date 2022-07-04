@@ -81,9 +81,7 @@ class PyPlayerButton(QPushButton):
     # SET EMPTY LIST
     # ///////////////////////////////////////////////////////////////
     def set_empty_list(self):
-        """
-        It sets the list to an empty list
-        """
+        """It sets the list to an empty list"""
         self._lista = []
 
     # GET LEN LISTA

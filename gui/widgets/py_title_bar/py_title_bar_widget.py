@@ -236,9 +236,7 @@ class PyTitleBar(QWidget):
         self.clicked.emit(self.menu)
 
     def btn_released(self):
-        """
-        The function emits a signal that is connected to a slot that opens a menu
-        """
+        """The function emits a signal that is connected to a slot that opens a menu"""
         self.released.emit(self.menu)
 
     # SET TITLE BAR TEXT

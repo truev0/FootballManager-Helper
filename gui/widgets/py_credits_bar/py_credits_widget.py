@@ -49,9 +49,7 @@ class PyCredits(QWidget):
         self.setup_ui()
 
     def setup_ui(self):
-        """
-        It sets up the UI of the widget
-        """
+        """It sets up the UI of the widget"""
         # ADD LAYOUT
         self.widget_layout = QHBoxLayout(self)
         self.widget_layout.setContentsMargins(0, 0, 0, 0)

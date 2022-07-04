@@ -21,9 +21,7 @@ from gui.widgets import PyToggle, PyLineEdit, PyComboBox
 # It's a widget that contains a group of buttons
 class PyButtonGroup(QWidget):
     def __init__(self):
-        """
-        I'm trying to create a button group that will allow me to select multiple buttons
-        """
+        """I'm trying to create a button group that will allow me to select multiple buttons"""
         super().__init__()
         # LOAD THEME COLOR
         # ///////////////////////////////////////////////////////////////
@@ -170,16 +168,12 @@ class PyButtonGroup(QWidget):
                 self.layout.addWidget(custom_widget2, *pos_c)
 
     def remove_all_buttons(self):
-        """
-        It removes all buttons from the button group
-        """
+        """It removes all buttons from the button group"""
         for i in range(self._count):
             self.button_group.removeButton(self.button_group.button(i))
 
     def reset_all_lines(self):
-        """
-        It finds all the QLineEdit objects in the current window and clears them
-        """
+        """It finds all the QLineEdit objects in the current window and clears them"""
         for child in self.findChildren(QLineEdit):
             child.clear()
 

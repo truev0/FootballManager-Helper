@@ -28,9 +28,7 @@ class PyIcon(QWidget):
         self.setup_ui()
 
     def setup_ui(self):
-        """
-        It creates a QLabel, sets its alignment, sets its icon, and adds it to the layout
-        """
+        """It creates a QLabel, sets its alignment, sets its icon, and adds it to the layout"""
         # LAYOUT
         self.layout = QVBoxLayout(self)
         self.layout.setContentsMargins(0, 0, 0, 0)

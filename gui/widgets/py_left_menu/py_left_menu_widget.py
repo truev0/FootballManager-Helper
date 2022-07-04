@@ -196,9 +196,7 @@ class PyLeftMenu(QWidget):
         self.clicked.emit(self.menu)
 
     def btn_released(self):
-        """
-        The function emits a signal that is connected to a slot that opens a menu
-        """
+        """The function emits a signal that is connected to a slot that opens a menu"""
         self.released.emit(self.menu)
 
     # EXPAND / RETRACT LEF MENU
@@ -261,27 +259,21 @@ class PyLeftMenu(QWidget):
     # DESELECT ALL BTNs
     # ///////////////////////////////////////////////////////////////
     def deselect_all(self):
-        """
-        It finds all the QPushButtons in the current widget and sets their active state to False
-        """
+        """It finds all the QPushButtons in the current widget and sets their active state to False"""
         for btn in self.findChildren(QPushButton):
             btn.set_active(False)
 
     # DESELECT ALL TAB BTNs
     # ///////////////////////////////////////////////////////////////
     def deselect_all_tab(self):
-        """
-        It finds all the QPushButtons in the current widget and sets their active_tab property to False
-        """
+        """It finds all the QPushButtons in the current widget and sets their active_tab property to False"""
         for btn in self.findChildren(QPushButton):
             btn.set_active_tab(False)
 
     # SETUP APP
     # ///////////////////////////////////////////////////////////////
     def setup_ui(self):
-        """
-        It sets up the UI of the left menu
-        """
+        """It sets up the UI of the left menu"""
         # ADD MENU LAYOUT
         self.left_menu_layout = QVBoxLayout(self)
         self.left_menu_layout.setContentsMargins(0, 0, 0, 0)

@@ -55,9 +55,7 @@ class PyVerticalPitch(QWidget):
     # SETUP UI
     # ///////////////////////////////////////////////////////////////
     def setup_ui(self):
-        """
-        The function sets up the interface for the pitch
-        """
+        """The function sets up the interface for the pitch"""
         self._pitch_image = QLabel(self._parent)
         self._pitch_image.setObjectName("pitch_image")
         self._pitch_image.setGeometry(
@@ -79,15 +77,11 @@ class PyVerticalPitch(QWidget):
     # PITCH EMIT SIGNALS
     # ///////////////////////////////////////////////////////////////
     def btn_clicked(self):
-        """
-        The function btn_clicked is called when the button is clicked
-        """
+        """The function btn_clicked is called when the button is clicked"""
         self.clicked.emit(self.btn)
 
     def btn_released(self):
-        """
-        The function btn_released is a function that emits a signal when a button is released
-        """
+        """The function btn_released is a function that emits a signal when a button is released"""
         self.released.emit(self.btn)
 
     # ADD BUTTON TO PITCH
@@ -137,8 +131,6 @@ class PyVerticalPitch(QWidget):
     # DESELECT ALL BTNs
     # ///////////////////////////////////////////////////////////////
     def deselect_all(self):
-        """
-        It finds all the QPushButtons in the current widget and sets their active state to False
-        """
+        """It finds all the QPushButtons in the current widget and sets their active state to False"""
         for btn in self.findChildren(QPushButton):
             btn.set_active(False)

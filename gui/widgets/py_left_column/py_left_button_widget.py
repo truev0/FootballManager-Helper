@@ -283,9 +283,7 @@ class PyLeftButton(QPushButton):
     # MOVE TOOLTIP
     # ///////////////////////////////////////////////////////////////
     def move_tooltip(self):
-        """
-        It moves the tooltip to the right of the widget, and down by the height of the top margin
-        """
+        """It moves the tooltip to the right of the widget, and down by the height of the top margin"""
         # GET MAIN WINDOW PARENT
         gp = self.mapToGlobal(QPoint(0, 0))
 

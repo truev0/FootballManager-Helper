@@ -314,9 +314,7 @@ class MainWindow(QMainWindow):
     # CENTRE WINDOW
     # ///////////////////////////////////////////
     def center_window(self):
-        """
-        The function takes a window object and centers it on the screen
-        """
+        """The function takes a window object and centers it on the screen"""
         frame_geo = self.frameGeometry()
         screen = self.window().windowHandle().screen()
         center_loc = screen.geometry().center()
@@ -338,9 +336,7 @@ class MainWindow(QMainWindow):
     # CREATE MINIMIZE EVENT
     # ///////////////////////////////////////////
     def minimize_event(self):
-        """
-        It moves the window to the bottom of the screen, then minimizes it
-        """
+        """It moves the window to the bottom of the screen, then minimizes it"""
         self.oldPos = self.pos()
         self.hideAnimation.setStartValue(self.oldPos)
         self.hideAnimation.setEndValue(
@@ -409,9 +405,7 @@ class MainWindow(QMainWindow):
     # CUSTOM PARAMETERS FOR WINDOW
     # ///////////////////////////////////////////
     def custom_settings(self):
-        """
-        It sets the title of the window, removes the title bar, and adds grips to the window
-        """
+        """It sets the title of the window, removes the title bar, and adds grips to the window"""
         # APP TITLE
         # ///////////////////////////////////////////////////////////////
         self.setWindowTitle(self.settings["app_name"])
@@ -446,9 +440,7 @@ class MainWindow(QMainWindow):
     # BUTTONS WITH SIGNALS CLICKED
     # ///////////////////////////////////////////
     def btn_clicked(self):
-        """
-        It's a function that handles all the button clicks in the application
-        """
+        """It's a function that handles all the button clicks in the application"""
         # GET BTN CLICKED
         btn = self.ui.setup_btns()
 
@@ -653,18 +645,14 @@ class MainWindow(QMainWindow):
     # BUTTONS WITH SIGNALS RELEASED
     # ///////////////////////////////////////////
     def btn_released(self):
-        """
-        The function is called when a button is released
-        """
+        """The function is called when a button is released"""
         # GET BTN CLICKED
         # btn = self.ui.setup_btns()
 
     # SET ALL SIGNALS
     # ///////////////////////////////////////////
     def set_signals(self):
-        """
-        It connects the clicked and released signals of the buttons to the btn_clicked and btn_released functions
-        """
+        """It connects the clicked and released signals of the buttons to the btn_clicked and btn_released functions"""
         # LEFT MENU SIGNALS
         self.ui.left_menu.clicked.connect(self.btn_clicked)
         self.ui.left_menu.released.connect(self.btn_released)
@@ -692,9 +680,7 @@ class MainWindow(QMainWindow):
     # CONNECT EVENTS
     # ///////////////////////////////////////////
     def connect_events(self):
-        """
-        The function connects the buttons to the functions that will be executed when the buttons are clicked
-        """
+        """The function connects the buttons to the functions that will be executed when the buttons are clicked"""
         # CLICK EVENTS
         # ///////////////////////////////////////////
         self.ui.load_squad_btn.clicked.connect(
@@ -1054,9 +1040,7 @@ class MainWindow(QMainWindow):
     # SQUAD HELPER FUNCTION
     # ///////////////////////////////////////////
     def tables_helper_squad(self):
-        """
-        It takes a dataframe, converts it to a numpy array, and then uses a custom model to display it in a table
-        """
+        """It takes a dataframe, converts it to a numpy array, and then uses a custom model to display it in a table"""
         model = CustomizedNumpyModel(self.df_for_table)
         column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
         self.ui.table_squad.setSelectionBehavior(QTableView.SelectItems)
@@ -1091,9 +1075,7 @@ class MainWindow(QMainWindow):
     # SET / LOAD DATA FOR STATS AND METRICS GRAPHS
     # ///////////////////////////////////////////
     def load_data_for_graphs(self):
-        """
-        It loads data from pandas dataframe, and then it loads that dataframe into a Chart object.
-        """
+        """It loads data from pandas dataframe, and then it loads that dataframe into a Chart object."""
         # SETTING DATAFRAME FOR STATS / METRICS WIDGET
         self.df_helper = self.df_original.iloc[:, :2]
         if self.language == "en":
@@ -1250,9 +1232,7 @@ class MainWindow(QMainWindow):
     # CREATE AND LOAD CHECHBOXES TO COMPARE
     # ///////////////////////////////////////////
     def create_and_load_checkboxes(self):
-        """
-        It creates and loads checkboxes to compare players
-        """
+        """It creates and loads checkboxes to compare players"""
         if (self.ui.group_chk_stats_widget.get_count() is not None
                 and self.ui.group_chk_attrs_widget.get_count() is not None):
             self.ui.group_chk_attrs_widget.remove_all_buttons()
@@ -1326,9 +1306,7 @@ class MainWindow(QMainWindow):
                 util_lists.list_es[0], 1)
 
     def create_lines_for_clustering(self):
-        """
-        It creates a list of buttons for the user to select from
-        """
+        """It creates a list of buttons for the user to select from"""
         if self.ui.group_clustering_filters.get_lines() is not None:
             self.ui.group_clustering_filters.reset_all_lines()
         if self.language == "en":
@@ -1416,17 +1394,13 @@ class MainWindow(QMainWindow):
         return actual_players, squad, checked_buttons
 
     def process_data_compare_players(self):
-        """
-        It takes the data from the database and sends it to the chart widget to be displayed
-        """
+        """It takes the data from the database and sends it to the chart widget to be displayed"""
         players_info, squads, options_info = self.send_data_compare_graphic()
         self.ui.spyder_graph_widget.spyder_chart.set_chart(
             players_info, squads, options_info)
 
     def collect_scout_data(self):
-        """
-        It takes the values from the GUI and puts them into a list
-        """
+        """It takes the values from the GUI and puts them into a list"""
         attrs_set = []
         stats_set = []
         if self.language == "en":
@@ -1587,9 +1561,7 @@ class MainWindow(QMainWindow):
         return data
 
     def clustering_management(self):
-        """
-        It takes a dataframe, performs some clustering, and then plots the results
-        """
+        """It takes a dataframe, performs some clustering, and then plots the results"""
         tmp_filters = self.collect_results_clustering()
         base_columns_plus = None
         complementary_df = None
