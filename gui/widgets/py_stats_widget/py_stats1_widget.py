@@ -72,6 +72,46 @@ class PyStatsWidget(QWidget):
         :param bar_color: The color of the bars in the chart, defaults to 3f6fd1 (optional)
         """
         super().__init__(parent)
+        self.setStyleSheet(
+            '''
+            QScrollBar::vertical {
+            border: none;
+            background-color: #2c313c;
+            width: 8px;
+            margin: 21px 0 21px 0;
+            border-radius: 0px;
+            }
+            QScrollBar::handle:vertical {
+            background: #568af2;
+            min-height: 25px;
+            border-radius: 4px
+            }
+            QScrollBar::add-line:vertical {
+            border: none;
+            background: #272c36;
+            height: 20px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            subcontrol-position: bottom;
+            subcontrol-origin: margin;
+            }
+            QScrollBar::sub-line:vertical {
+            border: none;
+            background: #272c36;
+            height: 20px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            subcontrol-position: top;
+            subcontrol-origin: margin;
+            }
+            QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+            background: none;
+            }
+            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+            background: none;
+            }
+            '''
+        )
         self.name = name
         self.language = language
         self.type_selector = PyComboBox(
@@ -111,7 +151,8 @@ class PyStatsWidget(QWidget):
 
     def update_dependent_combo(self, index):
         """
-        The function clears the dependent combo box, then adds the items from the dependent list to the dependent combo box
+        The function clears the dependent combo box, then adds the items from the dependent list to the dependent
+        combo box
 
         :param index: The index of the item that was selected
         """
@@ -136,8 +177,8 @@ class _CustomCanvas(FigureCanvas):
         bar_color,
     ):
         """
-        It's a function that creates a graph with a title, a background color, a color for the axis, a color for the title,
-        and a color for the bars
+        It's a function that creates a graph with a title, a background color, a color for the axis, a color for the
+        title, and a color for the bars
 
         :param parent: The parent widget
         :param language: "en" or "es"

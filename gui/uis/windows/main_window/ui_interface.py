@@ -855,6 +855,7 @@ class Ui_MainWindow(object):
             bg_color_pressed=self.themes["app_color"]["dark_four"],
         )
         self.load_scouting_btn.setMaximumHeight(40)
+        self.load_scouting_btn.setEnabled(False)
         self.left_column.menus.btn_2_layout.addWidget(self.load_scouting_btn)
 
         # Load Old Btn
@@ -868,6 +869,7 @@ class Ui_MainWindow(object):
             bg_color_pressed=self.themes["app_color"]["dark_four"],
         )
         self.load_old_btn.setMaximumHeight(40)
+        self.load_old_btn.setEnabled(False)
         self.left_column.menus.btn_3_layout.addWidget(self.load_old_btn)
 
         # PAGES CONFIGURATION

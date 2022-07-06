@@ -262,6 +262,46 @@ class Ui_MainPages(object):
 
         # Left Frame (Page 7)
         self.compare_left_frame = QFrame()
+        self.compare_left_frame.setStyleSheet(
+            '''
+            QScrollBar::vertical {
+            border: none;
+            background-color: #2c313c;
+            width: 8px;
+            margin: 21px 0 21px 0;
+            border-radius: 0px;
+            }
+            QScrollBar::handle:vertical {
+            background: #568af2;
+            min-height: 25px;
+            border-radius: 4px
+            }
+            QScrollBar::add-line:vertical {
+            border: none;
+            background: #272c36;
+            height: 20px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            subcontrol-position: bottom;
+            subcontrol-origin: margin;
+            }
+            QScrollBar::sub-line:vertical {
+            border: none;
+            background: #272c36;
+            height: 20px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            subcontrol-position: top;
+            subcontrol-origin: margin;
+            }
+            QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+            background: none;
+            }
+            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+            background: none;
+            }
+            '''
+        )
         self.compare_left_frame_layout = QVBoxLayout(self.compare_left_frame)
 
         # Left Top Frame (Page 7)
@@ -396,6 +436,46 @@ class Ui_MainPages(object):
         # /////////////////////////////////////////////////////////
         self.page_9 = QWidget()
         self.page_9.setObjectName(u"page_9")
+        self.page_9.setStyleSheet(
+            '''
+            QScrollBar::vertical {
+            border: none;
+            background-color: #2c313c;
+            width: 8px;
+            margin: 21px 0 21px 0;
+            border-radius: 0px;
+            }
+            QScrollBar::handle:vertical {
+            background: #568af2;
+            min-height: 25px;
+            border-radius: 4px
+            }
+            QScrollBar::add-line:vertical {
+            border: none;
+            background: #272c36;
+            height: 20px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            subcontrol-position: bottom;
+            subcontrol-origin: margin;
+            }
+            QScrollBar::sub-line:vertical {
+            border: none;
+            background: #272c36;
+            height: 20px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            subcontrol-position: top;
+            subcontrol-origin: margin;
+            }
+            QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+            background: none;
+            }
+            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+            background: none;
+            }
+            '''
+        )
         self.page_9_layout = QVBoxLayout(self.page_9)
         self.page_9_layout.setContentsMargins(0, 0, 0, 0)
         self.page_9_layout.setObjectName(u"page_9_layout")

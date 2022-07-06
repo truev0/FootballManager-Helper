@@ -11,7 +11,7 @@ import numpy as np
 
 # IMPORT CUSTOM RADAR
 # ///////////////////////////////////////////////////////////////
-from . py_radar_chart import Radar
+from .py_radar_chart import Radar
 
 
 # PY SPYDER WIDGET
@@ -116,30 +116,102 @@ class _CustomSpyder(FigureCanvas):
         self._data = None
         self.setParent(parent)
 
-    def set_data(self, data):
+    def set_data(self, data, opt=0):
         """
         If the dataframe is empty, set the dataframe to the data. If the dataframe is not empty, concatenate the dataframe
         with the data
 
         :param data: the dataframe that you want to add to the class
+        :param opt: the option to concatenate the dataframe, defaults to 0 (optional)
         """
-        if self._data is None and self._inner_squad is None:
-            self._data = data
+        if opt == 0:
             self._inner_squad = data
-        elif self._data is not None and self._inner_scouting is None:
-            self._data = pd.concat([self._data, data], axis=0)
+            if self._inner_scouting is None and self._inner_old_squad is None:
+                self._data = data
+            if self._inner_scouting is not None:
+                self._data = pd.concat([
+                    self._inner_squad,
+                    self._inner_scouting
+                ],
+                    axis=0)
+            elif self._inner_scouting is not None and self._inner_old_squad is not None:
+                tmp = pd.concat(
+                    [
+                        self._inner_squad,
+                        self._inner_scouting
+                    ],
+                    axis=0
+                )
+                self._data = pd.concat(
+                    [
+                        tmp,
+                        self._inner_old_squad
+                    ],
+                    axis=0
+                )
             self._data.reset_index(drop=True, inplace=True)
+        elif opt == 1:
             self._inner_scouting = data
-        elif self._data is not None and self._inner_old_squad is None:
-            self._data = pd.concat([self._data, data], axis=0)
+            if self._inner_old_squad is not None:
+                tmp = pd.concat(
+                    [
+                        self._inner_squad,
+                        self._inner_scouting
+                    ],
+                    axis=0
+                )
+                self._data = pd.concat(
+                    [
+                        tmp,
+                        self._inner_old_squad
+                    ],
+                    axis=0
+                )
+            elif self._inner_old_squad is None:
+                self._data = pd.concat(
+                    [
+                        self._inner_squad,
+                        self._inner_scouting
+                    ],
+                    axis=0
+                )
             self._data.reset_index(drop=True, inplace=True)
+        elif opt == 2:
             self._inner_old_squad = data
-        elif self._data is not None and self._inner_scouting is not None:
-            self._data = None
-            self._data = self._inner_squad
-            self._data = pd.concat([self._data, data], axis=0)
-            self._data = pd.concat([self._data, self._inner_old_squad], axis=0)
+            tmp = pd.concat(
+                [
+                    self._inner_squad,
+                    self._inner_scouting
+                ],
+                axis=0
+            )
+
+            self._data = pd.concat(
+                [
+                    tmp,
+                    self._inner_old_squad
+                ],
+                axis=0
+            )
             self._data.reset_index(drop=True, inplace=True)
+
+        # if self._data is None and self._inner_squad is None:
+        #     self._data = data
+        #     self._inner_squad = data
+        # elif self._data is not None and self._inner_scouting is None:
+        #     self._data = pd.concat([self._data, data], axis=0)
+        #     self._data.reset_index(drop=True, inplace=True)
+        #     self._inner_scouting = data
+        # elif self._data is not None and self._inner_old_squad is None:
+        #     self._data = pd.concat([self._data, data], axis=0)
+        #     self._data.reset_index(drop=True, inplace=True)
+        #     self._inner_old_squad = data
+        # elif self._data is not None and self._inner_scouting is not None:
+        #     self._data = None
+        #     self._data = self._inner_squad
+        #     self._data = pd.concat([self._data, data], axis=0)
+        #     self._data = pd.concat([self._data, self._inner_old_squad], axis=0)
+        #     self._data.reset_index(drop=True, inplace=True)
 
     def set_chart(self, players, squads, opts):
         """
@@ -170,7 +242,7 @@ class _CustomSpyder(FigureCanvas):
                     max_ranges.append(b)
 
                 radar = Radar(opts, min_ranges, max_ranges,
-                              round_int=[False]*len(opts),
+                              round_int=[False] * len(opts),
                               num_rings=6, ring_width=1, center_circle_radius=1)
 
                 radar.setup_axis(ax=self.ax['radar'], facecolor=self.bg_one)
@@ -212,8 +284,8 @@ class _CustomSpyder(FigureCanvas):
                 )
                 vertices11 = np.append(vertices1, vertices1[0])
                 vertices22 = np.append(vertices2, vertices2[0])
-                vertices11 = np.reshape(vertices11, (int(len(vertices11)/2), 2))
-                vertices22 = np.reshape(vertices22, (int(len(vertices22)/2), 2))
+                vertices11 = np.reshape(vertices11, (int(len(vertices11) / 2), 2))
+                vertices22 = np.reshape(vertices22, (int(len(vertices22) / 2), 2))
                 self.ax['radar'].scatter(vertices1[:, 0], vertices1[:, 1],
                                          c=self.COLORS[0], marker='D', s=90, zorder=2)
                 self.ax['radar'].scatter(vertices2[:, 0], vertices2[:, 1],
