@@ -873,7 +873,6 @@ class Ui_MainWindow(object):
         self.load_old_btn.setMaximumHeight(40)
         self.load_old_btn.setEnabled(False)
         self.left_column.menus.btn_3_layout.addWidget(self.load_old_btn)
-        
         # Save Session Btn
         self.save_session_btn = PyPushButton(
             name="save_session",
@@ -887,7 +886,6 @@ class Ui_MainWindow(object):
         self.save_session_btn.setMaximumHeight(40)
         self.save_session_btn.setMinimumHeight(40)
         self.left_column.menus.btn_6_layout.addWidget(self.save_session_btn)
-        
         # Load Session Btn
         self.load_session_btn = PyPushButton(
             name="load_session",

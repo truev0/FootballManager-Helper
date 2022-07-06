@@ -1701,6 +1701,9 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
 
     def _save_state(self):
+        """
+        It saves the dataframes to feather files and saves the paths to those files in a config file
+        """
         self.df_for_table = pd.DataFrame(
             self.ui.table_squad.model().get_dataframe(),
             columns=self.df_for_table.columns
@@ -1734,16 +1737,20 @@ class MainWindow(QMainWindow):
             path = os.path.dirname(file_name)
             path = path.replace("/", "\\")
             path = path + "\\" + folder_name
-            for i in range(len(dataframes)):
-                if dataframes[i] is not None:
-                    config.set("paths", f"{i}", f"{path}\\{i}.feather")
-                    dataframes[i].to_feather(f"{path}\\{i}.feather")
+            for index, element in enumerate(dataframes):
+                if element is not None:
+                    config.set("paths", str(index), f"{path}\\{index}.feather")
+                    element.to_feather(f"{path}\\{index}.feather")
             with open(file_name, "w") as config_file:
                 config.write(config_file)
         else:
             print("Invalido")
 
     def _load_state(self):
+        """
+        It loads a session file, which is a .ini file that contains the paths to the dataframes that were saved in the
+        previous session
+        """
         session_file = QFileDialog.getOpenFileName(
             self,
             "Reopen session",
@@ -1753,7 +1760,6 @@ class MainWindow(QMainWindow):
         if session_file[0] != "":
             config_obj = configparser.ConfigParser()
             config_obj.read(session_file[0])
-            name = config_obj.get("session_name", "name")
             paths = config_obj["paths"]
             if "0" in paths.keys():
                 self.df_original = pd.read_feather(paths["0"])
@@ -1784,6 +1790,9 @@ class MainWindow(QMainWindow):
             self.ui.load_old_btn.setEnabled(True)
 
     def _load_process_squad(self):
+        """
+        It takes a dataframe, and a list of column names, and creates a new dataframe with only the columns in the list
+        """
         self.tables_helper_squad(self.df_for_table, self.df_tactic)
         self._load_data_graphs(self.df_helper)
         self.create_and_load_checkboxes()
@@ -1794,6 +1803,10 @@ class MainWindow(QMainWindow):
         self.haveSquadInfo = True
 
     def _load_process_scouting(self):
+        """
+        It takes the dataframe of scouting data, and creates a list of the names of the scouts, and then adds those
+        names to the scouting table
+        """
         self.tables_helper_scouting(self.df_scout_for_table)
         tmp_list_scout = self.df_scouting[self.ui_headers[
             self.language].h.h1].values.tolist()
@@ -1803,12 +1816,20 @@ class MainWindow(QMainWindow):
         self.haveScoutingInfo = True
 
     def _load_process_old(self):
+        """
+        It takes the dataframe of the old squad and adds the names of the players to a list
+        """
         tmp_list_old = self.df_old_squad[self.ui_headers[
             self.language].h.h1].values.tolist()
         self.add_old_squad_names(self.df_old_squad, tmp_list_old)
         self.haveOldSquadInfo = True
 
     def _load_data_graphs(self, df):
+        """
+        It adds two items to a QComboBox, and then adds the same two items to a list
+
+        :param df: pandas dataframe
+        """
         if self.ui.graph_statistics.chart.count_actual_list() > 1:
             self.ui.graph_statistics.type_selector.clear()
             self.ui.graph_statistics.combo_selector.clear()
@@ -1829,17 +1850,21 @@ class MainWindow(QMainWindow):
         self.ui.graph_statistics.chart.set_data(df)
 
     def file_saver(self):
+        """
+        It creates a directory called "sessions" if it doesn't exist, then opens a file dialog to get the name of the
+        file to save, then creates a file with that name and writes nothing to it
+        :return: The name of the file that was saved.
+        """
         if not os.path.exists("sessions"):
             os.mkdir("sessions")
         try:
             name = QFileDialog.getSaveFileName(self, "Save File", "./sessions", "*.ini")
-            file = open(name[0], "w")
-            text = ''
-            file.write(text)
-            file.close()
+            with open(name[0], 'w') as file:
+                text = ''
+                file.write(text)
             return name[0]
         except FileNotFoundError:
-            print(f"File not found")
+            print("File not found")
             return None
     # ///////////////////////////////////////////
     # END FUNCTIONS FOR STATE
@@ -1868,3 +1893,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # TODO arreglar por que no guarda los numeros de frol, srol, trol
