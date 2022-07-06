@@ -383,28 +383,18 @@ class _CustomCanvas(FigureCanvas):
                         try:
                             if self._language == "en":
                                 sel.annotation.set_text(
-                                    "{}\n{}: {:.2f}\n{}: {:.2f}".format(
-                                        custom_df[custom_df.columns[0]][
-                                            sel.index],
-                                        util_lists.stats_list_en[
-                                            custom_df.columns[1]],
-                                        sel.target[0],
-                                        util_lists.stats_list_en[
-                                            custom_df.columns[2]],
-                                        sel.target[1],
-                                    ))
+                                    f"{custom_df[custom_df.columns[0]][sel.index]}\n"
+                                    f"{util_lists.stats_list_en[custom_df.columns[1]]}:"
+                                    f" {sel.target[0]:.2f}\n{util_lists.stats_list_en[custom_df.columns[2]]}:"
+                                    f"{sel.target[1]:.2f}"
+                                )
                             elif self._language == "es":
                                 sel.annotation.set_text(
-                                    "{}\n{}: {:.2f}\n{}: {:.2f}".format(
-                                        custom_df[custom_df.columns[0]][
-                                            sel.index],
-                                        util_lists.stats_list_es[
-                                            custom_df.columns[1]],
-                                        sel.target[0],
-                                        util_lists.stats_list_es[
-                                            custom_df.columns[2]],
-                                        sel.target[1],
-                                    ))
+                                    f"{custom_df[custom_df.columns[0]][sel.index]}\n"
+                                    f"{util_lists.stats_list_es[custom_df.columns[1]]}:"
+                                    f" {sel.target[0]:.2f}\n{util_lists.stats_list_es[custom_df.columns[2]]}:"
+                                    f"{sel.target[1]:.2f}"
+                                )
                             sel.annotation.get_bbox_patch().set(alpha=0.8)
                         except KeyError:
                             pass

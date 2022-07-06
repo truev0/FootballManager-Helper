@@ -195,24 +195,6 @@ class _CustomSpyder(FigureCanvas):
             )
             self._data.reset_index(drop=True, inplace=True)
 
-        # if self._data is None and self._inner_squad is None:
-        #     self._data = data
-        #     self._inner_squad = data
-        # elif self._data is not None and self._inner_scouting is None:
-        #     self._data = pd.concat([self._data, data], axis=0)
-        #     self._data.reset_index(drop=True, inplace=True)
-        #     self._inner_scouting = data
-        # elif self._data is not None and self._inner_old_squad is None:
-        #     self._data = pd.concat([self._data, data], axis=0)
-        #     self._data.reset_index(drop=True, inplace=True)
-        #     self._inner_old_squad = data
-        # elif self._data is not None and self._inner_scouting is not None:
-        #     self._data = None
-        #     self._data = self._inner_squad
-        #     self._data = pd.concat([self._data, data], axis=0)
-        #     self._data = pd.concat([self._data, self._inner_old_squad], axis=0)
-        #     self._data.reset_index(drop=True, inplace=True)
-
     def set_chart(self, players, squads, opts):
         """
         The function takes in a list of players, a list of squads, and a list of options. It then creates a radar chart

@@ -110,9 +110,8 @@ os.environ["QT_FONT_DPI"] = "96"
 
 # The class MainWindow inherits from the class QMainWindow
 class MainWindow(QMainWindow):
-    """
-    The MainWindow contain all widgets for app
-    """
+    """The MainWindow contain all widgets for app"""
+
     closing = Signal()
 
     def __init__(self):
@@ -1650,18 +1649,15 @@ class MainWindow(QMainWindow):
         reduced.columns = base_columns_plus
 
         player_x = float(
-            reduced[reduced[col_name] == self.ui.clustering_player_combo.
-            currentText()]["x"].tolist()[0])
+            reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]["x"].tolist()[0])
         player_y = float(
-            reduced[reduced[col_name] == self.ui.clustering_player_combo.
-            currentText()]["y"].tolist()[0])
+            reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]["y"].tolist()[0])
 
         reduced["dist_to_player"] = np.sqrt((player_x - reduced["x"]) ** 2 +
                                             (player_y - reduced["y"]) ** 2)
 
         player_cluster = int(
-            reduced[reduced[col_name] == self.ui.clustering_player_combo.
-            currentText()]["cluster"].tolist()[0])
+            reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]["cluster"].tolist()[0])
         df_p_s_c = reduced[(reduced["cluster"] == player_cluster)]
         for index, element in enumerate(tmp_filters):  # skipcq: PYL-W0612
             if tmp_filters[index][1] == ">" and tmp_filters[index][2] == 0.0:
