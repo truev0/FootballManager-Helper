@@ -19,6 +19,8 @@ import os
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////
 import sys
+import configparser
+import pathlib
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -701,6 +703,8 @@ class MainWindow(QMainWindow):
             self.ui.popup_notification_container.collapseMenu)
         self.ui.btn_send.clicked.connect(self.process_data_compare_players)
         self.ui.clustering_btn_send.clicked.connect(self.clustering_management)
+        self.ui.save_session_btn.clicked.connect(self._save_state)
+        self.ui.load_session_btn.clicked.connect(self._load_state)
 
         # SLIDE BETWEEN PAGES
         # ///////////////////////////////////////////
@@ -933,7 +937,7 @@ class MainWindow(QMainWindow):
                 if self.df_original is not None:
                     self.process_squad_info()
 
-                    self.tables_helper_squad()
+                    self.tables_helper_squad(self.df_for_table, self.df_tactic)
 
                     self.load_data_for_graphs()
 
@@ -941,7 +945,7 @@ class MainWindow(QMainWindow):
                     tmp_list = self.df_original[self.ui_headers[
                         self.language].h.h1].values.tolist()
                     self.ui.clustering_player_combo.addItems(tmp_list)
-                    self.add_squad_names(tmp_list)
+                    self.add_squad_names(self.df_squad, tmp_list)
                     self.haveSquadInfo = True
                 if self.haveSquadInfo:
                     self.ui.load_scouting_btn.setEnabled(True)
@@ -975,13 +979,13 @@ class MainWindow(QMainWindow):
                         self.language].h.h1].values.tolist()
                     self.create_edits_for_scouting()
                     self.create_lines_for_clustering()
-                    self.add_scouting_names(tmp_list)
+                    self.add_scouting_names(self.df_scouting, tmp_list)
                     self.haveScoutingInfo = True
                 elif self.df_scouting is not None and self.scoutingCounter > 1:
                     self.tables_helper_scouting(self.df_scout_for_table)
                     tmp_list = self.df_scouting[self.ui_headers[
                         self.language].h.h1].values.tolist()
-                    self.add_scouting_names(tmp_list)
+                    self.add_scouting_names(self.df_scouting, tmp_list)
                 if self.haveSquadInfo and self.haveScoutingInfo:
                     self.ui.load_old_btn.setEnabled(True)
             elif "old" in button_object.text():
@@ -992,7 +996,7 @@ class MainWindow(QMainWindow):
                     self.process_old_squad_info()
                     tmp_list = self.df_old_squad[self.ui_headers[
                         self.language].h.h1].values.tolist()
-                    self.add_old_squad_names(tmp_list)
+                    self.add_old_squad_names(self.df_old_squad, tmp_list)
                     self.haveOldSquadInfo = True
 
     # PROCESS ACTUAL SQUAD INFO
@@ -1057,9 +1061,9 @@ class MainWindow(QMainWindow):
 
     # SQUAD HELPER FUNCTION
     # ///////////////////////////////////////////
-    def tables_helper_squad(self):
+    def tables_helper_squad(self, df_big, df_small):
         """It takes a dataframe, converts it to a numpy array, and then uses a custom model to display it in a table"""
-        model = CustomizedNumpyModel(self.df_for_table)
+        model = CustomizedNumpyModel(df_big)
         column_indexes = [1, 3, 4, 5, 6, 7, 8, 10, 12]
         self.ui.table_squad.setSelectionBehavior(QTableView.SelectItems)
         self.ui.table_squad.setModel(model)
@@ -1068,7 +1072,7 @@ class MainWindow(QMainWindow):
         for c in column_indexes:
             headers.setSectionResizeMode(c, QHeaderView.ResizeToContents)
 
-        model2 = CustomizedNumpyListModel(self.df_tactic)
+        model2 = CustomizedNumpyListModel(df_small)
         self.ui.table_tactic.setModel(model2)
         self.ui.table_tactic.show()
         self.ui.table_tactic.horizontalHeader().setStretchLastSection(True)
@@ -1266,7 +1270,6 @@ class MainWindow(QMainWindow):
             self.ui.group_chk_stats_widget.add_buttons(util_lists.list_es[0],
                                                        0)
 
-        # TEST SECTION
         self.ui.first_squad_player_combo.currentIndexChanged.connect(
             self.update_inner_combo)
         self.update_inner_combo(
@@ -1336,7 +1339,7 @@ class MainWindow(QMainWindow):
 
     # THREE FUNCTIONS FOR ACTUAL SQUAD, SCOUT, OLD SQUAD
     # //////////////////////////////////////////////////
-    def add_squad_names(self, tmp_l):
+    def add_squad_names(self, df, tmp_l):
         """
         It takes a list of strings, and adds them to two combo boxes
 
@@ -1356,9 +1359,9 @@ class MainWindow(QMainWindow):
                 self.ui_text[self.language].menu.g0, tmp_l)
             self.ui.second_squad_player_combo.addItem(
                 self.ui_text[self.language].menu.g0, tmp_l)
-        self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_squad, 0)
+        self.ui.spyder_graph_widget.spyder_chart.set_data(df, 0)
 
-    def add_scouting_names(self, tmp_l):
+    def add_scouting_names(self, df, tmp_l):
         """
         It takes a list of strings, and adds them to two combo boxes
 
@@ -1378,9 +1381,9 @@ class MainWindow(QMainWindow):
                 self.ui_text[self.language].menu.g1, tmp_l)
             self.ui.second_squad_player_combo.addItem(
                 self.ui_text[self.language].menu.g1, tmp_l)
-        self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_scouting, 1)
+        self.ui.spyder_graph_widget.spyder_chart.set_data(df, 1)
 
-    def add_old_squad_names(self, tmp_l):
+    def add_old_squad_names(self, df, tmp_l):
         if self.haveOldSquadInfo:
             self.ui.first_squad_player_combo.setItemData(
                 2,
@@ -1395,7 +1398,7 @@ class MainWindow(QMainWindow):
                 self.ui_text[self.language].menu.g2, tmp_l)
             self.ui.second_squad_player_combo.addItem(
                 self.ui_text[self.language].menu.g2, tmp_l)
-        self.ui.spyder_graph_widget.spyder_chart.set_data(self.df_old_squad, 2)
+        self.ui.spyder_graph_widget.spyder_chart.set_data(df, 2)
 
     # SEND DATA FOR COMPARE GRAPHIC
     # ///////////////////////////////////////////////////
@@ -1698,13 +1701,146 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
 
     def _save_state(self):
-        # TODO implement
-        pass
+        self.df_for_table = pd.DataFrame(
+            self.ui.table_squad.model().get_dataframe(),
+            columns=self.df_for_table.columns
+        )
+
+        self.df_scout_for_table = pd.DataFrame(
+            self.ui.table_scouting.model().get_dataframe(),
+            columns=self.df_scout_for_table.columns
+        )
+        dataframes = [
+            self.df_original,
+            self.df_squad,
+            self.df_for_table,
+            self.df_tactic,
+            self.df_helper,
+            self.df_scouting,
+            self.df_scout_for_table,
+            self.df_old_squad
+        ]
+
+        file_name = self.file_saver()
+        if file_name is not None:
+            tmp_name = pathlib.PurePath(file_name).name
+            folder_name = os.path.splitext(tmp_name)[0]
+            config = configparser.ConfigParser()
+            config.add_section("session_name")
+            config.set("session_name", "name", folder_name)
+            config.add_section("paths")
+            if not os.path.exists("sessions/" + folder_name):
+                os.makedirs("sessions/" + folder_name)
+            path = os.path.dirname(file_name)
+            path = path.replace("/", "\\")
+            path = path + "\\" + folder_name
+            for i in range(len(dataframes)):
+                if dataframes[i] is not None:
+                    config.set("paths", f"{i}", f"{path}\\{i}.feather")
+                    dataframes[i].to_feather(f"{path}\\{i}.feather")
+            with open(file_name, "w") as config_file:
+                config.write(config_file)
+        else:
+            print("Invalido")
 
     def _load_state(self):
-        # TODO implement
-        pass
+        session_file = QFileDialog.getOpenFileName(
+            self,
+            "Reopen session",
+            filter="INI Files (*.ini)"
+        )
 
+        if session_file[0] != "":
+            config_obj = configparser.ConfigParser()
+            config_obj.read(session_file[0])
+            name = config_obj.get("session_name", "name")
+            paths = config_obj["paths"]
+            if "0" in paths.keys():
+                self.df_original = pd.read_feather(paths["0"])
+            if "1" in paths.keys():
+                self.df_squad = pd.read_feather(paths["1"])
+            if "2" in paths.keys():
+                self.df_for_table = pd.read_feather(paths["2"])
+            if "3" in paths.keys():
+                self.df_tactic = pd.read_feather(paths["3"])
+            if "4" in paths.keys():
+                self.df_helper = pd.read_feather(paths["4"])
+            if "5" in paths.keys():
+                self.df_scouting = pd.read_feather(paths["5"])
+                self.scoutingCounter += 1
+            if "6" in paths.keys():
+                self.df_scout_for_table = pd.read_feather(paths["6"])
+            if "7" in paths.keys():
+                self.df_old_squad = pd.read_feather(paths["7"])
+
+            if self.df_original is not None:
+                self._load_process_squad()
+            if self.df_scouting is not None:
+                self._load_process_scouting()
+            if self.df_old_squad is not None:
+                self._load_process_old()
+
+            self.ui.load_scouting_btn.setEnabled(True)
+            self.ui.load_old_btn.setEnabled(True)
+
+    def _load_process_squad(self):
+        self.tables_helper_squad(self.df_for_table, self.df_tactic)
+        self._load_data_graphs(self.df_helper)
+        self.create_and_load_checkboxes()
+        tmp_list_squad = self.df_original[self.ui_headers[
+            self.language].h.h1].values.tolist()
+        self.ui.clustering_player_combo.addItems(tmp_list_squad)
+        self.add_squad_names(self.df_squad, tmp_list_squad)
+        self.haveSquadInfo = True
+
+    def _load_process_scouting(self):
+        self.tables_helper_scouting(self.df_scout_for_table)
+        tmp_list_scout = self.df_scouting[self.ui_headers[
+            self.language].h.h1].values.tolist()
+        self.create_edits_for_scouting()
+        self.create_lines_for_clustering()
+        self.add_scouting_names(self.df_scouting, tmp_list_scout)
+        self.haveScoutingInfo = True
+
+    def _load_process_old(self):
+        tmp_list_old = self.df_old_squad[self.ui_headers[
+            self.language].h.h1].values.tolist()
+        self.add_old_squad_names(self.df_old_squad, tmp_list_old)
+        self.haveOldSquadInfo = True
+
+    def _load_data_graphs(self, df):
+        if self.ui.graph_statistics.chart.count_actual_list() > 1:
+            self.ui.graph_statistics.type_selector.clear()
+            self.ui.graph_statistics.combo_selector.clear()
+        if self.language == "en":
+            self.ui.graph_statistics.type_selector.addItem(
+                self.ui_text[self.language].menu.o5, util_lists.list_en[0])
+            self.ui.graph_statistics.type_selector.addItem(
+                self.ui_text[self.language].menu.o6, util_lists.list_en[1])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[0])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[1])
+        elif self.language == "es":
+            self.ui.graph_statistics.type_selector.addItem(
+                self.ui_text[self.language].menu.o5, util_lists.list_es[0])
+            self.ui.graph_statistics.type_selector.addItem(
+                self.ui_text[self.language].menu.o6, util_lists.list_es[1])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[0])
+            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[1])
+        self.ui.graph_statistics.chart.set_data(df)
+
+    def file_saver(self):
+        if not os.path.exists("sessions"):
+            os.mkdir("sessions")
+        try:
+            name = QFileDialog.getSaveFileName(self, "Save File", "./sessions", "*.ini")
+            file = open(name[0], "w")
+            text = ''
+            file.write(text)
+            file.close()
+            return name[0]
+        except FileNotFoundError:
+            print(f"File not found")
+            return None
     # ///////////////////////////////////////////
     # END FUNCTIONS FOR STATE
     # ///////////////////////////////////////////

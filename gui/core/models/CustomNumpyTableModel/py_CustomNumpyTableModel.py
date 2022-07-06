@@ -128,3 +128,6 @@ class CustomizedNumpyModel(QAbstractTableModel):
                     self.dataChanged.emit(index, index)
                 return True
         return False
+
+    def get_dataframe(self):
+        return self._data

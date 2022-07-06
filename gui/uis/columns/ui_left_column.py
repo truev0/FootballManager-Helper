@@ -25,6 +25,10 @@ from PySide6.QtWidgets import QVBoxLayout, QWidget, QStackedWidget, QSizePolicy,
 # This class is used to create the left column of the main window
 class Ui_LeftColumn(object):
     def __init__(self):
+        self.btn_7_layout = None
+        self.btn_7_widget = None
+        self.btn_6_layout = None
+        self.btn_6_widget = None
         self.menu_2_spacer = None
         self.btn_5_layout = None
         self.btn_5_widget = None
@@ -101,6 +105,28 @@ class Ui_LeftColumn(object):
         self.menu_1_spacer = QSpacerItem(10, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.vertical_layout_menu_1.addItem(self.menu_1_spacer)
+
+        self.btn_6_widget = QWidget(self.menu_1)
+        self.btn_6_widget.setObjectName(u"btn_6_widget")
+        self.btn_6_widget.setMinimumSize(QSize(0, 40))
+        self.btn_6_widget.setMaximumSize(QSize(16777215, 40))
+        self.btn_6_layout = QVBoxLayout(self.btn_6_widget)
+        self.btn_6_layout.setSpacing(0)
+        self.btn_6_layout.setObjectName(u"btn_6_layout")
+        self.btn_6_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.vertical_layout_menu_1.addWidget(self.btn_6_widget)
+
+        self.btn_7_widget = QWidget(self.menu_1)
+        self.btn_7_widget.setObjectName(u"btn_7_widget")
+        self.btn_7_widget.setMinimumSize(QSize(0, 40))
+        self.btn_7_widget.setMaximumSize(QSize(16777215, 40))
+        self.btn_7_layout = QVBoxLayout(self.btn_7_widget)
+        self.btn_7_layout.setSpacing(0)
+        self.btn_7_layout.setObjectName(u"btn_7_layout")
+        self.btn_7_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.vertical_layout_menu_1.addWidget(self.btn_7_widget)
 
         self.menus.addWidget(self.menu_1)
         self.menu_2 = QWidget()

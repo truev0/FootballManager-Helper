@@ -1,6 +1,7 @@
 .vscode/
 .git/
 venv/
+sessions/
 __pycache__/
 .idea/
 .pyc

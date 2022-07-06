@@ -63,6 +63,8 @@ from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 class Ui_MainWindow(object):
 
     def __init__(self):
+        self.load_session_btn = None
+        self.save_session_btn = None
         self.group = None
         self.right_box = None
         self.left_box = None
@@ -871,6 +873,34 @@ class Ui_MainWindow(object):
         self.load_old_btn.setMaximumHeight(40)
         self.load_old_btn.setEnabled(False)
         self.left_column.menus.btn_3_layout.addWidget(self.load_old_btn)
+        
+        # Save Session Btn
+        self.save_session_btn = PyPushButton(
+            name="save_session",
+            text="Save actual session",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
+        )
+        self.save_session_btn.setMaximumHeight(40)
+        self.save_session_btn.setMinimumHeight(40)
+        self.left_column.menus.btn_6_layout.addWidget(self.save_session_btn)
+        
+        # Load Session Btn
+        self.load_session_btn = PyPushButton(
+            name="load_session",
+            text="Load recently session",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
+        )
+        self.load_session_btn.setMaximumHeight(40)
+        self.load_session_btn.setMinimumHeight(40)
+        self.left_column.menus.btn_7_layout.addWidget(self.load_session_btn)
 
         # PAGES CONFIGURATION
         # ///////////////////////////////////////////////////////////////
