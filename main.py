@@ -21,7 +21,7 @@ import os
 import sys
 import configparser
 import pathlib
-import functools
+import json
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -709,6 +709,7 @@ class MainWindow(QMainWindow):
         self.ui.clustering_btn_send.clicked.connect(self.clustering_management)
         self.ui.save_session_btn.clicked.connect(self._save_state)
         self.ui.load_session_btn.clicked.connect(self._load_state)
+        self.ui.delete_session_btn.clicked.connect(self._delete_state)
 
         # SLIDE BETWEEN PAGES
         # ///////////////////////////////////////////
@@ -953,6 +954,8 @@ class MainWindow(QMainWindow):
                     self.haveSquadInfo = True
                 if self.haveSquadInfo:
                     self.ui.load_scouting_btn.setEnabled(True)
+                    self.ui.save_session_btn.setEnabled(True)
+                    self.ui.delete_session_btn.setEnabled(True)
             elif "scouting" in button_object.get_name():
                 if self.df_scouting is None:
                     self.df_scouting = FMi.setting_up_pandas(
@@ -1608,93 +1611,94 @@ class MainWindow(QMainWindow):
         complementary_df = None
         df_alone = None
         tmp_df = None
-        col_name = self.df_scouting.columns[0]
-        if self.language == "en":
-            tmp_df = self.df_scouting[util_lists.numerical_clustering_en]
-            complementary_df = self.df_scouting[util_lists.list_en[0]]
-            df_alone = self.df_squad[self.df_squad[col_name].str.contains(
-                self.ui.clustering_player_combo.currentText())]
-            df_alone = df_alone[util_lists.numerical_clustering_en]
-        elif self.language == "es":
-            tmp_df = self.df_scouting[util_lists.numerical_clustering_es]
-            complementary_df = self.df_scouting[util_lists.list_es[0]]
-            df_alone = self.df_squad[self.df_squad[col_name].str.contains(
-                self.ui.clustering_player_combo.currentText())]
-            df_alone = df_alone[util_lists.numerical_clustering_es]
+        if self.df_scouting is not None:
+            col_name = self.df_scouting.columns[0]
+            if self.language == "en":
+                tmp_df = self.df_scouting[util_lists.numerical_clustering_en]
+                complementary_df = self.df_scouting[util_lists.list_en[0]]
+                df_alone = self.df_squad[self.df_squad[col_name].str.contains(
+                    self.ui.clustering_player_combo.currentText())]
+                df_alone = df_alone[util_lists.numerical_clustering_en]
+            elif self.language == "es":
+                tmp_df = self.df_scouting[util_lists.numerical_clustering_es]
+                complementary_df = self.df_scouting[util_lists.list_es[0]]
+                df_alone = self.df_squad[self.df_squad[col_name].str.contains(
+                    self.ui.clustering_player_combo.currentText())]
+                df_alone = df_alone[util_lists.numerical_clustering_es]
 
-        df_player_clusters = tmp_df.fillna(tmp_df.mean())
+            df_player_clusters = tmp_df.fillna(tmp_df.mean())
 
-        names = self.df_scouting[col_name].values.tolist()
+            names = self.df_scouting[col_name].values.tolist()
 
-        names.append(self.ui.clustering_player_combo.currentText())
-        df_player_clusters = pd.concat([df_player_clusters, df_alone], axis=0)
+            names.append(self.ui.clustering_player_combo.currentText())
+            df_player_clusters = pd.concat([df_player_clusters, df_alone], axis=0)
 
-        x = df_player_clusters.values
-        scaler = preprocessing.MinMaxScaler()
-        x_scaled = scaler.fit_transform(x)
-        x_norm = pd.DataFrame(x_scaled)
+            x = df_player_clusters.values
+            scaler = preprocessing.MinMaxScaler()
+            x_scaled = scaler.fit_transform(x)
+            x_norm = pd.DataFrame(x_scaled)
 
-        pca = PCA(n_components=2)
-        reduced = pd.DataFrame(pca.fit_transform(x_norm))
+            pca = PCA(n_components=2)
+            reduced = pd.DataFrame(pca.fit_transform(x_norm))
 
-        kmeans = KMeans(n_clusters=5)
-        kmeans = kmeans.fit(reduced)
-        _labels = kmeans.predict(reduced)  # skipcq: PYL-W0612 lgtm [py/unused-local-variable]
-        _centroid = kmeans.cluster_centers_  # skipcq: PYL-W0612 lgtm [py/unused-local-variable]
-        clusters = kmeans.labels_.tolist()
+            kmeans = KMeans(n_clusters=5)
+            kmeans = kmeans.fit(reduced)
+            _labels = kmeans.predict(reduced)  # skipcq: PYL-W0612 lgtm [py/unused-local-variable]
+            _centroid = kmeans.cluster_centers_  # skipcq: PYL-W0612 lgtm [py/unused-local-variable]
+            clusters = kmeans.labels_.tolist()
 
-        reduced["cluster"] = clusters
-        reduced[col_name] = names
-        reduced = pd.concat([reduced, complementary_df], axis=1)
+            reduced["cluster"] = clusters
+            reduced[col_name] = names
+            reduced = pd.concat([reduced, complementary_df], axis=1)
 
-        base_columns = ["x", "y", "cluster", col_name]
-        if self.language == "en":
-            base_columns_plus = base_columns + util_lists.list_en[0]
-        elif self.language == "es":
-            base_columns_plus = base_columns + util_lists.list_es[0]
+            base_columns = ["x", "y", "cluster", col_name]
+            if self.language == "en":
+                base_columns_plus = base_columns + util_lists.list_en[0]
+            elif self.language == "es":
+                base_columns_plus = base_columns + util_lists.list_es[0]
 
-        reduced.columns = base_columns_plus
+            reduced.columns = base_columns_plus
 
-        player_x = float(
-            reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]["x"].tolist()[0])
-        player_y = float(
-            reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]["y"].tolist()[0])
+            player_x = float(
+                reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]["x"].tolist()[0])
+            player_y = float(
+                reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]["y"].tolist()[0])
 
-        reduced["dist_to_player"] = np.sqrt((player_x - reduced["x"]) ** 2 +
-                                            (player_y - reduced["y"]) ** 2)
+            reduced["dist_to_player"] = np.sqrt((player_x - reduced["x"]) ** 2 +
+                                                (player_y - reduced["y"]) ** 2)
 
-        player_cluster = int(
-            reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]["cluster"].tolist()[0])
-        df_p_s_c = reduced[(reduced["cluster"] == player_cluster)]
-        for index, element in enumerate(tmp_filters):  # skipcq: PYL-W0612
-            if tmp_filters[index][1] == ">" and tmp_filters[index][2] == 0.0:
-                continue
-            if tmp_filters[index][1] == ">":
-                df_p_s_c = df_p_s_c[
-                    df_p_s_c[tmp_filters[index][0]] > tmp_filters[index][2]]
-            if tmp_filters[index][1] == "<":
-                if tmp_filters[index][2] > 0.0:
-                    df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] <
-                                        tmp_filters[index][2]]
-                elif tmp_filters[index][2] == 0.0:
+            player_cluster = int(
+                reduced[reduced[col_name] == self.ui.clustering_player_combo.currentText()]["cluster"].tolist()[0])
+            df_p_s_c = reduced[(reduced["cluster"] == player_cluster)]
+            for index, element in enumerate(tmp_filters):  # skipcq: PYL-W0612
+                if tmp_filters[index][1] == ">" and tmp_filters[index][2] == 0.0:
                     continue
+                if tmp_filters[index][1] == ">":
+                    df_p_s_c = df_p_s_c[
+                        df_p_s_c[tmp_filters[index][0]] > tmp_filters[index][2]]
+                if tmp_filters[index][1] == "<":
+                    if tmp_filters[index][2] > 0.0:
+                        df_p_s_c = df_p_s_c[df_p_s_c[tmp_filters[index][0]] <
+                                            tmp_filters[index][2]]
+                    elif tmp_filters[index][2] == 0.0:
+                        continue
 
-            if tmp_filters[index][1] == ">=":
-                df_p_s_c = df_p_s_c[
-                    df_p_s_c[tmp_filters[index][0]] >= tmp_filters[index][2]]
+                if tmp_filters[index][1] == ">=":
+                    df_p_s_c = df_p_s_c[
+                        df_p_s_c[tmp_filters[index][0]] >= tmp_filters[index][2]]
 
-            if tmp_filters[index][1] == "<=":
-                df_p_s_c = df_p_s_c[
-                    df_p_s_c[tmp_filters[index][0]] <= tmp_filters[index][2]]
+                if tmp_filters[index][1] == "<=":
+                    df_p_s_c = df_p_s_c[
+                        df_p_s_c[tmp_filters[index][0]] <= tmp_filters[index][2]]
 
-        df_p_s_c = df_p_s_c[df_p_s_c[col_name] !=
-                            self.ui.clustering_player_combo.currentText()]
-        df_p_s_c = df_p_s_c.sort_values(by="dist_to_player", ascending=True)
-        printable_names = df_p_s_c[col_name].values.tolist()
-        self.ui.clustering_chart.inner_chart.update_chart(
-            reduced, printable_names,
-            self.ui.clustering_player_combo.currentText())
-        self.ui.clustering_chart.add_player_to_list(printable_names)
+            df_p_s_c = df_p_s_c[df_p_s_c[col_name] !=
+                                self.ui.clustering_player_combo.currentText()]
+            df_p_s_c = df_p_s_c.sort_values(by="dist_to_player", ascending=True)
+            printable_names = df_p_s_c[col_name].values.tolist()
+            self.ui.clustering_chart.inner_chart.update_chart(
+                reduced, printable_names,
+                self.ui.clustering_player_combo.currentText())
+            self.ui.clustering_chart.add_player_to_list(printable_names)
 
     # ///////////////////////////////////////////
     # END CUSTOM FUNCTIONS FOR FUNCTIONALITY
@@ -1706,6 +1710,13 @@ class MainWindow(QMainWindow):
 
     def _save_state(self):
         """It saves the dataframes to feather files and saves the paths to those files in a config file"""
+        player_pos_lists = []
+        if self.ui.load_pages.vertical_pitch_frame.findChildren(QPushButton):
+            for i in range(len(self.ui.load_pages.vertical_pitch_frame.children())):
+                item = self.ui.load_pages.vertical_pitch_frame.children()[i]
+                if isinstance(item, QPushButton):
+                    player_pos_lists.append(item.get_lista())
+
         if self.df_for_table is not None:
             self.df_for_table = pd.DataFrame(
                 self.ui.table_squad.model().get_dataframe(),
@@ -1745,10 +1756,12 @@ class MainWindow(QMainWindow):
                 if element is not None:
                     config.set("paths", str(index), f"{path}\\{index}.csv")
                     element.to_csv(f"{path}\\{index}.csv", index=False)
-            with open(file_name, "w") as config_file:
+            config.add_section("player_positions")
+            for index, element in enumerate(player_pos_lists):
+                tmp_str = ",".join(element)
+                config.set("player_positions", str(index), tmp_str)
+            with open(file_name, "w", encoding='utf-8') as config_file:
                 config.write(config_file)
-        else:
-            print("Invalido")
 
     def _load_state(self):
         """
@@ -1763,10 +1776,11 @@ class MainWindow(QMainWindow):
 
         if session_file[0] != "":
             config_obj = configparser.ConfigParser()
-            config_obj.read(session_file[0])
+            config_obj.read(session_file[0], encoding='utf-8')
             paths = config_obj["paths"]
+            player_positions = config_obj["player_positions"]
             if "0" in paths.keys():
-                    self.df_original = pd.read_csv(paths["0"])
+                self.df_original = pd.read_csv(paths["0"])
             if "1" in paths.keys():
                 self.df_squad = pd.read_csv(paths["1"])
             if "2" in paths.keys():
@@ -1785,13 +1799,34 @@ class MainWindow(QMainWindow):
 
             if self.df_original is not None:
                 self._load_process_squad()
+
             if self.df_scouting is not None:
                 self._load_process_scouting()
+            elif self.df_scouting is None:
+                self.ui.first_squad_player_combo.removeItem(1)
+                self.ui.second_squad_player_combo.removeItem(1)
+
             if self.df_old_squad is not None:
                 self._load_process_old()
+            elif self.df_old_squad is None:
+                self.ui.first_squad_player_combo.removeItem(2)
+                self.ui.second_squad_player_combo.removeItem(2)
+
+            if self.ui.load_pages.vertical_pitch_frame.findChildren(QPushButton):
+                for j in range(1, len(self.ui.load_pages.vertical_pitch_frame.children())):
+                    item = self.ui.load_pages.vertical_pitch_frame.children()[j]
+                    if isinstance(item, QPushButton):
+                        tmp_string = player_positions[str(j - 1)]
+                        if tmp_string == '':
+                            tmp_list = []
+                        else:
+                            tmp_list = tmp_string.split(",")
+                        item.set_updated_lista(tmp_list)
 
             self.ui.load_scouting_btn.setEnabled(True)
             self.ui.load_old_btn.setEnabled(True)
+            self.ui.delete_session_btn.setEnabled(True)
+            self.ui.save_session_btn.setEnabled(True)
 
     def _delete_state(self):
         self.df_original = None
@@ -1802,9 +1837,11 @@ class MainWindow(QMainWindow):
         self.df_scouting = None
         self.df_scout_for_table = None
         self.df_old_squad = None
-        self.ui.table_squad.clear()
-        self.ui.table_scouting.clear()
-        self.ui.table_tactic.clear()
+        model = None
+        self.ui.table_squad.setModel(model)
+        self.ui.table_scouting.setModel(model)
+        self.ui.table_tactic.setModel(model)
+        self.ui.clustering_player_combo.clear()
 
     def _load_process_squad(self):
         """

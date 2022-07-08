@@ -904,6 +904,7 @@ class Ui_MainWindow(object):
         )
         self.save_session_btn.setMaximumHeight(40)
         self.save_session_btn.setMinimumHeight(40)
+        self.save_session_btn.setEnabled(False)
         self.left_column.menus.btn_6_layout.addWidget(self.save_session_btn)
         # Load Session Btn
         self.load_session_btn = PyPushButton(
@@ -930,6 +931,7 @@ class Ui_MainWindow(object):
         )
         self.delete_session_btn.setMaximumHeight(40)
         self.delete_session_btn.setMinimumHeight(40)
+        self.delete_session_btn.setEnabled(False)
         self.left_column.menus.btn_8_layout.addWidget(self.delete_session_btn)
 
         # PAGES CONFIGURATION
