@@ -53,8 +53,6 @@ from gui.widgets import (
     PyVerticalPitch,
     PyWindow,
     PyButtonGroup,
-    PyRemovableTag,
-    PyTagContainer,
 )
 from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 
@@ -444,11 +442,12 @@ class Ui_MainWindow(object):
             self.popup_notification_subcontainer)
         self.popup_notification_subcontainer_layout.setObjectName(
             "popup_notification_subcontainer_layout")
+        self.popup_notification_subcontainer_layout.setContentsMargins(0, 0, 0, 0)
 
         # CREATE LIST NOTIFICATION FRAME
         # ///////////////////////////////////////////////////////////////
         self.title_notification_frame = QFrame()
-        self.title_notification_frame.setObjectName("list_notification_frame")
+        self.title_notification_frame.setObjectName("title_notification_frame")
         size_policy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         size_policy.setHorizontalStretch(0)
         size_policy.setVerticalStretch(0)
@@ -464,7 +463,7 @@ class Ui_MainWindow(object):
         self.title_notification_frame_layout = QHBoxLayout(
             self.title_notification_frame)
         self.title_notification_frame_layout.setObjectName(
-            "list_notification_frame_layout")
+            "title_notification_frame_layout")
         self.title_notification_frame_layout.setContentsMargins(3, 3, 3, 3)
 
         # Title notification
@@ -495,6 +494,7 @@ class Ui_MainWindow(object):
             bg_color="transparent",
             icon_path=set_svg_icon("icon_close.svg"),
         )
+        self.btn_close_notification.delete_tooltip()
 
         self.btn_close_notification.setObjectName("btn_close_notification")
 
@@ -512,34 +512,30 @@ class Ui_MainWindow(object):
         self.tag_notification_frame.setObjectName("tag_notification_frame")
         self.tag_notification_frame.setFrameShape(QFrame.StyledPanel)
         self.tag_notification_frame.setFrameShadow(QFrame.Raised)
+        self.tag_notification_frame.setStyleSheet(
+            """
+            QPushButton {
+            font-size: 12px;
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid rgba(194, 221, 255, 0.8);
+            background: rgba(194, 221, 255, 0.3);
+            color: #dce1ec;
+            }
+            
+            QPushButton:hover {
+            background: rgba(63, 111, 209, 0.5);
+            }
+            """
+        )
         self.tag_notification_frame_layout = QVBoxLayout(self.tag_notification_frame)
         self.tag_notification_frame_layout.setObjectName("tag_notification_frame_layout")
-        self.tag_notification_frame_layout.setContentsMargins(0, 0, 0, 0)
-        self.tag_notification_frame_layout.setSpacing(0)
-        # ADD TAG CONTAINER
-        # ///////////////////////////////////////////////////////////////
-        self.tag_container = PyTagContainer()
-        self.tag_notification_frame_layout.addWidget(self.tag_container)
+        self.tag_notification_frame_layout.setContentsMargins(5, 3, 5, 2)
+        self.tag_notification_frame_layout.setSpacing(4)
 
         self.popup_notification_subcontainer_layout.addWidget(self.tag_notification_frame)
 
         self.tag_notification_frame.raise_()
-
-        # # List label
-        # self.list_label = QLabel()
-        # self.list_label.setObjectName("list_label")
-        # size_policy2 = QSizePolicy(QSizePolicy.Preferred,
-        #                            QSizePolicy.MinimumExpanding)
-        # size_policy2.setHorizontalStretch(0)
-        # size_policy2.setVerticalStretch(0)
-        # size_policy2.setHeightForWidth(
-        #     self.list_label.sizePolicy().hasHeightForWidth())
-        # self.list_label.setSizePolicy(size_policy2)
-        # self.list_label.setFont(font)
-        # self.list_label.setAlignment(Qt.AlignCenter)
-        #
-        # # Add list label
-        # self.popup_notification_subcontainer_layout.addWidget(self.list_label)
 
         # ADD SUBCONTAINER TO CONTAINER
         self.popup_notification_container_layout.addWidget(
@@ -576,7 +572,7 @@ class Ui_MainWindow(object):
             "\n"
             "}\n"
             "\n"
-            "#list_notification_frame {\n"
+            "#title_notification_frame {\n"
             "	background-color:#1b1e23;\n"
             "border-top-right-radius: 10px;\n"
             "border-top-left-radius: 10px;\n"

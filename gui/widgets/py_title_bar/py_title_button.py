@@ -103,7 +103,7 @@ class PyTitleButton(QPushButton):
     # ///////////////////////////////////////////////////////////////
     def delete_tooltip(self):
         """It deletes the tooltip object from the class"""
-        del self._tooltip
+        self._tooltip = None
 
     # SETTER FOR TRANSLATE
     # ///////////////////////////////////////////////////////////////
@@ -220,8 +220,9 @@ class PyTitleButton(QPushButton):
         :param event: The event that triggered this method
         """
         self.change_style(QEvent.Enter)
-        self.move_tooltip()
-        self._tooltip.show()
+        if self._tooltip is not None:
+            self.move_tooltip()
+            self._tooltip.show()
 
     # MOUSE LEAVE
     # Event fired when the mouse leaves the BTN
@@ -233,8 +234,10 @@ class PyTitleButton(QPushButton):
         :param event: The event that triggered the leave event
         """
         self.change_style(QEvent.Leave)
-        self.move_tooltip()
-        self._tooltip.hide()
+        if self._tooltip is not None:
+            self.move_tooltip()
+            self._tooltip.hide()
+
 
     # MOUSE PRESS
     # Event triggered when the left button is pressed

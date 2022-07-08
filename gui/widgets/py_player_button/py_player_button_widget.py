@@ -102,6 +102,9 @@ class PyPlayerButton(QPushButton):
         """
         return self._lista
 
+    def set_updated_lista(self, lista):
+        self._lista = lista
+
     # FORMAT TEXT
     # ///////////////////////////////////////////////////////////////
     def text_formatter(self):

@@ -78,7 +78,7 @@ from .py_button_group.py_button_group_widget import PyButtonGroup  # skipcq: PY-
 # ///////////////////////////////////////////////////////////////
 from .py_collapse.py_collapse_widget import FrameLayout  # skipcq: PY-W2000
 
-# PY TAG / CONTAINER WIDGET
+# PY TAG WIDGET
 # ///////////////////////////////////////////////////////////////
 from .py_removable_tag.py_removable_widget import PyRemovableTag  # skipcq: PY-W2000
-from .py_removable_tag.py_tag_container import PyTagContainer  # skipcq: PY-W2000
+

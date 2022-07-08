@@ -391,13 +391,13 @@ class MainWindow(QMainWindow):
         for j in reversed(range(self.ui.tag_notification_frame_layout.count())):
             self.ui.tag_notification_frame_layout.itemAt(j).widget().setParent(None)
 
-        if btn.get_len_lista() > 5:
-            diff = btn.get_len_lista() - 5
-            self.ui.popup_notification_container.expandedHeight += 14 * diff
+        if btn.get_len_lista() > 3:
+            diff = btn.get_len_lista() - 3
+            self.ui.popup_notification_container.expandedHeight += 25 * diff
         if btn.get_len_lista() > 0:
             for i in range(btn.get_len_lista()):
-                tag = PyRemovableTag(text=btn.get_lista()[i]).closeable()
-                tag.set_self_index(i)
+                tag = PyRemovableTag(text=btn.get_lista()[i], instanceof=btn, parent=self.ui.tag_notification_frame)
+                tag.setMinimumHeight(21)
                 self.ui.tag_notification_frame_layout.insertWidget(i * -1, tag)
 
         # EXEC NOTIFICATION CONTAINER
@@ -657,7 +657,6 @@ class MainWindow(QMainWindow):
         """The function is called when a button is released"""
         # GET BTN CLICKED
         # btn = self.ui.setup_btns()
-
 
     # SET ALL SIGNALS
     # ///////////////////////////////////////////
@@ -1910,4 +1909,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # TODO arreglar por que no guarda los numeros de frol, srol, trol
