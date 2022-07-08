@@ -21,6 +21,7 @@ import os
 import sys
 import configparser
 import pathlib
+import functools
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -97,7 +98,7 @@ from gui.uis.windows.main_window.ui_interface import Ui_MainWindow
 
 # IMPORT CUSTOM WIDGETS
 # ///////////////////////////////////////////
-from gui.widgets import PyGrips, FrameLayout
+from gui.widgets import PyGrips, FrameLayout, PyRemovableTag
 
 plt.style.use("seaborn-whitegrid")
 
@@ -385,17 +386,20 @@ class MainWindow(QMainWindow):
         :param btn: the button that was clicked
         """
         # RESET CONTAINER HEIGHT
-        self.ui.popup_notification_container.expandedHeight = (
-            self.default_size_notification_container)
+        self.ui.popup_notification_container.expandedHeight = self.default_size_notification_container
+
+        for j in reversed(range(self.ui.tag_notification_frame_layout.count())):
+            self.ui.tag_notification_frame_layout.itemAt(j).widget().setParent(None)
+
         if btn.get_len_lista() > 5:
             diff = btn.get_len_lista() - 5
-            # SET + HEIGHT IF HAVE A LOT OF PLAYERS
-            self.ui.popup_notification_container.expandedHeight = (
-                    self.default_size_notification_container + (12 * diff))
-        # FORMAT TEXT TO BE DISPLAYED
-        tmp = btn.text_formatter()
-        # DISPLAY PLAYERS
-        self.ui.list_label.setText(tmp)
+            self.ui.popup_notification_container.expandedHeight += 14 * diff
+        if btn.get_len_lista() > 0:
+            for i in range(btn.get_len_lista()):
+                tag = PyRemovableTag(text=btn.get_lista()[i]).closeable()
+                tag.set_self_index(i)
+                self.ui.tag_notification_frame_layout.insertWidget(i * -1, tag)
+
         # EXEC NOTIFICATION CONTAINER
         self.ui.popup_notification_container.toggleMenu(btn)
 
@@ -653,6 +657,7 @@ class MainWindow(QMainWindow):
         """The function is called when a button is released"""
         # GET BTN CLICKED
         # btn = self.ui.setup_btns()
+
 
     # SET ALL SIGNALS
     # ///////////////////////////////////////////
@@ -1701,18 +1706,18 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
 
     def _save_state(self):
-        """
-        It saves the dataframes to feather files and saves the paths to those files in a config file
-        """
-        self.df_for_table = pd.DataFrame(
-            self.ui.table_squad.model().get_dataframe(),
-            columns=self.df_for_table.columns
-        )
+        """It saves the dataframes to feather files and saves the paths to those files in a config file"""
+        if self.df_for_table is not None:
+            self.df_for_table = pd.DataFrame(
+                self.ui.table_squad.model().get_dataframe(),
+                columns=self.df_for_table.columns
+            )
 
-        self.df_scout_for_table = pd.DataFrame(
-            self.ui.table_scouting.model().get_dataframe(),
-            columns=self.df_scout_for_table.columns
-        )
+        if self.df_scout_for_table is not None:
+            self.df_scout_for_table = pd.DataFrame(
+                self.ui.table_scouting.model().get_dataframe(),
+                columns=self.df_scout_for_table.columns
+            )
         dataframes = [
             self.df_original,
             self.df_squad,
@@ -1739,8 +1744,8 @@ class MainWindow(QMainWindow):
             path = path + "\\" + folder_name
             for index, element in enumerate(dataframes):
                 if element is not None:
-                    config.set("paths", str(index), f"{path}\\{index}.feather")
-                    element.to_feather(f"{path}\\{index}.feather")
+                    config.set("paths", str(index), f"{path}\\{index}.csv")
+                    element.to_csv(f"{path}\\{index}.csv", index=False)
             with open(file_name, "w") as config_file:
                 config.write(config_file)
         else:
@@ -1762,22 +1767,22 @@ class MainWindow(QMainWindow):
             config_obj.read(session_file[0])
             paths = config_obj["paths"]
             if "0" in paths.keys():
-                self.df_original = pd.read_feather(paths["0"])
+                    self.df_original = pd.read_csv(paths["0"])
             if "1" in paths.keys():
-                self.df_squad = pd.read_feather(paths["1"])
+                self.df_squad = pd.read_csv(paths["1"])
             if "2" in paths.keys():
-                self.df_for_table = pd.read_feather(paths["2"])
+                self.df_for_table = pd.read_csv(paths["2"])
             if "3" in paths.keys():
-                self.df_tactic = pd.read_feather(paths["3"])
+                self.df_tactic = pd.read_csv(paths["3"])
             if "4" in paths.keys():
-                self.df_helper = pd.read_feather(paths["4"])
+                self.df_helper = pd.read_csv(paths["4"])
             if "5" in paths.keys():
-                self.df_scouting = pd.read_feather(paths["5"])
+                self.df_scouting = pd.read_csv(paths["5"])
                 self.scoutingCounter += 1
             if "6" in paths.keys():
-                self.df_scout_for_table = pd.read_feather(paths["6"])
+                self.df_scout_for_table = pd.read_csv(paths["6"])
             if "7" in paths.keys():
-                self.df_old_squad = pd.read_feather(paths["7"])
+                self.df_old_squad = pd.read_csv(paths["7"])
 
             if self.df_original is not None:
                 self._load_process_squad()
@@ -1789,9 +1794,23 @@ class MainWindow(QMainWindow):
             self.ui.load_scouting_btn.setEnabled(True)
             self.ui.load_old_btn.setEnabled(True)
 
+    def _delete_state(self):
+        self.df_original = None
+        self.df_squad = None
+        self.df_for_table = None
+        self.df_tactic = None
+        self.df_helper = None
+        self.df_scouting = None
+        self.df_scout_for_table = None
+        self.df_old_squad = None
+        self.ui.table_squad.clear()
+        self.ui.table_scouting.clear()
+        self.ui.table_tactic.clear()
+
     def _load_process_squad(self):
         """
-        It takes a dataframe, and a list of column names, and creates a new dataframe with only the columns in the list
+        It takes a dataframe, and a list of column names, and creates a new dataframe with only the columns in
+        the list
         """
         self.tables_helper_squad(self.df_for_table, self.df_tactic)
         self._load_data_graphs(self.df_helper)
@@ -1816,9 +1835,7 @@ class MainWindow(QMainWindow):
         self.haveScoutingInfo = True
 
     def _load_process_old(self):
-        """
-        It takes the dataframe of the old squad and adds the names of the players to a list
-        """
+        """It takes the dataframe of the old squad and adds the names of the players to a list"""
         tmp_list_old = self.df_old_squad[self.ui_headers[
             self.language].h.h1].values.tolist()
         self.add_old_squad_names(self.df_old_squad, tmp_list_old)

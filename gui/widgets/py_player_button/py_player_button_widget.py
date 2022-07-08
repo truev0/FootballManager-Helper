@@ -93,6 +93,15 @@ class PyPlayerButton(QPushButton):
         """
         return len(self._lista)
 
+    # GET LISTA
+    # ///////////////////////////////////////////////////////////////
+    def get_lista(self):
+        """
+        It returns the list
+        :return: The list
+        """
+        return self._lista
+
     # FORMAT TEXT
     # ///////////////////////////////////////////////////////////////
     def text_formatter(self):
@@ -128,9 +137,9 @@ class PyPlayerButton(QPushButton):
         """
         mime_data = event.mimeData()
         if mime_data.hasText():
-            self._lista.append(mime_data.text())
+            if mime_data.text() not in self._lista:
+                self._lista.append(mime_data.text())
         elif "application/x-qabstractitemmodeldatalist" in mime_data.formats():
-            names = []
             stream = QDataStream(
                 mime_data.data("application/x-qabstractitemmodeldatalist"))
             while not stream.atEnd():
@@ -140,9 +149,8 @@ class PyPlayerButton(QPushButton):
                 for _ in range(stream.readInt32()):
                     role = stream.readInt32()
                     value = stream.readQVariant()
-                    if role == Qt.DisplayRole and value not in names:
-                        names.append(value)
-            self._lista.extend(names)
+                    if role == Qt.DisplayRole and value not in self._lista:
+                        self._lista.append(value)
 
     # SET ACTIVE MENU
     # ///////////////////////////////////////////////////////////////

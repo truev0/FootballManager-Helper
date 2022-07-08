@@ -52,7 +52,9 @@ from gui.widgets import (
     PyTitleBar,
     PyVerticalPitch,
     PyWindow,
-    PyButtonGroup
+    PyButtonGroup,
+    PyRemovableTag,
+    PyTagContainer,
 )
 from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 
@@ -63,6 +65,7 @@ from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 class Ui_MainWindow(object):
 
     def __init__(self):
+        self.delete_session_btn = None
         self.load_session_btn = None
         self.save_session_btn = None
         self.group = None
@@ -454,6 +457,7 @@ class Ui_MainWindow(object):
         self.title_notification_frame.setSizePolicy(size_policy)
         self.title_notification_frame.setFrameShape(QFrame.StyledPanel)
         self.title_notification_frame.setFrameShadow(QFrame.Raised)
+        self.title_notification_frame.setMaximumHeight(30)
 
         # CREATE LAYOUT LIST NOTIFICATION FRAME
         # ///////////////////////////////////////////////////////////////
@@ -502,21 +506,40 @@ class Ui_MainWindow(object):
         self.popup_notification_subcontainer_layout.addWidget(
             self.title_notification_frame)
 
-        # List label
-        self.list_label = QLabel()
-        self.list_label.setObjectName("list_label")
-        size_policy2 = QSizePolicy(QSizePolicy.Preferred,
-                                   QSizePolicy.MinimumExpanding)
-        size_policy2.setHorizontalStretch(0)
-        size_policy2.setVerticalStretch(0)
-        size_policy2.setHeightForWidth(
-            self.list_label.sizePolicy().hasHeightForWidth())
-        self.list_label.setSizePolicy(size_policy2)
-        self.list_label.setFont(font)
-        self.list_label.setAlignment(Qt.AlignCenter)
 
-        # Add list label
-        self.popup_notification_subcontainer_layout.addWidget(self.list_label)
+        # TAG NOTIFICATION FRAME
+        self.tag_notification_frame = QFrame()
+        self.tag_notification_frame.setObjectName("tag_notification_frame")
+        self.tag_notification_frame.setFrameShape(QFrame.StyledPanel)
+        self.tag_notification_frame.setFrameShadow(QFrame.Raised)
+        self.tag_notification_frame_layout = QVBoxLayout(self.tag_notification_frame)
+        self.tag_notification_frame_layout.setObjectName("tag_notification_frame_layout")
+        self.tag_notification_frame_layout.setContentsMargins(0, 0, 0, 0)
+        self.tag_notification_frame_layout.setSpacing(0)
+        # ADD TAG CONTAINER
+        # ///////////////////////////////////////////////////////////////
+        self.tag_container = PyTagContainer()
+        self.tag_notification_frame_layout.addWidget(self.tag_container)
+
+        self.popup_notification_subcontainer_layout.addWidget(self.tag_notification_frame)
+
+        self.tag_notification_frame.raise_()
+
+        # # List label
+        # self.list_label = QLabel()
+        # self.list_label.setObjectName("list_label")
+        # size_policy2 = QSizePolicy(QSizePolicy.Preferred,
+        #                            QSizePolicy.MinimumExpanding)
+        # size_policy2.setHorizontalStretch(0)
+        # size_policy2.setVerticalStretch(0)
+        # size_policy2.setHeightForWidth(
+        #     self.list_label.sizePolicy().hasHeightForWidth())
+        # self.list_label.setSizePolicy(size_policy2)
+        # self.list_label.setFont(font)
+        # self.list_label.setAlignment(Qt.AlignCenter)
+        #
+        # # Add list label
+        # self.popup_notification_subcontainer_layout.addWidget(self.list_label)
 
         # ADD SUBCONTAINER TO CONTAINER
         self.popup_notification_container_layout.addWidget(
@@ -899,6 +922,19 @@ class Ui_MainWindow(object):
         self.load_session_btn.setMaximumHeight(40)
         self.load_session_btn.setMinimumHeight(40)
         self.left_column.menus.btn_7_layout.addWidget(self.load_session_btn)
+        # Delete sesion btn
+        self.delete_session_btn = PyPushButton(
+            name="delete_session",
+            text="Delete actual session",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
+        )
+        self.delete_session_btn.setMaximumHeight(40)
+        self.delete_session_btn.setMinimumHeight(40)
+        self.left_column.menus.btn_8_layout.addWidget(self.delete_session_btn)
 
         # PAGES CONFIGURATION
         # ///////////////////////////////////////////////////////////////

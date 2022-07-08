@@ -22,6 +22,7 @@ numpy==1.23.0
 packaging==21.3
 pandas==1.4.3
 Pillow==9.2.0
+pyarrow==8.0.0
 pycparser==2.21
 pyparsing==3.0.9
 PyQt5==5.15.7
