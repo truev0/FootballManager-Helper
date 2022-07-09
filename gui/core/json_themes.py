@@ -22,9 +22,8 @@ class Themes(object):
 
     # APP PATH
     # ///////////////////////////////////////////////////////////////
-    json_file = f"themes/{_settings['theme_name']}.json"
-    settings_path = os.path.join(BASE_DIR, json_file)
-    print(f"Themes: {settings_path}")
+    json_file = f"themes\\{_settings['theme_name']}.json"
+    settings_path = os.path.normpath(os.path.join(BASE_DIR, json_file))
     if not os.path.isfile(settings_path):
         print(f"WARNING: \"gui/themes/{_settings['theme_name']}.json\" not found! check in the folder {settings_path}")
 

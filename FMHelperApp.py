@@ -56,6 +56,7 @@ from PySide6.QtWidgets import (
 from sklearn import preprocessing
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
+import sklearn.neighbors
 
 # IMPORT FM INSIDE
 # ///////////////////////////////////////////
@@ -206,7 +207,7 @@ class MainWindow(QMainWindow):
         self.set_signals()
         self.connect_events()
         self.load_qa_questions()
-        popup_path = os.path.join(BASE_DIR, 'core/popup_style.json')
+        popup_path = os.path.normpath(os.path.join(BASE_DIR, 'core\\popup_style.json'))
         loadJsonStyle(self, self.ui, popup_path)
 
         # CUSTOM MAIN ANIMATIONS
@@ -745,7 +746,7 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     def load_qa_questions(self):
 
-        new_font = "color: #dce1ec; text-align: justify; text-justify: inter-word; font-size: 16px; font-weight: bold;"
+        new_font = "color: #dce1ec; text-align: justify; font-size: 16px; font-weight: bold;"
         # Start First collapsable tab
         self.first_collapsable = FrameLayout(
             title=self.ui_text[self.language].pages.p9.first_collapse[0]

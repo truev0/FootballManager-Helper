@@ -228,7 +228,7 @@ def data_for_rankings(df, language):
     """
     c = None
     if language == "en":
-        path_file = os.path.join(BASE_DIR, "core/fm_insider/data_ranking_values_en.json")
+        path_file = os.path.normpath(os.path.join(BASE_DIR, "core\\fm_insider\\data_ranking_values_en.json"))
         with open(
                 path_file,
                 mode="r",
@@ -236,7 +236,7 @@ def data_for_rankings(df, language):
         ) as f:
             c = f.read()
     elif language == "es":
-        path_file = os.path.join(BASE_DIR, "core/fm_insider/data_ranking_values_es.json")
+        path_file = os.path.normpath(os.path.join(BASE_DIR, "core\\fm_insider\\data_ranking_values_es.json"))
         with open(
                 path_file,
                 mode="r",

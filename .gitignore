@@ -5,6 +5,11 @@ sessions/
 __pycache__/
 .idea/
 .pyc
+dist/
+build/
+output/
+FMHelperApp.spec
+FMHelperBuild.json
 test_files/
 gui/widgets/py_virtual_pitch/
 gui/uis/windows/main_window/ui_interface_prueba.py
