@@ -18,8 +18,8 @@ from PySide6.QtWidgets import (
 
 # CLUSTERING WIDGET
 # ///////////////////////////////////////////////////////////////
-# This class is a widget that contains a Graphic of clustering
 class PyClusteringWidget(QWidget):
+    """This class is a widget that contains a Graphic of clustering"""
 
     def __init__(
         self,
@@ -149,9 +149,9 @@ class PyClusteringWidget(QWidget):
 
 # PY CANVAS
 # ///////////////////////////////////////////////////////////////
-# It's a FigureCanvas that
-# can be embedded in a wxPython application
 class _PyCanvas(FigureCanvas):
+    """It's a FigureCanvas that can be embedded in application"""
+
     def __init__(
         self,
         language,

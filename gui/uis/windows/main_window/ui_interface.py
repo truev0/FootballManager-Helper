@@ -31,11 +31,11 @@ from gui.core.json_themes import Themes
 
 # RIGHT COLUMN
 # ///////////////////////////////////////////////////////////////
-from gui.uis.columns.ui_right_column import Ui_RightColumn
+from gui.uis.columns.ui_right_column import UiRightColumn
 
 # IMPORT MAIN WINDOW PAGES / AND SIDE BOXES FOR APP
 # ///////////////////////////////////////////////////////////////
-from gui.uis.pages.ui_main_pages import Ui_MainPages
+from gui.uis.pages.ui_main_pages import UiMainPages
 
 # IMPORT CUSTOM WIDGETS
 # ///////////////////////////////////////////////////////////////
@@ -59,10 +59,12 @@ from gui.widgets.py_title_bar.py_title_button import PyTitleButton
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
-# This class is used to create all interface of the application
-class Ui_MainWindow(object):
+class UiMainWindow:
+    """This class is used to create all interface of the application"""
 
     def __init__(self):
+        self.tag_notification_frame = None
+        self.tag_notification_frame_layout = None
         self.delete_session_btn = None
         self.load_session_btn = None
         self.save_session_btn = None
@@ -141,7 +143,7 @@ class Ui_MainWindow(object):
         self.themes = None
         self.settings = None
 
-    def setupUi(self, parent):
+    def setup_ui(self, parent):
         """
         Initialize interface of the main window
 
@@ -365,7 +367,7 @@ class Ui_MainWindow(object):
             self.content_area_right_bg_frame)
 
         # ADD RIGHT PAGES TO RIGHT COLUMN
-        self.right_column = Ui_RightColumn()
+        self.right_column = UiRightColumn()
         self.right_column.setupUi(self.content_area_right_bg_frame)
 
         # LEFT CONTENT
@@ -374,7 +376,7 @@ class Ui_MainWindow(object):
 
         # IMPORT MAIN PAGES
         # ///////////////////////////////////////////////////////////////
-        self.load_pages = Ui_MainPages()
+        self.load_pages = UiMainPages()
         self.load_pages.setupUi(self.content_area_left_frame)
 
         # ADD TO LAYOUT
@@ -416,7 +418,6 @@ class Ui_MainWindow(object):
 
         # CREATE POPUP NOTIFICATION CONTAINER
         # ///////////////////////////////////////////////////////////////
-        # TODO FIX STYLE
         self.popup_notification_container = QCustomSlideMenu(
             self.right_app_frame)
         self.popup_notification_container.setObjectName(
@@ -506,7 +507,6 @@ class Ui_MainWindow(object):
         self.popup_notification_subcontainer_layout.addWidget(
             self.title_notification_frame)
 
-
         # TAG NOTIFICATION FRAME
         self.tag_notification_frame = QFrame()
         self.tag_notification_frame.setObjectName("tag_notification_frame")
@@ -522,7 +522,6 @@ class Ui_MainWindow(object):
             background: rgba(194, 221, 255, 0.3);
             color: #dce1ec;
             }
-            
             QPushButton:hover {
             background: rgba(63, 111, 209, 0.5);
             }
@@ -806,17 +805,17 @@ class Ui_MainWindow(object):
         # LEFT MENUS / GET SIGNALS WHEN LEFT MENU BTN IS CLICKED / RELEASED
         # ///////////////////////////////////////////////////////////////
         # ADD BUTTONS
-        self.left_menu.add_menus(Ui_MainWindow.add_left_buttons)
+        self.left_menu.add_menus(UiMainWindow.add_left_buttons)
 
         # TITLE BAR / EXTRA BUTTONS
         # ///////////////////////////////////////////////////////////////
         # ADD BUTTONS
-        self.title_bar.add_menus(Ui_MainWindow.add_title_bar_buttons)
+        self.title_bar.add_menus(UiMainWindow.add_title_bar_buttons)
 
         # PITCH WIDGET / ADD BUTTONS
         # ///////////////////////////////////////////////////////////////
         # ADD BUTTONS
-        self.pitch_widget.add_btns(Ui_MainWindow.add_players_pitch_buttons)
+        self.pitch_widget.add_btns(UiMainWindow.add_players_pitch_buttons)
 
         # ADD TITLE
         if self.settings["custom_title_bar"]:
@@ -942,6 +941,8 @@ class Ui_MainWindow(object):
 
         # PAGE 1 - Introduction to App
         self.logo_svg = QSvgWidget(set_svg_image("logo.svg"))
+
+        self.load_pages.welcome_label.setText("Welcome to FM Helper")
 
         self.load_pages.logo_layout.addWidget(self.logo_svg, Qt.AlignCenter,
                                               Qt.AlignCenter)

@@ -9,8 +9,9 @@ from PySide6.QtGui import QColor, QPainter, QBrush, QPixmap
 
 # PY TITLE BUTTON
 # ///////////////////////////////////////////////////////////////
-# It's a QPushButton that has a title and a description
 class PyTitleButton(QPushButton):
+    """It's a QPushButton that has a title and a description"""
+
     def __init__(
             self,
             parent,
@@ -238,7 +239,6 @@ class PyTitleButton(QPushButton):
             self.move_tooltip()
             self._tooltip.hide()
 
-
     # MOUSE PRESS
     # Event triggered when the left button is pressed
     # ///////////////////////////////////////////////////////////////
@@ -332,8 +332,9 @@ class PyTitleButton(QPushButton):
 
 # TOOLTIP
 # ///////////////////////////////////////////////////////////////
-# This class is a QLabel that displays a tooltip when the mouse hovers over it
 class _ToolTip(QLabel):
+    """This class is a QLabel that displays a tooltip when the mouse hovers over it"""
+
     # TOOLTIP / LABEL StyleSheet
     style_tooltip = """
     QLabel {{

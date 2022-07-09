@@ -19,8 +19,8 @@ from gui.widgets.py_combo_box.py_combo_box_widget import PyComboBox
 
 # PY STATS WIDGET
 # ///////////////////////////////////////////////////////////////
-# It's a widget that displays a list of statistics
 class PyStatsWidget(QWidget):
+    """It's a widget that displays a list of statistics"""
 
     def __init__(
         self,
@@ -162,8 +162,8 @@ class PyStatsWidget(QWidget):
             self.combo_selector.addItems(dependent_list)
 
 
-# It's a class to place graph
 class _CustomCanvas(FigureCanvas):
+    """It's a class to place graph"""
 
     def __init__(
         self,

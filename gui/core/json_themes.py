@@ -13,8 +13,10 @@ from gui.core.json_settings import Settings
 
 # APP THEMES
 # ///////////////////////////////////////////////////////////////
-# > Themes is a class that contains a list of themes and a list of colors
-class Themes(object):
+
+class Themes:
+    """Themes is a class that contains a list of themes and a list of colors"""
+
     # LOAD SETTINGS
     # ///////////////////////////////////////////////////////////////
     setup_settings = Settings()
@@ -30,7 +32,7 @@ class Themes(object):
     # INIT SETTINGS
     # ///////////////////////////////////////////////////////////////
     def __init__(self):
-        """The function __init__() is a constructor that initializes the class Themes"""
+        """The function is a constructor that initializes the class Themes"""
         super(Themes, self).__init__()
 
         # DICTIONARY WITH SETTINGS

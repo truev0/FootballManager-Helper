@@ -9,8 +9,9 @@ from PySide6.QtCore import Qt, QEvent, QRect, QPoint
 
 # PY TITLE BUTTON
 # ///////////////////////////////////////////////////////////////
-# It's a QPushButton that has a custom paintEvent() method
 class PyLeftButton(QPushButton):
+    """It's a QPushButton for left column"""
+
     def __init__(
             self,
             parent,
@@ -303,8 +304,9 @@ class PyLeftButton(QPushButton):
 
 # TOOLTIP
 # ///////////////////////////////////////////////////////////////
-# This class is a QLabel that displays a tooltip when the mouse hovers over it
 class _ToolTip(QLabel):
+    """This class is a QLabel that displays a tooltip when the mouse hovers over it"""
+
     # TOOLTIP / LABEL StyleSheet
     style_tooltip = """
     QLabel {{

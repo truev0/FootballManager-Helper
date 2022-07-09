@@ -81,4 +81,3 @@ from .py_collapse.py_collapse_widget import FrameLayout  # skipcq: PY-W2000
 # PY TAG WIDGET
 # ///////////////////////////////////////////////////////////////
 from .py_removable_tag.py_removable_widget import PyRemovableTag  # skipcq: PY-W2000
-

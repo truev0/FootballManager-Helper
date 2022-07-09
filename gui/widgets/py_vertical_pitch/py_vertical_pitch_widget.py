@@ -15,8 +15,9 @@ from gui.widgets.py_player_button.py_player_button_widget import PyPlayerButton
 # PY VERTICAL PITCH
 
 
-# This class is a widget that displays a vertical pitch
 class PyVerticalPitch(QWidget):
+    """This class is a widget that displays a vertical pitch"""
+
     # SIGNALS
     clicked = Signal(object)
     released = Signal(object)
@@ -29,8 +30,8 @@ class PyVerticalPitch(QWidget):
         minimum_height=820,
     ):
         """
-        The function `__init__` is a special function that is called when an object is created. It is used to initialize the
-        object
+        The function `__init__` is a special function that is called when an object is created. It is used to initialize
+        the object
 
         :param parent: The parent widget of the dialog
         :param image_path: The path to the image that will be displayed in the window, defaults to
@@ -42,6 +43,8 @@ class PyVerticalPitch(QWidget):
 
         # PROPERTIES
         # ///////////////////////////////////////////////////////////////
+        self.btn = None
+        self._pitch_image = None
         self._image_player = image_path
         self._minimum_width = minimum_width
         self._minimum_height = minimum_height
@@ -97,8 +100,8 @@ class PyVerticalPitch(QWidget):
             for parameter in parameters:
                 _btn_id = parameter["btn_id"]
                 _is_active = parameter["is_active"]
-                _posX = parameter["posX"]
-                _posY = parameter["posY"]
+                _pos_x = parameter["posX"]
+                _pos_y = parameter["posY"]
                 _size = parameter["size"]
 
                 self.btn = PyPlayerButton(
@@ -107,7 +110,7 @@ class PyVerticalPitch(QWidget):
                     btn_id=_btn_id,
                     is_active=_is_active,
                 )
-                self.btn.setGeometry(QRect(_posX, _posY, _size, _size))
+                self.btn.setGeometry(QRect(_pos_x, _pos_y, _size, _size))
                 self.btn.clicked.connect(self.btn_clicked)
                 self.btn.released.connect(self.btn_released)
 
@@ -116,8 +119,8 @@ class PyVerticalPitch(QWidget):
     def select_only_one(self, widget: str):
         """
         It takes a string as an argument, and then finds all the QPushButtons in the current window, and if the button's
-        object name matches the string passed to the function, it sets that button to active, and all the other buttons to
-        inactive
+        object name matches the string passed to the function, it sets that button to active, and all the other buttons
+        to inactive
 
         :param widget: str
         :type widget: str

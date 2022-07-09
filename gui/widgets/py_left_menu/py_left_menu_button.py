@@ -17,9 +17,12 @@ from gui.core.functions import set_svg_icon
 
 # CUSTOM LEFT MENU
 # ///////////////////////////////////////////////////////////////
-# This class is a subclass of QPushButton that has a custom paintEvent() method that draws a triangle on the left side of
-# the button
 class PyLeftMenuButton(QPushButton):
+    """
+    This class is a subclass of QPushButton that has a custom paintEvent() method that draws a triangle on the left side
+    of the button
+    """
+
     def __init__(
             self,
             app_parent,
@@ -455,8 +458,9 @@ class PyLeftMenuButton(QPushButton):
         self.tooltip.move(pos_x, pos_y)
 
 
-# This class is a QLabel that displays a tooltip when the mouse hovers over it
 class _ToolTip(QLabel):
+    """This class is a QLabel that displays a tooltip when the mouse hovers over it"""
+
     # TOOLTIP / LABEL StyleSheet
     style_tooltip = """
     QLabel {{

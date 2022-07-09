@@ -18,8 +18,9 @@ from gui.widgets import PyToggle, PyLineEdit, PyComboBox
 
 # PY BUTTON GROUP
 # ////////////////////////////////////////////////////////////////
-# It's a widget that contains a group of buttons
 class PyButtonGroup(QWidget):
+    """It's a widget that contains a group of buttons"""
+
     def __init__(self):
         """I'm trying to create a button group that will allow me to select multiple buttons"""
         super().__init__()

@@ -9,8 +9,9 @@ from .style import style
 
 # PY PUSH BUTTON
 # ///////////////////////////////////////////////////////////////
-# It's a QTableView that can be populated with a list of lists
 class PyTableWidget(QTableView):
+    """It's a QTableView that can be populated with a list of lists"""
+
     def __init__(
         self,
         radius=8,

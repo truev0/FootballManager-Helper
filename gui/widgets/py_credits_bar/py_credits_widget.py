@@ -8,8 +8,9 @@ from PySide6.QtCore import Qt
 
 # PY CREDITS BAR AND VERSION
 # ///////////////////////////////////////////////////////////////
-# This class is a widget that displays the credits for the Python version of the game.
 class PyCredits(QWidget):
+    """This class is a widget that displays the credits for the Python version of the app."""
+
     def __init__(
         self,
         copyright_text,

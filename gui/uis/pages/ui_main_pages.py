@@ -6,8 +6,9 @@ from PySide6.QtWidgets import QVBoxLayout, QStackedWidget, QWidget, QFrame, QScr
     QLabel, QHBoxLayout, QSpacerItem, QSizePolicy
 
 
-# This class is a template for the main pages of the GUI.
-class Ui_MainPages(object):
+class UiMainPages:
+    """This class is a template for the main pages of the GUI."""
+
     def __init__(self):
         """This function is called when the user open the application."""
         self.clustering_bottom_layout = None
@@ -76,7 +77,7 @@ class Ui_MainPages(object):
         self.scroll_area = None
         self.page_2_layout = None
         self.page_2 = None
-        self.label = None
+        self.welcome_label = None
         self.logo_layout = None
         self.logo = None
         self.center_page_layout = None
@@ -140,11 +141,11 @@ class Ui_MainPages(object):
 
         self.center_page_layout.addWidget(self.logo)
 
-        self.label = QLabel(self.welcome_base)
-        self.label.setObjectName(u"label")
-        self.label.setAlignment(Qt.AlignCenter)
+        self.welcome_label = QLabel(self.welcome_base)
+        self.welcome_label.setObjectName(u"label")
+        self.welcome_label.setAlignment(Qt.AlignCenter)
 
-        self.center_page_layout.addWidget(self.label)
+        self.center_page_layout.addWidget(self.welcome_label)
 
         self.page_1_layout.addWidget(self.welcome_base, 0, Qt.AlignHCenter)
 
@@ -549,13 +550,5 @@ class Ui_MainPages(object):
         # ADD PAGES TO MAIN LAYOUT
         # /////////////////////////////////////////////////////////
         self.main_pages_layout.addWidget(self.pages)
-
-        self.retranslateUi(MainPages)
-
         self.pages.setCurrentIndex(2)
-
         QMetaObject.connectSlotsByName(MainPages)
-
-    def retranslateUi(self, MainPages):
-        MainPages.setWindowTitle(QCoreApplication.translate("MainPages", u"Form", None))
-        self.label.setText(QCoreApplication.translate("MainPages", u"Welcome To FM Excel Helper", None))

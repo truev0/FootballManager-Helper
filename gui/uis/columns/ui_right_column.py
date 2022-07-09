@@ -6,8 +6,9 @@ from PySide6.QtWidgets import QVBoxLayout, QFrame, QStackedWidget, QWidget, QHBo
 from PySide6.QtCore import QSize, Qt, QMetaObject, QCoreApplication
 
 
-# This class is used to create the right column of the main window
-class Ui_RightColumn(object):
+class UiRightColumn:
+    """This class is used to create the right column of the main window"""
+
     def __init__(self):
         self.filter_data_btn_layout = None
         self.filter_data_btn_frame = None

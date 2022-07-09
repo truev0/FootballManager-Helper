@@ -7,21 +7,22 @@ from PySide6.QtWidgets import QFrame, QSizeGrip, QWidget
 
 # PY GRIPS
 # ///////////////////////////////////////////////////////////////
-# This class is a QWidget that contains Grips for application
 class PyGrips(QWidget):
+    """This class is a QWidget that contains Grips for application"""
 
     def __init__(self, parent, position, disable_color=False):
         """
         It creates a QSizeGrip object and attaches it to the parent widget
 
         :param parent: The parent widget
-        :param position: This is the position of the grip. It can be top_left, top_right, bottom_left, bottom_right, top,
-        bottom, left, or right
+        :param position: This is the position of the grip. It can be top_left, top_right, bottom_left, bottom_right, 
+        top, bottom, left, or right
         :param disable_color: If set to True, the grip will be transparent, defaults to False (optional)
         """
         # SETUP UI
         # ///////////////////////////////////////////////////////////////
         super().__init__()
+        self.mousePos = None
         self.parent = parent
         self.setParent(parent)
         self.wi = Widgets()
@@ -170,8 +171,8 @@ class PyGrips(QWidget):
     # ///////////////////////////////////////////////////////////////
     def mouseReleaseEvent(self, event):  # skipcq: PYL-W0613
         """
-        > The function `mouseReleaseEvent` is a member of the class `QtGui.QWidget` and is called when the mouse button is
-        released
+        > The function `mouseReleaseEvent` is a member of the class `QtGui.QWidget` and is called when the mouse button 
+        is released
 
         :param event: the event that triggered the method
         """
@@ -211,8 +212,8 @@ class PyGrips(QWidget):
 
 # GRIP WIDGTES
 # ///////////////////////////////////////////////////////////////
-# Widgets are objects for grips
-class Widgets(object):
+class Widgets:
+    """Widgets are objects for grips"""
 
     def top_left(self, form):
         """
@@ -252,8 +253,8 @@ class Widgets(object):
 
     def bottom_right(self, form):
         """
-        It creates a frame that is 15x15 pixels in size and sets the background color to #333 and the border to 2px solid
-        #55FF00.
+        It creates a frame that is 15x15 pixels in size and sets the background color to #333 and the border to 2px 
+        solid #55FF00.
 
         :param form: The form that the grip is being added to
         """

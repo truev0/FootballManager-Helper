@@ -17,8 +17,9 @@ from gui.core.functions import set_svg_icon
 
 # PY LEFT MENU
 # ///////////////////////////////////////////////////////////////
-# This class is a widget that contains a QVBoxLayout that contains a QPushButton and a QListWidget
 class PyLeftMenu(QWidget):
+    """This class is a widget that contains a QVBoxLayout that contains a QPushButton and a QListWidget"""
+
     # SIGNALS
     clicked = Signal(object)
     released = Signal(object)
@@ -57,7 +58,7 @@ class PyLeftMenu(QWidget):
         :param dark_four: The background color of the menu, defaults to #272c36 (optional)
         :param bg_one: The background color of the menu, defaults to #2c313c (optional)
         :param icon_color: The color of the icon when the menu is hidden, defaults to #c3ccdf (optional)
-        :param icon_color_hover: The color of the icon when the mouse is hovering over it, defaults to #dce1ec (optional)
+        :param icon_color_hover: The color of the icon when the mouse is hovering over it, defaults to #dce1ec(optional)
         :param icon_color_pressed: The color of the icon when the button is pressed, defaults to #edf0f5 (optional)
         :param icon_color_active: The color of the icon when the button is active, defaults to #f5f6f9 (optional)
         :param context_color: The color of the context menu, defaults to #568af2 (optional)
@@ -67,17 +68,20 @@ class PyLeftMenu(QWidget):
         :param radius: The radius of the rounded corners, defaults to 8 (optional)
         :param minimum_width: The minimum width of the menu, defaults to 50 (optional)
         :param maximum_width: The maximum width of the menu, defaults to 240 (optional)
-        :param icon_path: The path to the icon that will be used for the toggle button, defaults to icon_menu.svg (optional)
+        :param icon_path: The path to the icon that will be used for the toggle button, defaults to icon_menu.svg
+        (optional)
         :param icon_path_close: The icon that will be displayed when the menu is open, defaults to icon_menu_close.svg
         (optional)
         :param toggle_text: The text that will be displayed on the toggle button, defaults to Hide Menu (optional)
-        :param toggle_tooltip: The tooltip text that appears when you hover over the toggle button, defaults to Show menu
-        (optional)
+        :param toggle_tooltip: The tooltip text that appears when you hover over the toggle button, defaults to Show
+        menu (optional)
         """
         super().__init__()
 
         # PROPERTIES
         # ///////////////////////////////////////////////////////////////
+        self.menu = None
+        self.animation = None
         self._dark_one = dark_one
         self._dark_three = dark_three
         self._dark_four = dark_four
@@ -203,8 +207,8 @@ class PyLeftMenu(QWidget):
     # ///////////////////////////////////////////////////////////////
     def toggle_animation(self):
         """
-        It creates an animation object, stops it, sets the start and end values, sets the easing curve, sets the duration,
-        and starts the animation
+        It creates an animation object, stops it, sets the start and end values, sets the easing curve, sets the
+        duration, and starts the animation
         """
         # CREATE ANIMATION
         self.animation = QPropertyAnimation(self._parent, b"minimumWidth")
@@ -228,8 +232,8 @@ class PyLeftMenu(QWidget):
     def select_only_one(self, widget: str):
         """
         It takes a string as an argument, and then finds all the QPushButtons in the current window, and if the button's
-        object name matches the string passed to the function, it sets that button to active, and all the other buttons to
-        inactive
+        object name matches the string passed to the function, it sets that button to active, and all the other buttons
+        to inactive
 
         :param widget: str
         :type widget: str

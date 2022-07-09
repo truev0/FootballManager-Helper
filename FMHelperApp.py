@@ -56,7 +56,6 @@ from PySide6.QtWidgets import (
 from sklearn import preprocessing
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
-import sklearn.neighbors
 
 # IMPORT FM INSIDE
 # ///////////////////////////////////////////
@@ -96,7 +95,7 @@ from gui.core.util import get_screen_size
 
 # IMPORT INTERFACE
 # ///////////////////////////////////////////
-from gui.uis.windows.main_window.ui_interface import Ui_MainWindow
+from gui.uis.windows.main_window.ui_interface import UiMainWindow
 
 # IMPORT CUSTOM WIDGETS
 # ///////////////////////////////////////////
@@ -129,8 +128,8 @@ class MainWindow(QMainWindow):
         # SETUP MAIN WINDOW
         # Load widgets from "gui\uis\main_window\ui_interface.py"
         # ///////////////////////////////////////////
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+        self.ui = UiMainWindow()
+        self.ui.setup_ui(self)
 
         # CLASS VARIABLES
         # ///////////////////////////////////////////
@@ -745,6 +744,9 @@ class MainWindow(QMainWindow):
     # LOAD FILE
     # ///////////////////////////////////////////
     def load_qa_questions(self):
+        """
+        It loads a bunch of collapsable tabs with text in them with most of frequent questions about app.
+        """
 
         new_font = "color: #dce1ec; text-align: justify; font-size: 16px; font-weight: bold;"
         # Start First collapsable tab
@@ -1059,6 +1061,11 @@ class MainWindow(QMainWindow):
     # PROCESS OLD SQUAD INFO
     # ///////////////////////////////////////////
     def process_old_squad_info(self):
+        """
+        It takes a dataframe of player information, converts the values to the language of the user, converts the values
+        to the scout values, creates metrics for goalkeepers, creates data for rankings, rounds the data, and fills in
+        any missing values with 0 (Same of process actual squad but with old squad)
+        """
         self.df_old_squad = FMi.convert_values(self.df_old_squad, self.language)
         self.df_old_squad = FMi.convert_values_scout(self.df_old_squad)
         self.df_old_squad = FMi.create_metrics_for_gk(self.df_old_squad, self.language)
@@ -1396,6 +1403,12 @@ class MainWindow(QMainWindow):
         self.ui.spyder_graph_widget.spyder_chart.set_data(df, 1)
 
     def add_old_squad_names(self, df, tmp_l):
+        """
+        It adds the old squad names to the dropdown menu of the GUI
+
+        :param df: pandas dataframe
+        :param tmp_l: list of strings
+        """
         if self.haveOldSquadInfo:
             self.ui.first_squad_player_combo.setItemData(
                 2,
@@ -1834,6 +1847,9 @@ class MainWindow(QMainWindow):
             self.ui.save_session_btn.setEnabled(True)
 
     def _delete_state(self):
+        """
+        It deletes all the dataframes and the models of the tables
+        """
         self.df_original = None
         self.df_squad = None
         self.df_for_table = None
@@ -1934,7 +1950,7 @@ class MainWindow(QMainWindow):
 # ///////////////////////////////////////////
 def main():
     """
-    `main()` is the entry point of the application. It creates an instance of the `QApplication` class, which is the
+    Is the entry point of the application. It creates an instance of the `QApplication` class, which is the
     main class of the Qt framework. It also creates an instance of the `MainWindow` class, which is the main window
     of the application
     """

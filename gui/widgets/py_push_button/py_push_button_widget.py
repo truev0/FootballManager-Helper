@@ -26,8 +26,9 @@ background-color: {_bg_color_pressed};
 
 # PY PUSH BUTTON
 # ///////////////////////////////////////////////////////////////
-# It's a QPushButton that can be connected to a Python function
 class PyPushButton(QPushButton):
+    """It's a QPushButton that can be connected to a Python function"""
+
     def __init__(
             self,
             text,
@@ -72,7 +73,7 @@ class PyPushButton(QPushButton):
 
     def get_name(self):
         """
-        The function get_name() returns the value of the private variable _name
+        The function returns the value of the private variable _name
         :return: The name of the person.
         """
         return self._name

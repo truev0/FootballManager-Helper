@@ -31,8 +31,9 @@ _old_size = QSize()
 # Top bar with move application, maximize, restore, minimize,
 # close buttons and extra buttons
 # ///////////////////////////////////////////////////////////////
-# It's a widget that contains a title bar with a title, a close button, and a minimize button
 class PyTitleBar(QWidget):
+    """It's a widget that contains a title bar with a title, a close button, and a minimize button"""
+
     # SIGNALS
     clicked = Signal(object)
     released = Signal(object)
@@ -61,8 +62,8 @@ class PyTitleBar(QWidget):
         is_custom_title_bar=True,
     ):
         """
-        The function takes in a bunch of parameters, sets up the UI, adds a background color, sets the logo and width, and
-        then adds widgets to the title bar
+        The function takes in a bunch of parameters, sets up the UI, adds a background color, sets the logo and width,
+        and then adds widgets to the title bar
 
         :param parent: The parent widget of the title bar
         :param app_parent: The parent of the window
@@ -84,11 +85,12 @@ class PyTitleBar(QWidget):
         :param radius: The radius of the title bar's corners, defaults to 8 (optional)
         :param font_family: The font family of the title bar, defaults to Segoe UI (optional)
         :param title_size: The size of the title text, defaults to 10 (optional)
-        :param is_custom_title_bar: If True, the title bar will be customized. If False, the title bar will be the default
-        one, defaults to True (optional)
+        :param is_custom_title_bar: If True, the title bar will be customized. If False, the title bar will be the
+        default one, defaults to True (optional)
         """
         super().__init__()
 
+        self.menu = None
         settings = Settings()
         self.settings = settings.items
 
@@ -259,8 +261,8 @@ class PyTitleBar(QWidget):
 
         :param e: The event that triggered the function
         """
-        global _is_maximized
-        global _old_size
+        global _is_maximized  # skipcq: PYL-W0603
+        global _old_size  # skipcq: PYL-W0603
 
         # CHANGE UI AND RESIZE GRIP
         def change_ui():

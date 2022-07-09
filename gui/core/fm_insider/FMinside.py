@@ -4,11 +4,10 @@ import json
 import warnings
 import os
 
-from gui import BASE_DIR
-
 import numpy as np
 import pandas as pd
 
+from gui import BASE_DIR
 from gui.core.dicts import en, es
 from gui.core.models.CustomNestedNamespace.py_CustomNestedNamespace import (
     NestedNamespace,

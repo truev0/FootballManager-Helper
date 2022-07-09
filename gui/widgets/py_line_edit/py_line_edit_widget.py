@@ -28,8 +28,9 @@ background-color: {_bg_color_active};
 
 # PY PUSH BUTTON
 # ///////////////////////////////////////////////////////////////
-# It's a custom QLineEdit that can be used in Python
 class PyLineEdit(QLineEdit):
+    """It's a custom QLineEdit that can be used in Python"""
+
     def __init__(
             self,
             text="",

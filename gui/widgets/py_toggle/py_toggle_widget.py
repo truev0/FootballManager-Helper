@@ -5,8 +5,8 @@ from PySide6.QtGui import QColor, QFont, QPainter
 from PySide6.QtWidgets import QCheckBox
 
 
-# It's a checkbox that can be toggled on and off
 class PyToggle(QCheckBox):
+    """It's a checkbox that can be toggled on and off"""
 
     def __init__(
         self,
@@ -54,7 +54,7 @@ class PyToggle(QCheckBox):
     @position.setter
     def position(self, pos):
         """
-        The function position() takes in a position (pos) and sets the position of the object to that position
+        The function takes in a position (pos) and sets the position of the object to that position
 
         :param pos: The position of the widget
         """
@@ -117,7 +117,7 @@ class PyToggle(QCheckBox):
 
     def get_name(self):
         """
-        The function get_name() returns the value of the attribute name of the object self
+        The function returns the value of the attribute name of the object self
         :return: The name of the person.
         """
         return self.name

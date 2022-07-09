@@ -9,8 +9,8 @@ from gui import BASE_DIR
 
 # APP SETTINGS
 # ///////////////////////////////////////////////////////////////
-# > The Settings class is a container for all the settings that are used in the game
-class Settings(object):
+class Settings:
+    """The Settings class is a container for all the settings that are used in the app"""
     # APP PATH
     # ///////////////////////////////////////////////////////////////
     json_file = "core\\settings.json"
@@ -21,7 +21,7 @@ class Settings(object):
     # INIT SETTINGS
     # ///////////////////////////////////////////////////////////////
     def __init__(self):
-        """The function __init__() is a constructor that initializes the class Settings"""
+        """The function is a constructor that initializes the class Settings"""
         super(Settings, self).__init__()
 
         # DICTIONARY WITH SETTINGS

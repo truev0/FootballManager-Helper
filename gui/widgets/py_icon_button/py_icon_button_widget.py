@@ -7,8 +7,8 @@ from PySide6.QtWidgets import QGraphicsDropShadowEffect, QLabel, QPushButton
 
 # PY TITLE BUTTON
 # ///////////////////////////////////////////////////////////////
-# It's a button that displays an icon and has a tooltip
 class PyIconButton(QPushButton):
+    """It's a button that displays an icon and has a tooltip"""
 
     def __init__(
         self,
@@ -293,8 +293,9 @@ class PyIconButton(QPushButton):
 
 # TOOLTIP
 # ///////////////////////////////////////////////////////////////
-# This class is a QLabel that displays a tooltip when the mouse hovers over it
 class _ToolTip(QLabel):
+    """This class is a QLabel that displays a tooltip when the mouse hovers over it"""
+
     # TOOLTIP / LABEL StyleSheet
     style_tooltip = """
     QLabel {{

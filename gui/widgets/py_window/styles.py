@@ -1,6 +1,6 @@
 
-# It's a container for all the styles that are used in the document
-class Styles(object):
+class Styles:
+    """It's a container for all the styles that are used in the document"""
     bg_style = """
     #pod_bg_app {{
         background-color: {_bg_color};

@@ -10,8 +10,9 @@ import numpy as np
 
 # CUSTOM LIST MODEL FOR PANDAS
 # ///////////////////////////////////////////
-# It's a model that can be used to display a list of numpy arrays in a QTableView
 class CustomizedNumpyListModel(QAbstractTableModel):
+    """It's a model that can be used to display a list of numpy arrays in a QTableView"""
+
     def __init__(self, data, parent=None):
         """
         The function takes a pandas dataframe as input, converts it to a numpy array, and stores the array and the column
@@ -78,7 +79,7 @@ class CustomizedNumpyListModel(QAbstractTableModel):
                 return section
         return None
 
-    def flags(self, index):  # skipcq: PYL-W0613 PYL-R0201
+    def flags(self, index):  # skipcq: PYL-W0613, PYL-R0201
         """
         "Return a set of flags that indicate how the user can interact with the item."
 

@@ -10,8 +10,9 @@ import numpy as np
 
 # CUSTOM TABLE MODEL FOR PANDAS
 # ///////////////////////////////////////////
-# It's a customized QAbstractTableModel that uses a numpy array as its data source
 class CustomizedNumpyModel(QAbstractTableModel):
+    """It's a customized QAbstractTableModel that uses a numpy array as its data source"""
+
     def __init__(self, data, parent=None):
         """
         The function takes a pandas dataframe as input, converts it to a numpy array, and stores the array and the
@@ -81,7 +82,7 @@ class CustomizedNumpyModel(QAbstractTableModel):
                 return p_int
         return None
 
-    def flags(self, index):  # skipcq: PYL-W0613 PYL-R0201
+    def flags(self, index):  # skipcq: PYL-W0613, PYL-R0201
         """
         "Return a set of flags that indicate how the user can interact with the item."
 
@@ -130,4 +131,8 @@ class CustomizedNumpyModel(QAbstractTableModel):
         return False
 
     def get_dataframe(self):
+        """
+        It returns the dataframe that is stored in the object
+        :return: The dataframe is being returned.
+        """
         return self._data

@@ -2,8 +2,9 @@
 from types import SimpleNamespace
 
 
-# > It's a `SimpleNamespace` that can contain other `SimpleNamespace`s
 class NestedNamespace(SimpleNamespace):
+    """It's a `SimpleNamespace` that can contain other `SimpleNamespace`s"""
+
     def __init__(self, dictionary, **kwargs):
         """
         It takes a dictionary and creates a new object with the keys of the dictionary as attributes and the values

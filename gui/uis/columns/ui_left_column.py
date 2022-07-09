@@ -22,8 +22,9 @@ from PySide6.QtWidgets import QVBoxLayout, QWidget, QStackedWidget, QSizePolicy,
     QSpacerItem
 
 
-# This class is used to create the left column of the main window
-class Ui_LeftColumn(object):
+class UiLeftColumn:
+    """This class is used to create the left column of the main window"""
+
     def __init__(self):
         self.btn_8_layout = None
         self.btn_8_widget = None
@@ -129,7 +130,6 @@ class Ui_LeftColumn(object):
         self.btn_7_layout.setContentsMargins(0, 0, 0, 0)
 
         self.vertical_layout_menu_1.addWidget(self.btn_7_widget)
-        
         self.btn_8_widget = QWidget(self.menu_1)
         self.btn_8_widget.setObjectName(u"btn_8_widget")
         self.btn_8_widget.setMinimumSize(QSize(0, 40))

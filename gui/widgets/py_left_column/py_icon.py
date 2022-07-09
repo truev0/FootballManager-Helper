@@ -7,12 +7,12 @@ from PySide6.QtWidgets import QLabel, QVBoxLayout, QWidget
 
 # PY ICON WITH CUSTOM COLORS
 # ///////////////////////////////////////////////////////////////
-# It's a widget that displays an icon
 class PyIcon(QWidget):
+    """It's a widget that displays an icon"""
 
     def __init__(self, icon_path, icon_color):
         """
-        The function __init__() is a special function in Python classes. It is run as soon as an object of a class is
+        The function is a special function in Python classes. It is run as soon as an object of a class is
         instantiated. The method is useful to do any initialization you want to do with your object
 
         :param icon_path: The path to the icon image

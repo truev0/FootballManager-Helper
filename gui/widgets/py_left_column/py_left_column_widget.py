@@ -15,56 +15,41 @@ from .py_icon import PyIcon
 
 # IMPORT LEFT COLUMN
 # ///////////////////////////////////////////////////////////////
-from gui.uis.columns.ui_left_column import Ui_LeftColumn
+from gui.uis.columns.ui_left_column import UiLeftColumn
 
 
-# This class is a subclass of QWidget that creates a left column of buttons for the Python tab.
 class PyLeftColumn(QWidget):
+    """This class is a subclass of QWidget that creates a left column of buttons for the Python tab."""
+
     # SIGNALS
     clicked = Signal(object)
     released = Signal(object)
 
-    def __init__(
-            self,
-            parent,
-            app_parent,
-            text_title,
-            text_title_size,
-            text_title_color,
-            dark_one,
-            bg_color,
-            btn_color,
-            btn_color_hover,
-            btn_color_pressed,
-            icon_path,
-            icon_color,
-            icon_color_hover,
-            icon_color_pressed,
-            context_color,
-            icon_close_path,
-            radius=8
+    def __init__(self, parent, app_parent, text_title, text_title_size, text_title_color, dark_one, bg_color,
+                 btn_color, btn_color_hover, btn_color_pressed, icon_path, icon_color, icon_color_hover,
+                 icon_color_pressed, context_color, icon_close_path, radius=8
     ):
         """
-              This function is the constructor for the class LeftColumn
+        This function is the constructor for the class LeftColumn
 
-              :param parent: The parent widget of the window
-              :param app_parent: The parent of the application
-              :param text_title: The text that will be displayed on the title bar
-              :param text_title_size: The size of the text in the title bar
-              :param text_title_color: The color of the text in the title bar
-              :param dark_one: This is a boolean value that determines whether the window is dark or light
-              :param bg_color: The background color of the menu
-              :param btn_color: The color of the button when it's not being hovered over or pressed
-              :param btn_color_hover: The color of the button when the mouse is hovering over it
-              :param btn_color_pressed: The color of the button when it's pressed
-              :param icon_path: The path to the icon you want to use for the button
-              :param icon_color: The color of the icon when the button is not being hovered over or pressed
-              :param icon_color_hover: The color of the icon when the mouse is hovering over it
-              :param icon_color_pressed: The color of the icon when the button is pressed
-              :param context_color: The color of the context menu
-              :param icon_close_path: The path to the icon you want to use for the close button
-              :param radius: The radius of the rounded corners of the window, defaults to 8 (optional)
-              """
+        :param parent: The parent widget of the window
+        :param app_parent: The parent of the application
+        :param text_title: The text that will be displayed on the title bar
+        :param text_title_size: The size of the text in the title bar
+        :param text_title_color: The color of the text in the title bar
+        :param dark_one: This is a boolean value that determines whether the window is dark or light
+        :param bg_color: The background color of the menu
+        :param btn_color: The color of the button when it's not being hovered over or pressed
+        :param btn_color_hover: The color of the button when the mouse is hovering over it
+        :param btn_color_pressed: The color of the button when it's pressed
+        :param icon_path: The path to the icon you want to use for the button
+        :param icon_color: The color of the icon when the button is not being hovered over or pressed
+        :param icon_color_hover: The color of the icon when the mouse is hovering over it
+        :param icon_color_pressed: The color of the icon when the button is pressed
+        :param context_color: The color of the context menu
+        :param icon_close_path: The path to the icon you want to use for the close button
+        :param radius: The radius of the rounded corners of the window, defaults to 8 (optional)
+        """
         super().__init__()
 
         # PARAMETERS
@@ -90,7 +75,7 @@ class PyLeftColumn(QWidget):
         self.setup_ui()
 
         # ADD LEFT COLUMN TO BG FRAME
-        self.menus = Ui_LeftColumn()
+        self.menus = UiLeftColumn()
         self.menus.setupUi(self.content_frame)
 
         # CONNECT SIGNALS

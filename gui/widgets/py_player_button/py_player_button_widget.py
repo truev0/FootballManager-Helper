@@ -11,8 +11,11 @@ from PySide6.QtWidgets import QGraphicsDropShadowEffect, QLabel, QPushButton
 # ///////////////////////////////////////////////////////////////
 
 
-# This class is a subclass of QPushButton that has a custom signal called clicked_with_player
 class PyPlayerButton(QPushButton):
+    """
+    This class is a subclass of QPushButton that has a custom signal called clicked_with_player
+    to create a button for represent a player in pitch
+    """
 
     def __init__(
         self,
@@ -103,18 +106,12 @@ class PyPlayerButton(QPushButton):
         return self._lista
 
     def set_updated_lista(self, lista):
-        self._lista = lista
+        """
+        The function takes in a lista and sets the lista to the lista that was passed in
 
-    # FORMAT TEXT
-    # ///////////////////////////////////////////////////////////////
-    def text_formatter(self):
+        :param lista: list of objects
         """
-        It takes a list of strings, joins them together with a newline character, and returns the result
-        :return: The text formatter is returning the text that is being created in the list.
-        """
-        self._text = "\n".join([str(x) for x in self._lista])
-        tmp = self._text
-        return tmp
+        self._lista = lista
 
     # DRAG ENTER EVENT VERIFIER
     # ///////////////////////////////////////////////////////////////
@@ -362,8 +359,9 @@ class PyPlayerButton(QPushButton):
         self.repaint()
 
 
-# This class is a QLabel that displays a tooltip when the mouse hovers over it
 class _ToolTip(QLabel):
+    """This class is a QLabel that displays a tooltip when the mouse hovers over it"""
+
     # TOOLTIP / LABEL StyleSheet
     # ///////////////////////////////////////////////////////////////
     style_tooltip = """

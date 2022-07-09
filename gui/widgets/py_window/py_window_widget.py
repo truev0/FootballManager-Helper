@@ -20,8 +20,9 @@ from . styles import Styles
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
-# It's a QFrame for the Windows
 class PyWindow(QFrame):
+    """It's a QFrame for the Windows"""
+
     def __init__(
         self,
         parent,

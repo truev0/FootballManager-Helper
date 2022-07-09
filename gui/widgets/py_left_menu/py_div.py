@@ -5,8 +5,9 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QFrame
 
 # CUSTOM LEFT MENU
 # ///////////////////////////////////////////////////////////////
-# It's a widget that displays a division problem and allows the user to enter an answer
 class PyDiv(QWidget):
+    """It's a widget that displays a division in left menu"""
+
     def __init__(self, color):
         """
         It creates a horizontal layout, adds a frame to it, sets the frame's background color, sets the frame's maximum and

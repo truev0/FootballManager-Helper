@@ -16,9 +16,12 @@ from . py_radar_utils import set_visible
 __all__ = ['Radar']
 
 
-# A radar object can be created with a name, a maximum range, and a maximum bearing, and it can be asked to scan for a
-# target.
 class Radar:
+    """
+    A radar object can be created with a name, a maximum range, and a maximum bearing, and it can be asked to scan for a
+    target.
+    """
+
     def __init__(
             self,
             params,

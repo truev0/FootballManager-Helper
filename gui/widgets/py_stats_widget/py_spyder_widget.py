@@ -16,8 +16,9 @@ from .py_radar_chart import Radar
 
 # PY SPYDER WIDGET
 # ///////////////////////////////////////////////////////////////
-# This class is a widget that contains Radar Chart
 class PySpyderWidget(QWidget):
+    """This class is a widget that contains Radar Chart"""
+
     def __init__(
             self,
             language='en',
@@ -30,7 +31,7 @@ class PySpyderWidget(QWidget):
             line_color="#3f6fd1"
     ):
         """
-        The function __init__() is a constructor that initializes the attributes of the class
+        The function is a constructor that initializes the attributes of the class
 
         :param language: The language of the chart, defaults to en (optional)
         :param parent: The parent widget
@@ -60,8 +61,9 @@ class PySpyderWidget(QWidget):
         self.principal_layout.addWidget(self.spyder_chart)
 
 
-# It's a class to place radar chart
 class _CustomSpyder(FigureCanvas):
+    """It's a class to place radar chart"""
+
     def __init__(
             self,
             parent,

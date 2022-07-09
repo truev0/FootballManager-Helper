@@ -1,9 +1,8 @@
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
-from PySide6.QtCore import Signal, Qt, Property
+from PySide6.QtCore import Signal, Qt
 
-from PySide6.QtWidgets import QLabel, QPushButton, QHBoxLayout, \
-    QSizePolicy
+from PySide6.QtWidgets import QPushButton
 
 
 # PY PUSH BUTTON
@@ -12,6 +11,7 @@ from PySide6.QtWidgets import QLabel, QPushButton, QHBoxLayout, \
 
 class PyRemovableTag(QPushButton):
     """Tag for players in tactic view"""
+
     sig_closed = Signal()
     sig_clicked = Signal()
 
@@ -34,6 +34,9 @@ class PyRemovableTag(QPushButton):
         self._color = None
 
     def delete_from_all(self):
+        """
+        It removes the text of the button that was clicked from the list of buttons that was passed to the class
+        """
         tmp_lista = self._instanceof.get_lista()
         tmp_lista.remove(self.text())
         self._instanceof.set_updated_lista(tmp_lista)

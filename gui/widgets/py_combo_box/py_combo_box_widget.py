@@ -5,8 +5,9 @@ from PySide6.QtWidgets import QComboBox
 
 # PY COMBO BOX
 # ///////////////////////////////////////////////////////////
-# It's a QComboBox that can be used in a QTableWidget
 class PyComboBox(QComboBox):
+    """It's a QComboBox that can be used in a QTableWidget"""
+
     style_combobox = """
         QComboBox {{
             background-color: {_dark_one};
