@@ -58,15 +58,11 @@ class FrameLayout(QWidget):
         self._content_layout.addWidget(widget)
 
     def initCollapsable(self):
-        """
-        When the title frame is clicked, the toggleCollapsed function is called
-        """
+        """When the title frame is clicked, the toggleCollapsed function is called"""
         self.title_frame.clicked.connect(self.toggleCollapsed)
 
     def toggleCollapsed(self):
-        """
-        It sets the visibility of the content frame to the opposite of the current visibility
-        """
+        """It sets the visibility of the content frame to the opposite of the current visibility"""
         self._content.setVisible(self._is_collasped)
         self._is_collasped = not self._is_collasped
         self.title_frame.arrow.setArrow(int(self._is_collasped))

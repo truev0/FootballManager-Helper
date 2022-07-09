@@ -27,8 +27,7 @@ class PyLeftColumn(QWidget):
 
     def __init__(self, parent, app_parent, text_title, text_title_size, text_title_color, dark_one, bg_color,
                  btn_color, btn_color_hover, btn_color_pressed, icon_path, icon_color, icon_color_hover,
-                 icon_color_pressed, context_color, icon_close_path, radius=8
-    ):
+                 icon_color_pressed, context_color, icon_close_path, radius=8):
         """
         This function is the constructor for the class LeftColumn
 

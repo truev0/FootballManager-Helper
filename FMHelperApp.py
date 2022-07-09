@@ -744,10 +744,7 @@ class MainWindow(QMainWindow):
     # LOAD FILE
     # ///////////////////////////////////////////
     def load_qa_questions(self):
-        """
-        It loads a bunch of collapsable tabs with text in them with most of frequent questions about app.
-        """
-
+        """It loads a bunch of collapsable tabs with text in them with most of frequent questions about app."""
         new_font = "color: #dce1ec; text-align: justify; font-size: 16px; font-weight: bold;"
         # Start First collapsable tab
         self.first_collapsable = FrameLayout(
@@ -1847,9 +1844,7 @@ class MainWindow(QMainWindow):
             self.ui.save_session_btn.setEnabled(True)
 
     def _delete_state(self):
-        """
-        It deletes all the dataframes and the models of the tables
-        """
+        """It deletes all the dataframes and the models of the tables"""
         self.df_original = None
         self.df_squad = None
         self.df_for_table = None

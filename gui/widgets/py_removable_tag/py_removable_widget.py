@@ -34,9 +34,7 @@ class PyRemovableTag(QPushButton):
         self._color = None
 
     def delete_from_all(self):
-        """
-        It removes the text of the button that was clicked from the list of buttons that was passed to the class
-        """
+        """It removes the text of the button that was clicked from the list of buttons that was passed to the class"""
         tmp_lista = self._instanceof.get_lista()
         tmp_lista.remove(self.text())
         self._instanceof.set_updated_lista(tmp_lista)

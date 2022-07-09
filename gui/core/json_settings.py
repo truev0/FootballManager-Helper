@@ -11,6 +11,7 @@ from gui import BASE_DIR
 # ///////////////////////////////////////////////////////////////
 class Settings:
     """The Settings class is a container for all the settings that are used in the app"""
+
     # APP PATH
     # ///////////////////////////////////////////////////////////////
     json_file = "core\\settings.json"

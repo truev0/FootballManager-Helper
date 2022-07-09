@@ -1,6 +1,6 @@
 # IMPORT PYSIDE MODULES
 # /////////////////////////////////////////////////////
-from PySide6.QtCore import QSize, Qt, QRect, QMetaObject, QCoreApplication
+from PySide6.QtCore import QSize, Qt, QRect, QMetaObject
 
 from PySide6.QtWidgets import QVBoxLayout, QStackedWidget, QWidget, QFrame, QScrollArea, \
     QLabel, QHBoxLayout, QSpacerItem, QSizePolicy
