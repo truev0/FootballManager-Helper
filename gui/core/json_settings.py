@@ -3,6 +3,9 @@
 import json
 import os
 
+# BASE DIRECTORY
+from gui import BASE_DIR
+
 
 # APP SETTINGS
 # ///////////////////////////////////////////////////////////////
@@ -10,9 +13,8 @@ import os
 class Settings(object):
     # APP PATH
     # ///////////////////////////////////////////////////////////////
-    json_file = "settings.json"
-    app_path = os.path.abspath(os.getcwd())
-    settings_path = os.path.normpath(os.path.join(app_path, json_file))
+    json_file = "core/settings.json"
+    settings_path = os.path.join(BASE_DIR, json_file)
     if not os.path.isfile(settings_path):
         print(f"WARNING: \"settings.json\" not found! check in the folder {settings_path}")
 

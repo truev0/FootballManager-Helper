@@ -1,7 +1,7 @@
 {
-    "app_name": "FM Excel Helper",
-    "version" : "v1.0.0",
-    "copyright" : "By: Victor Caicedo",
+    "app_name": "FM Helper",
+    "version" : "v0.1.0",
+    "copyright" : "By: Victor Caicedo - truev0",
     "year" : 2022,
     "theme_name" : "default",
     "custom_title_bar": true,

@@ -16,12 +16,13 @@
 
 import os
 
+from gui import BASE_DIR
+
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////
 import sys
 import configparser
 import pathlib
-import json
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -205,7 +206,8 @@ class MainWindow(QMainWindow):
         self.set_signals()
         self.connect_events()
         self.load_qa_questions()
-        loadJsonStyle(self, self.ui)
+        popup_path = os.path.join(BASE_DIR, 'core/popup_style.json')
+        loadJsonStyle(self, self.ui, popup_path)
 
         # CUSTOM MAIN ANIMATIONS
         # ///////////////////////////////////////////
@@ -1348,8 +1350,9 @@ class MainWindow(QMainWindow):
     # //////////////////////////////////////////////////
     def add_squad_names(self, df, tmp_l):
         """
-        It takes a list of strings, and adds them to two combo boxes
+        It adds the names of the players to the dropdown menu in the GUI
 
+        :param df: pandas dataframe
         :param tmp_l: list of strings
         """
         if self.haveSquadInfo:
@@ -1370,9 +1373,10 @@ class MainWindow(QMainWindow):
 
     def add_scouting_names(self, df, tmp_l):
         """
-        It takes a list of strings, and adds them to two combo boxes
+        It adds a new item to a QComboBox, and then sets the data of that item to a list
 
-        :param tmp_l: list of strings
+        :param df: pandas dataframe
+        :param tmp_l: a list of strings
         """
         if self.scoutingCounter > 1:
             self.ui.first_squad_player_combo.setItemData(

@@ -552,36 +552,37 @@ class Ui_MainWindow(object):
         self.right_app_layout.addWidget(self.credits_frame)
 
         self.popup_notification_container.setStyleSheet(
-            "    #popup_notification_subcontainer{\n"
-            "	border-color: #343b48;\n"
-            "	border-radius:10px;\n"
-            "	border-width: 1px;\n"
-            "	margin: 0px;\n"
-            "	background-color: #343b48;\n"
-            "\n"
-            "}\n"
-            "\n"
-            "#label_list {\n"
-            "   border: 1px;\n"
-            "   border-color: #1b1e23;\n"
-            "   border-style: solid;\n"
-            "	border-bottom-left-radius:10px;\n"
-            "	border-bottom-right-radius:10px;\n"
-            "	background-color: #3c4454;\n"
-            "color: #dce1ec;\n"
-            "\n"
-            "}\n"
-            "\n"
-            "#title_notification_frame {\n"
-            "	background-color:#1b1e23;\n"
-            "border-top-right-radius: 10px;\n"
-            "border-top-left-radius: 10px;\n"
-            "}\n"
-            "\n"
-            "#title_notification {\n"
-            "padding-left: 7px;\n"
-            "color: #dce1ec;\n"
-            "}")
+            """
+            #popup_notification_subcontainer {
+            border-color: #343b48;
+            border-radius: 10px;
+            border-width: 1px;
+            margin: 0px;
+            background-color: #343b48;
+            }
+
+            #label_list {
+            border: 1px;
+            border-color: #1b1e23;
+            border-style: solid;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            background-color: #3c4454;
+            color: #dce1ec;
+            }
+
+            #title_notification_frame {
+            background-color: #1b1e23;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            }
+
+            #title_notification {
+            padding-left: 7px;
+            color: #dce1ec;
+            }
+            """
+        )
 
         # ADD WIDGETS TO "PyWindow"
         # ///////////////////////////////////////////////////////////////

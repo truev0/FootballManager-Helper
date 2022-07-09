@@ -2,6 +2,9 @@
 # ///////////////////////////////////////////////////////////////
 import json
 import warnings
+import os
+
+from gui import BASE_DIR
 
 import numpy as np
 import pandas as pd
@@ -225,15 +228,17 @@ def data_for_rankings(df, language):
     """
     c = None
     if language == "en":
+        path_file = os.path.join(BASE_DIR, "core/fm_insider/data_ranking_values_en.json")
         with open(
-                "gui/core/fm_insider/data_ranking_values_en.json",
+                path_file,
                 mode="r",
                 encoding="utf-8",
         ) as f:
             c = f.read()
     elif language == "es":
+        path_file = os.path.join(BASE_DIR, "core/fm_insider/data_ranking_values_es.json")
         with open(
-                "gui/core/fm_insider/data_ranking_values_es.json",
+                path_file,
                 mode="r",
                 encoding="utf-8",
         ) as f:
