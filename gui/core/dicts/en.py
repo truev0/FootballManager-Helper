@@ -196,7 +196,10 @@ english = {
     "left_content": {
         "b1": "Load squad file",
         "b2": "Load scouting file",
-        "b3": "Load old squad file"
+        "b3": "Load old squad file",
+        "b6": "Save actual session",
+        "b7": "Load recently session",
+        "b8": "Delete actual session"
     },
     "right_content": {
         "b1": "Slide to stats filters",

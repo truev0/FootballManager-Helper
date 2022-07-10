@@ -88,34 +88,40 @@
 <p align="right">(<a href="#top">volver arriba</a>)</p>
 
 
-
-<!-- GETTING STARTED -->
 ## 🚀 Empecemos!
 
-🛠 <b>Bajo construcción</b>
+Lo primero que debes tener en cuenta para empezar es que deberás descargar nuestras vistas personalizadas
+para plantilla y ojeo la cual encontraras en el apartado `Releases` junto con el instalador de la aplicación.
 
+Estas vistas deberás importarlas en las páginas correspondientes de Football Manager 2022, cargarlas correctamente:
+* Después dependiendo de que quieras exportar, vas a `Plantilla` o `Ojeo`
+* Presionar`Ctrl + A` para seleccionar todos los datos de jugadores
+* Presionar `Ctrl + P` para exportar y seleccionas exportar como página web
+
+<!-- GETTING STARTED -->
 ### 💻 Pre-requisitos
 
 Antes de comenzar, verifique si cuenta con los siguientes requisitos:
 * Un computador que cuente con `Windows`.
 * Ganas de viciar con `Football Manager`.
 
+
 ### ⚙️ Instalación
 
-🛠 <b>Bajo construcción</b>
+Nuestro sistema es un clasico sistema de instalación, donde primeramente deberás descargar el archivo y posteriormente 
+ejecutarlo.
+
+Seleccionarás un lugar donde instalar la aplicación y después solo... SIGUIENTE - SIGUIENTE - FINALIZAR!
 
 <p align="right">(<a href="#top">volver arriba</a>)</p>
-
-
 
 <!-- USAGE EXAMPLES -->
-## 🎯 Usos
+## 🎯 Uso
 
-🛠 <b>Bajo construcción</b>
+<b>[Video guia](https://www.youtube.com/)</b>
+
 
 <p align="right">(<a href="#top">volver arriba</a>)</p>
-
-
 
 <!-- ROADMAP -->
 ## 📝 Roadmap

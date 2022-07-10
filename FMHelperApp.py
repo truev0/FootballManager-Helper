@@ -2,7 +2,7 @@
 #
 # BY: VICTOR CAICEDO
 # PROJECT MADE WITH: PySide6
-# V: 1.0.0
+# V: 0.1.0
 #
 # This project can be used freely for all uses, as long as they maintain the
 # respective credits only in the Python scripts, any information in the visual
@@ -35,7 +35,7 @@ from Custom_Widgets.Widgets import loadJsonStyle
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////
 # from gui.core.pyside_modules import *
-from PySide6.QtCore import QEasingCurve, QPoint, QPropertyAnimation, QRect, Qt, Signal
+from PySide6.QtCore import QPropertyAnimation, Qt, Signal
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
@@ -1107,6 +1107,9 @@ class MainWindow(QMainWindow):
         self.ui.load_squad_btn.setText(self.ui_text[lang].left_content.b1)
         self.ui.load_scouting_btn.setText(self.ui_text[lang].left_content.b2)
         self.ui.load_old_btn.setText(self.ui_text[lang].left_content.b3)
+        self.ui.save_session_btn.setText(self.ui_text[lang].left_content.b6)
+        self.ui.load_session_btn.setText(self.ui_text[lang].left_content.b7)
+        self.ui.delete_session_btn.setText(self.ui_text[lang].left_content.b8)
 
         # Translating right inside menu
         self.ui.right_btn_1.setText(self.ui_text[lang].right_content.b1)
@@ -1170,8 +1173,6 @@ class MainWindow(QMainWindow):
 
         self.ninth_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.ninth_collapse[0])
         self.text_ninth_collapsable.setText(self.ui_text[self.language].pages.p9.ninth_collapse[1])
-
-
 
     # CREATE AND LOAD CHECHBOXES TO COMPARE
     # ///////////////////////////////////////////

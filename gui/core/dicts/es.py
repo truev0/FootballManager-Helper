@@ -211,6 +211,9 @@ espanol = {
         "b1": "Filtros de estadisticas",
         "b2": "Filtros de atributos",
         "b3": "Filtrar datos",
+        "b6": "Guardar sesión actual",
+        "b7": "Cargar sesión reciente",
+        "b8": "Eliminar sesión actual"
     },
     "title_buttons_tooltips": {
         "b1": "Refrescar",
