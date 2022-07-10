@@ -49,6 +49,7 @@ from PySide6.QtWidgets import (
     QSpacerItem,
     QSizePolicy
 )
+from PySide6.QtGui import QIcon
 
 # PROCESSING, CHARTS AND CLUSTERING MODULES
 # ///////////////////////////////////////////
@@ -1861,6 +1862,7 @@ def main():
     # APPLICATION
     # ///////////////////////////////////////////
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon(os.path.normpath(BASE_DIR + "\\..\\" + "icon.ico")))
     window = MainWindow()
     window.show()
 
