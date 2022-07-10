@@ -85,6 +85,14 @@
 
 * [Python](https://www.python.org/)
 
+<b>Paquetes usados en el proyecto</b>
+* Numpy
+* Pandas
+* Matplotlib
+* Scikit-learn
+* mplcursors
+* PySide6
+
 <p align="right">(<a href="#top">volver arriba</a>)</p>
 
 
