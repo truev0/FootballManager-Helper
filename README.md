@@ -119,7 +119,19 @@ Seleccionarás un lugar donde instalar la aplicación y después solo... SIGUIEN
 ## 🎯 Uso
 
 <b>[Video guia](https://www.youtube.com/)</b>
+<details>
+  <summary><b>App Screenshots</b></summary>
+  <img src=".github/readme_images/fm-helperpics/home.png" alt="Home">
+  <img src=".github/readme_images/fm-helperpics/squad.png" alt="Squad page">
+  <img src=".github/readme_images/fm-helperpics/tactic.png" alt="Tactic page">
+  <img src=".github/readme_images/fm-helperpics/tactic1.png" alt="Player list container">
+  <img src=".github/readme_images/fm-helperpics/stats.png" alt="Stats graph">
+  <img src=".github/readme_images/fm-helperpics/metrics.png" alt="Metrics graphs">
+  <img src=".github/readme_images/fm-helperpics/compare.png" alt="Compare page">
+  <img src=".github/readme_images/fm-helperpics/scouting.png" alt="Scouting page">
+  <img src=".github/readme_images/fm-helperpics/clustering.png" alt="Clustering page">
 
+</details>
 
 <p align="right">(<a href="#top">volver arriba</a>)</p>
 
