@@ -34,7 +34,7 @@ espanol = {
     },
     "pages": {
         "p1": {
-
+            "w_text": "Bienvenido a FM Helper"
         },
         "p2": {
 
@@ -70,7 +70,21 @@ espanol = {
                                                     "también la gestión de la lista de scouting y búsqueda de "
                                                     "prospectos para reemplazar tus jugadores."),
             "second_collapse": ("Instrucciones - ¿Como usar FM-Helper", ""),
-            "third_collapse": ("Usos", ""),
+            "third_collapse": ("Sesiones en la App", "A continuación presentaremos las opciones que puedes tomar "
+                                                     "durante tu sesión.\n\n1. Guardar sesión: Esta opción estará "
+                                                     "habilitada si tiene por lo menos cargado el archivo de tu "
+                                                     "plantilla actual. Independientemente si has cargado las otras o "
+                                                     "no, esta opción te pedirá un nombre para crear un archivo que "
+                                                     "contendrá los datos de tu sesión.\n\n2. Cargar sesión: Esta "
+                                                     "opción te permitirá seleccionar un archivo dentro de la carpeta "
+                                                     "'sessions' que corresponde a los datos de la toda la sesión "
+                                                     "previamente guardada.\n\n3. Borrar sesión: En caso de que desees "
+                                                     "limpiar o borrar la sesión actual, este es el botón indicado, lo "
+                                                     "que hará será limpiar los archivos de plantilla dentro de la app "
+                                                     "para que después puedas cargar otros archivos.\n\n\nNOTA: El "
+                                                     "método de guardado de sesión considera un archivo de "
+                                                     "configuración que contiene 'paths' de los archivos a leer, junto "
+                                                     "una carpeta donde están los archivos."),
             "fourth_collapse": ("En plantilla", "Podrás gestionar tus jugadores sabiendo cuales son sus mejores roles"
                                                 " dentro de la cancha y así mismo ver todos sus atributos.\n\nEl mejor"
                                                 " rol o el rol en el que crees que pueda funcionar mejor lo puedes "

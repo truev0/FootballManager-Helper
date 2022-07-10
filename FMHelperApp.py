@@ -36,7 +36,6 @@ from Custom_Widgets.Widgets import loadJsonStyle
 # ///////////////////////////////////////////
 # from gui.core.pyside_modules import *
 from PySide6.QtCore import QEasingCurve, QPoint, QPropertyAnimation, QRect, Qt, Signal
-from PySide6.QtGui import QCloseEvent, QShowEvent
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
@@ -88,10 +87,6 @@ from gui.core.models.CustomNumpyScoutTableModel.py_CustomNumpyScoutTableModel im
 from gui.core.models.CustomNumpyTableModel.py_CustomNumpyTableModel import (
     CustomizedNumpyModel,
 )
-
-# IMPORT UTILS
-# ///////////////////////////////////////////
-from gui.core.util import get_screen_size
 
 # IMPORT INTERFACE
 # ///////////////////////////////////////////
@@ -224,57 +219,11 @@ class MainWindow(QMainWindow):
         self.hideAnimation = QPropertyAnimation(self, b"pos")
         self.hideAnimation.setDuration(400)
 
-        # SAVING OLD POSITION
-        self.oldPos = self.get_center()
         self._is_started = False
 
     # ///////////////////////////////////////////
     # START IMPLEMENTED FUNCTIONS
     # ///////////////////////////////////////////
-
-    # RE-IMPLEMENT SHOW EVENT
-    # ///////////////////////////////////////////
-    def showEvent(self, event: QShowEvent) -> None:
-        """
-        The function is called when the window is shown. It sets the start value of the animation to the current
-        position of the window, and the end value to the position of the window before it was hidden
-
-        :param event: QShowEvent
-        :type event: QShowEvent
-        """
-        self.showAnimation.setStartValue(
-            QPoint(self.x(),
-                   get_screen_size().height()))
-        self.showAnimation.setEndValue(self.oldPos)
-        self.showAnimation.setEasingCurve(QEasingCurve.OutCubic)
-        self.showAnimation.start()
-
-        QMainWindow.showEvent(self, event)
-
-    # RE-IMPLEMENT CLOSE EVENT
-    # ///////////////////////////////////////////
-    def closeEvent(self, event: QCloseEvent) -> None:
-        """
-        The function is called when the user clicks the close button on the window. If the window is not started,
-        the window is hidden and the animation is started. If the window is started, the window is closed
-
-        :param event: QCloseEvent
-        :type event: QCloseEvent
-        """
-        if not self._is_started:
-            self.oldPos = self.pos()
-            self.hideAnimation.setStartValue(self.oldPos)
-            self.hideAnimation.setEndValue(
-                QPoint(self.x(),
-                       get_screen_size().height()))
-            self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
-            self.hideAnimation.start()
-            self._is_started = True
-            event.ignore()
-        else:
-            event.accept()
-
-        self.hideAnimation.finished.connect(self.close)
 
     # RESIZE EVENT
     # ///////////////////////////////////////////
@@ -318,64 +267,6 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
     # START CUSTOM FUNCTIONS FOR UI
     # ///////////////////////////////////////////
-
-    # CENTRE WINDOW
-    # ///////////////////////////////////////////
-    def center_window(self):
-        """The function takes a window object and centers it on the screen"""
-        frame_geo = self.frameGeometry()
-        screen = self.window().windowHandle().screen()
-        center_loc = screen.geometry().center()
-        frame_geo.moveCenter(center_loc)
-        self.move(frame_geo.topLeft())
-
-    # GET CENTER OF THE SCREEN
-    # ///////////////////////////////////////////
-    def get_center(self):
-        """
-        It returns the top left corner of the window, which is the same as the center of the window, but only if the
-        window is centered on the screen
-        :return: The top left corner of the window.
-        """
-        geometry = self.frameGeometry()
-        geometry.moveCenter(get_screen_size().center())
-        return geometry.topLeft()
-
-    # CREATE MINIMIZE EVENT
-    # ///////////////////////////////////////////
-    def minimize_event(self):
-        """It moves the window to the bottom of the screen, then minimizes it"""
-        self.oldPos = self.pos()
-        self.hideAnimation.setStartValue(self.oldPos)
-        self.hideAnimation.setEndValue(
-            QPoint(self.x(),
-                   get_screen_size().height()))
-        self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
-        self.hideAnimation.setDuration(400)
-        self.hideAnimation.start()
-        self.hideAnimation.finished.connect(self.showMinimized)
-
-    # CREATE MAXIMIZE EVENT
-    # ///////////////////////////////////////////
-    def maximize_event(self):
-        """
-        It hides the window, moves it to the top left corner of the screen, resizes it to the size of the screen,
-        and then centers it
-        """
-        self.oldPos = self.pos()
-        self.hideAnimation.setStartValue(self.oldPos)
-        self.hideAnimation.setEndValue(
-            QRect(
-                self.x(),
-                self.y(),
-                get_screen_size().width(),
-                get_screen_size().height(),
-            ))
-        self.hideAnimation.setDuration(200)
-        self.hideAnimation.setEasingCurve(QEasingCurve.InCubic)
-        self.hideAnimation.start()
-        self.center_window()
-        self.hideAnimation.finished.connect(self.ui.title_bar.maximize_restore)
 
     # RESIZE NOTIFICATION POPUP
     # ///////////////////////////////////////////
@@ -1222,6 +1113,9 @@ class MainWindow(QMainWindow):
         self.ui.right_btn_2.setText(self.ui_text[lang].right_content.b2)
         self.ui.right_btn_3.setText(self.ui_text[lang].right_content.b3)
 
+        # Translate home
+        self.ui.load_pages.welcome_label.setText(self.ui_text[lang].pages.p1.w_text)
+
         # Translate page 7
         self.ui.btn_compare_stats.setText(
             self.ui_text[lang].pages.p7.btn_compare_s)
@@ -1244,6 +1138,18 @@ class MainWindow(QMainWindow):
 
         self.second_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.second_collapse[0])
 
+        self.second_collapsable_1.title_frame.change_title(self.ui_text[self.language].pages.p9_aux.step_one[0])
+        self.text_sc1.setText(self.ui_text[self.language].pages.p9_aux.step_one[1])
+
+        self.second_collapsable_2.title_frame.change_title(self.ui_text[self.language].pages.p9_aux.step_two[0])
+        self.text_sc2.setText(self.ui_text[self.language].pages.p9_aux.step_two[1])
+
+        self.second_collapsable_3.title_frame.change_title(self.ui_text[self.language].pages.p9_aux.step_three[0])
+        self.text_sc3.setText(self.ui_text[self.language].pages.p9_aux.step_three[1])
+
+        self.second_collapsable_4.title_frame.change_title(self.ui_text[self.language].pages.p9_aux.step_four[0])
+        self.text_sc4.setText(self.ui_text[self.language].pages.p9_aux.step_four[1])
+
         self.third_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.third_collapse[0])
         self.text_third_collapsable.setText(self.ui_text[self.language].pages.p9.third_collapse[1])
 
@@ -1264,6 +1170,8 @@ class MainWindow(QMainWindow):
 
         self.ninth_collapsable.title_frame.change_title(self.ui_text[self.language].pages.p9.ninth_collapse[0])
         self.text_ninth_collapsable.setText(self.ui_text[self.language].pages.p9.ninth_collapse[1])
+
+
 
     # CREATE AND LOAD CHECHBOXES TO COMPARE
     # ///////////////////////////////////////////

@@ -136,7 +136,7 @@ Antes de comenzar, verifique si cuenta con los siguientes requisitos:
     - [x] Español
     - [x] Inglés
 - [x] Interactividad
-- [ ] Documentación
+- [X] Documentación
 
 Ver [issues](https://github.com/truev0/FootballManager-Helper/issues) para ver un listado de caracteristicas propuestas y errores pendientes por resolver
 
@@ -186,7 +186,7 @@ Copyright (c) 2022
 oficial fue creado por [Victor Caicedo](https://github.com/truev0) y distribuido bajo la licencia [Creative Commons](https://creativecommons.org/licenses/by-sa/4.0/)
 (CC BY-SA 4.0 International)
 
-Para mas informacion lea el archivo `LICENSE`.
+Para mas información lea el archivo `LICENSE`.
 
 
 <p align="right">(<a href="#top">volver arriba</a>)</p>

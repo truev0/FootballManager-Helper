@@ -34,7 +34,7 @@ english = {
     },
     "pages": {
         "p1": {
-
+            "w_text": "Welcome to FM Helper"
         },
         "p2": {
 
@@ -70,7 +70,18 @@ english = {
                                                      "management of the scouting list and search for prospect to "
                                                      "replace your players."),
             "second_collapse": ("Instructions - How to use FM-Helper?", ""),
-            "third_collapse": ("Uses", ""),
+            "third_collapse": ("App sessions", "Here are the options you can take during your session.\n\nSave session:"
+                                               " This option will be enabled if you have at least loaded your current "
+                                               "template file. Regardless if you have loaded the others or not, this "
+                                               "option will ask you for a name to create a file that will contain the "
+                                               "data of your session.\n\nLoad session: This option will allow you to "
+                                               "select a file within the 'sessions' folder that corresponds to the "
+                                               "data of the entire session previously saved.\n\nDelete session: In case"
+                                               " you want to clean or delete the current session, this is the indicated"
+                                               " button, what it will do is to clean the template files inside the app"
+                                               " so that later you can load other files.\n\n\nNOTE: The session saving"
+                                               " method considers a configuration file that contains 'paths' of the "
+                                               "files to read, along with a folder where the files are."),
             "fourth_collapse": ("In squad page", "You will be able to manage your players by knowing which are their"
                                                  " best roles on the court and also see all their attributes. The best"
                                                  " role or the role in which you think he can perform better can be"
