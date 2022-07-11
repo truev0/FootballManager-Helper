@@ -99,7 +99,8 @@
 ## 🚀 Empecemos!
 
 Lo primero que debes tener en cuenta para empezar es que deberás descargar nuestras vistas personalizadas
-para plantilla y ojeo la cual encontraras en el apartado `Releases` junto con el instalador de la aplicación.
+para plantilla y ojeo la cual encontraras en el apartado 
+<b><a href="https://github.com/truev0/FootballManager-Helper/releases">Releases</a></b> junto con el instalador de la aplicación.
 
 Estas vistas deberás importarlas en las páginas correspondientes de Football Manager 2022, cargarlas correctamente:
 * Después dependiendo de que quieras exportar, vas a `Plantilla` o `Ojeo`
