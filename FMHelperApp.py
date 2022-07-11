@@ -832,20 +832,24 @@ class MainWindow(QMainWindow):
             if "squad" in button_object.get_name():
                 # SETTING ORIGINAL DATAFRAME
                 self.df_original = FMi.setting_up_pandas(
-                    dlg_file[0])
+                    path_file=dlg_file[0],
+                    language=self.language
+                )
                 if self.df_original is not None:
-                    self.process_squad_info()
+                    if (self.language == 'en' and 'Name' in self.df_original.columns) or\
+                            (self.language == 'es' and 'Nombre' in self.df_original.columns):
+                        self.process_squad_info()
 
-                    self.tables_helper_squad(self.df_for_table, self.df_tactic)
+                        self.tables_helper_squad(self.df_for_table, self.df_tactic)
 
-                    self.load_data_for_graphs()
+                        self.load_data_for_graphs()
 
-                    self.create_and_load_checkboxes()
-                    tmp_list = self.df_original[self.ui_headers[
-                        self.language].h.h1].values.tolist()
-                    self.ui.clustering_player_combo.addItems(tmp_list)
-                    self.add_squad_names(self.df_squad, tmp_list)
-                    self.haveSquadInfo = True
+                        self.create_and_load_checkboxes()
+                        tmp_list = self.df_original[self.ui_headers[
+                            self.language].h.h1].values.tolist()
+                        self.ui.clustering_player_combo.addItems(tmp_list)
+                        self.add_squad_names(self.df_squad, tmp_list)
+                        self.haveSquadInfo = True
                 if self.haveSquadInfo:
                     self.ui.load_scouting_btn.setEnabled(True)
                     self.ui.save_session_btn.setEnabled(True)
@@ -853,26 +857,34 @@ class MainWindow(QMainWindow):
             elif "scouting" in button_object.get_name():
                 if self.df_scouting is None:
                     self.df_scouting = FMi.setting_up_pandas(
-                        dlg_file[0])
+                        dlg_file[0],
+                        self.language
+                    )
                     if self.df_scouting is not None:
-                        self.df_scouting = self.process_scouting_info(self.df_scouting)
-                        self.df_scout_for_table = FMi.create_df_for_scouting_team(
-                            self.df_scouting, self.language)
-                        self.df_scout_for_table.fillna(0, inplace=True)
+                        if (self.language == 'en' and 'Name' in self.df_scouting.columns) or (
+                                self.language == 'es' and 'Nombre' in self.df_scouting.columns):
+                            self.df_scouting = self.process_scouting_info(self.df_scouting)
+                            self.df_scout_for_table = FMi.create_df_for_scouting_team(
+                                self.df_scouting, self.language)
+                            self.df_scout_for_table.fillna(0, inplace=True)
                 else:
                     transition_df = FMi.setting_up_pandas(
-                        dlg_file[0])
+                        dlg_file[0],
+                        self.language
+                    )
                     if transition_df is not None:
-                        transition_df = self.process_scouting_info(transition_df)
-                        self.df_scouting = pd.concat([
-                            self.df_scouting,
-                            transition_df,
-                        ],
-                            axis=0,
-                            ignore_index=True)
-                        self.df_scout_for_table = FMi.create_df_for_scouting_team(
-                            self.df_scouting, self.language)
-                        self.df_scout_for_table.fillna(0, inplace=True)
+                        if (self.language == 'en' and 'Name' in transition_df.columns) or (
+                                self.language == 'es' and 'Nombre' in transition_df.columns):
+                            transition_df = self.process_scouting_info(transition_df)
+                            self.df_scouting = pd.concat([
+                                self.df_scouting,
+                                transition_df,
+                            ],
+                                axis=0,
+                                ignore_index=True)
+                            self.df_scout_for_table = FMi.create_df_for_scouting_team(
+                                self.df_scouting, self.language)
+                            self.df_scout_for_table.fillna(0, inplace=True)
 
                 if self.df_scouting is not None and self.scoutingCounter == 1:
                     self.tables_helper_scouting(self.df_scout_for_table)
@@ -892,13 +904,17 @@ class MainWindow(QMainWindow):
             elif "old" in button_object.text():
                 # SETTING ORIGINAL DATAFRAME
                 self.df_old_squad = FMi.setting_up_pandas(
-                    dlg_file[0])
+                    dlg_file[0],
+                    self.language
+                )
                 if self.df_old_squad is not None:
-                    self.process_old_squad_info()
-                    tmp_list = self.df_old_squad[self.ui_headers[
-                        self.language].h.h1].values.tolist()
-                    self.add_old_squad_names(self.df_old_squad, tmp_list)
-                    self.haveOldSquadInfo = True
+                    if (self.language == 'en' and 'Name' in self.df_old_squad.columns) or (
+                            self.language == 'es' and 'Nombre' in self.df_old_squad.columns):
+                        self.process_old_squad_info()
+                        tmp_list = self.df_old_squad[self.ui_headers[
+                            self.language].h.h1].values.tolist()
+                        self.add_old_squad_names(self.df_old_squad, tmp_list)
+                        self.haveOldSquadInfo = True
 
     # PROCESS ACTUAL SQUAD INFO
     # ///////////////////////////////////////////
@@ -934,7 +950,6 @@ class MainWindow(QMainWindow):
         """
         if self.scoutingCounter < 4:
             scout_tpt = FMi.convert_values(scout_tp, self.language)
-            scout_tpt = FMi.convert_values_scout(scout_tpt)
             scout_tpt = FMi.create_metrics_for_gk(scout_tpt, self.language)
 
             # SETTING MODIFIED DATAFRAME
@@ -1346,9 +1361,10 @@ class MainWindow(QMainWindow):
             for i in range(self.ui.group_chk_attrs_widget.get_count()):
                 if self.ui.group_chk_attrs_widget.button_group.button(
                         i).isChecked():
-                    checked_buttons.append(
-                        self.ui.group_chk_attrs_widget.button_group.button(
-                            i).get_name())
+                    tmp = self.ui.group_chk_attrs_widget.button_group.button(i).get_name()
+                    if self.language == 'en' and tmp == 'Tck':
+                        tmp = 'Tck.1'
+                    checked_buttons.append(tmp)
         elif not self.ui.btn_compare_stats.isEnabled():
             for i in range(self.ui.group_chk_stats_widget.get_count()):
                 if self.ui.group_chk_stats_widget.button_group.button(
@@ -1723,16 +1739,22 @@ class MainWindow(QMainWindow):
                 self.df_old_squad = pd.read_csv(paths["7"])
 
             if self.df_original is not None:
-                self._load_process_squad()
+                if (self.language == 'en' and 'Name' in self.df_original.columns) or (
+                        self.language == 'es' and 'Nombre' in self.df_original.columns):
+                    self._load_process_squad()
 
             if self.df_scouting is not None:
-                self._load_process_scouting()
+                if (self.language == 'en' and 'Name' in self.df_scouting.columns) or (
+                        self.language == 'es' and 'Nombre' in self.df_scouting.columns):
+                    self._load_process_scouting()
             elif self.df_scouting is None:
                 self.ui.first_squad_player_combo.removeItem(1)
                 self.ui.second_squad_player_combo.removeItem(1)
 
             if self.df_old_squad is not None:
-                self._load_process_old()
+                if (self.language == 'en' and 'Name' in self.df_old_squad.columns) or (
+                        self.language == 'es' and 'Nombre' in self.df_old_squad.columns):
+                    self._load_process_old()
             elif self.df_old_squad is None:
                 self.ui.first_squad_player_combo.removeItem(2)
                 self.ui.second_squad_player_combo.removeItem(2)

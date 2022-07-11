@@ -13,5 +13,3 @@ FMHelperBuild.json
 test_files/
 gui/widgets/py_virtual_pitch/
 gui/uis/windows/main_window/ui_interface_prueba.py
-gui/core/models/CustomPandasTableModel
-gui/core/models/CustomPandasListModel

@@ -27,7 +27,7 @@ poss.update({"es": NestedNamespace(es.positions)})
 # SETTING PANDAS
 # Load file to create the dataframe
 # ///////////////////////////////////////////////////////////////
-def setting_up_pandas(path_file):
+def setting_up_pandas(path_file, language):
     """
     This function sets up the pandas dataframe for the squad and scouting files
 
@@ -39,8 +39,33 @@ def setting_up_pandas(path_file):
     pd.set_option("styler.format.precision", 0)
     # LOADING FILE
     try:
+        droppers = ["Inf", "Rec"]
         html_filename = f"{path_file}"
         df_fmi = pd.read_html(html_filename, encoding="utf-8")[0]
+        if "Inf" in df_fmi.columns:
+            if language == 'en':
+                for _, element in enumerate(en.prevent_dash):
+                    if element in df_fmi.columns:
+                        if element == 'Name':
+                            n = df_fmi[element].str.split(' - ', expand=True)
+                            df_fmi[element] = n[0]
+                        else:
+                            s = df_fmi[element].str.split('-', expand=True)
+                            df_fmi[element] = np.floor(s[s != ''].astype(float).mean(1).fillna(0))
+            elif language == 'es':
+                for _, element in enumerate(es.prevent_dash):
+                    if element in df_fmi.columns:
+                        if element == 'Nombre':
+                            n = df_fmi[element].str.split(' - ', expand=True)
+                            df_fmi[element] = n[0]
+                        else:
+                            s = df_fmi[element].str.split('-', expand=True)
+                            df_fmi[element] = np.floor(s[s != ''].astype(float).mean(1).fillna(0))
+
+            for _, element in enumerate(droppers):
+                if element in df_fmi.columns:
+                    df_fmi.drop(element, axis=1, inplace=True)
+
     except ValueError:
         return None
     except FileNotFoundError:
@@ -100,9 +125,17 @@ def convert_values(df, language):
             text[language].h.s17,
             text[language].h.s19,
             text[language].h.s20,
+            text[language].h.s30,
             text[language].h.s31,
+            text[language].h.s32,
+            text[language].h.s29,
+            text[language].h.h12,
+            text[language].h.s7,
+            text[language].h.s12,
+            text[language].h.s24,
+            text[language].h.s25,
     ]:
-        df[column] = df[column].str.replace("-", "0")
+        df[column] = df[column].astype(str).str.replace("-", "0")
         if column in [
                 text[language].h.s5,
                 text[language].h.s8,
@@ -146,26 +179,9 @@ def convert_values(df, language):
             text[language].h.s26,
             text[language].h.h11,
             text[language].h.s32,
+            text[language].h.h12,
     ]:
         df[column] = pd.to_numeric(df[column], downcast="integer")
-
-    return df
-
-
-# CONVERT VALUES IN SCOUTING DATAFRAME
-# Convert value to str, float, int / replace text in number cells
-# ///////////////////////////////////////////////////////////////
-def convert_values_scout(df):
-    """
-    It takes a dataframe as an input, and for each column in the dataframe, if the column is of type "object",
-     it replaces all instances of "-" with "0"
-
-    :param df: the dataframe you want to convert
-    :return: A dataframe with the values converted to numeric.
-    """
-    for i, item in enumerate(df.columns):
-        if df.dtypes[i] == "object":
-            df[item] = df[item].str.replace("-", "0")
     return df
 
 
