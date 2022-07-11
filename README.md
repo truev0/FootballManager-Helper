@@ -102,6 +102,8 @@ Lo primero que debes tener en cuenta para empezar es que deberás descargar nues
 para plantilla y ojeo la cual encontraras en el apartado 
 <b><a href="https://github.com/truev0/FootballManager-Helper/releases">Releases</a></b> junto con el instalador de la aplicación.
 
+![GitHub release (by tag)](https://img.shields.io/github/downloads/truev0/FootballManager-Helper/v0.1.0/total?style=for-the-badge)
+
 Estas vistas deberás importarlas en las páginas correspondientes de Football Manager 2022, cargarlas correctamente:
 * Después dependiendo de que quieras exportar, vas a `Plantilla` o `Ojeo`
 * Presionar`Ctrl + A` para seleccionar todos los datos de jugadores
