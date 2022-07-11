@@ -32,6 +32,7 @@ def setting_up_pandas(path_file, language):
     This function sets up the pandas dataframe for the squad and scouting files
 
     :param path_file: This is the path to the file you want to load
+    :param language: The language of the dataframe
     :return: The dataframe is being returned.
     """
     pd.set_option("styler.render.max_columns", 100)
@@ -128,12 +129,12 @@ def convert_values(df, language):
             text[language].h.s30,
             text[language].h.s31,
             text[language].h.s32,
-            text[language].h.s29,
+            text[language].h.s29,  # Here N
             text[language].h.h12,
-            text[language].h.s7,
-            text[language].h.s12,
-            text[language].h.s24,
-            text[language].h.s25,
+            text[language].h.s7,  # Here N
+            text[language].h.s12,  # Here N
+            text[language].h.s24,  # Here N
+            text[language].h.s25,  # Here N
             text[language].h.h11,
     ]:
         df[column] = df[column].astype(str).str.replace("-", "0")
@@ -185,6 +186,11 @@ def convert_values(df, language):
             text[language].h.h11,
             text[language].h.s32,
             text[language].h.h12,
+            text[language].h.s7,
+            text[language].h.s12,
+            text[language].h.s24,
+            text[language].h.s25,
+            text[language].h.s29,
     ]:
         df[column] = pd.to_numeric(df[column], downcast="integer")
     return df
