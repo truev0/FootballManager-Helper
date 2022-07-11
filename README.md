@@ -86,12 +86,12 @@
 * [Python](https://www.python.org/)
 
 <b>Paquetes usados en el proyecto</b>
-* Numpy
-* Pandas
-* Matplotlib
-* Scikit-learn
-* mplcursors
-* PySide6
+* [Numpy](https://numpy.org)
+* [Pandas](https://pandas.pydata.org)
+* [Matplotlib](https://matplotlib.org)
+* [Scikit-learn](https://scikit-learn.org/stable/)
+* [mplcursors](https://mplcursors.readthedocs.io/en/stable/)
+* [PySide6](https://www.qt.io/qt-for-python#:~:text=Qt%20for%20Python%20is%20the,should%20consider%20Qt%20for%20Python.)
 
 <p align="right">(<a href="#top">volver arriba</a>)</p>
 
