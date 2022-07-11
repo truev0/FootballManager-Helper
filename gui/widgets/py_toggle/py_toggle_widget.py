@@ -54,7 +54,7 @@ class PyToggle(QCheckBox):
     @position.setter
     def position(self, pos):
         """
-        The function takes in a position (pos) and sets the position of the object to that position
+        The function takes a value and sets the position of the object to that position
 
         :param pos: The position of the widget
         """

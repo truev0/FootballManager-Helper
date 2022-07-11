@@ -61,15 +61,15 @@ espanol = {
         },
         "p9": {
             "first_collapse": (
-            "¿Que es FM-Helper", "FM-Helper es una herramienta desarrollada en Python, que se encarga"
-                                 "de recrear las funciones vistas en el archivo 'Organizador de "
-                                 "plantillas para Football Manager' de @f_mpanda.\n\nEn resumen, es un"
-                                 "asistente que te permite gestionar tus plantillas de una manera"
-                                 "mas profunda, creando una inmersión de juego que permite tener aun"
-                                 "mas control sobre tus partidas. A su vez permite tener el control"
-                                 "sobre las estadísticas y atributos de tus jugadores asi como "
-                                 "también la gestión de la lista de scouting y búsqueda de "
-                                 "prospectos para reemplazar tus jugadores."),
+                "¿Que es FM-Helper", "FM-Helper es una herramienta desarrollada en Python, que se encarga"
+                                     "de recrear las funciones vistas en el archivo 'Organizador de "
+                                     "plantillas para Football Manager' de @f_mpanda.\n\nEn resumen, es un"
+                                     "asistente que te permite gestionar tus plantillas de una manera"
+                                     "mas profunda, creando una inmersión de juego que permite tener aun"
+                                     "mas control sobre tus partidas. A su vez permite tener el control"
+                                     "sobre las estadísticas y atributos de tus jugadores asi como "
+                                     "también la gestión de la lista de scouting y búsqueda de "
+                                     "prospectos para reemplazar tus jugadores."),
             "second_collapse": ("Instrucciones - ¿Como usar FM-Helper", ""),
             "third_collapse": ("Sesiones en la App", "A continuación presentaremos las opciones que puedes tomar "
                                                      "durante tu sesión.\n\n1. Guardar sesión: Esta opción estará "

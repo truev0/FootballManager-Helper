@@ -134,6 +134,7 @@ def convert_values(df, language):
             text[language].h.s12,
             text[language].h.s24,
             text[language].h.s25,
+            text[language].h.h11,
     ]:
         df[column] = df[column].astype(str).str.replace("-", "0")
         if column in [
@@ -170,6 +171,10 @@ def convert_values(df, language):
     ]:
         df[column] = pd.to_numeric(df[column], downcast="float")
 
+    if language == 'en':
+        df["Salary"] = df["Salary"].astype(str).str.replace("nan", "0")
+    elif language == 'es':
+        df["Sueldo"] = df["Sueldo"].astype(str).str.replace("nan", "0")
     for column in [
             text[language].h.s1,
             text[language].h.s2,
