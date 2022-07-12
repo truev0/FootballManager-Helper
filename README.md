@@ -124,6 +124,8 @@ ejecutarlo.
 
 Seleccionarás un lugar donde instalar la aplicación y después solo... SIGUIENTE - SIGUIENTE - FINALIZAR!
 
+<b>NOTA: En caso de que al momento de guardar el archivo de sesión, tu pc no permita guardar el archivo
+deberas re-instalar la App en:<br>a) Otro disco duro <br>b) Carpeta Documentos</b>
 <p align="right">(<a href="#top">volver arriba</a>)</p>
 
 <!-- USAGE EXAMPLES -->
