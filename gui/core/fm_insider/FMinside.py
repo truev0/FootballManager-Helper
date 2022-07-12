@@ -180,6 +180,7 @@ def convert_values(df, language):
             text[language].h.s30,
             text[language].h.s31,
     ]:
+        df[column] = df[column].apply(lambda x: float(x))
         df[column] = pd.to_numeric(df[column], downcast="float")
 
     if language == 'en':
@@ -202,6 +203,7 @@ def convert_values(df, language):
             text[language].h.s25,
             text[language].h.s29,
     ]:
+        df[column] = df[column].apply(lambda x: int(x))
         df[column] = pd.to_numeric(df[column], downcast="integer")
     return df
 
