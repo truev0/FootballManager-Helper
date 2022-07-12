@@ -51,7 +51,7 @@ def setting_up_pandas(path_file, language):
                             n = df_fmi[element].str.split(' - ', expand=True)
                             df_fmi[element] = n[0]
                         else:
-                            s = df_fmi[element].str.split('-', expand=True)
+                            s = df_fmi[element].astype(str).str.split('-', expand=True)
                             df_fmi[element] = np.floor(s[s != ''].astype(float).mean(1).fillna(0))
             elif language == 'es':
                 for _, element in enumerate(es.prevent_dash):
@@ -60,7 +60,7 @@ def setting_up_pandas(path_file, language):
                             n = df_fmi[element].str.split(' - ', expand=True)
                             df_fmi[element] = n[0]
                         else:
-                            s = df_fmi[element].str.split('-', expand=True)
+                            s = df_fmi[element].astype(str).str.split('-', expand=True)
                             df_fmi[element] = np.floor(s[s != ''].astype(float).mean(1).fillna(0))
 
             for _, element in enumerate(droppers):
@@ -94,9 +94,18 @@ def convert_values(df, language):
             df[column] = df[column].str.replace("N/A", "0")
             df[column] = df[column].str.replace("N/D", "0")
             df[column] = df[column].str.replace("$", "")
+            df[column] = df[column].str.replace("£", "")
+            df[column] = df[column].str.replace("¥", "")
+            df[column] = df[column].str.replace("€", "")
+            df[column] = df[column].str.replace("₺", "")
+            df[column] = df[column].str.replace("₽", "")
+            df[column] = df[column].str.replace("AED", "")
+            df[column] = df[column].str.replace("BGN", "")
+            df[column] = df[column].str.replace("CHF", "")
             df[column] = df[column].str.replace("Â", "")
             df[column] = df[column].str.replace("p/a", "")
             df[column] = df[column].str.replace("p/m", "")
+            df[column] = df[column].str.replace("p/s", "")
             df[column] = df[column].str.replace(",", "")
             df[column] = df[column].str.replace("K", "000")
             df[column] = df[column].str.replace(".", "")
