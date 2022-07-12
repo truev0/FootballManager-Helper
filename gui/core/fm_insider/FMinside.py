@@ -106,6 +106,7 @@ def convert_values(df, language):
             df[column] = df[column].str.replace("p/a", "")
             df[column] = df[column].str.replace("p/m", "")
             df[column] = df[column].str.replace("p/s", "")
+            df[column] = df[column].str.replace("p/w", "")
             df[column] = df[column].str.replace(",", "")
             df[column] = df[column].str.replace("K", "000")
             df[column] = df[column].str.replace(".", "")

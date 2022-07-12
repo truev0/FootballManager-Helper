@@ -35,7 +35,7 @@ from Custom_Widgets.Widgets import loadJsonStyle
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////
 # from gui.core.pyside_modules import *
-from PySide6.QtCore import QPropertyAnimation, Qt, Signal
+from PySide6.QtCore import QPropertyAnimation, Qt, Signal, QRect
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
@@ -1652,10 +1652,19 @@ class MainWindow(QMainWindow):
     def _save_state(self):
         """It saves the dataframes to feather files and saves the paths to those files in a config file"""
         player_pos_lists = []
+        buttons_geometry = []
         if self.ui.load_pages.vertical_pitch_frame.findChildren(QPushButton):
             for i in range(len(self.ui.load_pages.vertical_pitch_frame.children())):
                 item = self.ui.load_pages.vertical_pitch_frame.children()[i]
                 if isinstance(item, QPushButton):
+                    buttons_geometry.append(
+                        [
+                            item.geometry().x(),
+                            item.geometry().y(),
+                            item.geometry().width(),
+                            item.geometry().height()
+                        ]
+                    )
                     player_pos_lists.append(item.get_lista())
 
         if self.df_for_table is not None:
@@ -1701,6 +1710,10 @@ class MainWindow(QMainWindow):
             for index, element in enumerate(player_pos_lists):
                 tmp_str = ",".join(element)
                 config.set("player_positions", str(index), tmp_str)
+            config.add_section("buttons_geometry")
+            for index, element in enumerate(buttons_geometry):
+                tmp_str = ",".join(str(x) for x in element)
+                config.set("buttons_geometry", str(index), tmp_str)
             with open(file_name, "w", encoding='utf-8') as config_file:
                 config.write(config_file)
 
@@ -1720,6 +1733,7 @@ class MainWindow(QMainWindow):
             config_obj.read(session_file[0], encoding='utf-8')
             paths = config_obj["paths"]
             player_positions = config_obj["player_positions"]
+            buttons_geometries = config_obj["buttons_geometry"]
             if "0" in paths.keys():
                 self.df_original = pd.read_csv(paths["0"])
             if "1" in paths.keys():
@@ -1764,10 +1778,18 @@ class MainWindow(QMainWindow):
                     item = self.ui.load_pages.vertical_pitch_frame.children()[j]
                     if isinstance(item, QPushButton):
                         tmp_string = player_positions[str(j - 1)]
+                        tmp_geo = buttons_geometries[str(j - 1)]
+                        tmp_geo_t = tmp_geo.split(",")
                         if tmp_string == '':
                             tmp_list = []
                         else:
                             tmp_list = tmp_string.split(",")
+                        item.setGeometry(QRect(
+                            int(tmp_geo_t[0]),
+                            int(tmp_geo_t[1]),
+                            int(tmp_geo_t[2]),
+                            int(tmp_geo_t[3])
+                        ))
                         item.set_updated_lista(tmp_list)
 
             self.ui.load_scouting_btn.setEnabled(True)
