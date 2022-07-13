@@ -2,7 +2,7 @@
 #
 # BY: VICTOR CAICEDO
 # PROJECT MADE WITH: PySide6
-# V: 0.1.0
+# V: 0.1.0-r6
 #
 # This project can be used freely for all uses, as long as they maintain the
 # respective credits only in the Python scripts, any information in the visual
@@ -13,11 +13,12 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-__version__ = "0.2.0"
+__version__ = "0.1.0-r6"
 
 import os
 import requests
 import atexit
+import urllib.request
 
 from gui import BASE_DIR
 
@@ -67,7 +68,7 @@ import gui.core.fm_insider.FMinside as FMi
 
 # IMPORT TRANSLATIONS
 # ///////////////////////////////////////////
-from gui.core.dicts import en, es, util_lists
+from gui.core.dicts import en, es
 
 # IMPORT FUNCTIONS
 # ///////////////////////////////////////////
@@ -1304,12 +1305,7 @@ class MainWindow(QMainWindow):
         ]
         if self.ui.group_clustering_filters.get_lines() is not None:
             self.ui.group_clustering_filters.reset_all_lines()
-        if self.language == "en":
-            self.ui.group_clustering_filters.add_buttons(
-                self.filters_clustering, 2)
-        elif self.language == "es":
-            self.ui.group_clustering_filters.add_buttons(
-                self.filters_clustering, 2)
+        self.ui.group_clustering_filters.add_buttons(self.filters_clustering, 2)
 
     # THREE FUNCTIONS FOR ACTUAL SQUAD, SCOUT, OLD SQUAD
     # //////////////////////////////////////////////////
@@ -1961,14 +1957,39 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
 
 
+def restart_program(old_file, new_file):
+    """Restarts the current program.
+    Note: this function does not return. Any cleanup action (like
+    saving data) must be done before calling this function."""
+    atexit.register(os.execl, old_file, new_file)
+    sys.exit(0)
+
+
+def remove_old(filename):
+    app_path = None
+    if getattr(sys, 'frozen', False):
+        app_path = os.path.dirname(sys.executable)
+    else:
+        app_path = os.path.dirname(os.path.abspath(__file__))
+
+    if os.path.exists(os.path.join(app_path, filename)):
+        os.remove(os.path.join(app_path, filename))
+
+
 def check_update():
-    MAIN_BASE_DIR = os.path.dirname(__file__)
+    new_exe_name = "FM-Helper_new.exe"
+    old_exe_name = "FM-Helper_old.exe"
+    converted_exe_name = "FM-Helper.exe"
     try:
         link = "https://raw.githubusercontent.com/truev0/FootballManager-Helper/main/update/version.txt"
-        changes = "WRAP CHANGES"
         check = requests.get(link)
         if __version__ < check.text:
-            ####
+            changes = "https://raw.githubusercontent.com/truev0/FootballManager-Helper/main/update/changes.txt"
+            tmp_changes = requests.get(changes).text
+            result = [x.strip() for x in tmp_changes.split('\n')]
+            tmp_text = ""
+            for x in range(2, len(result)):
+                tmp_text += f"{result[x]}\n"
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Information)
 
@@ -1977,25 +1998,18 @@ def check_update():
             msg.setText(f"Update {check.text} version available.")
             msg.setInformativeText(f"You have {__version__} version.")
 
-            msg.setDetailedText(changes)  # wrap changes
+            msg.setDetailedText(tmp_text)
             msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-            ####
             retval = msg.exec()
             if retval == QMessageBox.Ok:
-                exe_name = "FM-Helper.exe"
-                exe_name = os.path.join(MAIN_BASE_DIR, exe_name)
-                raw_link = "https://raw.githubusercontent.com/truev0/FootballManager-Helper/main/update/FM-Helper.exe"
-                code = requests.get(raw_link, allow_redirects=True)
-                open(exe_name, 'wb').write(code.content)
-                restar_program(exe_name)
-        else:
-            print("You have the latest version")
-    except requests.exceptions.RequestException:
-        pass
+                exe_link = f"{result[0]}"
+                local_file, headers = urllib.request.urlretrieve(exe_link, new_exe_name)
+                os.rename(converted_exe_name, old_exe_name)
+                os.rename(new_exe_name, converted_exe_name)
+                restart_program(converted_exe_name, converted_exe_name)
 
-
-def restar_program(file):
-    atexit.register(os.execl, file, file)
+    except requests.exceptions.RequestException as e:
+        print(e)
 
 
 # MAIN FUNCTION TO START
@@ -2009,6 +2023,7 @@ def main():
     """
     # APPLICATION
     # ///////////////////////////////////////////
+    remove_old("FM-Helper_old.exe")
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon(os.path.normpath(BASE_DIR + "\\..\\" + "icon.ico")))
     window = MainWindow()
