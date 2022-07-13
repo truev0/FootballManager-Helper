@@ -201,6 +201,8 @@ class _CustomCanvas(FigureCanvas):
         self.color_title = color_title
         self.bar_color = bar_color
 
+        self.metric_list = None
+
         self._name = name
         self._language = language
         self._actual_list = [""]
@@ -246,6 +248,38 @@ class _CustomCanvas(FigureCanvas):
         :param data: The data to be plotted
         """
         self._data = data
+        self.metric_list = {
+            "Ground Duels": (self._data.columns[12], self._data.columns[11]),
+            "Air Duels": (self._data.columns[15], self._data.columns[14]),
+            "Ball Carrying Skills": (self._data.columns[18], self._data.columns[22]),
+            "Crossing Skills": (self._data.columns[25], self._data.columns[24]),
+            "Wide Creation Skills": (self._data.columns[25], self._data.columns[17]),
+            "Passing Skills": (self._data.columns[9], self._data.columns[8]),
+            "Goal Involvement": (self._data.columns[19], self._data.columns[20]),
+            "Goalscoring Efficiency": (self._data.columns[19], self._data.columns[26]),
+            "Playmaking Skills": (self._data.columns[17], self._data.columns[18]),
+            "Goal Creation Skills": (self._data.columns[18], self._data.columns[20]),
+            "Age Profile": (self._data.columns[1], self._data.columns[3]),
+            "Salary Profile": (self._data.columns[2], self._data.columns[3]),
+            "Wingplay Skills": (self._data.columns[22], self._data.columns[20]),
+            "Best Tacklers": (self._data.columns[10], self._data.columns[11]),
+            "Ball winners": (self._data.columns[12], self._data.columns[13]),
+            "Duelos Terrestres": (self._data.columns[12], self._data.columns[11]),
+            "Duelos Aereos": (self._data.columns[15], self._data.columns[14]),
+            "Habilidad transportando": (self._data.columns[18], self._data.columns[22]),
+            "Habilidad centrando": (self._data.columns[25], self._data.columns[24]),
+            "Creacion de juego con amplitud": (self._data.columns[25], self._data.columns[17]),
+            "Habilidad pasando": (self._data.columns[9], self._data.columns[8]),
+            "Participacion de gol": (self._data.columns[19], self._data.columns[20]),
+            "Eficiencia de gol": (self._data.columns[19], self._data.columns[26]),
+            "Creacion de juego corto": (self._data.columns[17], self._data.columns[18]),
+            "Creacion de gol": (self._data.columns[18], self._data.columns[20]),
+            "Perfil de edad": (self._data.columns[1], self._data.columns[3]),
+            "Perfil de salario": (self._data.columns[2], self._data.columns[3]),
+            "Habilidad de juego por banda": (self._data.columns[22], self._data.columns[20]),
+            "Mejores aplacadores": (self._data.columns[10], self._data.columns[11]),
+            "Ganadores de balones": (self._data.columns[12], self._data.columns[13]),
+        }
 
     def add_to_list(self, e_list):
         """
@@ -294,17 +328,31 @@ class _CustomCanvas(FigureCanvas):
                     )
                     self.fig.subplots_adjust(bottom=0.22)
                     if self._language == "en":
-                        self.ax.set_title(
-                            util_lists.stats_list_en[new_parameter],
-                            fontsize=15,
-                            color=self.color_title,
-                        )
+                        if new_parameter in util_lists.stats_list_en:
+                            self.ax.set_title(
+                                util_lists.stats_list_en[new_parameter],
+                                fontsize=15,
+                                color=self.color_title,
+                            )
+                        else:
+                            self.ax.set_title(
+                                new_parameter,
+                                fontsize=15,
+                                color=self.color_title,
+                            )
                     elif self._language == "es":
-                        self.ax.set_title(
-                            util_lists.stats_list_es[new_parameter],
-                            fontsize=15,
-                            color=self.color_title,
-                        )
+                        if new_parameter in util_lists.stats_list_es:
+                            self.ax.set_title(
+                                util_lists.stats_list_es[new_parameter],
+                                fontsize=15,
+                                color=self.color_title,
+                            )
+                        else:
+                            self.ax.set_title(
+                                new_parameter,
+                                fontsize=15,
+                                color=self.color_title,
+                            )
 
                     self.ax.tick_params(axis="x", rotation=80)
                     self.ax.axhline(y=custom_df[new_parameter].mean(),
@@ -344,8 +392,8 @@ class _CustomCanvas(FigureCanvas):
                 if new_parameter in self._actual_list:
                     custom_df = self._data.iloc[:, :1]
                     custom_df = custom_df.join(self._data[[
-                        util_lists.metrics_list[new_parameter][0],
-                        util_lists.metrics_list[new_parameter][1],
+                        self.metric_list[new_parameter][0],
+                        self.metric_list[new_parameter][1],
                     ]])
                     tmp_x = custom_df.columns[1]
                     tmp_y = custom_df.columns[2]
@@ -356,15 +404,27 @@ class _CustomCanvas(FigureCanvas):
                                            legend=None)
                     self.fig.subplots_adjust(bottom=0.1)
                     if self._language == "en":
-                        self.ax.set_xlabel(util_lists.stats_list_en[tmp_x],
-                                           size=12)
-                        self.ax.set_ylabel(util_lists.stats_list_en[tmp_y],
-                                           size=12)
+                        if tmp_x in util_lists.stats_list_en:
+                            self.ax.set_xlabel(util_lists.stats_list_en[tmp_x],
+                                               size=12)
+                        else:
+                            self.ax.set_xlabel(tmp_x, size=12)
+                        if tmp_y in util_lists.stats_list_en:
+                            self.ax.set_ylabel(util_lists.stats_list_en[tmp_y],
+                                               size=12)
+                        else:
+                            self.ax.set_ylabel(tmp_y, size=12)
                     elif self._language == "es":
-                        self.ax.set_xlabel(util_lists.stats_list_es[tmp_x],
-                                           size=12)
-                        self.ax.set_ylabel(util_lists.stats_list_es[tmp_y],
-                                           size=12)
+                        if tmp_x in util_lists.stats_list_es:
+                            self.ax.set_xlabel(util_lists.stats_list_es[tmp_x],
+                                               size=12)
+                        else:
+                            self.ax.set_xlabel(tmp_x, size=12)
+                        if tmp_y in util_lists.stats_list_es:
+                            self.ax.set_ylabel(util_lists.stats_list_es[tmp_y],
+                                               size=12)
+                        else:
+                            self.ax.set_ylabel(tmp_y, size=12)
                     self.ax.set_title(new_parameter,
                                       color=self.color_title,
                                       size=15)
@@ -382,19 +442,37 @@ class _CustomCanvas(FigureCanvas):
                     def on_add(sel):
                         try:
                             if self._language == "en":
-                                sel.annotation.set_text(
-                                    f"{custom_df[custom_df.columns[0]][sel.index]}\n"
-                                    f"{util_lists.stats_list_en[custom_df.columns[1]]}:"
-                                    f" {sel.target[0]:.2f}\n{util_lists.stats_list_en[custom_df.columns[2]]}:"
-                                    f"{sel.target[1]:.2f}"
-                                )
+                                if custom_df.columns[1] in util_lists.stats_list_en and\
+                                        custom_df.columns[2] in util_lists.stats_list_en:
+                                    sel.annotation.set_text(
+                                        f"{custom_df[custom_df.columns[0]][sel.index]}\n"
+                                        f"{util_lists.stats_list_en[custom_df.columns[1]]}:"
+                                        f" {sel.target[0]:.2f}\n{util_lists.stats_list_en[custom_df.columns[2]]}:"
+                                        f"{sel.target[1]:.2f}"
+                                    )
+                                else:
+                                    sel.annotation.set_text(
+                                        f"{custom_df[custom_df.columns[0]][sel.index]}\n"
+                                        f"{custom_df.columns[1]}:"
+                                        f" {sel.target[0]:.2f}\n{custom_df.columns[2]}:"
+                                        f"{sel.target[1]:.2f}"
+                                    )
                             elif self._language == "es":
-                                sel.annotation.set_text(
-                                    f"{custom_df[custom_df.columns[0]][sel.index]}\n"
-                                    f"{util_lists.stats_list_es[custom_df.columns[1]]}:"
-                                    f" {sel.target[0]:.2f}\n{util_lists.stats_list_es[custom_df.columns[2]]}:"
-                                    f"{sel.target[1]:.2f}"
-                                )
+                                if custom_df.columns[1] in util_lists.stats_list_es and\
+                                        custom_df.columns[2] in util_lists.stats_list_es:
+                                    sel.annotation.set_text(
+                                        f"{custom_df[custom_df.columns[0]][sel.index]}\n"
+                                        f"{util_lists.stats_list_es[custom_df.columns[1]]}:"
+                                        f" {sel.target[0]:.2f}\n{util_lists.stats_list_es[custom_df.columns[2]]}:"
+                                        f"{sel.target[1]:.2f}"
+                                    )
+                                else:
+                                    sel.annotation.set_text(
+                                        f"{custom_df[custom_df.columns[0]][sel.index]}\n"
+                                        f"{custom_df.columns[1]}:"
+                                        f" {sel.target[0]:.2f}\n{custom_df.columns[2]}:"
+                                        f"{sel.target[1]:.2f}"
+                                    )
                             sel.annotation.get_bbox_patch().set(alpha=0.8)
                         except KeyError:
                             pass

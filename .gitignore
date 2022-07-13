@@ -15,3 +15,7 @@ gui/widgets/py_virtual_pitch/
 gui/uis/windows/main_window/ui_interface_prueba.py
 FMHelperv2.json
 CHANGELOG.md
+FM-Helper.ifp
+gui/core/fm_insider/data_ranking_values_en.json
+gui/core/fm_insider/data_ranking_values_es.json
+

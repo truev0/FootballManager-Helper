@@ -180,13 +180,15 @@ class MainWindow(QMainWindow):
         self.haveScoutingInfo = False
         self.haveOldSquadInfo = False
         self.scoutingCounter = 0
+        self.default_size_notification_container = None
+        # List for interpretation, if wanna add another lang should be here
         self.ui_text = {}
         self.ui_text.update({"en": NestedNamespace(en.english)})
         self.ui_text.update({"es": NestedNamespace(es.espanol)})
-        self.ui_headers = {}
-        self.ui_headers.update({"en": NestedNamespace(en.column_headers)})
-        self.ui_headers.update({"es": NestedNamespace(es.column_headers)})
-        self.default_size_notification_container = None
+        self.list_en = None
+        self.list_es = None
+        self.gral_numerical_clustering = None
+        self.filters_clustering = None
 
         # LOAD SETTINGS
         # ///////////////////////////////////////////
@@ -832,24 +834,20 @@ class MainWindow(QMainWindow):
             if "squad" in button_object.get_name():
                 # SETTING ORIGINAL DATAFRAME
                 self.df_original = FMi.setting_up_pandas(
-                    path_file=dlg_file[0],
-                    language=self.language
+                    path_file=dlg_file[0]
                 )
                 if self.df_original is not None:
-                    if (self.language == 'en' and 'Name' in self.df_original.columns) or\
-                            (self.language == 'es' and 'Nombre' in self.df_original.columns):
-                        self.process_squad_info()
+                    self.process_squad_info()
 
-                        self.tables_helper_squad(self.df_for_table, self.df_tactic)
+                    self.tables_helper_squad(self.df_for_table, self.df_tactic)
 
-                        self.load_data_for_graphs()
+                    self.load_data_for_graphs()
 
-                        self.create_and_load_checkboxes()
-                        tmp_list = self.df_original[self.ui_headers[
-                            self.language].h.h1].values.tolist()
-                        self.ui.clustering_player_combo.addItems(tmp_list)
-                        self.add_squad_names(self.df_squad, tmp_list)
-                        self.haveSquadInfo = True
+                    self.create_and_load_checkboxes()
+                    tmp_list = self.df_original[self.df_original.columns[0]].values.tolist()
+                    self.ui.clustering_player_combo.addItems(tmp_list)
+                    self.add_squad_names(self.df_squad, tmp_list)
+                    self.haveSquadInfo = True
                 if self.haveSquadInfo:
                     self.ui.load_scouting_btn.setEnabled(True)
                     self.ui.save_session_btn.setEnabled(True)
@@ -857,64 +855,52 @@ class MainWindow(QMainWindow):
             elif "scouting" in button_object.get_name():
                 if self.df_scouting is None:
                     self.df_scouting = FMi.setting_up_pandas(
-                        dlg_file[0],
-                        self.language
+                        dlg_file[0]
                     )
                     if self.df_scouting is not None:
-                        if (self.language == 'en' and 'Name' in self.df_scouting.columns) or (
-                                self.language == 'es' and 'Nombre' in self.df_scouting.columns):
-                            self.df_scouting = self.process_scouting_info(self.df_scouting)
-                            self.df_scout_for_table = FMi.create_df_for_scouting_team(
-                                self.df_scouting, self.language)
-                            self.df_scout_for_table.fillna(0, inplace=True)
+                        self.df_scouting = self.process_scouting_info(self.df_scouting)
+                        self.df_scout_for_table = FMi.create_df_for_scouting_team(
+                            self.df_scouting, self.language)
+                        self.df_scout_for_table.fillna(0, inplace=True)
                 else:
                     transition_df = FMi.setting_up_pandas(
-                        dlg_file[0],
-                        self.language
+                        dlg_file[0]
                     )
                     if transition_df is not None:
-                        if (self.language == 'en' and 'Name' in transition_df.columns) or (
-                                self.language == 'es' and 'Nombre' in transition_df.columns):
-                            transition_df = self.process_scouting_info(transition_df)
-                            self.df_scouting = pd.concat([
-                                self.df_scouting,
-                                transition_df,
-                            ],
-                                axis=0,
-                                ignore_index=True)
-                            self.df_scout_for_table = FMi.create_df_for_scouting_team(
-                                self.df_scouting, self.language)
-                            self.df_scout_for_table.fillna(0, inplace=True)
+                        transition_df = self.process_scouting_info(transition_df)
+                        self.df_scouting = pd.concat([
+                            self.df_scouting,
+                            transition_df,
+                        ],
+                            axis=0,
+                            ignore_index=True)
+                        self.df_scout_for_table = FMi.create_df_for_scouting_team(
+                            self.df_scouting, self.language)
+                        self.df_scout_for_table.fillna(0, inplace=True)
 
                 if self.df_scouting is not None and self.scoutingCounter == 1:
                     self.tables_helper_scouting(self.df_scout_for_table)
-                    tmp_list = self.df_scouting[self.ui_headers[
-                        self.language].h.h1].values.tolist()
+                    tmp_list = self.df_scouting[self.df_scouting.columns[0]].values.tolist()
                     self.create_edits_for_scouting()
                     self.create_lines_for_clustering()
                     self.add_scouting_names(self.df_scouting, tmp_list)
                     self.haveScoutingInfo = True
                 elif self.df_scouting is not None and self.scoutingCounter > 1:
                     self.tables_helper_scouting(self.df_scout_for_table)
-                    tmp_list = self.df_scouting[self.ui_headers[
-                        self.language].h.h1].values.tolist()
+                    tmp_list = self.df_scouting[self.df_scouting.columns[0]].values.tolist()
                     self.add_scouting_names(self.df_scouting, tmp_list)
                 if self.haveSquadInfo and self.haveScoutingInfo:
                     self.ui.load_old_btn.setEnabled(True)
             elif "old" in button_object.text():
                 # SETTING ORIGINAL DATAFRAME
                 self.df_old_squad = FMi.setting_up_pandas(
-                    dlg_file[0],
-                    self.language
+                    dlg_file[0]
                 )
                 if self.df_old_squad is not None:
-                    if (self.language == 'en' and 'Name' in self.df_old_squad.columns) or (
-                            self.language == 'es' and 'Nombre' in self.df_old_squad.columns):
-                        self.process_old_squad_info()
-                        tmp_list = self.df_old_squad[self.ui_headers[
-                            self.language].h.h1].values.tolist()
-                        self.add_old_squad_names(self.df_old_squad, tmp_list)
-                        self.haveOldSquadInfo = True
+                    self.process_old_squad_info()
+                    tmp_list = self.df_old_squad[self.df_old_squad.columns[0]].values.tolist()
+                    self.add_old_squad_names(self.df_old_squad, tmp_list)
+                    self.haveOldSquadInfo = True
 
     # PROCESS ACTUAL SQUAD INFO
     # ///////////////////////////////////////////
@@ -924,9 +910,8 @@ class MainWindow(QMainWindow):
         a dataframe for the rankings, rounds the data, creates a dataframe for the squad table, and creates a dataframe
         for the tactic table
         """
-        self.df_original = FMi.convert_values(self.df_original, self.language)
-        self.df_original = FMi.create_metrics_for_gk(self.df_original,
-                                                     self.language)
+        self.df_original = FMi.convert_values(self.df_original)
+        self.df_original = FMi.create_metrics_for_gk(self.df_original)
 
         # SETTING MODIFIED DATAFRAME
         self.df_squad = FMi.data_for_rankings(self.df_original, self.language)
@@ -949,8 +934,8 @@ class MainWindow(QMainWindow):
         0, and increments the scouting counter
         """
         if self.scoutingCounter < 4:
-            scout_tpt = FMi.convert_values(scout_tp, self.language)
-            scout_tpt = FMi.create_metrics_for_gk(scout_tpt, self.language)
+            scout_tpt = FMi.convert_values(scout_tp)
+            scout_tpt = FMi.create_metrics_for_gk(scout_tpt)
 
             # SETTING MODIFIED DATAFRAME
             scout_tpt = FMi.data_for_rankings(scout_tpt, self.language)
@@ -970,9 +955,8 @@ class MainWindow(QMainWindow):
         to the scout values, creates metrics for goalkeepers, creates data for rankings, rounds the data, and fills in
         any missing values with 0 (Same of process actual squad but with old squad)
         """
-        self.df_old_squad = FMi.convert_values(self.df_old_squad, self.language)
-        self.df_old_squad = FMi.convert_values_scout(self.df_old_squad)
-        self.df_old_squad = FMi.create_metrics_for_gk(self.df_old_squad, self.language)
+        self.df_old_squad = FMi.convert_values(self.df_old_squad)
+        self.df_old_squad = FMi.create_metrics_for_gk(self.df_old_squad)
 
         # SETTING MODIFIED DATAFRAME
         self.df_old_squad = FMi.data_for_rankings(self.df_old_squad, self.language)
@@ -1021,12 +1005,60 @@ class MainWindow(QMainWindow):
         """It loads data from pandas dataframe, and then it loads that dataframe into a Chart object."""
         # SETTING DATAFRAME FOR STATS / METRICS WIDGET
         self.df_helper = self.df_original.iloc[:, :2]
-        if self.language == "en":
-            self.df_helper = self.df_helper.join(self.df_original["Salary"])
-            self.df_helper["Salary"] = self.df_helper["Salary"].fillna(0)
-        elif self.language == "es":
-            self.df_helper = self.df_helper.join(self.df_original["Sueldo"])
-            self.df_helper["Sueldo"] = self.df_helper["Sueldo"].fillna(0)
+        self.list_en = [
+            [
+                self.df_original.columns[x] for x in range(10, 44)
+            ],
+            [
+                "Ground Duels",
+                "Air Duels",
+                "Ball Carrying Skills",
+                "Crossing Skills",
+                "Wide Creation Skills",
+                "Passing Skills",
+                "Goal Involvement",
+                "Goalscoring Efficiency",
+                "Playmaking Skills",
+                "Goal Creation Skills",
+                "Age Profile",
+                "Salary Profile",
+                "Wingplay Skills",
+                "Best Tacklers",
+                "Ball winners",
+            ],
+            [
+                self.df_original.columns[x] for x in range(44, 91)
+            ]
+        ]
+        self.list_en[0].append(self.df_original.columns[1])
+        self.list_es = [
+            [
+                self.df_original.columns[x] for x in range(1, 36)
+            ],
+            [
+                "Duelos Terrestres",
+                "Duelos Aereos",
+                "Habilidad transportando",
+                "Habilidad centrando",
+                "Creacion de juego con amplitud",
+                "Habilidad pasando",
+                "Participacion de gol",
+                "Eficiencia de gol",
+                "Creacion de juego corto",
+                "Creacion de gol",
+                "Perfil de edad",
+                "Perfil de salario",
+                "Habilidad de juego por banda",
+                "Mejores aplacadores",
+                "Ganadores de balones",
+            ],
+            [
+                self.df_original.columns[x] for x in range(44, 91)
+            ]
+        ]
+        self.list_es[0].append(self.df_original.columns[1])
+        self.df_helper = self.df_helper.join(self.df_original[self.df_original.columns[10]])
+        self.df_helper[self.df_original.columns[10]] = self.df_helper[self.df_original.columns[10]].fillna(0)
         self.df_helper = self.df_helper.join(self.df_original.iloc[:, 11:44])
 
         # STATS & METRICS DATA
@@ -1036,18 +1068,18 @@ class MainWindow(QMainWindow):
 
         if self.language == "en":
             self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o5, util_lists.list_en[0])
+                self.ui_text[self.language].menu.o5, self.list_en[0])
             self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o6, util_lists.list_en[1])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[0])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[1])
+                self.ui_text[self.language].menu.o6, self.list_en[1])
+            self.ui.graph_statistics.chart.add_to_list(self.list_en[0])
+            self.ui.graph_statistics.chart.add_to_list(self.list_en[1])
         elif self.language == "es":
             self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o5, util_lists.list_es[0])
+                self.ui_text[self.language].menu.o5, self.list_es[0])
             self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o6, util_lists.list_es[1])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[0])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[1])
+                self.ui_text[self.language].menu.o6, self.list_es[1])
+            self.ui.graph_statistics.chart.add_to_list(self.list_es[0])
+            self.ui.graph_statistics.chart.add_to_list(self.list_es[1])
         self.ui.graph_statistics.chart.set_data(self.df_helper)
 
     # TRANSLATE UI
@@ -1199,15 +1231,11 @@ class MainWindow(QMainWindow):
             self.ui.group_chk_attrs_widget.remove_all_buttons()
             self.ui.group_chk_stats_widget.remove_all_buttons()
         if self.language == "en":
-            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_en[2],
-                                                       0)
-            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_en[0],
-                                                       0)
+            self.ui.group_chk_attrs_widget.add_buttons(self.list_en[2], 0)
+            self.ui.group_chk_stats_widget.add_buttons(self.list_en[0], 0)
         elif self.language == "es":
-            self.ui.group_chk_attrs_widget.add_buttons(util_lists.list_es[2],
-                                                       0)
-            self.ui.group_chk_stats_widget.add_buttons(util_lists.list_es[0],
-                                                       0)
+            self.ui.group_chk_attrs_widget.add_buttons(self.list_es[2], 0)
+            self.ui.group_chk_stats_widget.add_buttons(self.list_es[0], 0)
 
         self.ui.first_squad_player_combo.currentIndexChanged.connect(
             self.update_inner_combo)
@@ -1256,25 +1284,30 @@ class MainWindow(QMainWindow):
             self.ui.group_lineedits_stats_widget.reset_all_lines()
         if self.language == "en":
             self.ui.group_lineedits_attrs_widget.add_buttons(
-                util_lists.list_en[2], 1)
+                self.list_en[2], 1)
             self.ui.group_lineedits_stats_widget.add_buttons(
-                util_lists.list_en[0], 1)
+                self.list_en[0], 1)
         elif self.language == "es":
             self.ui.group_lineedits_attrs_widget.add_buttons(
-                util_lists.list_es[2], 1)
+                self.list_es[2], 1)
             self.ui.group_lineedits_stats_widget.add_buttons(
-                util_lists.list_es[0], 1)
+                self.list_es[0], 1)
 
     def create_lines_for_clustering(self):
         """It creates a list of buttons for the user to select from"""
+        self.filters_clustering = [
+            self.df_original.columns[1],
+            self.df_original.columns[10],
+            self.df_original.columns[11]
+        ]
         if self.ui.group_clustering_filters.get_lines() is not None:
             self.ui.group_clustering_filters.reset_all_lines()
         if self.language == "en":
             self.ui.group_clustering_filters.add_buttons(
-                util_lists.filters_en, 2)
+                self.filters_clustering, 2)
         elif self.language == "es":
             self.ui.group_clustering_filters.add_buttons(
-                util_lists.filters_es, 2)
+                self.filters_clustering, 2)
 
     # THREE FUNCTIONS FOR ACTUAL SQUAD, SCOUT, OLD SQUAD
     # //////////////////////////////////////////////////
@@ -1392,7 +1425,7 @@ class MainWindow(QMainWindow):
             for value_child, operator_child, identifier in zip(
                     self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
                     self.ui.right_column.scroll_area_1.findChildren(QComboBox),
-                    util_lists.list_en[2],
+                    self.list_en[2],
             ):
                 if value_child.text() == "":
                     tmp_value_child = float(0)
@@ -1407,7 +1440,7 @@ class MainWindow(QMainWindow):
             for value_child, operator_child, identifier in zip(
                     self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
                     self.ui.right_column.scroll_area_2.findChildren(QComboBox),
-                    util_lists.list_en[0],
+                    self.list_en[0],
             ):
                 if value_child.text() == "":
                     tmp_value_child = float(0)
@@ -1423,7 +1456,7 @@ class MainWindow(QMainWindow):
             for value_child, operator_child, identifier in zip(
                     self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
                     self.ui.right_column.scroll_area_1.findChildren(QComboBox),
-                    util_lists.list_es[2],
+                    self.list_es[2],
             ):
                 if value_child.text() == "":
                     tmp_value_child = float(0)
@@ -1438,7 +1471,7 @@ class MainWindow(QMainWindow):
             for value_child, operator_child, identifier in zip(
                     self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
                     self.ui.right_column.scroll_area_2.findChildren(QComboBox),
-                    util_lists.list_es[0],
+                    self.list_es[0],
             ):
                 if value_child.text() == "":
                     tmp_value_child = float(0)
@@ -1506,42 +1539,23 @@ class MainWindow(QMainWindow):
         :return: A list of lists.
         """
         data = []
-        if self.language == "en":
-            for value_child, operator_child, identifier in zip(
-                    self.ui.load_pages.clustering_filters_frame.findChildren(
-                        QLineEdit),
-                    self.ui.load_pages.clustering_filters_frame.findChildren(
-                        QComboBox),
-                    util_lists.filters_en,
-            ):
-                if value_child.text() == "":
-                    tmp_value_child = float(0)
-                else:
-                    tmp_value_child = float(value_child.text().replace(
-                        ",", "."))
+        for value_child, operator_child, identifier in zip(
+                self.ui.load_pages.clustering_filters_frame.findChildren(
+                    QLineEdit),
+                self.ui.load_pages.clustering_filters_frame.findChildren(
+                    QComboBox),
+                self.filters_clustering,
+        ):
+            if value_child.text() == "":
+                tmp_value_child = float(0)
+            else:
+                tmp_value_child = float(value_child.text().replace(
+                    ",", "."))
 
-                data.append([
-                    identifier,
-                    operator_child.currentText(), tmp_value_child
-                ])
-        if self.language == "es":
-            for value_child, operator_child, identifier in zip(
-                    self.ui.load_pages.clustering_filters_frame.findChildren(
-                        QLineEdit),
-                    self.ui.load_pages.clustering_filters_frame.findChildren(
-                        QComboBox),
-                    util_lists.filters_es,
-            ):
-                if value_child.text() == "":
-                    tmp_value_child = float(0)
-                else:
-                    tmp_value_child = float(value_child.text().replace(
-                        ",", "."))
-
-                data.append([
-                    identifier,
-                    operator_child.currentText(), tmp_value_child
-                ])
+            data.append([
+                identifier,
+                operator_child.currentText(), tmp_value_child
+            ])
 
         return data
 
@@ -1552,20 +1566,24 @@ class MainWindow(QMainWindow):
         complementary_df = None
         df_alone = None
         tmp_df = None
+        del self.gral_numerical_clustering
         if self.df_scouting is not None:
+            self.gral_numerical_clustering = [
+                self.df_scouting.columns[x] for x in range(12, 44)
+            ]
             col_name = self.df_scouting.columns[0]
             if self.language == "en":
-                tmp_df = self.df_scouting[util_lists.numerical_clustering_en]
-                complementary_df = self.df_scouting[util_lists.list_en[0]]
+                tmp_df = self.df_scouting[self.gral_numerical_clustering]
+                complementary_df = self.df_scouting[self.list_en[0]]
                 df_alone = self.df_squad[self.df_squad[col_name].str.contains(
                     self.ui.clustering_player_combo.currentText())]
-                df_alone = df_alone[util_lists.numerical_clustering_en]
+                df_alone = df_alone[self.gral_numerical_clustering]
             elif self.language == "es":
-                tmp_df = self.df_scouting[util_lists.numerical_clustering_es]
-                complementary_df = self.df_scouting[util_lists.list_es[0]]
+                tmp_df = self.df_scouting[self.gral_numerical_clustering]
+                complementary_df = self.df_scouting[self.list_es[0]]
                 df_alone = self.df_squad[self.df_squad[col_name].str.contains(
                     self.ui.clustering_player_combo.currentText())]
-                df_alone = df_alone[util_lists.numerical_clustering_es]
+                df_alone = df_alone[self.gral_numerical_clustering]
 
             df_player_clusters = tmp_df.fillna(tmp_df.mean())
 
@@ -1594,9 +1612,9 @@ class MainWindow(QMainWindow):
 
             base_columns = ["x", "y", "cluster", col_name]
             if self.language == "en":
-                base_columns_plus = base_columns + util_lists.list_en[0]
+                base_columns_plus = base_columns + self.list_en[0]
             elif self.language == "es":
-                base_columns_plus = base_columns + util_lists.list_es[0]
+                base_columns_plus = base_columns + self.list_es[0]
 
             reduced.columns = base_columns_plus
 
@@ -1821,8 +1839,7 @@ class MainWindow(QMainWindow):
         self.tables_helper_squad(self.df_for_table, self.df_tactic)
         self._load_data_graphs(self.df_helper)
         self.create_and_load_checkboxes()
-        tmp_list_squad = self.df_original[self.ui_headers[
-            self.language].h.h1].values.tolist()
+        tmp_list_squad = self.df_original[self.df_original.columns[0]].values.tolist()
         self.ui.clustering_player_combo.addItems(tmp_list_squad)
         self.add_squad_names(self.df_squad, tmp_list_squad)
         self.haveSquadInfo = True
@@ -1833,8 +1850,7 @@ class MainWindow(QMainWindow):
         names to the scouting table
         """
         self.tables_helper_scouting(self.df_scout_for_table)
-        tmp_list_scout = self.df_scouting[self.ui_headers[
-            self.language].h.h1].values.tolist()
+        tmp_list_scout = self.df_scouting[self.df_scouting.columns[0]].values.tolist()
         self.create_edits_for_scouting()
         self.create_lines_for_clustering()
         self.add_scouting_names(self.df_scouting, tmp_list_scout)
@@ -1842,8 +1858,7 @@ class MainWindow(QMainWindow):
 
     def _load_process_old(self):
         """It takes the dataframe of the old squad and adds the names of the players to a list"""
-        tmp_list_old = self.df_old_squad[self.ui_headers[
-            self.language].h.h1].values.tolist()
+        tmp_list_old = self.df_old_squad[self.df_old_squad.columns[0]].values.tolist()
         self.add_old_squad_names(self.df_old_squad, tmp_list_old)
         self.haveOldSquadInfo = True
 
@@ -1853,23 +1868,73 @@ class MainWindow(QMainWindow):
 
         :param df: pandas dataframe
         """
+        self.list_en = [
+            [
+                df.columns[x] for x in range(1, 36)
+            ],
+            [
+                "Ground Duels",
+                "Air Duels",
+                "Ball Carrying Skills",
+                "Crossing Skills",
+                "Wide Creation Skills",
+                "Passing Skills",
+                "Goal Involvement",
+                "Goalscoring Efficiency",
+                "Playmaking Skills",
+                "Goal Creation Skills",
+                "Age Profile",
+                "Salary Profile",
+                "Wingplay Skills",
+                "Best Tacklers",
+                "Ball winners",
+            ],
+            [
+                self.df_original.columns[x] for x in range(44, 91)
+            ]
+        ]
+        self.list_es = [
+            [
+                df.columns[x] for x in range(1, 36)
+            ],
+            [
+                "Duelos Terrestres",
+                "Duelos Aereos",
+                "Habilidad transportando",
+                "Habilidad centrando",
+                "Creacion de juego con amplitud",
+                "Habilidad pasando",
+                "Participacion de gol",
+                "Eficiencia de gol",
+                "Creacion de juego corto",
+                "Creacion de gol",
+                "Perfil de edad",
+                "Perfil de salario",
+                "Habilidad de juego por banda",
+                "Mejores aplacadores",
+                "Ganadores de balones",
+            ],
+            [
+                self.df_original.columns[x] for x in range(44, 91)
+            ]
+        ]
         if self.ui.graph_statistics.chart.count_actual_list() > 1:
             self.ui.graph_statistics.type_selector.clear()
             self.ui.graph_statistics.combo_selector.clear()
         if self.language == "en":
             self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o5, util_lists.list_en[0])
+                self.ui_text[self.language].menu.o5, self.list_en[0])
             self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o6, util_lists.list_en[1])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[0])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_en[1])
+                self.ui_text[self.language].menu.o6, self.list_en[1])
+            self.ui.graph_statistics.chart.add_to_list(self.list_en[0])
+            self.ui.graph_statistics.chart.add_to_list(self.list_en[1])
         elif self.language == "es":
             self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o5, util_lists.list_es[0])
+                self.ui_text[self.language].menu.o5, self.list_es[0])
             self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o6, util_lists.list_es[1])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[0])
-            self.ui.graph_statistics.chart.add_to_list(util_lists.list_es[1])
+                self.ui_text[self.language].menu.o6, self.list_es[1])
+            self.ui.graph_statistics.chart.add_to_list(self.list_es[0])
+            self.ui.graph_statistics.chart.add_to_list(self.list_es[1])
         self.ui.graph_statistics.chart.set_data(df)
 
     def file_saver(self):

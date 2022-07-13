@@ -2,603 +2,603 @@
   "positionEvaluation": [
     {
       "position": "GK-De",
-      "sumElements": ["Aer", "Han", "Com", "Cmd", "Ref", "Thr", "Kic", "1v1", "Ant", "Cnt", "Pos", "Dec", "Agi"],
+      "sumElements": [df.columns[90], df.columns[70], df.columns[83], df.columns[84], df.columns[54], df.columns[47], df.columns[67], df.columns[60], df.columns[87], df.columns[81], df.columns[56], df.columns[78], df.columns[88]],
       "coef1": 13,
       "coef2": 0.000001
     },
     {
       "position": "SW-De",
-      "sumElements": ["Aer", "Han", "Com", "Cmd", "Fir", "Pas", "Ref", "TRO", "Kic", "1v1", "Ant", "Cnt", "Pos", "Dec",
-        "Vis", "Cmp", "Acc", "Agi", "Thr"],
+      "sumElements": [df.columns[90], df.columns[70], df.columns[83], df.columns[84], df.columns[73], df.columns[58], df.columns[54], df.columns[53], df.columns[67], df.columns[60], df.columns[87], df.columns[81], df.columns[56], df.columns[78],
+        df.columns[46], df.columns[82], df.columns[44], df.columns[88], df.columns[47]],
       "coef1": 19,
       "coef2": 0.00000002
     },
     {
       "position": "SW-Su",
-      "sumElements": ["Aer", "Han", "Com", "Cmd", "Fir", "Pas", "Ref", "TRO", "Kic", "1v1", "Ant", "Cnt", "Pos", "Dec",
-        "Vis", "Cmp", "Acc", "Agi", "Thr"],
+      "sumElements": [df.columns[90], df.columns[70], df.columns[83], df.columns[84], df.columns[73], df.columns[58], df.columns[54], df.columns[53], df.columns[67], df.columns[60], df.columns[87], df.columns[81], df.columns[56], df.columns[78],
+        df.columns[46], df.columns[82], df.columns[44], df.columns[88], df.columns[47]],
       "coef1": 19,
       "coef2": 0.000003
     },
     {
       "position": "SW-At",
-      "sumElements": ["Aer", "Han", "Com", "Cmd", "Fir", "Pas", "Ref", "TRO", "Kic", "1v1", "Ant", "Cnt", "Pos", "Dec",
-        "Vis", "Cmp", "Acc", "Agi", "Thr", "Ecc"],
+      "sumElements": [df.columns[90], df.columns[70], df.columns[83], df.columns[84], df.columns[73], df.columns[58], df.columns[54], df.columns[53], df.columns[67], df.columns[60], df.columns[87], df.columns[81], df.columns[56], df.columns[78],
+        df.columns[46], df.columns[82], df.columns[44], df.columns[88], df.columns[47], df.columns[75]],
       "coef1": 20,
       "coef2": 0.00004
     },
     {
       "position": "BPD-De",
-      "sumElements": ["Hea", "Fir", "Tck", "Mar", "Pas", "Tec", "Agg", "Ant", "Pos", "Cnt", "Dec", "Cmp", "Bra", "Vis",
-        "Jum", "Pac", "Str"],
+      "sumElements": [df.columns[69], df.columns[73], df.columns[50], df.columns[63], df.columns[58], df.columns[48], df.columns[89], df.columns[87], df.columns[56], df.columns[81], df.columns[78], df.columns[82], df.columns[85], df.columns[46],
+        df.columns[68], df.columns[59], df.columns[51]],
       "coef1": 17,
       "coef2": 0.00005
     },
     {
       "position": "BPD-Co",
-      "sumElements": ["Hea", "Fir", "Tck", "Mar", "Pas", "Tec", "Ant", "Pos", "Cnt", "Dec", "Cmp", "Bra", "Vis",
-        "Jum", "Pac", "Str"],
+      "sumElements": [df.columns[69], df.columns[73], df.columns[50], df.columns[63], df.columns[58], df.columns[48], df.columns[87], df.columns[56], df.columns[81], df.columns[78], df.columns[82], df.columns[85], df.columns[46],
+        df.columns[68], df.columns[59], df.columns[51]],
       "coef1": 16,
       "coef2": 0.000006
     },
     {
       "position": "BPD-St",
-      "sumElements": ["Hea", "Fir", "Tck", "Mar", "Pas", "Tec", "Agg","Ant", "Pos", "Cnt", "Dec", "Cmp", "Bra", "Vis",
-        "Jum", "Str"],
+      "sumElements": [df.columns[69], df.columns[73], df.columns[50], df.columns[63], df.columns[58], df.columns[48], df.columns[89],df.columns[87], df.columns[56], df.columns[81], df.columns[78], df.columns[82], df.columns[85], df.columns[46],
+        df.columns[68], df.columns[51]],
       "coef1": 16,
       "coef2": 0.000007
     },
     {
       "position": "CD-De",
-      "sumElements": ["Hea", "Mar", "Tck", "Agg", "Ant", "Pos", "Cnt", "Dec", "Cmp", "Bra", "Str", "Jum", "Pac"],
+      "sumElements": [df.columns[69], df.columns[63], df.columns[50], df.columns[89], df.columns[87], df.columns[56], df.columns[81], df.columns[78], df.columns[82], df.columns[85], df.columns[51], df.columns[68], df.columns[59]],
       "coef1": 13,
       "coef2": 0.000008
     },
     {
       "position": "CD-Co",
-      "sumElements": ["Hea", "Mar", "Tck", "Ant", "Pos", "Cnt", "Dec", "Cmp", "Bra", "Str", "Jum", "Pac"],
+      "sumElements": [df.columns[69], df.columns[63], df.columns[50], df.columns[87], df.columns[56], df.columns[81], df.columns[78], df.columns[82], df.columns[85], df.columns[51], df.columns[68], df.columns[59]],
       "coef1": 12,
       "coef2": 0.0000008
     },
     {
       "position": "CD-St",
-      "sumElements": ["Hea", "Mar", "Tck", "Agg", "Ant", "Pos", "Cnt", "Dec", "Cmp", "Bra", "Str", "Jum"],
+      "sumElements": [df.columns[69], df.columns[63], df.columns[50], df.columns[89], df.columns[87], df.columns[56], df.columns[81], df.columns[78], df.columns[82], df.columns[85], df.columns[51], df.columns[68]],
       "coef1": 12,
       "coef2": 0.000009
     },
     {
       "position": "L-Su",
-      "sumElements": ["Hea", "Fir", "Mar", "Tck", "Pas", "Dri", "Tec", "Ant", "Pos", "Cnt", "Dec", "Tea", "Cmp", "Vis",
-        "Fla", "Bra", "Agi", "Jum", "Str", "Bal"],
+      "sumElements": [df.columns[69], df.columns[73], df.columns[63], df.columns[50], df.columns[58], df.columns[76], df.columns[48], df.columns[87], df.columns[56], df.columns[81], df.columns[78], df.columns[49], df.columns[82], df.columns[46],
+        df.columns[72], df.columns[85], df.columns[88], df.columns[68], df.columns[51], df.columns[86]],
       "coef1": 20,
       "coef2": 0.000000101
     },
     {
       "position": "WCB-De",
-      "sumElements": ["Hea", "Cro", "Mar", "Tck", "Agg", "Dri", "Ant", "Pos", "Cnt", "Dec", "Cmp", "Bra", "Wor", "Jum",
-        "Str", "Sta", "Pac"],
+      "sumElements": [df.columns[69], df.columns[79], df.columns[63], df.columns[50], df.columns[89], df.columns[76], df.columns[87], df.columns[56], df.columns[81], df.columns[78], df.columns[82], df.columns[85], df.columns[45], df.columns[68],
+        df.columns[51], df.columns[52], df.columns[59]],
       "coef1": 17,
       "coef2": 0.0000011
     },
     {
       "position": "WCB-Su",
-      "sumElements": ["Hea", "Cro", "Mar", "Tck", "Agg", "Dri", "Ant", "Pos", "Cnt", "Dec", "Cmp", "Bra", "Wor", "Jum",
-        "Str", "Sta", "Pac", "OtB"],
+      "sumElements": [df.columns[69], df.columns[79], df.columns[63], df.columns[50], df.columns[89], df.columns[76], df.columns[87], df.columns[56], df.columns[81], df.columns[78], df.columns[82], df.columns[85], df.columns[45], df.columns[68],
+        df.columns[51], df.columns[52], df.columns[59], df.columns[61]],
       "coef1": 17,
       "coef2": 0.0000012
     },
     {
       "position": "WCB-At",
-      "sumElements": ["Hea", "Cro", "Mar", "Tck", "Agg", "Dri", "Ant", "Pos", "Cnt", "Dec", "Cmp", "Bra", "Wor", "Jum",
-        "Str", "Sta", "Pac", "OtB"],
+      "sumElements": [df.columns[69], df.columns[79], df.columns[63], df.columns[50], df.columns[89], df.columns[76], df.columns[87], df.columns[56], df.columns[81], df.columns[78], df.columns[82], df.columns[85], df.columns[45], df.columns[68],
+        df.columns[51], df.columns[52], df.columns[59], df.columns[61]],
       "coef1": 17,
       "coef2": 0.00000013
     },
     {
       "position": "NCB-De",
-      "sumElements": ["Hea", "Tck", "Mar", "Agg", "Cnt", "Pos", "Ant", "Bra", "Jum", "Str", "Pac"],
+      "sumElements": [df.columns[69], df.columns[50], df.columns[63], df.columns[89], df.columns[81], df.columns[56], df.columns[87], df.columns[85], df.columns[68], df.columns[51], df.columns[59]],
       "coef1": 11,
       "coef2": 0.00000014
     },
     {
       "position": "NCB-Co",
-      "sumElements": ["Hea", "Tck", "Mar", "Ant", "Cnt", "Pos", "Bra", "Jum", "Pac", "Str"],
+      "sumElements": [df.columns[69], df.columns[50], df.columns[63], df.columns[87], df.columns[81], df.columns[56], df.columns[85], df.columns[68], df.columns[59], df.columns[51]],
       "coef1": 10,
       "coef2": 0.000015
     },
     {
       "position": "NCB-St",
-      "sumElements": ["Hea", "Tck", "Mar", "Agg", "Ant", "Cnt", "Pos", "Jum", "Str"],
+      "sumElements": [df.columns[69], df.columns[50], df.columns[63], df.columns[89], df.columns[87], df.columns[81], df.columns[56], df.columns[68], df.columns[51]],
       "coef1": 9,
       "coef2": 0.000000016
     },
     {
       "position": "CWB-Su",
-      "sumElements": ["Cro", "Fir", "Tck", "Pas", "Tec", "Dri", "Ant", "Dec", "OtB", "Tea", "Cmp", "Wor", "Fla", "Acc",
-        "Agi", "Bal", "Sta", "Pac"],
+      "sumElements": [df.columns[79], df.columns[73], df.columns[50], df.columns[58], df.columns[48], df.columns[76], df.columns[87], df.columns[78], df.columns[61], df.columns[49], df.columns[82], df.columns[45], df.columns[72], df.columns[44],
+        df.columns[88], df.columns[86], df.columns[52], df.columns[59]],
       "coef1": 18,
       "coef2": 0.00000017
     },
     {
       "position": "CWB-At",
-      "sumElements": ["Cro", "Fir", "Tck", "Pas", "Tec", "Dri", "Ant", "Dec", "OtB", "Tea", "Cmp", "Wor", "Fla", "Acc",
-        "Agi", "Bal", "Sta", "Pac"],
+      "sumElements": [df.columns[79], df.columns[73], df.columns[50], df.columns[58], df.columns[48], df.columns[76], df.columns[87], df.columns[78], df.columns[61], df.columns[49], df.columns[82], df.columns[45], df.columns[72], df.columns[44],
+        df.columns[88], df.columns[86], df.columns[52], df.columns[59]],
       "coef1": 18,
       "coef2": 0.0000018
     },
     {
       "position": "WB-De",
-      "sumElements": ["Cro","Fir","Pas","Mar","Tck","Dri","Tec","Ant","Cnt","Pos","Dec","OtB","Tea","Wor","Acc","Agi",
-        "Sta","Pac"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[58],df.columns[63],df.columns[50],df.columns[76],df.columns[48],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[44],df.columns[88],
+        df.columns[52],df.columns[59]],
       "coef1": 18,
       "coef2": 0.000019
     },
     {
       "position": "WB-Su",
-      "sumElements": ["Cro","Fir","Tck","Mar","Dri","Tec","Pas","Ant","Cnt","Dec","Pos","OtB","Tea","Wor","Acc","Agi",
-        "Sta","Pac"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[50],df.columns[63],df.columns[76],df.columns[48],df.columns[58],df.columns[87],df.columns[81],df.columns[78],df.columns[56],df.columns[61],df.columns[49],df.columns[45],df.columns[44],df.columns[88],
+        df.columns[52],df.columns[59]],
       "coef1": 18,
       "coef2": 0.00000201
     },
     {
       "position": "WB-At",
-      "sumElements": ["Cro","Fir","Tck","Pas","Mar","Dri","Tec","Ant","Cnt","Pos","OtB","Dec","Tea","Wor","Fla","Acc",
-        "Agi","Sta","Pac"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[50],df.columns[58],df.columns[63],df.columns[76],df.columns[48],df.columns[87],df.columns[81],df.columns[56],df.columns[61],df.columns[78],df.columns[49],df.columns[45],df.columns[72],df.columns[44],
+        df.columns[88],df.columns[52],df.columns[59]],
       "coef1": 19,
       "coef2": 0.00000021
     },
     {
       "position": "IWB-De",
-      "sumElements": ["Fir","Mar","Pas","Tck","Dri","Tec","Ant","Cnt","Pos","Dec","OtB","Tea","Wor","Acc","Agi","Sta"],
+      "sumElements": [df.columns[73],df.columns[63],df.columns[58],df.columns[50],df.columns[76],df.columns[48],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[44],df.columns[88],df.columns[52]],
       "coef1": 16,
       "coef2": 0.000000022
     },
     {
       "position": "IWB-Su",
-      "sumElements": ["Fir","Tck","Mar","Pas","Dri","Tec","Ant","Cnt","Dec","Pos","OtB","Tea","Wor","Cmp","Acc","Agi",
-        "Sta"],
+      "sumElements": [df.columns[73],df.columns[50],df.columns[63],df.columns[58],df.columns[76],df.columns[48],df.columns[87],df.columns[81],df.columns[78],df.columns[56],df.columns[61],df.columns[49],df.columns[45],df.columns[82],df.columns[44],df.columns[88],
+        df.columns[52]],
       "coef1": 17,
       "coef2": 0.00000023
     },
     {
       "position": "IWB-At",
-      "sumElements": ["Fir","Pas","Mar","Tck","Dri","Tec","Lon","Ant","Cnt","Pos","Dec","OtB","Tea","Wor","Cmp","Fla",
-        "Acc","Agi","Sta","Pac"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[63],df.columns[50],df.columns[76],df.columns[48],df.columns[65],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[82],df.columns[72],
+        df.columns[44],df.columns[88],df.columns[52],df.columns[59]],
       "coef1": 20,
       "coef2": 0.0000024
     },
     {
       "position": "NFB-De",
-      "sumElements": ["Hea","Mar","Tck","Agg","Ant","Cnt","Pos","Tea","Bra","Str"],
+      "sumElements": [df.columns[69],df.columns[63],df.columns[50],df.columns[89],df.columns[87],df.columns[81],df.columns[56],df.columns[49],df.columns[85],df.columns[51]],
       "coef1": 10,
       "coef2": 0.00000025
     },
     {
       "position": "FB-De",
-      "sumElements": ["Cro","Tck","Pas","Mar","Ant","Cnt","Dec","Pos","Tea","Cmp","Sta","Pac"],
+      "sumElements": [df.columns[79],df.columns[50],df.columns[58],df.columns[63],df.columns[87],df.columns[81],df.columns[78],df.columns[56],df.columns[49],df.columns[82],df.columns[52],df.columns[59]],
       "coef1": 12,
       "coef2": 0.0000026
     },
     {
       "position": "FB-Su",
-      "sumElements": ["Cro","Tck","Pas","Mar","Dri","Tec","Ant","Cnt","Pos","Dec","Tea","Cmp","Wor","Sta","Pac"],
+      "sumElements": [df.columns[79],df.columns[50],df.columns[58],df.columns[63],df.columns[76],df.columns[48],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[49],df.columns[82],df.columns[45],df.columns[52],df.columns[59]],
       "coef1": 15,
       "coef2": 0.0000027
     },
     {
       "position": "FB-At",
-      "sumElements": ["Acc","Agi","Sta","Pac","Ant","Cnt","Pos","Dec","OtB","Tea","Wor","Cmp","Cro","Fir","Tck","Mar",
-        "Dri","Pas","Tec"],
+      "sumElements": [df.columns[44],df.columns[88],df.columns[52],df.columns[59],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[82],df.columns[79],df.columns[73],df.columns[50],df.columns[63],
+        df.columns[76],df.columns[58],df.columns[48]],
       "coef1": 19,
       "coef2": 0.0000028
     },
     {
       "position": "A-De",
-      "sumElements": ["Tck","Mar","Ant","Cnt","Pos","Dec","Tea","Cmp","Str"],
+      "sumElements": [df.columns[50],df.columns[63],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[49],df.columns[82],df.columns[51]],
       "coef1": 9,
       "coef2": 0.000029
     },
     {
       "position": "HB-De",
-      "sumElements": ["Jum","Str","Sta","Agg","Ant","Pos","Cnt","Dec","Tea","Wor","Cmp","Bra","Hea","Mar","Pas","Tck"],
+      "sumElements": [df.columns[68],df.columns[51],df.columns[52],df.columns[89],df.columns[87],df.columns[56],df.columns[81],df.columns[78],df.columns[49],df.columns[45],df.columns[82],df.columns[85],df.columns[69],df.columns[63],df.columns[58],df.columns[50]],
       "coef1": 16,
       "coef2": 0.0000301
     },
     {
       "position": "DM-De",
-      "sumElements": ["Mar","Pas","Tck","Agg","Ant","Pos","Cnt","Dec","Tea","Wor","Cmp","Str","Sta"],
+      "sumElements": [df.columns[63],df.columns[58],df.columns[50],df.columns[89],df.columns[87],df.columns[56],df.columns[81],df.columns[78],df.columns[49],df.columns[45],df.columns[82],df.columns[51],df.columns[52]],
       "coef1": 13,
       "coef2": 0.000031
     },
     {
       "position": "DM-Su",
-      "sumElements": ["Mar","Pas","Tck","Agg","Ant","Pos","Cnt","Dec","Tea","Wor","Cmp","Str","Sta","Fir"],
+      "sumElements": [df.columns[63],df.columns[58],df.columns[50],df.columns[89],df.columns[87],df.columns[56],df.columns[81],df.columns[78],df.columns[49],df.columns[45],df.columns[82],df.columns[51],df.columns[52],df.columns[73]],
       "coef1": 14,
       "coef2": 0.000032
     },
     {
       "position": "REG-Su",
-      "sumElements": ["Pas","Fir","Dri","Tec","Lon","Ant","Dec","OtB","Tea","Cmp","Fla","Vis","Bal"],
+      "sumElements": [df.columns[58],df.columns[73],df.columns[76],df.columns[48],df.columns[65],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[82],df.columns[72],df.columns[46],df.columns[86]],
       "coef1": 13,
       "coef2": 0.000033
     },
     {
       "position": "VOL-Su",
-      "sumElements": ["Fir","Pas","Tck","Mar","Fin","Lon","Ant","Cnt","Pos","Dec","OtB","Wor","Cmp","Acc","Bal","Str",
-        "Sta","Pac"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[50],df.columns[63],df.columns[74],df.columns[65],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[61],df.columns[45],df.columns[82],df.columns[44],df.columns[86],df.columns[51],
+        df.columns[52],df.columns[59]],
       "coef1": 20,
       "coef2": 0.000034
     },
     {
       "position": "VOL-At",
-      "sumElements": ["Fir","Pas","Tck","Mar","Fin","Lon","Ant","Cnt","Pos","Dec","OtB","Wor","Cmp","Acc","Bal","Str",
-        "Sta","Pac"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[50],df.columns[63],df.columns[74],df.columns[65],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[61],df.columns[45],df.columns[82],df.columns[44],df.columns[86],df.columns[51],
+        df.columns[52],df.columns[59]],
       "coef1": 20,
       "coef2": 0.000035
     },
     {
       "position": "DLP-De",
-      "sumElements": ["Fir","Tck","Pas","Tec","Ant","Pos","Dec","Tea","Wor","Vis","Cmp","Bal"],
+      "sumElements": [df.columns[73],df.columns[50],df.columns[58],df.columns[48],df.columns[87],df.columns[56],df.columns[78],df.columns[49],df.columns[45],df.columns[46],df.columns[82],df.columns[86]],
       "coef1": 12,
       "coef2": 0.000036
     },
     {
       "position": "DLP-Su",
-      "sumElements": ["Fir","Pas","Tec","Ant","Dec","OtB","Tea","Wor","Vis","Cmp","Bal"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[48],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[46],df.columns[82],df.columns[86]],
       "coef1": 11,
       "coef2": 0.000037
     },
     {
       "position": "BWM-De",
-      "sumElements": ["Pos","Mar","Tck","Agg","Ant","Cnt","Tea","Wor","Bra","Agi","Str","Sta","Pac"],
+      "sumElements": [df.columns[56],df.columns[63],df.columns[50],df.columns[89],df.columns[87],df.columns[81],df.columns[49],df.columns[45],df.columns[85],df.columns[88],df.columns[51],df.columns[52],df.columns[59]],
       "coef1": 13,
       "coef2": 0.000038
     },
     {
       "position": "BWM-Su",
-      "sumElements": ["Pas","Mar","Tck","Agg","Ant","Cnt","Tea","Wor","Bra","Agi","Str","Sta","Pac"],
+      "sumElements": [df.columns[58],df.columns[63],df.columns[50],df.columns[89],df.columns[87],df.columns[81],df.columns[49],df.columns[45],df.columns[85],df.columns[88],df.columns[51],df.columns[52],df.columns[59]],
       "coef1": 13,
       "coef2": 0.000039
     },
     {
       "position": "CM-De",
-      "sumElements": ["Fir","Mar","Pas","Tck","Tec","Agg","Ant","Pos","Cnt","Dec","Tea","Wor","Cmp","Sta"],
+      "sumElements": [df.columns[73],df.columns[63],df.columns[58],df.columns[50],df.columns[48],df.columns[89],df.columns[87],df.columns[56],df.columns[81],df.columns[78],df.columns[49],df.columns[45],df.columns[82],df.columns[52]],
       "coef1": 14,
       "coef2": 0.0000401
     },
     {
       "position": "CM-Su",
-      "sumElements": ["Sta","Ant","Cnt","Dec","OtB","Tea","Vis","Wor","Cmp","Tec","Pas","Fir","Tck"],
+      "sumElements": [df.columns[52],df.columns[87],df.columns[81],df.columns[78],df.columns[61],df.columns[49],df.columns[46],df.columns[45],df.columns[82],df.columns[48],df.columns[58],df.columns[73],df.columns[50]],
       "coef1": 13,
       "coef2": 0.000041
     },
     {
       "position": "CM-At",
-      "sumElements": ["Fir","Tck","Pas","Tec","Lon","Ant","Dec","OtB","Tea","Wor","Cmp","Vis","Acc","Sta"],
+      "sumElements": [df.columns[73],df.columns[50],df.columns[58],df.columns[48],df.columns[65],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[82],df.columns[46],df.columns[44],df.columns[52]],
       "coef1": 14,
       "coef2": 0.000042
     },
     {
       "position": "CAR-Su",
-      "sumElements": ["Fir","Tck","Pas","Tec","Ant","Cnt","Pos","Dec","OtB","Tea","Wor","Cmp","Vis","Sta"],
+      "sumElements": [df.columns[73],df.columns[50],df.columns[58],df.columns[48],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[82],df.columns[46],df.columns[52]],
       "coef1": 14,
       "coef2": 0.000043
     },
     {
       "position": "BBM-Su",
-      "sumElements": ["Fir","Pas","Tck","Dri","Fin","Tec","Lon","Agg","Ant","Pos","Dec","OtB","Tea","Wor","Cmp","Acc",
-        "Bal","Str","Sta","Pac"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[50],df.columns[76],df.columns[74],df.columns[48],df.columns[65],df.columns[89],df.columns[87],df.columns[56],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[82],df.columns[44],
+        df.columns[86],df.columns[51],df.columns[52],df.columns[59]],
       "coef1": 20,
       "coef2": 0.000044
     },
     {
       "position": "RPM-Su",
-      "sumElements": ["Fir","Pas","Dri","Lon","Tec","Ant","Cnt","Pos","Dec","OtB","Tea","Wor","Vis","Cmp","Acc","Agi",
-        "Bal","Sta","Pac"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[76],df.columns[65],df.columns[48],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[46],df.columns[82],df.columns[44],df.columns[88],
+        df.columns[86],df.columns[52],df.columns[59]],
       "coef1": 19,
       "coef2": 0.000045
     },
     {
       "position": "MEZ-Su",
-      "sumElements": ["Fir","Tck","Pas","Dri","Tec","Lon","Ant","Dec","OtB","Wor","Cmp","Vis","Acc","Bal","Sta"],
+      "sumElements": [df.columns[73],df.columns[50],df.columns[58],df.columns[76],df.columns[48],df.columns[65],df.columns[87],df.columns[78],df.columns[61],df.columns[45],df.columns[82],df.columns[46],df.columns[44],df.columns[86],df.columns[52]],
       "coef1": 15,
       "coef2": 0.000046
     },
     {
       "position": "MEZ-At",
-      "sumElements": ["Fir","Pas","Fin","Dri","Tec","Lon","Ant","Dec","OtB","Wor","Vis","Fla","Cmp","Acc","Bal","Sta"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[74],df.columns[76],df.columns[48],df.columns[65],df.columns[87],df.columns[78],df.columns[61],df.columns[45],df.columns[46],df.columns[72],df.columns[82],df.columns[44],df.columns[86],df.columns[52]],
       "coef1": 16,
       "coef2": 0.000047
     },
     {
       "position": "AT-Su",
-      "sumElements": ["Agi","Ant","Dec","OtB","Tea","Vis","Fla","Cmp","Fir","Pas","Tec","Dri"],
+      "sumElements": [df.columns[88],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[46],df.columns[72],df.columns[82],df.columns[73],df.columns[58],df.columns[48],df.columns[76]],
       "coef1": 12,
       "coef2": 0.000048
     },
     {
       "position": "AT-At",
-      "sumElements": ["Acc","Agi","Ant","Dec","OtB","Tea","Vis","Fla","Cmp","Fir","Pas","Tec","Dri"],
+      "sumElements": [df.columns[44],df.columns[88],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[46],df.columns[72],df.columns[82],df.columns[73],df.columns[58],df.columns[48],df.columns[76]],
       "coef1": 13,
       "coef2": 0.000049
     },
     {
       "position": "WM-De",
-      "sumElements": ["Fir","Tck","Pas","Mar","Cro","Tec","Ant","Cnt","Pos","Dec","Tea","Wor","Cmp","Sta"],
+      "sumElements": [df.columns[73],df.columns[50],df.columns[58],df.columns[63],df.columns[79],df.columns[48],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[49],df.columns[45],df.columns[82],df.columns[52]],
       "coef1": 14,
       "coef2": 0.00000501
     },
     {
       "position": "WM-Su",
-      "sumElements": ["Fir","Tck","Pas","OtB","Cro","Tec","Ant","Cnt","Pos","Dec","Tea","Wor","Cmp","Sta","Vis"],
+      "sumElements": [df.columns[73],df.columns[50],df.columns[58],df.columns[61],df.columns[79],df.columns[48],df.columns[87],df.columns[81],df.columns[56],df.columns[78],df.columns[49],df.columns[45],df.columns[82],df.columns[52],df.columns[46]],
       "coef1": 15,
       "coef2": 0.0000051
     },
     {
       "position": "WM-At",
-      "sumElements": ["Fir","Tck","Pas","OtB","Cro","Tec","Ant","Dec","Tea","Wor","Cmp","Sta","Vis"],
+      "sumElements": [df.columns[73],df.columns[50],df.columns[58],df.columns[61],df.columns[79],df.columns[48],df.columns[87],df.columns[78],df.columns[49],df.columns[45],df.columns[82],df.columns[52],df.columns[46]],
       "coef1": 13,
       "coef2": 0.0000052
     },
     {
       "position": "DW-De",
-      "sumElements": ["Cro","Fir","Mar","Tck","Dri","Tec","Ant","Agg","Cnt","Pos","Dec","OtB","Tea","Wor","Acc","Sta"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[63],df.columns[50],df.columns[76],df.columns[48],df.columns[87],df.columns[89],df.columns[81],df.columns[56],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[44],df.columns[52]],
       "coef1": 16,
       "coef2": 0.0000053
     },
     {
       "position": "DW-Su",
-      "sumElements": ["Cro","Fir","Mar","Tck","Dri","Tec","Ant","Agg","Cnt","Pos","Dec","OtB","Tea","Wor","Acc","Sta",
-        "Pas","Cmp"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[63],df.columns[50],df.columns[76],df.columns[48],df.columns[87],df.columns[89],df.columns[81],df.columns[56],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[44],df.columns[52],
+        df.columns[58],df.columns[82]],
       "coef1": 18,
       "coef2": 0.0000054
     },
     {
       "position": "WP-Su",
-      "sumElements": ["Fir","Pas","Tec","Dri","Dec","OtB","Tea","Cmp","Vis","Agi"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[48],df.columns[76],df.columns[78],df.columns[61],df.columns[49],df.columns[82],df.columns[46],df.columns[88]],
       "coef1": 10,
       "coef2": 0.0000055
     },
     {
       "position": "WP-At",
-      "sumElements": ["Fir","Pas","Tec","Dri","Ant","Dec","OtB","Tea","Cmp","Fla","Vis","Acc","Agi"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[48],df.columns[76],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[82],df.columns[72],df.columns[46],df.columns[44],df.columns[88]],
       "coef1": 13,
       "coef2": 0.00056
     },
     {
       "position": "EG-Su",
-      "sumElements": ["Agi","Ant","Dec","OtB","Tea","Vis","Fla","Cmp","Fir","Pas","Tec","Dri"],
+      "sumElements": [df.columns[88],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[46],df.columns[72],df.columns[82],df.columns[73],df.columns[58],df.columns[48],df.columns[76]],
       "coef1": 12,
       "coef2": 0.0000057
     },
     {
       "position": "AM-Su",
-      "sumElements": ["Fir","Pas","Dri","Tec","Lon","Ant","Dec","OtB","Cmp","Vis","Fla","Agi"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[76],df.columns[48],df.columns[65],df.columns[87],df.columns[78],df.columns[61],df.columns[82],df.columns[46],df.columns[72],df.columns[88]],
       "coef1": 12,
       "coef2": 0.0000058
     },
     {
       "position": "AM-At",
-      "sumElements": ["Fir","Pas","Dri","Tec","Lon","Ant","Dec","OtB","Cmp","Vis","Fla","Agi","Fin"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[76],df.columns[48],df.columns[65],df.columns[87],df.columns[78],df.columns[61],df.columns[82],df.columns[46],df.columns[72],df.columns[88],df.columns[74]],
       "coef1": 13,
       "coef2": 0.0000059
     },
     {
       "position": "T-At",
-      "sumElements": ["Fir","Pas","Dri","Fin","Tec","Ant","Dec","OtB","Vis","Cmp","Fla","Acc","Agi","Bal"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[76],df.columns[74],df.columns[48],df.columns[87],df.columns[78],df.columns[61],df.columns[46],df.columns[82],df.columns[72],df.columns[44],df.columns[88],df.columns[86]],
       "coef1": 14,
       "coef2": 0.00000601
     },
     {
       "position": "SS-At",
-      "sumElements": ["Fir","Pas","Dri","Fin","Tec","Ant","Cnt","Dec","OtB","Wor","Cmp","Acc","Agi","Bal","Sta","Pac"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[76],df.columns[74],df.columns[48],df.columns[87],df.columns[81],df.columns[78],df.columns[61],df.columns[45],df.columns[82],df.columns[44],df.columns[88],df.columns[86],df.columns[52],df.columns[59]],
       "coef1": 16,
       "coef2": 0.0000061
     },
     {
       "position": "W-Su",
-      "sumElements": ["Cro","Fir","Pas","Dri","Tec","OtB","Wor","Acc","Agi","Sta","Pac"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[58],df.columns[76],df.columns[48],df.columns[61],df.columns[45],df.columns[44],df.columns[88],df.columns[52],df.columns[59]],
       "coef1": 11,
       "coef2": 0.0000062
     },
     {
       "position": "W-At",
-      "sumElements": ["Cro","Fir","Pas","Dri","Tec","Ant","OtB","Fla","Acc","Agi","Pac"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[58],df.columns[76],df.columns[48],df.columns[87],df.columns[61],df.columns[72],df.columns[44],df.columns[88],df.columns[59]],
       "coef1": 11,
       "coef2": 0.0000063
     },
     {
       "position": "IF-Su",
-      "sumElements": ["Fir","Pas","Dri","Fin","Lon","Tec","Ant","OtB","Cmp","Fla","Vis","Acc","Agi","Bal","Pac"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[76],df.columns[74],df.columns[65],df.columns[48],df.columns[87],df.columns[61],df.columns[82],df.columns[72],df.columns[46],df.columns[44],df.columns[88],df.columns[86],df.columns[59]],
       "coef1": 15,
       "coef2": 0.0000064
     },
     {
       "position": "IF-At",
-      "sumElements": ["Acc","Agi","Bal","Pac","Ant","OtB","Cmp","Fla","Pas","Fir","Fin","Dri","Tec","Lon"],
+      "sumElements": [df.columns[44],df.columns[88],df.columns[86],df.columns[59],df.columns[87],df.columns[61],df.columns[82],df.columns[72],df.columns[58],df.columns[73],df.columns[74],df.columns[76],df.columns[48],df.columns[65]],
       "coef1": 14,
       "coef2": 0.0000065
     },
     {
       "position": "IW-Su",
-      "sumElements": ["Cro","Fir","Pas","Dri","Tec","Lon","Dec","OtB","Wor","Cmp","Vis","Acc","Agi","Sta","Pac"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[58],df.columns[76],df.columns[48],df.columns[65],df.columns[78],df.columns[61],df.columns[45],df.columns[82],df.columns[46],df.columns[44],df.columns[88],df.columns[52],df.columns[59]],
       "coef1": 15,
       "coef2": 0.0000066
     },
     {
       "position": "IW-At",
-      "sumElements": ["Cro","Fir","Pas","Dri","Tec","Lon","Ant","Dec","OtB","Cmp","Fla","Vis","Acc","Agi","Pac"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[58],df.columns[76],df.columns[48],df.columns[65],df.columns[87],df.columns[78],df.columns[61],df.columns[82],df.columns[72],df.columns[46],df.columns[44],df.columns[88],df.columns[59]],
       "coef1": 15,
       "coef2": 0.0000067
     },
     {
       "position": "RMD-At",
-      "sumElements": ["Fir","Tec","Fin","Ant","Cnt","Dec","OtB","Wor","Cmp","Acc","Bal","Sta"],
+      "sumElements": [df.columns[73],df.columns[48],df.columns[74],df.columns[87],df.columns[81],df.columns[78],df.columns[61],df.columns[45],df.columns[82],df.columns[44],df.columns[86],df.columns[52]],
       "coef1": 12,
       "coef2": 0.0000068
     },
     {
       "position": "WT-Su",
-      "sumElements": ["Cro","Fir","Hea","Ant","OtB","Tea","Wor","Bra","Jum","Str","Bal","Sta"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[69],df.columns[87],df.columns[61],df.columns[49],df.columns[45],df.columns[85],df.columns[68],df.columns[51],df.columns[86],df.columns[52]],
       "coef1": 12,
       "coef2": 0.0000069
     },
     {
       "position": "WT-At",
-      "sumElements": ["Cro","Fir","Hea","Ant","OtB","Tea","Wor","Bra","Jum","Str","Bal","Sta","Fin"],
+      "sumElements": [df.columns[79],df.columns[73],df.columns[69],df.columns[87],df.columns[61],df.columns[49],df.columns[45],df.columns[85],df.columns[68],df.columns[51],df.columns[86],df.columns[52],df.columns[74]],
       "coef1": 13,
       "coef2": 0.00000701
     },
     {
       "position": "TF-Su",
-      "sumElements": ["Hea","Fir","Fin","Agg","Ant","Dec","OtB","Tea","Cmp","Bra","Str","Jum","Bal"],
+      "sumElements": [df.columns[69],df.columns[73],df.columns[74],df.columns[89],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[82],df.columns[85],df.columns[51],df.columns[68],df.columns[86]],
       "coef1": 13,
       "coef2": 0.0000071
     },
     {
       "position": "TF-At",
-      "sumElements": ["Hea","Fir","Fin","Agg","Ant","Dec","OtB","Tea","Cmp","Bra","Str","Jum","Bal"],
+      "sumElements": [df.columns[69],df.columns[73],df.columns[74],df.columns[89],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[82],df.columns[85],df.columns[51],df.columns[68],df.columns[86]],
       "coef1": 13,
       "coef2": 0.0000072
     },
     {
       "position": "DLF-Su",
-      "sumElements": ["Fir","Pas","Fin","Tec","Ant","Dec","OtB","Tea","Cmp","Fla","Vis","Bal","Str"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[74],df.columns[48],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[82],df.columns[72],df.columns[46],df.columns[86],df.columns[51]],
       "coef1": 13,
       "coef2": 0.0000073
     },
     {
       "position": "DLF-At",
-      "sumElements": ["Fir","Pas","Fin","Tec","Ant","Dec","OtB","Tea","Cmp","Fla","Vis","Bal","Str","Dri"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[74],df.columns[48],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[82],df.columns[72],df.columns[46],df.columns[86],df.columns[51],df.columns[76]],
       "coef1": 14,
       "coef2": 0.0000074
     },
     {
       "position": "PF-De",
-      "sumElements": ["Acc","Agi","Bal","Str","Sta","Pac","Agg","Ant","Cnt","Dec","Tea","Cmp","Wor","Bra","Fir"],
+      "sumElements": [df.columns[44],df.columns[88],df.columns[86],df.columns[51],df.columns[52],df.columns[59],df.columns[89],df.columns[87],df.columns[81],df.columns[78],df.columns[49],df.columns[82],df.columns[45],df.columns[85],df.columns[73]],
       "coef1": 15,
       "coef2": 0.0000075
     },
     {
       "position": "PF-Su",
-      "sumElements": ["Acc","Agi","Bal","Str","Sta","Pac","Agg","Ant","Cnt","Dec","OtB","Tea","Cmp","Wor","Bra","Fir",
-        "Pas"],
+      "sumElements": [df.columns[44],df.columns[88],df.columns[86],df.columns[51],df.columns[52],df.columns[59],df.columns[89],df.columns[87],df.columns[81],df.columns[78],df.columns[61],df.columns[49],df.columns[82],df.columns[45],df.columns[85],df.columns[73],
+        df.columns[58]],
       "coef1": 17,
       "coef2": 0.0000076
     },
     {
       "position": "PF-At",
-      "sumElements": ["Acc","Agi","Bal","Str","Sta","Pac","Agg","Ant","Cnt","Dec","OtB","Tea","Cmp","Wor","Bra","Fir",
-        "Fin"],
+      "sumElements": [df.columns[44],df.columns[88],df.columns[86],df.columns[51],df.columns[52],df.columns[59],df.columns[89],df.columns[87],df.columns[81],df.columns[78],df.columns[61],df.columns[49],df.columns[82],df.columns[45],df.columns[85],df.columns[73],
+        df.columns[74]],
       "coef1": 17,
       "coef2": 0.0000077
     },
     {
       "position": "CF-Su",
-      "sumElements": ["Hea","Fir","Pas","Dri","Fin","Lon","Tec","Ant","Dec","OtB","Tea","Wor","Cmp","Vis","Acc","Agi",
-        "Jum","Bal","Str","Pac","Sta"],
+      "sumElements": [df.columns[69],df.columns[73],df.columns[58],df.columns[76],df.columns[74],df.columns[65],df.columns[48],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[82],df.columns[46],df.columns[44],df.columns[88],
+        df.columns[68],df.columns[86],df.columns[51],df.columns[59],df.columns[52]],
       "coef1": 21,
       "coef2": 0.0000078
     },
     {
       "position": "CF-At",
-      "sumElements": ["Hea","Fir","Pas","Dri","Fin","Lon","Tec","Ant","Dec","OtB","Tea","Wor","Cmp","Vis","Acc","Agi",
-        "Jum","Bal","Str","Pac","Sta"],
+      "sumElements": [df.columns[69],df.columns[73],df.columns[58],df.columns[76],df.columns[74],df.columns[65],df.columns[48],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[45],df.columns[82],df.columns[46],df.columns[44],df.columns[88],
+        df.columns[68],df.columns[86],df.columns[51],df.columns[59],df.columns[52]],
       "coef1": 21,
       "coef2": 0.0000079
     },
     {
       "position": "P-At",
-      "sumElements": ["Hea","Fir","Fin","Tec","Ant","Dec","OtB","Cmp","Acc"],
+      "sumElements": [df.columns[69],df.columns[73],df.columns[74],df.columns[48],df.columns[87],df.columns[78],df.columns[61],df.columns[82],df.columns[44]],
       "coef1": 9,
       "coef2": 0.00000801
     },
     {
       "position": "AF-At",
-      "sumElements": ["Fir","Pas","Fin","Dri","Tec","Ant","Dec","OtB","Wor","Cmp","Acc","Agi","Bal","Sta","Pac"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[74],df.columns[76],df.columns[48],df.columns[87],df.columns[78],df.columns[61],df.columns[45],df.columns[82],df.columns[44],df.columns[88],df.columns[86],df.columns[52],df.columns[59]],
       "coef1": 15,
       "coef2": 0.0000081
     },
     {
       "position": "F9-Su",
-      "sumElements": ["Fir","Pas","Dri","Fin","Tec","Ant","Dec","OtB","Tea","Fla","Cmp","Vis","Acc","Agi","Bal"],
+      "sumElements": [df.columns[73],df.columns[58],df.columns[76],df.columns[74],df.columns[48],df.columns[87],df.columns[78],df.columns[61],df.columns[49],df.columns[72],df.columns[82],df.columns[46],df.columns[44],df.columns[88],df.columns[86]],
       "coef1": 15,
       "coef2": 0.0000082
     },
     {
       "position": "Global",
-      "sumElements": ["Aer", "Cmd", "Com", "Ecc", "Han", "Kic", "1v1", "Ref", "TRO", "Pun", "Thr", "Agg", "Ant", "Bra"],
-      "gralSum": ["Cmp", "Cnt", "Dec", "Det", "Fla", "Ldr", "OtB", "Pos", "Tea", "Vis", "Wor", "Acc", "Agi", "Bal",
-        "Jum", "Nat", "Pac", "Sta", "Str"],
-      "elementsProm": ["Cor", "Cro", "Dri", "Fin", "Fir", "Fre", "Hea", "Lon", "L Th", "Mar", "Pas", "Pen", "Tck",
-        "Tec", "Agg", "Ant", "Bra", "Cmp", "Cnt", "Dec", "Det", "Fla", "Ldr", "OtB", "Pos", "Tea", "Vis", "Wor", "Acc",
-        "Agi", "Bal", "Jum", "Nat", "Pac", "Sta", "Str"]
+      "sumElements": [df.columns[90], df.columns[84], df.columns[83], df.columns[75], df.columns[70], df.columns[67], df.columns[60], df.columns[54], df.columns[53], df.columns[55], df.columns[47], df.columns[89], df.columns[87], df.columns[85]],
+      "gralSum": [df.columns[82], df.columns[81], df.columns[78], df.columns[77], df.columns[72], df.columns[66], df.columns[61], df.columns[56], df.columns[49], df.columns[46], df.columns[45], df.columns[44], df.columns[88], df.columns[86],
+        df.columns[68], df.columns[62], df.columns[59], df.columns[52], df.columns[51]],
+      "elementsProm": [df.columns[80], df.columns[79], df.columns[76], df.columns[74], df.columns[73], df.columns[71], df.columns[69], df.columns[65], df.columns[64], df.columns[63], df.columns[58], df.columns[57], df.columns[50],
+        df.columns[48], df.columns[89], df.columns[87], df.columns[85], df.columns[82], df.columns[81], df.columns[78], df.columns[77], df.columns[72], df.columns[66], df.columns[61], df.columns[56], df.columns[49], df.columns[46], df.columns[45], df.columns[44],
+        df.columns[88], df.columns[86], df.columns[68], df.columns[62], df.columns[59], df.columns[52], df.columns[51]]
     }
   ],
   "development": [
     {
       "training": "Free kicks",
-      "e_trained": ["Fre", "Tec"]
+      "e_trained": [df.columns[71], df.columns[48]]
     },
     {
       "training": "Corners",
-      "e_trained": ["Cor", "Tec"]
+      "e_trained": [df.columns[80], df.columns[48]]
     },
     {
       "training": "Penalty kicks",
-      "e_trained": ["Pen", "Tec"]
+      "e_trained": [df.columns[57], df.columns[48]]
     },
     {
       "training": "Long throws",
-      "e_trained": ["L Th"]
+      "e_trained": [df.columns[64]]
     },
     {
       "training": "Speed",
-      "e_trained": ["Acc", "Pac"]
+      "e_trained": [df.columns[44], df.columns[59]]
     },
     {
       "training": "Agility and balance",
-      "e_trained": ["Bal", "Agi"]
+      "e_trained": [df.columns[86], df.columns[88]]
     },
     {
       "training": "Strength",
-      "e_trained": ["Str", "Jum"]
+      "e_trained": [df.columns[51], df.columns[68]]
     },
     {
       "training": "Support",
-      "e_trained": ["Sta", "Wor"]
+      "e_trained": [df.columns[52], df.columns[45]]
     },
     {
       "training": "Defensive positioning",
-      "e_trained": ["Pos", "Dec", "Mar"]
+      "e_trained": [df.columns[56], df.columns[78], df.columns[63]]
     },
     {
       "training": "Attacking moves",
-      "e_trained": ["Dec, OtB", "Ant"]
+      "e_trained": ["Dec, OtB", df.columns[87]]
     },
     {
       "training": "Last third",
-      "e_trained": ["Dec", "Cmp"]
+      "e_trained": [df.columns[78], df.columns[82]]
     },
     {
       "training": "Shoots",
-      "e_trained": ["Tec", "Lon", "Fin"]
+      "e_trained": [df.columns[48], df.columns[65], df.columns[74]]
     },
     {
       "training": "Passes",
-      "e_trained": ["Tec", "Pas", "Vis"]
+      "e_trained": [df.columns[48], df.columns[58], df.columns[46]]
     },
     {
       "training": "Crossings",
-      "e_trained": ["Cro", "Tec"]
+      "e_trained": [df.columns[79], df.columns[48]]
     },
     {
       "training": "Ball control",
-      "e_trained": ["Dri", "Fir", "Tec"]
+      "e_trained": [df.columns[76], df.columns[73], df.columns[48]]
     },
     {
       "training": "Aerial game",
-      "e_trained": ["Hea", "Bra"]
+      "e_trained": [df.columns[69], df.columns[85]]
     }
   ]
 }
