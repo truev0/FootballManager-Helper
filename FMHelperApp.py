@@ -13,7 +13,7 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-__version__ = "0.1.0-r6"
+__version__ = "0.1.0-r7"
 
 import os
 import requests
@@ -1950,7 +1950,7 @@ class MainWindow(QMainWindow):
                 file.write(text)
             return name[0]
         except FileNotFoundError:
-            print("File not found")
+            print("File not found!")
             return None
     # ///////////////////////////////////////////
     # END FUNCTIONS FOR STATE
