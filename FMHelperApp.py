@@ -13,7 +13,7 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 import os
 import requests
@@ -1988,6 +1988,8 @@ def check_update():
                 code = requests.get(raw_link, allow_redirects=True)
                 open(exe_name, 'wb').write(code.content)
                 restar_program(exe_name)
+        else:
+            print("You have the latest version")
     except requests.exceptions.RequestException:
         pass
 
