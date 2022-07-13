@@ -17,6 +17,7 @@ __version__ = "0.1.0"
 
 import os
 import requests
+import atexit
 
 from gui import BASE_DIR
 
@@ -49,7 +50,8 @@ from PySide6.QtWidgets import (
     QTableView,
     QLabel,
     QSpacerItem,
-    QSizePolicy
+    QSizePolicy,
+    QMessageBox
 )
 from PySide6.QtGui import QIcon
 
@@ -104,8 +106,6 @@ plt.style.use("seaborn-whitegrid")
 # ADJUST QT FONT DPI FOR HIGH SCALE
 # ///////////////////////////////////////////
 os.environ["QT_FONT_DPI"] = "96"
-
-
 # MAIN WINDOW
 # ///////////////////////////////////////////
 
@@ -1961,6 +1961,41 @@ class MainWindow(QMainWindow):
     # ///////////////////////////////////////////
 
 
+def check_update():
+    MAIN_BASE_DIR = os.path.dirname(__file__)
+    try:
+        link = "https://raw.githubusercontent.com/truev0/FootballManager-Helper/main/update/version.txt"
+        changes = "WRAP CHANGES"
+        check = requests.get(link)
+        if __version__ < check.text:
+            ####
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+
+            msg.setWindowTitle("Check for updates")
+
+            msg.setText(f"Update {check.text} version available.")
+            msg.setInformativeText(f"You have {__version__} version.")
+
+            msg.setDetailedText(changes)  # wrap changes
+            msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            ####
+            retval = msg.exec()
+            if retval == QMessageBox.Ok:
+                exe_name = "FM-Helper.exe"
+                exe_name = os.path.join(MAIN_BASE_DIR, exe_name)
+                raw_link = "https://raw.githubusercontent.com/truev0/FootballManager-Helper/main/update/FM-Helper.exe"
+                code = requests.get(raw_link, allow_redirects=True)
+                open(exe_name, 'wb').write(code.content)
+                restar_program(exe_name)
+    except requests.exceptions.RequestException:
+        pass
+
+
+def restar_program(file):
+    atexit.register(os.execl, file, file)
+
+
 # MAIN FUNCTION TO START
 # Set initial class and also additional parameter of the "QApplication" class
 # ///////////////////////////////////////////
@@ -1976,28 +2011,10 @@ def main():
     app.setWindowIcon(QIcon(os.path.normpath(BASE_DIR + "\\..\\" + "icon.ico")))
     window = MainWindow()
     window.show()
-
+    check_update()
     # EXEC EXIT APP
     # ///////////////////////////////////////////
     sys.exit(app.exec())
-
-
-def check_update():
-    try:
-        link = "https://raw.githubusercontent.com/truev0/FootballManager-Helper/main/update/version.txt"
-        check = requests.get(link)
-        if __version__ < check.text:
-            checkinput = input('Do you want to update (y or n): ')
-            if checkinput == 'y':
-                print('Will start update')
-                exename = f'FM-Helper.exe'
-                # code = requests.get("",
-                #                     allow_redirects=True)
-                # open(exename, 'wb').write(code.content)
-            else:
-                print('Not updating')
-    except requests.exceptions.RequestException:
-        pass
 
 
 if __name__ == "__main__":
