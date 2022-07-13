@@ -131,7 +131,7 @@ deberas re-instalar la App en:<br>a) Otro disco duro <br>b) Carpeta Documentos</
 <!-- USAGE EXAMPLES -->
 ## 🎯 Uso
 
-<b>[Video guia](https://www.youtube.com/)</b>
+<b>[Video guia](https://www.youtube.com/playlist?list=PLJSd3Httd1HL3zM0ehVvUNh2L4hUWJocM)</b>
 <details>
   <summary><b>App Screenshots</b></summary>
   <img src=".github/readme_images/fm-helperpics/home.png" alt="Home">
