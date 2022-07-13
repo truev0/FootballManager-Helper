@@ -16,6 +16,7 @@
 __version__ = "0.1.0"
 
 import os
+import requests
 
 from gui import BASE_DIR
 
@@ -1979,6 +1980,24 @@ def main():
     # EXEC EXIT APP
     # ///////////////////////////////////////////
     sys.exit(app.exec())
+
+
+def check_update():
+    try:
+        link = "https://raw.githubusercontent.com/truev0/FootballManager-Helper/main/update/version.txt"
+        check = requests.get(link)
+        if __version__ < check.text:
+            checkinput = input('Do you want to update (y or n): ')
+            if checkinput == 'y':
+                print('Will start update')
+                exename = f'FM-Helper.exe'
+                # code = requests.get("",
+                #                     allow_redirects=True)
+                # open(exename, 'wb').write(code.content)
+            else:
+                print('Not updating')
+    except requests.exceptions.RequestException:
+        pass
 
 
 if __name__ == "__main__":

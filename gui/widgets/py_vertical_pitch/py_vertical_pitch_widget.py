@@ -1,3 +1,6 @@
+import os
+from gui import BASE_DIR
+
 # IMPORT PYSIDE MODULES
 # ///////////////////////////////////////////////////////////////
 from PySide6.QtCore import QRect, QSize, Qt, Signal
@@ -71,8 +74,7 @@ class PyVerticalPitch(QWidget):
         self._pitch_image.setSizePolicy(size_policy)
         self._pitch_image.setMinimumSize(
             QSize(self._minimum_width, self._minimum_height))
-        self._pitch_image.setPixmap(
-            QPixmap("gui/images/png_images/vertical_pitch.png"))
+        self._pitch_image.setPixmap(QPixmap(os.path.join(BASE_DIR, "images/png_images/vertical_pitch.png")))
         self._pitch_image.setScaledContents(True)
         self._pitch_image.setAlignment(Qt.AlignCenter)
         self._pitch_image.raise_()
