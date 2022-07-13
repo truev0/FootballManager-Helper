@@ -13,6 +13,7 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
+__version__ = "0.1.0"
 
 import os
 
