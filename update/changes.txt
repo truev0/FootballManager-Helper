@@ -2,4 +2,4 @@ https://github.com/truev0/FootballManager-Helper/releases/download/v0.1.0-r7/FM-
 #############
 Changes v0.1.0-r7
 __________________________________________________
-* Prueba por cambio de version de v0.1.0-r6 a v0.1.0-r7
+*
