@@ -24,6 +24,7 @@ class CustomizedNumpyScoutModel(QAbstractTableModel):
         QAbstractTableModel.__init__(self, parent)
         self._data = np.array(data.values)
         self._cols = data.columns
+        self.insensitive = data.columns.values
         self.r, self.c = np.shape(self._data)
 
     def data(self, index, role=Qt.DisplayRole):
@@ -106,16 +107,20 @@ class CustomizedNumpyScoutModel(QAbstractTableModel):
         """
         index_value = None
         based_columns = [6, 8, 10, 12]
+        index_no = None
         if role == Qt.EditRole:
             row = index.row()
             column = index.column()
             tmp = str(value)
             if tmp != '':
                 if column in based_columns:
-                    if column == 6 and tmp in self._cols:
-                        index_no = np.where(self._cols == tmp)[0][0]
+                    if column == 6 and tmp.casefold() in [x.casefold() for x in self.insensitive]:
+                        for i, element in enumerate([x.casefold() for x in self.insensitive]):
+                            if element == tmp.casefold():
+                                index_no = i
+                                break
                         self._data[row, column + 1] = self._data[row, index_no]
-                        self._data[row, column] = tmp
+                        self._data[row, column] = self._cols[index_no]
                     elif column in [8, 10, 12]:
                         for x in range(183, 266):
                             if self._data[row, x] == int(tmp):

@@ -2,7 +2,7 @@
 #
 # BY: VICTOR CAICEDO
 # PROJECT MADE WITH: PySide6
-# V: 0.1.0-r6
+# V: 0.1.0-r7
 #
 # This project can be used freely for all uses, as long as they maintain the
 # respective credits only in the Python scripts, any information in the visual
@@ -13,7 +13,7 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-__version__ = "0.1.0-r6"
+__version__ = "0.1.0-r7"
 
 import os
 import requests
@@ -188,8 +188,7 @@ class MainWindow(QMainWindow):
         self.ui_text = {}
         self.ui_text.update({"en": NestedNamespace(en.english)})
         self.ui_text.update({"es": NestedNamespace(es.espanol)})
-        self.list_en = None
-        self.list_es = None
+        self.lista_gral = None
         self.gral_numerical_clustering = None
         self.filters_clustering = None
 
@@ -1008,58 +1007,57 @@ class MainWindow(QMainWindow):
         """It loads data from pandas dataframe, and then it loads that dataframe into a Chart object."""
         # SETTING DATAFRAME FOR STATS / METRICS WIDGET
         self.df_helper = self.df_original.iloc[:, :2]
-        self.list_en = [
+        self.lista_gral = [
             [
                 self.df_original.columns[x] for x in range(10, 44)
-            ],
-            [
-                "Ground Duels",
-                "Air Duels",
-                "Ball Carrying Skills",
-                "Crossing Skills",
-                "Wide Creation Skills",
-                "Passing Skills",
-                "Goal Involvement",
-                "Goalscoring Efficiency",
-                "Playmaking Skills",
-                "Goal Creation Skills",
-                "Age Profile",
-                "Salary Profile",
-                "Wingplay Skills",
-                "Best Tacklers",
-                "Ball winners",
-            ],
+            ]
+        ]
+        if self.language == 'en':
+            self.lista_gral.append(
+                [
+                    "Ground Duels",
+                    "Air Duels",
+                    "Ball Carrying Skills",
+                    "Crossing Skills",
+                    "Wide Creation Skills",
+                    "Passing Skills",
+                    "Goal Involvement",
+                    "Goalscoring Efficiency",
+                    "Playmaking Skills",
+                    "Goal Creation Skills",
+                    "Age Profile",
+                    "Salary Profile",
+                    "Wingplay Skills",
+                    "Best Tacklers",
+                    "Ball winners",
+                ]
+            )
+        elif self.language == 'es':
+            self.lista_gral.append(
+                [
+                    "Duelos Terrestres",
+                    "Duelos Aereos",
+                    "Habilidad transportando",
+                    "Habilidad centrando",
+                    "Creacion de juego con amplitud",
+                    "Habilidad pasando",
+                    "Participacion de gol",
+                    "Eficiencia de gol",
+                    "Creacion de juego corto",
+                    "Creacion de gol",
+                    "Perfil de edad",
+                    "Perfil de salario",
+                    "Habilidad de juego por banda",
+                    "Mejores aplacadores",
+                    "Ganadores de balones",
+                ]
+            )
+        self.lista_gral.append(
             [
                 self.df_original.columns[x] for x in range(44, 91)
             ]
-        ]
-        self.list_en[0].append(self.df_original.columns[1])
-        self.list_es = [
-            [
-                self.df_original.columns[x] for x in range(1, 36)
-            ],
-            [
-                "Duelos Terrestres",
-                "Duelos Aereos",
-                "Habilidad transportando",
-                "Habilidad centrando",
-                "Creacion de juego con amplitud",
-                "Habilidad pasando",
-                "Participacion de gol",
-                "Eficiencia de gol",
-                "Creacion de juego corto",
-                "Creacion de gol",
-                "Perfil de edad",
-                "Perfil de salario",
-                "Habilidad de juego por banda",
-                "Mejores aplacadores",
-                "Ganadores de balones",
-            ],
-            [
-                self.df_original.columns[x] for x in range(44, 91)
-            ]
-        ]
-        self.list_es[0].append(self.df_original.columns[1])
+        )
+        self.lista_gral[0].append(self.df_original.columns[1])
         self.df_helper = self.df_helper.join(self.df_original[self.df_original.columns[10]])
         self.df_helper[self.df_original.columns[10]] = self.df_helper[self.df_original.columns[10]].fillna(0)
         self.df_helper = self.df_helper.join(self.df_original.iloc[:, 11:44])
@@ -1069,20 +1067,14 @@ class MainWindow(QMainWindow):
             self.ui.graph_statistics.type_selector.clear()
             self.ui.graph_statistics.combo_selector.clear()
 
-        if self.language == "en":
-            self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o5, self.list_en[0])
-            self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o6, self.list_en[1])
-            self.ui.graph_statistics.chart.add_to_list(self.list_en[0])
-            self.ui.graph_statistics.chart.add_to_list(self.list_en[1])
-        elif self.language == "es":
-            self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o5, self.list_es[0])
-            self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o6, self.list_es[1])
-            self.ui.graph_statistics.chart.add_to_list(self.list_es[0])
-            self.ui.graph_statistics.chart.add_to_list(self.list_es[1])
+        self.ui.graph_statistics.type_selector.addItem(
+            self.ui_text[self.language].menu.o5, self.lista_gral[0]
+        )
+        self.ui.graph_statistics.type_selector.addItem(
+            self.ui_text[self.language].menu.o6, self.lista_gral[1]
+        )
+        self.ui.graph_statistics.chart.add_to_list(self.lista_gral[0])
+        self.ui.graph_statistics.chart.add_to_list(self.lista_gral[1])
         self.ui.graph_statistics.chart.set_data(self.df_helper)
 
     # TRANSLATE UI
@@ -1233,12 +1225,8 @@ class MainWindow(QMainWindow):
                 and self.ui.group_chk_attrs_widget.get_count() is not None):
             self.ui.group_chk_attrs_widget.remove_all_buttons()
             self.ui.group_chk_stats_widget.remove_all_buttons()
-        if self.language == "en":
-            self.ui.group_chk_attrs_widget.add_buttons(self.list_en[2], 0)
-            self.ui.group_chk_stats_widget.add_buttons(self.list_en[0], 0)
-        elif self.language == "es":
-            self.ui.group_chk_attrs_widget.add_buttons(self.list_es[2], 0)
-            self.ui.group_chk_stats_widget.add_buttons(self.list_es[0], 0)
+        self.ui.group_chk_attrs_widget.add_buttons(self.lista_gral[2], 0)
+        self.ui.group_chk_stats_widget.add_buttons(self.lista_gral[0], 0)
 
         self.ui.first_squad_player_combo.currentIndexChanged.connect(
             self.update_inner_combo)
@@ -1285,16 +1273,8 @@ class MainWindow(QMainWindow):
                 self.ui.group_lineedits_stats_widget.get_lines() is not None):
             self.ui.group_lineedits_attrs_widget.reset_all_lines()
             self.ui.group_lineedits_stats_widget.reset_all_lines()
-        if self.language == "en":
-            self.ui.group_lineedits_attrs_widget.add_buttons(
-                self.list_en[2], 1)
-            self.ui.group_lineedits_stats_widget.add_buttons(
-                self.list_en[0], 1)
-        elif self.language == "es":
-            self.ui.group_lineedits_attrs_widget.add_buttons(
-                self.list_es[2], 1)
-            self.ui.group_lineedits_stats_widget.add_buttons(
-                self.list_es[0], 1)
+        self.ui.group_lineedits_attrs_widget.add_buttons(self.lista_gral[2], 1)
+        self.ui.group_lineedits_stats_widget.add_buttons(self.lista_gral[0], 1)
 
     def create_lines_for_clustering(self):
         """It creates a list of buttons for the user to select from"""
@@ -1419,68 +1399,36 @@ class MainWindow(QMainWindow):
         """It takes the values from the GUI and puts them into a list"""
         attrs_set = []
         stats_set = []
-        if self.language == "en":
-            for value_child, operator_child, identifier in zip(
-                    self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
-                    self.ui.right_column.scroll_area_1.findChildren(QComboBox),
-                    self.list_en[2],
-            ):
-                if value_child.text() == "":
-                    tmp_value_child = float(0)
-                else:
-                    tmp_value_child = float(value_child.text().replace(
-                        ",", "."))
+        for value_child, operator_child, identifier in zip(
+                self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
+                self.ui.right_column.scroll_area_1.findChildren(QComboBox),
+                self.lista_gral[2],
+        ):
+            if value_child.text() == "":
+                tmp_value_child = float(0)
+            else:
+                tmp_value_child = float(value_child.text().replace(
+                    ",", "."))
 
-                attrs_set.append([
-                    identifier,
-                    operator_child.currentText(), tmp_value_child
-                ])
-            for value_child, operator_child, identifier in zip(
-                    self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
-                    self.ui.right_column.scroll_area_2.findChildren(QComboBox),
-                    self.list_en[0],
-            ):
-                if value_child.text() == "":
-                    tmp_value_child = float(0)
-                else:
-                    tmp_value_child = float(value_child.text().replace(
-                        ",", "."))
+            attrs_set.append([
+                identifier,
+                operator_child.currentText(), tmp_value_child
+            ])
+        for value_child, operator_child, identifier in zip(
+                self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
+                self.ui.right_column.scroll_area_2.findChildren(QComboBox),
+                self.lista_gral[0],
+        ):
+            if value_child.text() == "":
+                tmp_value_child = float(0)
+            else:
+                tmp_value_child = float(value_child.text().replace(
+                    ",", "."))
 
-                stats_set.append([
-                    identifier,
-                    operator_child.currentText(), tmp_value_child
-                ])
-        if self.language == "es":
-            for value_child, operator_child, identifier in zip(
-                    self.ui.right_column.scroll_area_1.findChildren(QLineEdit),
-                    self.ui.right_column.scroll_area_1.findChildren(QComboBox),
-                    self.list_es[2],
-            ):
-                if value_child.text() == "":
-                    tmp_value_child = float(0)
-                else:
-                    tmp_value_child = float(value_child.text().replace(
-                        ",", "."))
-
-                attrs_set.append([
-                    identifier,
-                    operator_child.currentText(), tmp_value_child
-                ])
-            for value_child, operator_child, identifier in zip(
-                    self.ui.right_column.scroll_area_2.findChildren(QLineEdit),
-                    self.ui.right_column.scroll_area_2.findChildren(QComboBox),
-                    self.list_es[0],
-            ):
-                if value_child.text() == "":
-                    tmp_value_child = float(0)
-                else:
-                    tmp_value_child = float(value_child.text().replace(
-                        ",", "."))
-
-                stats_set.append([
-                    identifier,
-                    operator_child.currentText(), tmp_value_child
-                ])
+            stats_set.append([
+                identifier,
+                operator_child.currentText(), tmp_value_child
+            ])
         self.filter_scout_data(stats_set, attrs_set)
 
     def filter_scout_data(self, stats, attrs):
@@ -1560,28 +1508,19 @@ class MainWindow(QMainWindow):
     def clustering_management(self):
         """It takes a dataframe, performs some clustering, and then plots the results"""
         tmp_filters = self.collect_results_clustering()
-        base_columns_plus = None
-        complementary_df = None
-        df_alone = None
-        tmp_df = None
+
         del self.gral_numerical_clustering
         if self.df_scouting is not None:
             self.gral_numerical_clustering = [
                 self.df_scouting.columns[x] for x in range(12, 44)
             ]
             col_name = self.df_scouting.columns[0]
-            if self.language == "en":
-                tmp_df = self.df_scouting[self.gral_numerical_clustering]
-                complementary_df = self.df_scouting[self.list_en[0]]
-                df_alone = self.df_squad[self.df_squad[col_name].str.contains(
-                    self.ui.clustering_player_combo.currentText())]
-                df_alone = df_alone[self.gral_numerical_clustering]
-            elif self.language == "es":
-                tmp_df = self.df_scouting[self.gral_numerical_clustering]
-                complementary_df = self.df_scouting[self.list_es[0]]
-                df_alone = self.df_squad[self.df_squad[col_name].str.contains(
-                    self.ui.clustering_player_combo.currentText())]
-                df_alone = df_alone[self.gral_numerical_clustering]
+
+            tmp_df = self.df_scouting[self.gral_numerical_clustering]
+            complementary_df = self.df_scouting[self.lista_gral[0]]
+            df_alone = self.df_squad[self.df_squad[col_name].str.contains(
+                self.ui.clustering_player_combo.currentText())]
+            df_alone = df_alone[self.gral_numerical_clustering]
 
             df_player_clusters = tmp_df.fillna(tmp_df.mean())
 
@@ -1609,10 +1548,7 @@ class MainWindow(QMainWindow):
             reduced = pd.concat([reduced, complementary_df], axis=1)
 
             base_columns = ["x", "y", "cluster", col_name]
-            if self.language == "en":
-                base_columns_plus = base_columns + self.list_en[0]
-            elif self.language == "es":
-                base_columns_plus = base_columns + self.list_es[0]
+            base_columns_plus = base_columns + self.lista_gral[0]
 
             reduced.columns = base_columns_plus
 
@@ -1866,73 +1802,67 @@ class MainWindow(QMainWindow):
 
         :param df: pandas dataframe
         """
-        self.list_en = [
+        self.lista_gral = [
             [
                 df.columns[x] for x in range(1, 36)
-            ],
-            [
-                "Ground Duels",
-                "Air Duels",
-                "Ball Carrying Skills",
-                "Crossing Skills",
-                "Wide Creation Skills",
-                "Passing Skills",
-                "Goal Involvement",
-                "Goalscoring Efficiency",
-                "Playmaking Skills",
-                "Goal Creation Skills",
-                "Age Profile",
-                "Salary Profile",
-                "Wingplay Skills",
-                "Best Tacklers",
-                "Ball winners",
-            ],
+            ]
+        ]
+        if self.language == 'en':
+            self.lista_gral.append(
+                [
+                    "Ground Duels",
+                    "Air Duels",
+                    "Ball Carrying Skills",
+                    "Crossing Skills",
+                    "Wide Creation Skills",
+                    "Passing Skills",
+                    "Goal Involvement",
+                    "Goalscoring Efficiency",
+                    "Playmaking Skills",
+                    "Goal Creation Skills",
+                    "Age Profile",
+                    "Salary Profile",
+                    "Wingplay Skills",
+                    "Best Tacklers",
+                    "Ball winners",
+                ]
+            )
+        elif self.language == 'es':
+            self.lista_gral.append(
+                [
+                    "Duelos Terrestres",
+                    "Duelos Aereos",
+                    "Habilidad transportando",
+                    "Habilidad centrando",
+                    "Creacion de juego con amplitud",
+                    "Habilidad pasando",
+                    "Participacion de gol",
+                    "Eficiencia de gol",
+                    "Creacion de juego corto",
+                    "Creacion de gol",
+                    "Perfil de edad",
+                    "Perfil de salario",
+                    "Habilidad de juego por banda",
+                    "Mejores aplacadores",
+                    "Ganadores de balones",
+                ]
+            )
+        self.lista_gral.append(
             [
                 self.df_original.columns[x] for x in range(44, 91)
             ]
-        ]
-        self.list_es = [
-            [
-                df.columns[x] for x in range(1, 36)
-            ],
-            [
-                "Duelos Terrestres",
-                "Duelos Aereos",
-                "Habilidad transportando",
-                "Habilidad centrando",
-                "Creacion de juego con amplitud",
-                "Habilidad pasando",
-                "Participacion de gol",
-                "Eficiencia de gol",
-                "Creacion de juego corto",
-                "Creacion de gol",
-                "Perfil de edad",
-                "Perfil de salario",
-                "Habilidad de juego por banda",
-                "Mejores aplacadores",
-                "Ganadores de balones",
-            ],
-            [
-                self.df_original.columns[x] for x in range(44, 91)
-            ]
-        ]
+        )
+        # self.lista_gral[0].append(self.df_original.columns[1])
+
         if self.ui.graph_statistics.chart.count_actual_list() > 1:
             self.ui.graph_statistics.type_selector.clear()
             self.ui.graph_statistics.combo_selector.clear()
-        if self.language == "en":
-            self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o5, self.list_en[0])
-            self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o6, self.list_en[1])
-            self.ui.graph_statistics.chart.add_to_list(self.list_en[0])
-            self.ui.graph_statistics.chart.add_to_list(self.list_en[1])
-        elif self.language == "es":
-            self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o5, self.list_es[0])
-            self.ui.graph_statistics.type_selector.addItem(
-                self.ui_text[self.language].menu.o6, self.list_es[1])
-            self.ui.graph_statistics.chart.add_to_list(self.list_es[0])
-            self.ui.graph_statistics.chart.add_to_list(self.list_es[1])
+        self.ui.graph_statistics.type_selector.addItem(
+            self.ui_text[self.language].menu.o5, self.lista_gral[0])
+        self.ui.graph_statistics.type_selector.addItem(
+            self.ui_text[self.language].menu.o6, self.lista_gral[1])
+        self.ui.graph_statistics.chart.add_to_list(self.lista_gral[0])
+        self.ui.graph_statistics.chart.add_to_list(self.lista_gral[1])
         self.ui.graph_statistics.chart.set_data(df)
 
     def file_saver(self):

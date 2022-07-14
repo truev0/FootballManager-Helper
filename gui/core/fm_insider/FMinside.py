@@ -71,33 +71,33 @@ def convert_values(df):
     :param df: the dataframe you want to convert
     :return: A dataframe with the columns converted to the correct data type.
     """
-    for column in [df.columns[9], df.columns[10], df.columns[35]]:
+    for column in [df.columns[9], df.columns[10], df.columns[35], df.columns[11]]:
         if column in [df.columns[35]]:
             df[column] = df[column].astype(str).str.replace("km", "")
             df[column] = df[column].str.replace("-", "0")
             df[column] = df[column].str.replace(",", ".")
         else:
-            df[column] = df[column].str.replace("N/A", "0")
-            df[column] = df[column].str.replace("N/D", "0")
-            df[column] = df[column].str.replace("$", "")
-            df[column] = df[column].str.replace("£", "")
-            df[column] = df[column].str.replace("¥", "")
-            df[column] = df[column].str.replace("€", "")
-            df[column] = df[column].str.replace("₺", "")
-            df[column] = df[column].str.replace("₽", "")
-            df[column] = df[column].str.replace("AED", "")
-            df[column] = df[column].str.replace("BGN", "")
-            df[column] = df[column].str.replace("CHF", "")
-            df[column] = df[column].str.replace("Â", "")
-            df[column] = df[column].str.replace("p/a", "")
-            df[column] = df[column].str.replace("p/m", "")
-            df[column] = df[column].str.replace("p/s", "")
-            df[column] = df[column].str.replace("p/w", "")
-            df[column] = df[column].str.replace(",", "")
-            df[column] = df[column].str.replace("K", "000")
-            df[column] = df[column].str.replace(".", "")
-            df[column] = df[column].str.replace("M", "00000")
-            df[column] = df[column].str.replace("m", "000")
+            df[column] = df[column].astype(str).str.replace("N/A", "0")
+            df[column] = df[column].astype(str).str.replace("N/D", "0")
+            df[column] = df[column].astype(str).str.replace("$", "")
+            df[column] = df[column].astype(str).str.replace("£", "")
+            df[column] = df[column].astype(str).str.replace("¥", "")
+            df[column] = df[column].astype(str).str.replace("€", "")
+            df[column] = df[column].astype(str).str.replace("₺", "")
+            df[column] = df[column].astype(str).str.replace("₽", "")
+            df[column] = df[column].astype(str).str.replace("AED", "")
+            df[column] = df[column].astype(str).str.replace("BGN", "")
+            df[column] = df[column].astype(str).str.replace("CHF", "")
+            df[column] = df[column].astype(str).str.replace("Â", "")
+            df[column] = df[column].astype(str).str.replace("p/a", "")
+            df[column] = df[column].astype(str).str.replace("p/m", "")
+            df[column] = df[column].astype(str).str.replace("p/s", "")
+            df[column] = df[column].astype(str).str.replace("p/w", "")
+            df[column] = df[column].astype(str).str.replace(",", "")
+            df[column] = df[column].astype(str).str.replace("K", "000")
+            df[column] = df[column].astype(str).str.replace(".", "")
+            df[column] = df[column].astype(str).str.replace("M", "00000")
+            df[column] = df[column].astype(str).str.replace("m", "000")
 
     for column in [
         df.columns[17],

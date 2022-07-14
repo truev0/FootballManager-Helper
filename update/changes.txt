@@ -1,5 +1,12 @@
 https://github.com/truev0/FootballManager-Helper/releases/download/v0.1.0-r7/FM-Helper.exe
-#############
+################
 Changes v0.1.0-r7
-__________________________________________________
-*
+_____________________________________________
+* Fixed read column minutes with ',' or '.'
+* Fixed wrong options in statistics graph
+* Support case-insensitive for roles in table ( POR-De == por-de == PoR-De )
+################
+Changes v0.1.0-r6
+_____________________________________________
+* Added auto-update
+* Fixed errors when load columns from dataframe
